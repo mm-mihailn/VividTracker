@@ -7,9 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VividTracker", "VividTracke
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VividTracker.Data", "VividTracker.Data\VividTracker.Data.csproj", "{60A90684-EA83-4EF6-951C-03EC0892F48A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VividTracker.Domain", "VividTracker.Domain\VividTracker.Domain.csproj", "{000F5A82-DF65-4FD9-B9FE-4990B2C54500}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VividTracker.Business", "VividTracker.Business\VividTracker.Business.csproj", "{D6C04793-BDF6-426B-AC14-A1782A079BDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VividTracker.Business", "VividTracker.Business\VividTracker.Business.csproj", "{D6C04793-BDF6-426B-AC14-A1782A079BDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{60A90684-EA83-4EF6-951C-03EC0892F48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60A90684-EA83-4EF6-951C-03EC0892F48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60A90684-EA83-4EF6-951C-03EC0892F48A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{000F5A82-DF65-4FD9-B9FE-4990B2C54500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{000F5A82-DF65-4FD9-B9FE-4990B2C54500}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{000F5A82-DF65-4FD9-B9FE-4990B2C54500}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{000F5A82-DF65-4FD9-B9FE-4990B2C54500}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6C04793-BDF6-426B-AC14-A1782A079BDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6C04793-BDF6-426B-AC14-A1782A079BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6C04793-BDF6-426B-AC14-A1782A079BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU

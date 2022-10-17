@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VividTracker.Data\VividTracker.Data.csproj" />
-    <ProjectReference Include="..\VividTracker.Domain\VividTracker.Domain.csproj" />
   </ItemGroup>
 
 </Project>

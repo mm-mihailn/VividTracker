@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using VividTracker.Domain.Models;
+using VividTracker.Data.Models;
 
 namespace VividTracker.Data
 {

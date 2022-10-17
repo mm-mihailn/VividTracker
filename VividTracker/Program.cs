@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using VividTracker.Data;
-using VividTracker.Domain.Models;
+using VividTracker.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
