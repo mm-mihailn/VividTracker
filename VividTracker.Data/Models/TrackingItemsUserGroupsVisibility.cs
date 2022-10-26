@@ -11,7 +11,7 @@
     {
         public int Id { get; set; }
         public int TrackingItemId { get; set; }
-        public virtual TrackingItem TrackingItem { get; set; }
+        public TrackingItem TrackingItem { get; set; }
         public int UserGroupId { get; set; }
         public virtual UserGroup UserGroup { get; set; }
         public bool Visible { get; set; }

@@ -12,8 +12,8 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public int TenantId { get; set; }
-        public virtual Tenant Tenant { get; set; }
-        public ICollection<ApplicationUser> ApplicationUsers { get; set; }
-        public ICollection<TrackingItemsUserGroupsVisibility>? TrackingItemsUserGroupsVisibility { get; set; }
+        public Tenant Tenant { get; set; }
+        public ICollection<User> Users { get; set; }
+        public ICollection<TrackingItemsUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }
     }
 }

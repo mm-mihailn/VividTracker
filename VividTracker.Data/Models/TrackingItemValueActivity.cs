@@ -12,12 +12,11 @@
         public int Id { get; set; }
         public int TrackingItemValueId { get; set; }
         public TrackingItemValue TrackingItemValue { get; set; }
-
         [MaxLength(255)]
         public string? Comment { get; set; }
         public decimal? OldValue { get; set; }
         public DateTime TimeStamp { get; set; }
         public Guid UserId { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public User User { get; set; }
     }
 }

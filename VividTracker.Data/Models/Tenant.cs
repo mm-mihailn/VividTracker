@@ -2,27 +2,25 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class Tenant
     {
         public Tenant()
         {
-
+            Name = Guid.NewGuid().ToString();
+            Users = new List<User>();
+            UserGroups = new List<UserGroup>();
+            TrackingGroups = new List<TrackingGroup>();
+            TrackingItems = new List<TrackingItem>();
         }
-        public Tenant(ICollection<ApplicationUser> users, ICollection<UserGroup> usergroups, ICollection<TrackingGroup> trackinGroups, ICollection<TrackingItem> trackingItems)
+        public Tenant(string name) : this()
         {
-            Users = users;
-            UserGroups = usergroups;
-            TrackingGroups = trackinGroups;
-            TrackingItems = trackingItems;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
+
         public int Id { get; set; }
-        public string? Name { get; set; }
-        public ICollection<ApplicationUser> Users { get; set; }
+        public string Name { get; set; }
+        public ICollection<User> Users { get; set; }
         public ICollection<UserGroup> UserGroups { get; set; }
         public ICollection<TrackingGroup> TrackingGroups { get; set; }
         public ICollection<TrackingItem> TrackingItems { get; set; }
