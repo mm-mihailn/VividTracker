@@ -9,14 +9,33 @@
 
     public class TrackingItemValueActivity
     {
+        public TrackingItemValueActivity(TrackingItemValue trackingItemValue,string? comment, decimal? oldValue, DateTime timeStamp,User user)
+        {
+            _trackingItemValue = trackingItemValue;
+            Comment = comment;
+            OldValue = oldValue;
+            TimeStamp = timeStamp;
+            _user = User;
+        }
+
         public int Id { get; set; }
         public int TrackingItemValueId { get; set; }
-        public TrackingItemValue TrackingItemValue { get; set; }
+        public TrackingItemValue _trackingItemValue { get; set; }
+        public TrackingItemValue TrackingItemValue
+        {
+            get => _trackingItemValue ?? throw new InvalidOperationException("Uninitialized property: " + nameof(TrackingItemValue));
+            set => _trackingItemValue = value;
+        }
         [MaxLength(255)]
         public string? Comment { get; set; }
         public decimal? OldValue { get; set; }
         public DateTime TimeStamp { get; set; }
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public User _user { get; set; }
+        public User User
+        {
+            get => _user ?? throw new InvalidOperationException("Uninitialized property: " + nameof(User));
+            set => _user = value;
+        }
     }
 }

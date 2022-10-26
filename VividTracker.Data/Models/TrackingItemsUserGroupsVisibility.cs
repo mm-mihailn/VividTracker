@@ -9,11 +9,32 @@
 
     public class TrackingItemsUserGroupsVisibility
     {
+        public TrackingItemsUserGroupsVisibility()
+        {
+            TrackingItemsValuesActivities = new List<TrackingItemValueActivity>();
+        }
+        public TrackingItemsUserGroupsVisibility(TrackingItem trackingItem,UserGroup userGroup,bool visible):this()
+        {
+            _trackingItem = trackingItem;
+            _userGroup = userGroup;
+            Visible = visible;
+        }
         public int Id { get; set; }
         public int TrackingItemId { get; set; }
-        public TrackingItem TrackingItem { get; set; }
+        public TrackingItem _trackingItem { get; set; }
+
+        public TrackingItem TrackingItem
+        {
+            get => _trackingItem ?? throw new InvalidOperationException("Uninitialized property: " + nameof(TrackingItem));
+            set => _trackingItem = value;
+        }
         public int UserGroupId { get; set; }
-        public virtual UserGroup UserGroup { get; set; }
+        public  UserGroup _userGroup { get; set; }
+        public UserGroup UserGroup
+        {
+            get => _userGroup ?? throw new InvalidOperationException("Uninitialized property: " + nameof(UserGroup));
+            set => _userGroup = value;
+        }
         public bool Visible { get; set; }
         public ICollection<TrackingItemValueActivity> TrackingItemsValuesActivities { get; set; }
     }

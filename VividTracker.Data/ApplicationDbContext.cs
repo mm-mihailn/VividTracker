@@ -36,13 +36,8 @@ namespace VividTracker.Data
             //Todo add configurations for all entities
             builder.ApplyConfiguration(new TenantEntityConfiguration());
             builder.ApplyConfiguration(new TrackingGroupRecordEntityConfiguration());
-            
-            //Todo move this config in a UserGroupEntityConfiguration 
-            builder
-                .Entity<UserGroup>()
-                .HasMany(p => p.Users)
-                .WithMany(p => p.UserGroups)
-                .UsingEntity(j => j.ToTable("UserGroupUsers"));
+            builder.ApplyConfiguration(new UserGroupEntityConfiguration());
+            builder.ApplyConfiguration(new TrackingGroupEntityConfiguration());
         }
     }
 }
