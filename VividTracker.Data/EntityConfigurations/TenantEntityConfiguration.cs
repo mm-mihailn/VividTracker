@@ -22,6 +22,7 @@ namespace VividTracker.Data.EntityConfigurations
             builder.HasMany(t => t.UserGroups).WithOne(ug => ug.Tenant).HasForeignKey(ug => ug.TenantId);
             builder.HasMany(t => t.TrackingGroups).WithOne(tg => tg.Tenant).HasForeignKey(tg => tg.TenantId);
             builder.HasMany(t => t.TrackingItems).WithOne(ti => ti.Tenant).HasForeignKey(ti => ti.TenantId);
+          
         }
     }
 }

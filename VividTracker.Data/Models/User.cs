@@ -12,12 +12,12 @@ namespace VividTracker.Data.Models
             TrackingItemValueActivities =new List<TrackingItemValueActivity>();
         }
 
-        public User(Tenant tenant):this()
+        public User(Tenant? tenant):this()
         {
             _tenant = tenant;
         }
         public int TenantId { get; set; }
-        public Tenant _tenant { get; set; }
+        private Tenant? _tenant { get; set; }
         public Tenant Tenant
         {
             get => _tenant ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Tenant));

@@ -29,6 +29,7 @@
         public bool Disabled { get; set; }
         
         public int TrackingGroupId { get; set; }
+
         private TrackingGroup? _trackingGroup;
         public TrackingGroup TrackingGroup
         {

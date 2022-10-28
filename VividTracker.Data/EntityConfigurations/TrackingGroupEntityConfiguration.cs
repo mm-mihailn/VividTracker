@@ -15,9 +15,22 @@
         {
             builder.ToTable("TrackingGroups");
 
-            builder.HasKey(t => t.Id);
+            builder.HasKey(tg => tg.Id);
+            builder.Property(tg => tg.Name);
+            builder.Property(tg => tg.Label);
 
-            builder.HasMany(t => t.TrackingGroupRecords).WithOne(x => x.TrackingGroup).HasForeignKey(x => x.TrackingGroupId);
+            builder.HasOne(t => t.Tenant)
+                .WithMany(tg => tg.TrackingGroups)
+                .HasForeignKey(t => t.TenantId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(tgr => tgr.TrackingGroupRecords)
+                .WithOne(tg => tg.TrackingGroup)
+                .HasForeignKey(tg => tg.TrackingGroupId)
+                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(ti => ti.TrackingItems)
+                .WithMany(tg => tg.TrackingGroups);
         }
     }
 }

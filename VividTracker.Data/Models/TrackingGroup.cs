@@ -27,7 +27,6 @@
             get => _tenant ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Tenant));
             set => _tenant = value;
         }
-        
         public string? Label { get; set; }
         public ICollection<TrackingItem> TrackingItems { get; set; }
         public ICollection<TrackingGroupRecord> TrackingGroupRecords { get; set; }

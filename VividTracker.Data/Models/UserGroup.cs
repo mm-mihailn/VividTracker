@@ -15,15 +15,15 @@
             Users = new List<User>();
             TrackingItemsUserGroupsVisibilities = new List<TrackingItemsUserGroupsVisibility>();
         }
-        public UserGroup(string name,Tenant tenant):this()
+        public UserGroup(string name,Tenant? tenant):this()
         {
-            Name = name;
+             Name = name;
             _tenant = tenant;
         }
         public int Id { get; set; }
         public string Name { get; set; }
         public int TenantId { get; set; }
-        public Tenant _tenant { get; set; }
+        private Tenant? _tenant { get; set; }
         public Tenant Tenant
         {
             get => _tenant ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Tenant));

@@ -13,10 +13,24 @@
     {
         public void Configure(EntityTypeBuilder<UserGroup> builder)
         {
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Name);
+
             builder
                 .HasMany(p => p.Users)
                 .WithMany(p => p.UserGroups)
                 .UsingEntity(j => j.ToTable("UserGroupUsers"));
+
+            builder.HasOne(x => x.Tenant)
+                .WithMany(x => x.UserGroups)
+                .HasForeignKey(x => x.TenantId)
+                .OnDelete(DeleteBehavior.Restrict); ;
+
+            builder.HasMany(x => x.Users)
+                .WithMany(x => x.UserGroups);
+
+            builder.HasMany(x => x.TrackingItemsUserGroupsVisibilities)
+                .WithOne(x => x.UserGroup);
         }
     }
 }

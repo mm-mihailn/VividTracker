@@ -1,6 +1,7 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
 using IdentityModel;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Reflection.Emit;
@@ -29,15 +30,18 @@ namespace VividTracker.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
-            //Todo rename the other User Tables
+           
             builder.Entity<User>().ToTable("Users");
             
-            //Todo add configurations for all entities
             builder.ApplyConfiguration(new TenantEntityConfiguration());
             builder.ApplyConfiguration(new TrackingGroupRecordEntityConfiguration());
             builder.ApplyConfiguration(new UserGroupEntityConfiguration());
             builder.ApplyConfiguration(new TrackingGroupEntityConfiguration());
+            builder.ApplyConfiguration(new TrackingItemEntityConfiguration());
+            builder.ApplyConfiguration(new TrackingItemUserGroupsVisibilityEntityCongiguration());
+            builder.ApplyConfiguration(new TrackingItemValueActivityEntityConfiguration());
+            builder.ApplyConfiguration(new TrackingItemValueActivityEntityConfiguration());
+            builder.ApplyConfiguration(new UserEntityConfiguration());;
         }
     }
 }
