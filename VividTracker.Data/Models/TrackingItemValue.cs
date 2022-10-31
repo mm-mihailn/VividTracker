@@ -21,6 +21,7 @@
         public int Id { get; set; }
         public decimal Value { get; set; }
         public int TrackingItemId { get; set; }
+
         private TrackingItem? _trackingItem;
         public TrackingItem TrackingItem
         {
@@ -28,6 +29,7 @@
             set => _trackingItem = value;
         }
         public int TrackingGroupRecordId { get; set; }
+
         private TrackingGroupRecord? _trackingGroupRecord;
         public TrackingGroupRecord TrackingGroupRecord
         {

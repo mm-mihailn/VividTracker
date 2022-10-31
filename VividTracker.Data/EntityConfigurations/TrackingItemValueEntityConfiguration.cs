@@ -18,11 +18,10 @@
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Value).HasPrecision(5,2);
             builder.Property(x => x.TimeStamp);
-            
+
             builder.HasOne(x => x.TrackingItem)
                 .WithMany(x => x.TrackingItemsValues)
-                .HasForeignKey(x => x.TrackingItemId)
-                .OnDelete(DeleteBehavior.Restrict); ;
+                .HasForeignKey(x => x.TrackingItemId);
 
             builder.HasOne(x => x.TrackingGroupRecord)
                 .WithMany(x => x.TrackingItemValues)

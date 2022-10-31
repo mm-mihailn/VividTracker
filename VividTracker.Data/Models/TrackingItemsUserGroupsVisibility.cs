@@ -19,6 +19,7 @@
         }
         public int Id { get; set; }
         public int TrackingItemId { get; set; }
+
         private TrackingItem? _trackingItem;
         public TrackingItem TrackingItem
         {
@@ -26,6 +27,7 @@
             set => _trackingItem = value;
         }
         public int UserGroupId { get; set; }
+
         private UserGroup? _userGroup;
         public UserGroup UserGroup
         {

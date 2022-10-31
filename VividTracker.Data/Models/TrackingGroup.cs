@@ -16,11 +16,10 @@
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Label = label;
         }
-
         public int Id { get; set; }
         public string Name { get; set; }
-        
         public int TenantId { get; set; }
+
         private Tenant? _tenant;
         public Tenant Tenant
         {
@@ -30,6 +29,5 @@
         public string? Label { get; set; }
         public ICollection<TrackingItem> TrackingItems { get; set; }
         public ICollection<TrackingGroupRecord> TrackingGroupRecords { get; set; }
-
     }
 }

@@ -26,7 +26,7 @@
             builder.HasMany(tgr => tgr.TrackingGroupRecords)
                 .WithOne(tg => tg.TrackingGroup)
                 .HasForeignKey(tg => tg.TrackingGroupId);
-                
+
             builder.HasMany(ti => ti.TrackingItems)
                 .WithMany(tg => tg.TrackingGroups)
                 .UsingEntity(j => j.ToTable("TrackingGroupTrackingItems"));

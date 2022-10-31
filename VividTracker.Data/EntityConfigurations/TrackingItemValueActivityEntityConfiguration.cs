@@ -22,7 +22,8 @@
 
             builder.HasOne(x => x.TrackingItemValue)
                 .WithMany(x => x.TrackingItemValueActivities)
-                .HasForeignKey(x => x.TrackingItemValueId);
+                .HasForeignKey(x => x.TrackingItemValueId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.TrackingItemValueActivities)

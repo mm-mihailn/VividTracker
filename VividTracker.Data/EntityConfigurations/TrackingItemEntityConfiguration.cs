@@ -34,16 +34,11 @@
 
             builder.HasMany(t => t.TrackingItemsValues)
                 .WithOne(t => t.TrackingItem)
-                .HasForeignKey(x => x.TrackingItemId)
-                .OnDelete(DeleteBehavior.Restrict); ;
+                .HasForeignKey(x => x.TrackingItemId);
 
             builder.HasMany(t => t.TrackingItemsUserGroupsVisibilities)
                 .WithOne(t => t.TrackingItem)
-                .HasForeignKey(t => t.TrackingItemId)
-                .OnDelete(DeleteBehavior.Restrict); ;
-
-           
-                
+                .HasForeignKey(t => t.TrackingItemId);
         }
     }
 }

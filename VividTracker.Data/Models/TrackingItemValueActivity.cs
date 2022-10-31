@@ -23,6 +23,7 @@
         }
         public int Id { get; set; }
         public int TrackingItemValueId { get; set; }
+
         private TrackingItemValue? _trackingItemValue;
         public TrackingItemValue TrackingItemValue
         {

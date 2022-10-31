@@ -11,8 +11,8 @@ namespace VividTracker.Data.Models
             UserGroups = new List<UserGroup>();
             TrackingItemValueActivities =new List<TrackingItemValueActivity>();
         }
-
         public int TenantId { get; set; }
+
         private Tenant? _tenant;
         public Tenant Tenant
         {

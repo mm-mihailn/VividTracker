@@ -35,7 +35,6 @@
             Target = target;
             Type = type;
         }
-
         public int Id { get; set; }
         public int TenantId { get; set; }
         private Tenant? _tenant;

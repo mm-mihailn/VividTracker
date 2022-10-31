@@ -27,7 +27,6 @@
         public int? ParentId { get; set; }
         public TrackingGroupRecord? Parent { get; set; }
         public bool Disabled { get; set; }
-        
         public int TrackingGroupId { get; set; }
 
         private TrackingGroup? _trackingGroup;
