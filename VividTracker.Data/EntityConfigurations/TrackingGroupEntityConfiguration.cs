@@ -21,16 +21,15 @@
 
             builder.HasOne(t => t.Tenant)
                 .WithMany(tg => tg.TrackingGroups)
-                .HasForeignKey(t => t.TenantId)
-                 .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(t => t.TenantId);
 
             builder.HasMany(tgr => tgr.TrackingGroupRecords)
                 .WithOne(tg => tg.TrackingGroup)
-                .HasForeignKey(tg => tg.TrackingGroupId)
-                 .OnDelete(DeleteBehavior.Restrict);
-
+                .HasForeignKey(tg => tg.TrackingGroupId);
+                
             builder.HasMany(ti => ti.TrackingItems)
-                .WithMany(tg => tg.TrackingGroups);
+                .WithMany(tg => tg.TrackingGroups)
+                .UsingEntity(j => j.ToTable("TrackingGroupTrackingItems"));
         }
     }
 }

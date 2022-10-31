@@ -13,6 +13,8 @@
     {
         public void Configure(EntityTypeBuilder<UserGroup> builder)
         {
+            builder.ToTable("UserGroups");
+
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name);
 
@@ -24,7 +26,7 @@
             builder.HasOne(x => x.Tenant)
                 .WithMany(x => x.UserGroups)
                 .HasForeignKey(x => x.TenantId)
-                .OnDelete(DeleteBehavior.Restrict); ;
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.Users)
                 .WithMany(x => x.UserGroups);

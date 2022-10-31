@@ -13,11 +13,12 @@
     {
         public void Configure(EntityTypeBuilder<TrackingItemValue> builder)
         {
-            builder.ToTable("TarckingItemsValue");
+            builder.ToTable("TrackingItemsValues");
+            
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Value);
+            builder.Property(x => x.Value).HasPrecision(5,2);
             builder.Property(x => x.TimeStamp);
-
+            
             builder.HasOne(x => x.TrackingItem)
                 .WithMany(x => x.TrackingItemsValues)
                 .HasForeignKey(x => x.TrackingItemId)

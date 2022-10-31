@@ -14,6 +14,7 @@
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("Users");
+            
             builder.HasKey(x => x.Id);
 
             builder.HasOne(x => x.Tenant)

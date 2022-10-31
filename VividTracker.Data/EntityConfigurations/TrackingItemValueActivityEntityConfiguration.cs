@@ -13,10 +13,11 @@
     {
         public void Configure(EntityTypeBuilder<TrackingItemValueActivity> builder)
         {
-            builder.ToTable("TrackingItemsValueActivities");
+            builder.ToTable("TrackingItemValueActivities");
+            
             builder.HasKey(t => t.Id);
-            builder.Property(t => t.Comment);
-            builder.Property(t => t.OldValue);
+            builder.Property(t => t.Comment).HasMaxLength(255);
+            builder.Property(t => t.OldValue).HasPrecision(5, 2);
             builder.Property(t => t.TimeStamp);
 
             builder.HasOne(x => x.TrackingItemValue)

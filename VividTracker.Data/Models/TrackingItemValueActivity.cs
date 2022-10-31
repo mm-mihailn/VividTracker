@@ -12,30 +12,28 @@
     {
         public TrackingItemValueActivity()
         {
-
+            UserId = Guid.Empty.ToString();
         }
-        public TrackingItemValueActivity(TrackingItemValue? trackingItemValue,string? comment, decimal? oldValue, DateTime timeStamp,User? user):this()
+        public TrackingItemValueActivity(string userId, string? comment, decimal? oldValue, DateTime timeStamp) : this()
         {
-            _trackingItemValue = trackingItemValue;
+            UserId = userId;
             Comment = comment;
             OldValue = oldValue;
             TimeStamp = timeStamp;
-            _user = User;
         }
         public int Id { get; set; }
         public int TrackingItemValueId { get; set; }
-        private TrackingItemValue? _trackingItemValue { get; set; }
+        private TrackingItemValue? _trackingItemValue;
         public TrackingItemValue TrackingItemValue
         {
             get => _trackingItemValue ?? throw new InvalidOperationException("Uninitialized property: " + nameof(TrackingItemValue));
             set => _trackingItemValue = value;
         }
-        [MaxLength(255)]
         public string? Comment { get; set; }
         public decimal? OldValue { get; set; }
         public DateTime TimeStamp { get; set; }
-        public string UserId { get; set; } = Guid.NewGuid().ToString();
-        private User? _user { get; set; }
+        public string UserId { get; set; }
+        private User? _user;
         public User User
         {
             get => _user ?? throw new InvalidOperationException("Uninitialized property: " + nameof(User));

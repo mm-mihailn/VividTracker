@@ -14,6 +14,7 @@ namespace VividTracker.Data.EntityConfigurations
         public void Configure(EntityTypeBuilder<TrackingGroupRecord> builder)
         {
             builder.ToTable("TrackingGroupRecords");
+            
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).HasMaxLength(255);
             builder.Property(t => t.Disabled);

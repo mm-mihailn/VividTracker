@@ -14,6 +14,7 @@
         public void Configure(EntityTypeBuilder<TrackingItemsUserGroupsVisibility> builder)
         {
             builder.ToTable("TrackingItemUserGroupsVisibilities");
+            
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Visible);
 
