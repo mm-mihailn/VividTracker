@@ -16,7 +16,7 @@
             builder.ToTable("TrackingGroups");
 
             builder.HasKey(tg => tg.Id);
-            builder.Property(tg => tg.Name);
+            builder.Property(tg => tg.Name).HasMaxLength(255);
             builder.Property(tg => tg.Label);
 
             builder.HasOne(t => t.Tenant)

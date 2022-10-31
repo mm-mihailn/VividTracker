@@ -16,7 +16,7 @@
             builder.ToTable("UserGroups");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Name);
+            builder.Property(x => x.Name).HasMaxLength(255);
 
             builder
                 .HasMany(p => p.Users)

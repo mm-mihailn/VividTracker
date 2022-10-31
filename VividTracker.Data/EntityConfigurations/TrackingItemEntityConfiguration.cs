@@ -19,13 +19,13 @@
             builder.HasKey(t => t.Id);
             builder.Property(t => t.IrrelevantAllowed);
             builder.Property(t => t.MandatoryComment);
-            builder.Property(t => t.DefaultValue);
+            builder.Property(t => t.DefaultValue).HasPrecision(5, 2);
             builder.Property(t => t.MaxValueColor).HasMaxLength(7);
             builder.Property(t => t.MinValueColor).HasMaxLength(7);
             builder.Property(t => t.IrrelevantColor).HasMaxLength(7);
             builder.Property(t => t.Target).HasPrecision(5, 2);
             builder.Property(t => t.Type);
-            builder.Property(t => t.Name);
+            builder.Property(t => t.Name).HasMaxLength(255);
 
             builder.HasOne(x => x.Tenant)
                 .WithMany(x => x.TrackingItems)
