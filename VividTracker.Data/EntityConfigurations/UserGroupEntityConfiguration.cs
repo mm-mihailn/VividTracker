@@ -1,14 +1,9 @@
-﻿namespace VividTracker.Data.EntityConfigurations
-{
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using VividTracker.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VividTracker.Data.Models;
 
+namespace VividTracker.Data.EntityConfigurations
+{
     public class UserGroupEntityConfiguration : IEntityTypeConfiguration<UserGroup>
     {
         public void Configure(EntityTypeBuilder<UserGroup> builder)
@@ -21,7 +16,20 @@
             builder
                 .HasMany(p => p.Users)
                 .WithMany(p => p.UserGroups)
-                .UsingEntity(j => j.ToTable("UserGroupUsers"));
+                .UsingEntity<Dictionary<string, object>>(
+                "UserGroupUsers",
+                j => j
+                    .HasOne<User>()
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .HasConstraintName("FK_UserGroupUsers_Users_UserId")
+                    .OnDelete(DeleteBehavior.Cascade),
+                j => j
+                    .HasOne<UserGroup>()
+                    .WithMany()
+                    .HasForeignKey("UserGroupId")
+                    .HasConstraintName("FK_UserGroupUsers_UserGroups_UserGroupId")
+                    .OnDelete(DeleteBehavior.ClientCascade));
 
             builder.HasOne(x => x.Tenant)
                 .WithMany(x => x.UserGroups)

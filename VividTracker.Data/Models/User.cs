@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace VividTracker.Data.Models
 {
@@ -8,17 +6,21 @@ namespace VividTracker.Data.Models
     {
         public User()
         {
+            Name = string.Empty;
             UserGroups = new List<UserGroup>();
             TrackingItemValueActivities =new List<TrackingItemValueActivity>();
         }
-        public int TenantId { get; set; }
 
-        private Tenant? _tenant;
-        public Tenant Tenant
+        public User(string name):this()
         {
-            get => _tenant ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Tenant));
-            set => _tenant = value;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
         }
+
+        public string Name { get; set; }
+
+        public int? TenantId { get; set; }
+        public Tenant? Tenant { get; set; }
+
         public ICollection<UserGroup> UserGroups { get; set; }
         public ICollection<TrackingItemValueActivity> TrackingItemValueActivities { get; set; }
     }

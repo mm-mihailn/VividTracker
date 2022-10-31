@@ -67,7 +67,7 @@ namespace VividTracker.Data
             builder.ApplyConfiguration(new UserGroupEntityConfiguration());
             builder.ApplyConfiguration(new TrackingGroupEntityConfiguration());
             builder.ApplyConfiguration(new TrackingItemEntityConfiguration());
-            builder.ApplyConfiguration(new TrackingItemUserGroupsVisibilityEntityCongiguration());
+            builder.ApplyConfiguration(new TrackingItemUserGroupsVisibilityEntityConfiguration());
             builder.ApplyConfiguration(new TrackingItemValueActivityEntityConfiguration());
             builder.ApplyConfiguration(new TrackingItemValueActivityEntityConfiguration());
             builder.ApplyConfiguration(new UserEntityConfiguration());;

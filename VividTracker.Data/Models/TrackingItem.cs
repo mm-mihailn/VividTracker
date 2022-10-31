@@ -1,15 +1,7 @@
-﻿namespace VividTracker.Data.Models
-{
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Xml.Linq;
-    using VividTracker.Data.Enums;
+﻿using VividTracker.Data.Enums;
 
+namespace VividTracker.Data.Models
+{
     public class TrackingItem
     {
         public TrackingItem()

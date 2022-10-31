@@ -1,8 +1,5 @@
 ﻿namespace VividTracker.Data.Models
 {
-    using System;
-    using System.Collections.Generic;
-
     public class TrackingGroup
     {
         public TrackingGroup()

@@ -1,15 +1,9 @@
-﻿namespace VividTracker.Data.EntityConfigurations
-{
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using VividTracker.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VividTracker.Data.Models;
 
+namespace VividTracker.Data.EntityConfigurations
+{
     public class TrackingItemEntityConfiguration : IEntityTypeConfiguration<TrackingItem>
     {
         public void Configure(EntityTypeBuilder<TrackingItem> builder)

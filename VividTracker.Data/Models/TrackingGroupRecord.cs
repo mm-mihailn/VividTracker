@@ -1,9 +1,7 @@
-﻿namespace VividTracker.Data.Models
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
+namespace VividTracker.Data.Models
+{
     public class TrackingGroupRecord
     {
         public TrackingGroupRecord()
@@ -21,7 +19,6 @@
         }
 
         public int Id { get; set; }
-
         [MinLength(2)]
         public string Name { get; set; }
         public int? ParentId { get; set; }
@@ -35,6 +32,7 @@
             get => _trackingGroup ?? throw new InvalidOperationException("Uninitialized property: " + nameof(TrackingGroup));
             set => _trackingGroup = value;
         }
+        
         public ICollection<TrackingItemValue> TrackingItemValues { get; set; }
         public ICollection<TrackingGroupRecord> SubTrackingGroupRecords { get; set; }
     }

@@ -1,14 +1,9 @@
-﻿namespace VividTracker.Data.EntityConfigurations
-{
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using VividTracker.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VividTracker.Data.Models;
 
+namespace VividTracker.Data.EntityConfigurations
+{
     public class TrackingGroupEntityConfiguration : IEntityTypeConfiguration<TrackingGroup>
     {
         public void Configure(EntityTypeBuilder<TrackingGroup> builder)
@@ -17,7 +12,7 @@
 
             builder.HasKey(tg => tg.Id);
             builder.Property(tg => tg.Name).HasMaxLength(255);
-            builder.Property(tg => tg.Label);
+            builder.Property(tg => tg.Label).HasMaxLength(255);
 
             builder.HasOne(t => t.Tenant)
                 .WithMany(tg => tg.TrackingGroups)
@@ -29,7 +24,20 @@
 
             builder.HasMany(ti => ti.TrackingItems)
                 .WithMany(tg => tg.TrackingGroups)
-                .UsingEntity(j => j.ToTable("TrackingGroupTrackingItems"));
+                .UsingEntity<Dictionary<string, object>>(
+                "TrackingGroupTrackingItems",
+                j => j
+                    .HasOne<TrackingItem>()
+                    .WithMany()
+                    .HasForeignKey("TrackingItemId")
+                    .HasConstraintName("FK_TrackingGroupTrackingItems_TrackingItems_TrackingItemId")
+                    .OnDelete(DeleteBehavior.Cascade),
+                j => j
+                    .HasOne<TrackingGroup>()
+                    .WithMany()
+                    .HasForeignKey("TrackingGroupId")
+                    .HasConstraintName("FK_TrackingGroupTrackingItems_TrackingGroups_TrackingGroupId")
+                    .OnDelete(DeleteBehavior.ClientCascade));
         }
     }
 }

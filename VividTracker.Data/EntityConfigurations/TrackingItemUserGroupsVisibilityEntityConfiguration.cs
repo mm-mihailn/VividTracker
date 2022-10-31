@@ -1,15 +1,10 @@
-﻿namespace VividTracker.Data.EntityConfigurations
-{
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using VividTracker.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VividTracker.Data.Models;
 
-    public class TrackingItemUserGroupsVisibilityEntityCongiguration : IEntityTypeConfiguration<TrackingItemsUserGroupsVisibility>
+namespace VividTracker.Data.EntityConfigurations
+{
+    public class TrackingItemUserGroupsVisibilityEntityConfiguration : IEntityTypeConfiguration<TrackingItemsUserGroupsVisibility>
     {
         public void Configure(EntityTypeBuilder<TrackingItemsUserGroupsVisibility> builder)
         {
