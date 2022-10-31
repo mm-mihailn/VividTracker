@@ -32,45 +32,22 @@ namespace VividTracker.Data
             base.OnModelCreating(builder);
 
             builder.Entity<User>().ToTable("Users");
+            builder.Entity<IdentityRole>().ToTable(name: "Roles");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
             
-            builder.Entity<IdentityRole>(entity =>
-            {
-                entity.ToTable(name: "Roles");
-            });
-            builder.Entity<IdentityUserRole<string>>(entity =>
-            {
-                entity.ToTable("UserRoles");
-            });
-
-            builder.Entity<IdentityUserClaim<string>>(entity =>
-            {
-                entity.ToTable("UserClaims");
-            });
-
-            builder.Entity<IdentityUserLogin<string>>(entity =>
-            {
-                entity.ToTable("UserLogins");
-            });
-
-            builder.Entity<IdentityRoleClaim<string>>(entity =>
-            {
-                entity.ToTable("RoleClaims");
-            });
-
-            builder.Entity<IdentityUserToken<string>>(entity =>
-            {
-                entity.ToTable("UserTokens");
-            });
-
             builder.ApplyConfiguration(new TenantEntityConfiguration());
-            builder.ApplyConfiguration(new TrackingGroupRecordEntityConfiguration());
-            builder.ApplyConfiguration(new UserGroupEntityConfiguration());
             builder.ApplyConfiguration(new TrackingGroupEntityConfiguration());
+            builder.ApplyConfiguration(new TrackingGroupRecordEntityConfiguration());
             builder.ApplyConfiguration(new TrackingItemEntityConfiguration());
             builder.ApplyConfiguration(new TrackingItemUserGroupsVisibilityEntityConfiguration());
             builder.ApplyConfiguration(new TrackingItemValueActivityEntityConfiguration());
-            builder.ApplyConfiguration(new TrackingItemValueActivityEntityConfiguration());
-            builder.ApplyConfiguration(new UserEntityConfiguration());;
+            builder.ApplyConfiguration(new TrackingItemValueEntityConfiguration());
+            builder.ApplyConfiguration(new UserEntityConfiguration());
+            builder.ApplyConfiguration(new UserGroupEntityConfiguration());
         }
     }
 }
