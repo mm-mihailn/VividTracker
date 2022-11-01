@@ -461,7 +461,7 @@ namespace VividTracker.Data.Migrations
                     b.ToTable("TrackingItems", (string)null);
                 });
 
-            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemsUserGroupsVisibility", b =>
+            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemUserGroupsVisibility", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -775,7 +775,7 @@ namespace VividTracker.Data.Migrations
                     b.Navigation("Tenant");
                 });
 
-            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemsUserGroupsVisibility", b =>
+            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemUserGroupsVisibility", b =>
                 {
                     b.HasOne("VividTracker.Data.Models.TrackingItem", "TrackingItem")
                         .WithMany("TrackingItemsUserGroupsVisibilities")

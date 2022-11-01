@@ -12,7 +12,7 @@ using VividTracker.Data;
 namespace VividTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221031163315_InitialDbSchema")]
+    [Migration("20221101104738_InitialDbSchema")]
     partial class InitialDbSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -463,7 +463,7 @@ namespace VividTracker.Data.Migrations
                     b.ToTable("TrackingItems", (string)null);
                 });
 
-            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemsUserGroupsVisibility", b =>
+            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemUserGroupsVisibility", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -777,7 +777,7 @@ namespace VividTracker.Data.Migrations
                     b.Navigation("Tenant");
                 });
 
-            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemsUserGroupsVisibility", b =>
+            modelBuilder.Entity("VividTracker.Data.Models.TrackingItemUserGroupsVisibility", b =>
                 {
                     b.HasOne("VividTracker.Data.Models.TrackingItem", "TrackingItem")
                         .WithMany("TrackingItemsUserGroupsVisibilities")

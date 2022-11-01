@@ -6,7 +6,7 @@
         {
             Name = Guid.NewGuid().ToString();
             Users = new List<User>();
-            TrackingItemsUserGroupsVisibilities = new List<TrackingItemsUserGroupsVisibility>();
+            TrackingItemsUserGroupsVisibilities = new List<TrackingItemUserGroupsVisibility>();
         }
         public UserGroup(string name) : this()
         {
@@ -23,6 +23,6 @@
             set => _tenant = value;
         }
         public ICollection<User> Users { get; set; }
-        public ICollection<TrackingItemsUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }
+        public ICollection<TrackingItemUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }
     }
 }
