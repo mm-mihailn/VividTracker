@@ -5,21 +5,24 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Reflection.Emit;
+using Microsoft.EntityFrameworkCore.Internal;
 using VividTracker.Data.EntityConfigurations;
 using VividTracker.Data.Models;
 
 namespace VividTracker.Data
 {
+
+
     public class ApplicationDbContext : ApiAuthorizationDbContext<User>
     {
-        public DbSet<Tenant> Tenats { get; set; }
-        public DbSet<TrackingGroup> TrackingGroups { get; set; }
-        public DbSet<TrackingGroupRecord> TrackingGroupRecords { get; set; }
-        public DbSet<TrackingItem> TrackingItems { get; set; }
-        public DbSet<TrackingItemsUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }
-        public DbSet<TrackingItemValue> TrackingItemValues { get; set; }
-        public DbSet<TrackingItemValueActivity> TrackingItemValueActivities { get; set; }
-        public DbSet<UserGroup> UsersGroups { get; set; }
+        public DbSet<Tenant> Tenants => Set<Tenant>();
+        public DbSet<TrackingGroup> TrackingGroups => Set<TrackingGroup>();
+        public DbSet<TrackingGroupRecord> TrackingGroupRecords => Set<TrackingGroupRecord>();
+        public DbSet<TrackingItem> TrackingItems => Set<TrackingItem>();
+        public DbSet<TrackingItemUserGroupsVisibility> TrackingItemUserGroupsVisibilities => Set<TrackingItemUserGroupsVisibility>();
+        public DbSet<TrackingItemValue> TrackingItemValues => Set<TrackingItemValue>();
+        public DbSet<TrackingItemValueActivity> TrackingItemValueActivities => Set<TrackingItemValueActivity>();
+        public DbSet<UserGroup> UserGroups => Set<UserGroup>();
         
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)

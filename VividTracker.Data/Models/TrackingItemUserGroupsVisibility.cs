@@ -1,12 +1,12 @@
 ﻿namespace VividTracker.Data.Models
 {
-    public class TrackingItemsUserGroupsVisibility
+    public class TrackingItemUserGroupsVisibility
     {
-        public TrackingItemsUserGroupsVisibility()
+        public TrackingItemUserGroupsVisibility()
         {
             
         }
-        public TrackingItemsUserGroupsVisibility(bool visible):this()
+        public TrackingItemUserGroupsVisibility(bool visible):this()
         {
             Visible = visible;
         }
