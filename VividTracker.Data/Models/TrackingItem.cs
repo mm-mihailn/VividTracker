@@ -11,7 +11,7 @@ namespace VividTracker.Data.Models
             MaxValueColor = string.Empty;
             IrrelevantColor = string.Empty;
             TrackingItemsValues = new List<TrackingItemValue>();
-            TrackingItemsUserGroupsVisibilities = new List<TrackingItemsUserGroupsVisibility>();
+            TrackingItemsUserGroupsVisibilities = new List<TrackingItemUserGroupsVisibility>();
             TrackingGroups = new List<TrackingGroup>();
         }
 
@@ -45,7 +45,7 @@ namespace VividTracker.Data.Models
         public PropertyType Type { get; set; }
         public string Name { get; set; }
         public ICollection<TrackingItemValue> TrackingItemsValues{ get; set; }
-        public ICollection<TrackingItemsUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }
+        public ICollection<TrackingItemUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }
         public ICollection<TrackingGroup> TrackingGroups { get; set; }
     }
 }
