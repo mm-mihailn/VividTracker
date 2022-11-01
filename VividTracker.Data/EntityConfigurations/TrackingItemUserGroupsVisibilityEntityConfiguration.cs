@@ -4,9 +4,9 @@ using VividTracker.Data.Models;
 
 namespace VividTracker.Data.EntityConfigurations
 {
-    public class TrackingItemUserGroupsVisibilityEntityConfiguration : IEntityTypeConfiguration<TrackingItemsUserGroupsVisibility>
+    public class TrackingItemUserGroupsVisibilityEntityConfiguration : IEntityTypeConfiguration<TrackingItemUserGroupsVisibility>
     {
-        public void Configure(EntityTypeBuilder<TrackingItemsUserGroupsVisibility> builder)
+        public void Configure(EntityTypeBuilder<TrackingItemUserGroupsVisibility> builder)
         {
             builder.ToTable("TrackingItemUserGroupsVisibilities");
             
