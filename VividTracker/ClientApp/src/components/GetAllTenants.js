@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import authService from './api-authorization/AuthorizeService'
-
+import { CreateHost } from './Host/DefaultHost.js'
 export default class TenantsComponent extends Component {
 
     constructor()
@@ -9,9 +9,9 @@ export default class TenantsComponent extends Component {
         this.state = {tenants: []}
     }
 
-    componentDidMount()
-    {
-        this.populateTenants();
+   async componentDidMount()
+   {
+       this.populateTenants();
     }
     render () {
         return (
@@ -21,6 +21,7 @@ export default class TenantsComponent extends Component {
                 {this.state.tenants.map((tenant) => {
                     return(
                         <div key={tenant.id}>
+                            {tenant.id}
                             {tenant.name}
                         </div>
                     )
@@ -32,8 +33,7 @@ export default class TenantsComponent extends Component {
     }
 
     async populateTenants() {
-        const response = await fetch('https://localhost:7091/api/getAllTenants');
-        const data = await response.json();
-        this.setState({ tenants: data});
+        const data = await CreateHost('GET', '/api/getAllTenants');
+        this.setState({ tenants: data })
     }
 }

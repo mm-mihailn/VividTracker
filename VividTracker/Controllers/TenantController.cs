@@ -21,13 +21,19 @@ namespace VividTracker.Controllers
             _tenantsService = tenantsService;
         }
 
-        [Route("api/getAllTenants")]
+        [Route("/api/getAllTenants")]
         [HttpGet]
         public async Task<List<Tenant>> Get()
         {
             return (List<Tenant>)await _tenantsService.GetTenantsAsync();
         }
-       
+
+        [Route("/api/getTenantById")]
+        [HttpGet]
+        public async Task<Tenant?> GetTenantById(int id)
+        {
+            return await _tenantsService.GetTenantByIdAsync(id);
+        }
     }
 
 

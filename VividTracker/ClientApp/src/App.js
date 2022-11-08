@@ -7,9 +7,9 @@ import { Counter } from './components/Counter';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
-
+import GetAllTenants from './components/GetAllTenants';
+import GetTenantById from './components/GetTenantById';
 import './custom.css'
-import TenantsComponent from './components/TenantsComponent';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -19,7 +19,8 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
-        <AuthorizeRoute path='/tenants' component={TenantsComponent} />
+            <AuthorizeRoute path='/tenants' component={GetAllTenants} />
+            <AuthorizeRoute path='/tenantsById' component={GetTenantById} />
             <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
