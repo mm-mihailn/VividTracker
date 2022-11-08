@@ -2,8 +2,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using VividTracker.Business.Services.Interfaces;
+using VividTracker.Business.Services;
 using VividTracker.Data;
 using VividTracker.Data.Models;
+using VividTracker.Data.Repositories.Interfaces;
+using VividTracker.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +28,8 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-
+builder.Services.AddScoped<ITenantsRepository, TenantsRepository>();
+builder.Services.AddScoped<ITenantsService, TenantsService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

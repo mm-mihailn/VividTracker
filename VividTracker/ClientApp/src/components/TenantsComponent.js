@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import authService from './api-authorization/AuthorizeService'
 
 export default class TenantsComponent extends Component {
 
@@ -10,10 +11,7 @@ export default class TenantsComponent extends Component {
 
     componentDidMount()
     {
-        fetch('https://localhost:7091/api/getAllTenants')
-        .then((res) => res.json())
-        .then((res) => this.setState({tenants: res}))
-    
+        this.populateTenants();
     }
     render () {
         return (
@@ -31,5 +29,11 @@ export default class TenantsComponent extends Component {
             </div>
           </div>
         );
-      }
+    }
+
+    async populateTenants() {
+        const response = await fetch('https://localhost:7091/api/getAllTenants');
+        const data = await response.json();
+        this.setState({ tenants: data});
+    }
 }
