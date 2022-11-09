@@ -3,6 +3,7 @@ import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
+import '../../Styles/HeaderStyle.css';
 
 export class LoginMenu extends Component {
     constructor(props) {
