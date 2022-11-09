@@ -9,19 +9,14 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import GetAllTenants from './components/GetAllTenants';
 import GetTenantById from './components/GetTenantById';
-import './custom.css'
+import './Styles/NavMenu.css'
 
 export default class App extends Component {
   static displayName = App.name;
 
   render () {
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-            <AuthorizeRoute path='/tenants' component={GetAllTenants} />
-            <AuthorizeRoute path='/tenantsById' component={GetTenantById} />
-            <AuthorizeRoute path='/fetch-data' component={FetchData} />
+      <Layout>=
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );
