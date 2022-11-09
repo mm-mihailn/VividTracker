@@ -2,8 +2,12 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using VividTracker.Business.Services;
+using VividTracker.Business.Services.Interfaces;
 using VividTracker.Data;
 using VividTracker.Data.Models;
+using VividTracker.Data.Repositories;
+using VividTracker.Data.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +28,9 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<ITenantsRepository, TenantsRepository>();
+builder.Services.AddScoped<ITenantsService, TenantsService>();
 
 var app = builder.Build();
 
@@ -51,7 +58,7 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile("index.html"); 
 app.UseCors(c => c
                .AllowAnyOrigin()
                .AllowAnyMethod()
