@@ -2,7 +2,7 @@
     background-color: #F28627;
     height:auto;
     width:100vw;
-    padding-top:100px;
+    padding-top:10px;
     position:absolute;
     bottom:0;
     right:0;
@@ -14,7 +14,15 @@ body{
     padding:0;
     background-color:#0084B4
 }
-#list-item {
-    padding: 0;
+#dev{
+    text-align:center;
+    margin:0;
+    padding:0
+}
+ul {
     list-style-type: none;
 }
+li{
+    color:white
+}
+

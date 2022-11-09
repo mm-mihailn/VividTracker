@@ -26,17 +26,19 @@ html {
     border: 1px solid #E9573F;
     padding:5px;
 }
-#login {
+.btn {
+    border-style: solid;
+    background-color: #f6aa68;
+    color: white !important;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 15px;
+    height: 30px;
     position: absolute;
-    width: 61px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    color: white;
-    background-color: aliceblue;
-    border: 0.5px solid gray;
-  
+    bottom: 0px;
 }
+
 #logoTitle {
     color: white;
     position: absolute;

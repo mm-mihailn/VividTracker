@@ -8,6 +8,15 @@ export class Home extends Component {
     render() {
         return (
             <footer id='footer'>
+                <div id="dev">
+                    <ul>
+                        <li>Blagovest Damyanov</li>
+                        <li>Martin Yordanov</li>
+                        <li>Maetin Marinov</li>
+                        <li>Veli Ashikov</li>
+                        <li>Mihail Nikolov</li>
+                    </ul>
+                </div>
             </footer>
         );
     }
