@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react'
 import authService from './api-authorization/AuthorizeService'
-import { CreateHost } from './Host/DefaultHost.js'
+import { Request } from './DefaultRequest/Request.js'
 export default class TenantsComponent extends Component {
 
     constructor() {
@@ -34,7 +34,7 @@ export default class TenantsComponent extends Component {
     }
 
     async populateTenantById() {
-        const data = await CreateHost('GET', '/api/getTenantById');
+        const data = await Request('GET', '/api/getTenantById');
         this.setStet({ tenant:data})
     }
 }

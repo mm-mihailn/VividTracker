@@ -1,4 +1,4 @@
-﻿export async function CreateHost(method,url,data) {
+﻿export async function Request(method,url,data) {
     const host = 'https://localhost:7091' + url;
    
     const options = {
