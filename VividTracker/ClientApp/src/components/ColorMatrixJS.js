@@ -12,28 +12,28 @@ function ChangeColor() {
     switch (index) {
         case 0:
             squareColor = '#D9D9D9'
-            break;
+        break;
         case 1:
             squareColor = '#F03C31'
-            break;
+        break;
         case 2:
             squareColor = '#EEDC3A'
-            break;
+        break;
         case 3:
             squareColor = '#51FF4E'
-            break;
+        break;
         case 4:
             squareColor = '#0239FB'
-            break;
+        break;
         case 5:
             squareColor = '#708FFF'
-            break;
+        break;
         case 6:
             squareColor = '#D2DCFF'
-            break;
+        break;
         case 7:
             squareColor = '#9CB2FF'
-            break;
+        break;
     }
 
 
@@ -46,15 +46,14 @@ function ChangeColor() {
         value1.style.background = squareColor;
         value2.style.background = squareColor;
     }
-
     ColorSquares();
 }
+
 $(document).ready(function () {
-    $("#square1").hide();
-    $("#square1").show();
+
     for (var i = 0; i < 160; i++) {
-        $("#square1").append(`<p class="square"></p>`);
+        $(".firstColumn").append(`<p class="square"></p>`);
     }
-    $("#btn-square").hide();
+
     $(".firstColumn").css("column-count", "16");
 });

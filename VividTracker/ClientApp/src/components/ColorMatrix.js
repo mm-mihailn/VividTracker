@@ -7,14 +7,13 @@ export class ColorMatrix extends Component {
 
     render() {
         return (
+
             <div className='colorMatrix'>
 
-                    <div class="firstColumn">
+                <div class="firstColumn"></div>
 
-                        <p id="square1" class="square"></p>
-
-                    </div>
             </div>
+
         );
     }
 }
