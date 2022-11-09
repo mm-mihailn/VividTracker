@@ -59,7 +59,7 @@ export class LoginMenu extends Component {
     anonymousView(loginPath) {
         return (<Fragment>
             <NavItem>
-                <NavLink id ='login'tag={Link} className="text-dark" to={loginPath}>Login</NavLink>
+                <NavLink id ='login'tag={Link} to={loginPath}>Login</NavLink>
             </NavItem>
         </Fragment>);
     }

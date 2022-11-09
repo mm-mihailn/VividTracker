@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import '../Styles/HomeStyle.css'
-export class Home extends Component {
-  static displayName = Home.name;
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 
-  render () {
-      return (
-          <footer id='footer'>
-            <h1>Hello everyone</h1>
-          </footer>
-    );
-  }
+export class Home extends Component {
+    static displayName = Home.name;
+
+    render() {
+        return (
+            <footer id='footer'>
+            </footer>
+        );
+    }
 }

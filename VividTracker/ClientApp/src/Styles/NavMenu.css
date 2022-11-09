@@ -23,5 +23,22 @@ html {
     height:auto;
     left:0px;
     right:0px;
-    border: 1px solid #E9573F
+    border: 1px solid #E9573F;
+    padding:5px;
+}
+#login {
+    position: absolute;
+    width: 61px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: aliceblue;
+    border: 0.5px solid gray;
+  
+}
+#logoTitle {
+    color: white;
+    position: absolute;
+    padding-left:35px;
 }

@@ -1,7 +1,20 @@
-﻿#footer{
+﻿#footer {
+    background-color: #F28627;
+    height:auto;
+    width:100vw;
+    padding-top:100px;
     position:absolute;
-    width:1440px;
-    height:125px;
-    left:0px;
-    top:899px;
+    bottom:0;
+    right:0;
+    left:0
+
+}
+body{
+    margin:0;
+    padding:0;
+    background-color:#0084B4
+}
+#list-item {
+    padding: 0;
+    list-style-type: none;
 }
