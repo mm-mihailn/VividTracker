@@ -55,17 +55,8 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="footer border-top pl-3 text-muted">
-        <div class="container">
-       Hi everyone
-            @{
-                var foundPrivacy = Url.Page("/Privacy", new { area = "" });
-            }
-            @if (foundPrivacy != null)
-            {
-                <a asp-area="" asp-page="/Privacy">Privacy</a>
-            }
-        </div>
+    <footer id="footer">
+      
     </footer>
 
     <environment include="Development">

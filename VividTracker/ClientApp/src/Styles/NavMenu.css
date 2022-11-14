@@ -24,7 +24,6 @@ html {
     left:0px;
     right:0px;
     border: 1px solid #E9573F;
-    padding:5px;
 }
 .btn {
     border-style: solid;
@@ -37,6 +36,7 @@ html {
     height: 30px;
     position: absolute;
     bottom: 0px;
+    border-bottom:solid;
 }
 
 #logoTitle {

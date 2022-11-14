@@ -85,6 +85,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+nav {
+    background-color: #F28627;
+    position: absolute;
+    height: auto;
+    left: 0px;
+    right: 0px;
+    border: 1px solid #E9573F;
+    padding: 5px;
+}
 .footer {
   position: absolute;
   width:1440px;
