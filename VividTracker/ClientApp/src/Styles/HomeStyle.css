@@ -14,10 +14,10 @@ body{
     padding:0;
     background-color:#0084B4
 }
-#dev{
-    text-align:center;
-    margin:0;
-    padding:0
+#team-info {
+    text-align: center;
+    margin: 0;
+    padding: 0
 }
 ul {
     list-style-type: none;

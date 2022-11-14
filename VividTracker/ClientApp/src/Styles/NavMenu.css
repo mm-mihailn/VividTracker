@@ -17,15 +17,15 @@ html {
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
-#header{
-    background-color:#F28627;
-    position:absolute;
-    height:auto;
-    left:0px;
-    right:0px;
+#header-content {
+    background-color: #F28627;
+    position: absolute;
+    height: auto;
+    left: 0px;
+    right: 0px;
     border: 1px solid #E9573F;
 }
-.btn {
+.login-btn{
     border-style: solid;
     background-color: #f6aa68;
     color: white !important;
@@ -36,7 +36,7 @@ html {
     height: 30px;
     position: absolute;
     bottom: 0px;
-    border-bottom:solid;
+    border-bottom: solid;
 }
 
 #logoTitle {

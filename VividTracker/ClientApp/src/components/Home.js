@@ -8,7 +8,7 @@ export class Home extends Component {
     render() {
         return (
             <footer id='footer'>
-                <div id="dev">
+                <div id="team-info">
                     <ul>
                         <li>Blagovest Damyanov</li>
                         <li>Martin Yordanov</li>

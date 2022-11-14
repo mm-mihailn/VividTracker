@@ -25,7 +25,7 @@ export class NavMenu extends Component {
 
     render() {
         return (
-            <header id='header'>
+            <header id='header-content'>
 
                 <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white" light>
                    
