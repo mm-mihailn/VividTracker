@@ -44,4 +44,17 @@ body {
 #footer li {
     color: white
 }
+#loginBtn {
+    border-style: solid;
+    background-color: #f6aa68;
+    color: #fff !important;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 15px;
+    height: 30px;
+    position: absolute;
+    bottom: 0px;
+    border-bottom: solid;
+}
 
