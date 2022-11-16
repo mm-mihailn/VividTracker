@@ -25,3 +25,23 @@ code {
     right: 0;
     left: 0
 }
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0084B4
+}
+
+#team-info {
+    text-align: center;
+    margin: 0;
+    padding: 0
+}
+
+#footer ul {
+    list-style-type: none;
+}
+
+#footer li {
+    color: white
+}
+
