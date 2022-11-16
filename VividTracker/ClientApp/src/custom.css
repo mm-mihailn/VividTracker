@@ -12,3 +12,16 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+.navigation-content {
+    background-color: red
+}
+#footer {
+    background-color: #F28627;
+    height: auto;
+    width: 100vw;
+    padding-top: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0
+}
