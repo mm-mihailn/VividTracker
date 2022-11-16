@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import '../custom.css'
+import '../../custom.css'
 
 export class Footer extends Component {
     static displayName = Footer.name;

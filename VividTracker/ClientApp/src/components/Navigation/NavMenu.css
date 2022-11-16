@@ -24,3 +24,8 @@ html {
     right: 0px;
     border: 1px solid #E9573F;
 }
+#logo-title {
+    color: white;
+    position: absolute;
+    padding-left: 35px;
+}
