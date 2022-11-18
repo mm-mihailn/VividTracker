@@ -7,9 +7,9 @@ import Damyanov from './Images/BlagovestDamyanov.JPEG'
 import Yordanov from './Images/MartinYordanov.jpg'
 import Marinov from './Images/MartinMarinov.png'
 
-import {ColorMatrix} from './ColorMatrix/ColorMatrix.js'
-export class Home extends Component {
-  static displayName = Home.name;
+import {ColorMatrix} from '../ColorMatrix/ColorMatrix.js'
+export class LandingPage extends Component {
+  static displayName = LandingPage.name;
 
   render () {
     return (
