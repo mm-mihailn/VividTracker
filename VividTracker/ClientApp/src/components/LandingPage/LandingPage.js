@@ -6,6 +6,7 @@ import sampleDev from './Images/Sample_Developer.jpeg'
 import Damyanov from './Images/BlagovestDamyanov.JPEG'
 import Yordanov from './Images/MartinYordanov.jpg'
 import Marinov from './Images/MartinMarinov.png'
+import Ashikov from './Images/VeliAshikov.jpeg'
 
 import {ColorMatrix} from '../ColorMatrix/ColorMatrix.js'
 export class LandingPage extends Component {
@@ -42,7 +43,7 @@ export class LandingPage extends Component {
                   </div>
                 </div>
                 <div className='developerCard'>
-                  <img className='developerImage' src={sampleDev}/>
+                  <img className='developerImage' src={Ashikov}/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Veli Ashikov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Developer</p>
