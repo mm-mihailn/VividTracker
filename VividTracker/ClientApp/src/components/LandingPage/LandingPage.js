@@ -38,8 +38,8 @@ export class LandingPage extends Component {
                   <img className='developerImage' src={Damyanov}/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Blagovest Damyanov</p>
-                    <p className='dev-info-row devRole'><strong>Role:</strong> Developer</p>
-                    <p className='dev-info-row devThing'><strong>Interests:</strong> I have only rocks, but when I throw them they start to roll.</p>
+                    <p className='dev-info-row devRole'><strong>Role:</strong> Backend Developer</p>
+                    <p className='dev-info-row devThing'><strong>Interests:</strong> I like playing the guitar, cooking, commodities investing, etc.</p>
                   </div>
                 </div>
                 <div className='developerCard'>
