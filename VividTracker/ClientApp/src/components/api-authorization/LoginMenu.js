@@ -3,6 +3,7 @@ import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
+import '../../custom.css'
 
 export class LoginMenu extends Component {
     constructor(props) {
@@ -56,13 +57,10 @@ export class LoginMenu extends Component {
 
     }
 
-    anonymousView(registerPath, loginPath) {
+    anonymousView(loginPath) {
         return (<Fragment>
             <NavItem>
-                <NavLink tag={Link} className="text-dark" to={registerPath}>Register</NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink tag={Link} className="text-dark" to={loginPath}>Login</NavLink>
+                <NavLink id="loginBtn" tag={Link} className="text-dark" to={loginPath}>Login</NavLink>
             </NavItem>
         </Fragment>);
     }

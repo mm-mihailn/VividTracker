@@ -12,3 +12,46 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+#footer {
+    background-color: #F28627;
+    height: auto;
+    width: 100vw;
+    padding-top: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0084B4
+}
+
+#team-info {
+    text-align: center;
+    margin: 0;
+    padding: 0
+}
+
+#footer ul {
+    list-style-type: none;
+}
+
+#footer li {
+    color: #fff
+}
+#loginBtn {
+    border-style: solid;
+    background-color: #f6aa68;
+    color: #fff !important;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 15px;
+    height: 30px;
+    position: absolute;
+    bottom: 0px;
+    border-bottom: solid;
+}
+

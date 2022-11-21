@@ -16,3 +16,16 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+#navigation-content {
+    background-color: #F28627;
+    position: absolute;
+    height: auto;
+    left: 0px;
+    right: 0px;
+    border: 1px solid #E9573F;
+}
+#logo-title {
+    color: #fff;
+    position: absolute;
+    padding-left: 35px;
+}
