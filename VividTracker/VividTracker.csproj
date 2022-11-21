@@ -48,6 +48,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ClientApp\src\Images\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\VividTracker.Business\VividTracker.Business.csproj" />
     <ProjectReference Include="..\VividTracker.Data\VividTracker.Data.csproj" />
   </ItemGroup>
