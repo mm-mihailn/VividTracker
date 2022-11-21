@@ -1,4 +1,7 @@
 /* Provide sufficient contrast against white background */
+html, body {
+    background-color: #0084B4
+}
 a {
   color: #0366d6;
 }
