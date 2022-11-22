@@ -35,7 +35,7 @@ export class LandingPage extends Component {
               
               <div className=' developers left col-sm'>
                 <div className='developerCard first'>
-                  <img className='developerImage' src={Damyanov}/>
+                  <img className='developerImage' src={Damyanov} alt='An image showing a man in a red shirt with crossed arms, wearing sunglasses.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Blagovest Damyanov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Backend Developer</p>
@@ -43,7 +43,7 @@ export class LandingPage extends Component {
                   </div>
                 </div>
                 <div className='developerCard'>
-                  <img className='developerImage' src={Ashikov}/>
+                  <img className='developerImage' src={Ashikov} alt='An image showing a man on an alley, surrounded by green trees.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Veli Ashikov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Developer</p>
@@ -51,7 +51,7 @@ export class LandingPage extends Component {
                   </div>
                 </div>
                 <div className='developerCard'>
-                  <img className='developerImage' src={sampleDev}/>
+                  <img className='developerImage' src={sampleDev} alt='An anonymous puppet image.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Gabriel Yordanov </p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Developer </p>
@@ -61,7 +61,7 @@ export class LandingPage extends Component {
               </div>
               <div className=' developers right col-sm'>
                 <div className='developerCard'>
-                  <img className='developerImage' src={sampleDev}/>
+                  <img className='developerImage' src={sampleDev} alt='An anonymous puppet image.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Kristiyan Manov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Developer</p>
@@ -69,7 +69,7 @@ export class LandingPage extends Component {
                   </div>
                 </div>
                 <div className='developerCard'>
-                  <img className='developerImage' src={Yordanov}/>
+                  <img className='developerImage' src={Yordanov} alt='An image showing a man dressed in a yellow shirt with his arms crossed in front of him.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Martin Yordanov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Fullstack JS developer</p>
@@ -77,7 +77,7 @@ export class LandingPage extends Component {
                   </div>
                 </div>
                 <div className='developerCard'>
-                  <img className='developerImage' src={Marinov}/>
+                  <img className='developerImage' src={Marinov} alt='An image showing a man, wearing a backpack. Mountains in the background.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Martin Marinov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Front-end developer</p>
