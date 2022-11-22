@@ -14,11 +14,11 @@ export class LandingPage extends Component {
 
   render () {
     return (
-      <div className='homepageWrapper'>
+      <div className='homepageWrapper d-flex align-items-center justify-content-center'>
           <div className='informationBoxes'>
 
             <div className='row'>
-              <div className='box descriptionText col-sm'>
+              <div className='box descriptionText col'>
                 <p>VividTracker is a powerful collaborative tracking tool that allows you to visually follow the progress of your items through time, comparing the achieved results with those of other team members. Advanced features like activity tracking on every item with the possibility to: </p>
                 <p>- add comments;</p>
                 <p>- schedule events for status change in the future;</p>
@@ -26,14 +26,14 @@ export class LandingPage extends Component {
                 <p>not only does it increase transparency, but it also boosts team play and helps achieve greater results.</p>  
               </div>
 
-              <div className='box sampleActivityMatrix col-sm'>
+              <div className='box sampleActivityMatrix col-sm col-md col-lg'>
                 <ColorMatrix/> 
               </div>
             </div>
 
             <div className='row'>
               
-              <div className=' developers left col-sm'>
+              <div className=' developers left col-sm col-md'>
                 <div className='developerCard first'>
                   <img className='developerImage' src={Damyanov} alt='An image showing a man in a red shirt with crossed arms, wearing sunglasses.'/>
                   <div className='developerInformation'>
@@ -59,7 +59,7 @@ export class LandingPage extends Component {
                   </div>
                 </div>
               </div>
-              <div className=' developers right col-sm'>
+              <div className=' developers right col-sm col-md'>
                 <div className='developerCard'>
                   <img className='developerImage' src={sampleDev} alt='An anonymous puppet image.'/>
                   <div className='developerInformation'>
