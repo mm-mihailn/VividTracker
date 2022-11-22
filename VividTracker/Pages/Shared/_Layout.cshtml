@@ -21,13 +21,15 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/Identity/css/site.css" asp-append-version="true" />
     </environment>
-</head>
-<body>
+
+    @*I use the <style> tag instead of a css file to change the style of the .cshtml because of 
+        an unknown issue with the out-of-the-box template*@
     <style>
         #mynav{
             background-color:#F28627;
             max-width:100%;
             border:0px;
+            padding-bottom: 1px;
         }
         #logo-title {
            color: #fff;
@@ -41,8 +43,7 @@
            font-style: normal;
            font-size: 20px;
            text-decoration:none;
-           color: #ffffff;}
-
+        }
         #loginBtn {
            border-style: solid;
            background-color: #f6aa68;
@@ -52,16 +53,28 @@
            border-right: none;
            font-size: 20px;
            height: 35px;
-           position: absolute;
+           position:absolute;
            bottom: 0px;
-           border-bottom: solid;}
+           border-bottom: solid;
+           box-sizing: border-box;
+           text-align:end;
+           width:60px;
+           margin-left:20px;
+        }
+
         .myfooter{
         background-color:#F28627;}
+
+        .mynav-item{
+            padding-top:30px}
     </style>
-    
+
+</head>
+<body>
     <header>
-        <nav id = "mynav" class="navbar navbar-expand-sm  navbar-light border-bottom box-shadow mb-3 ">
+        <nav id = "mynav" class="navbar navbar-expand-sm  navbar-light   mb-3 ">
             <div class="container">
+
                 <img class="logo-img" src="/static/media/logo.04ab97cd80fafe188310.png" width="200" alt="not work">
                 <a id="logo-title" class="a-navbar" href="~/">VividTracker</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
