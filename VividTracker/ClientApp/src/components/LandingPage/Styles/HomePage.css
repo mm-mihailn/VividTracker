@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
+.informationBoxes{
+    background-color: #2696bf;
+    height: 799px;
+    position: fixed;
+    top: 85px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.logo{
+    width: 300px;
+    height: 90px;
+}
+
+.logoText{
+    color:white;
+    position: absolute;
+    left:350px;
+    top:35px;
+}
+.descriptionText{
+    font-weight: 700;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 21.79px;
+    margin-right: 0px !important;
+}
+.sampleActivityMatrix{
+    /* margin-left: 0px !important; */
+}
+.descriptionText p{
+    margin: 0;
+}
+.box
+{
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    width: 491px;
+}
+.developers{
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    margin-right:5%;  
+}
+.developers:not(:last-child)
+{
+    margin-left: 30px;
+    border-right: solid;
+    border-width: 10px;
+    color: white;
+
+}
+
+.developerCard{
+    display: flex;
+    margin: 20px;
+    width: 358px;
+    margin-bottom: 50px;
+    background-color: white;
+}
+.right{
+    margin-top: 50px;
+    padding-left: 50px; 
+}
+.right .developerCard {
+    margin-left: 40px;
+}
+.left{
+    margin-right: 0 !important;
+}
+.left .developerCard{
+    margin-top: 0;
+}
+.left .developerCard .first{
+    margin-top: 0;
+}
+.developerCard .dev-info-row .devRole{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+
+.developerImage{
+    width: 94px;
+    height: 114px;
+    margin: 10px;
+}
+.developerInformation{
+
+    margin-top: 2%;
+}
+.developerInformation p{
+
+    margin: 0%;
+    font-size: medium;
+}
+.dev-info-row{
+    font-size: small;
+    color: #0084B4;
+}
