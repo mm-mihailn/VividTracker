@@ -7,6 +7,7 @@ import Damyanov from './Images/BlagovestDamyanov.JPEG'
 import Yordanov from './Images/MartinYordanov.jpg'
 import Marinov from './Images/MartinMarinov.png'
 import Ashikov from './Images/VeliAshikov.jpeg'
+import Manov from './Images/KristiyanManov.png'
 
 import {ColorMatrix} from '../ColorMatrix/ColorMatrix.js'
 export class LandingPage extends Component {
@@ -47,7 +48,7 @@ export class LandingPage extends Component {
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Veli Ashikov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Developer</p>
-                    <p className='dev-info-row devThing'><strong>Interests:</strong> I have only rocks, but when I throw them they start to roll.</p>
+                    <p className='dev-info-row devThing'><strong>Interests:</strong> If life were a painting, <br></br>I want to create a masterpiece.</p>
                   </div>
                 </div>
                 <div className='developerCard'>
@@ -61,7 +62,7 @@ export class LandingPage extends Component {
               </div>
               <div className=' developers right col-sm col-md'>
                 <div className='developerCard'>
-                  <img className='developerImage' src={sampleDev} alt='An anonymous puppet image.'/>
+                  <img className='developerImage' src={Manov} alt='An image showing a man with earphones.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Kristiyan Manov</p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Developer</p>
