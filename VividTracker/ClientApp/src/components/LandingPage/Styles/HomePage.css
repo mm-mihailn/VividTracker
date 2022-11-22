@@ -1,15 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
-.row{
-    margin-left: 30px;
-}
 .informationBoxes{
     background-color: #2696bf;
-    width: 1050px;
     height: 799px;
-    position: absolute;
+    position: fixed;
     top: 85px;
-    left: 480px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -33,27 +28,25 @@
     margin-right: 0px !important;
 }
 .sampleActivityMatrix{
-    margin-left: 0px !important;
+    /* margin-left: 0px !important; */
 }
 .descriptionText p{
     margin: 0;
 }
 .box
 {
-    /* border-style: solid; */
-    height: 258px;
-    margin: 50px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 50px;
     width: 491px;
 }
 .developers{
-    width: 250px;
     border-style: solid;
     border-left: none;
     border-right: none;
     border-top: none;
     border-bottom: none;
-    margin-right:5%;
-    
+    margin-right:5%;  
 }
 .developers:not(:last-child)
 {
@@ -73,7 +66,7 @@
 }
 .right{
     margin-top: 50px;
-    /* padding-left: 50px; */
+    padding-left: 50px; 
 }
 .right .developerCard {
     margin-left: 40px;
