@@ -8,6 +8,7 @@ import Yordanov from './Images/MartinYordanov.jpg'
 import Marinov from './Images/MartinMarinov.png'
 import Ashikov from './Images/VeliAshikov.jpeg'
 import Manov from './Images/KristiyanManov.png'
+import GYordanov from './Images/GabrielYordanov.png'
 
 import {ColorMatrix} from '../ColorMatrix/ColorMatrix.js'
 export class LandingPage extends Component {
@@ -52,7 +53,7 @@ export class LandingPage extends Component {
                   </div>
                 </div>
                 <div className='developerCard'>
-                  <img className='developerImage' src={sampleDev} alt='An anonymous puppet image.'/>
+                  <img className='developerImage' src={GYordanov} alt='An anonymous puppet image.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Gabriel Yordanov </p>
                     <p className='dev-info-row devRole'><strong>Role:</strong> Developer </p>
