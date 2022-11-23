@@ -19,7 +19,7 @@ code {
 #footer {
     background-color: #F28627;
     height: 98px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     left: 0 ;
