@@ -18,8 +18,7 @@ code {
 }
 #footer {
     background-color: #F28627;
-    margin-top: auto;
-    padding-left: 500px !important;
+    padding-left: 0px !important;
     padding-top:11px;
 }
 
@@ -28,9 +27,9 @@ body {
     padding: 0;
     background-color: #0084B4
 }
-h5{
-    color:#fff;
-    font-weight:400 !important;
+h5 {
+    color: #fff;
+    font-weight: 400 !important;
 }
 #loginBtn {
     border-style: solid;
