@@ -4,6 +4,9 @@
 @{
     ViewData["Title"] = "Log in";
 }
+
+@*I use the <style> tag instead of a css file to change the style of the .cshtml because of 
+    an unknown issue with the out-of-the-box template*@
 <style>
     body {
         background-color: #0084B4;
@@ -58,21 +61,17 @@
         align-items: center;
         text-align: center;
         border-radius: 35px;
-        padding: 0px;
     }
 
     #back-btn {
-        margin-left: 50%;
         background-color: #ffffff;
         text-align: center;
         text-decoration-line: underline;
         color: #0084B4;
-        margin-right: 10px;
         border: 0px;
         border-radius: 35px;
         text-align: center;
         border-radius: 35px;
-        padding: 0px;
         font-size: 20px;
     }
 </style>
@@ -112,10 +111,12 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <a href="https://localhost:44430/" id="back-btn" class="col-sm-2 " onmouseover="mouseOver()"
-                onmouseout="mouseOut()">Back</a>
-            <button id="login-submit" type="submit" class="btn btn-lg btn-primary col-sm-2">Login</button>
+        <div class="row">
+            <div class="gap-3 d-md-flex justify-content-md-end ps-4 pe-4">
+                <a href="https://localhost:44430/" id="back-btn" class="btn btn-lg btn-primary"
+                   onmouseover="mouseOver()" onmouseout="mouseOut()">Back</a>
+                <button id="login-submit" type="submit" class="btn btn-lg btn-primary">Login</button>
+            </div>
         </div>
         <!-- #region Unwanted_features -->
         @*<div>

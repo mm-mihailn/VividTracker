@@ -28,7 +28,7 @@ export class NavMenu extends Component {
       <header id="navigation-content">
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white" light>
           <Container>
-            <img class="logo-img" src={logo} width="200" alt="not work"></img>
+            <img className="logo-img" src={logo} width="200" alt="not work"></img>
             <NavbarBrand tag={Link} id="logo-title" to="/">VividTracker</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
