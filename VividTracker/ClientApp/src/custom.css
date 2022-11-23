@@ -19,9 +19,13 @@ code {
 #footer {
     background-color: #F28627;
     padding: 0px !important;
-    padding-top:11.5px !important
+    padding-top:11.5px !important;
 }
+#main-content {
+    display: grid;
+    justify-content:center;
 
+}
 body {
     margin: 0;
     padding: 0;
