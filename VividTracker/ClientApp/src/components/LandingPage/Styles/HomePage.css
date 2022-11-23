@@ -27,9 +27,7 @@
     line-height: 21.79px;
     margin-right: 0px !important;
 }
-.sampleActivityMatrix{
-    /* margin-left: 0px !important; */
-}
+
 .descriptionText p{
     margin: 0;
 }
@@ -67,6 +65,12 @@
 .right{
     margin-top: 50px;
     padding-left: 50px; 
+}
+@media screen and (max-width: 968px) {
+    .right{
+        margin-top: 0px ;
+        padding-left: 20px; 
+    }
 }
 .right .developerCard {
     margin-left: 40px;
