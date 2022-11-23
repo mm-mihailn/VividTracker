@@ -56,8 +56,8 @@ export class LandingPage extends Component {
                   <img className='developerImage' src={GYordanov} alt='An anonymous puppet image.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Gabriel Yordanov </p>
-                    <p className='dev-info-row devRole'><strong>Role:</strong> Developer </p>
-                    <p className='dev-info-row devThing'><strong>Interests:</strong> I have only rocks, but when I throw them they start to roll.</p>
+                    <p className='dev-info-row devRole'><strong>Role:</strong> Tester </p>
+                    <p className='dev-info-row devThing'><strong>Interests:</strong> I like to do sports, listen to music and I like to watch movies.</p>
                   </div>
                 </div>
               </div>
