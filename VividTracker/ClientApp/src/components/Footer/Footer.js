@@ -11,9 +11,8 @@ export class Footer extends Component {
                     <ul>
                         <li>Blagovest Damyanov</li>
                         <li>Martin Yordanov</li>
-                        <li>Maetin Marinov</li>
+                        <li>Martin Marinov</li>
                         <li>Veli Ashikov</li>
-                        <li>Mihail Nikolov</li>
                     </ul>
                 </div>
             </footer>
