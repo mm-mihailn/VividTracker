@@ -26,6 +26,9 @@ code {
     justify-content:center;
 
 }
+.fix-size {
+    width: 300px !important
+}
 body {
     margin: 0;
     padding: 0;
