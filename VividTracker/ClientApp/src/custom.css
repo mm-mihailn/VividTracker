@@ -23,26 +23,22 @@ code {
     bottom: 0;
     right: 0;
     left: 0 ;
+    padding: 0px !important;
+    padding-top:11.5px !important;
+}
+#main-content {
+    display: grid;
+    justify-content:center;
+
 }
 body {
     margin: 0;
     padding: 0;
     background-color: #0084B4
 }
-
-#team-info {
-    text-align: center;
-    margin: 0;
-}
-
-#footer ul {
-    list-style-type: none;
-    padding-bottom:0
-    
-}
-
-#footer li {
+h5 {
     color: #fff;
+    font-weight: 400 !important;
 }
 #loginBtn {
     border-style: solid;
