@@ -19,7 +19,8 @@ code {
 #footer {
     background-color: #F28627;
     margin-top: auto;
-    padding-left: 500px !important
+    padding-left: 500px !important;
+    padding-top:11px;
 }
 
 body {
@@ -29,7 +30,7 @@ body {
 }
 h5{
     color:#fff;
-    font-weight:400 !important
+    font-weight:400 !important;
 }
 #loginBtn {
     border-style: solid;
