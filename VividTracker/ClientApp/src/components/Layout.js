@@ -12,10 +12,6 @@ export class Layout extends Component {
         <NavMenu />
 
 
-       {/* <Container>*/}
-          {this.props.children}
-         {/*   </Container>*/}
-
             {this.props.children}
 
          <Footer/>
