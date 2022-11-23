@@ -19,7 +19,7 @@ code {
 #footer {
     background-color: #F28627;
     padding: 0px !important;
-    padding-top:11px;
+    padding-top:11px !important
 }
 
 body {
