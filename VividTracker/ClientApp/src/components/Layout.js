@@ -16,7 +16,7 @@ export class Layout extends Component {
           {this.props.children}
          {/*   </Container>*/}
 
-            {this.props.children}
+         
 
          <Footer/>
       </div>
