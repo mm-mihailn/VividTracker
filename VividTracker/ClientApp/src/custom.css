@@ -18,15 +18,11 @@ code {
 }
 #footer {
     background-color: #F28627;
-    height: 98px;
-    position: fixed;
-    bottom: 0;
-    right: 0;
     padding: 0px !important;
     padding-top: 11.5px !important;
 }
 #main-content {
-    display: grid;
+    display:inline-item;
     justify-content:center;
 
 }
