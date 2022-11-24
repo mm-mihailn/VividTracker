@@ -7,31 +7,34 @@ export class Footer extends Component {
     render() {
         return (
             <footer id='footer' className='fixed-bottom'>
-                <div id ="main-content">
-                  <div className="row">
-                        <div className="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-6 col-12 fix-size">
-                            <h5>Martin Yordanov</h5>
+                <div id="main-content">
+                    <div className=" d-flex justify-content-center">
+                        <div className="row d-flex justify-content-center">
+                            <div>
+                                <h5>Martin Yordanov</h5>
+                            </div>
+                            <div>
+                                <h5>Blagovest Damqnov</h5>
+                            </div>
                         </div>
-                        <div className="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-6 col-12 fix-size">
-                       <h5>Blagovest Damqnov</h5>
+                        <div className="row d-flex justify-content-center">
+                            <div>
+                                <h5>Martin Marinov</h5>
+                            </div>
+                            <div>
+                                <h5>Veli Aschikov</h5>
+                            </div>
+                        </div>
+                        <div className="row d-flex justify-content-center">
+                            <div>
+                                <h5>Kristiqn Manov</h5>
+                            </div>
+                            <div>
+                                <h5>Gabriel Yordanov</h5>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                    <div className="row">
-                        <div className="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-6 col-12 fix-size">
-                            <h5>Martin Marinov</h5>
-                        </div>
-                        <div className="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-6 col-12 fix-size">
-                            <h5>Veli Aschikov</h5>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-6 col-12 fix-size">
-                            <h5>Kristiqn Manov</h5>
-                        </div>
-                        <div className="col-xs-6 col-sm-4 col-md-4 col-lg-4 col-xl-6 col-12 fix-size">
-                            <h5>Gabriel Yordanov</h5>
-                        </div>
-                    </div>
+                   
                 </div>
               
             </footer>
