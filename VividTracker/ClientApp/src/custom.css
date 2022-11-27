@@ -18,32 +18,22 @@ code {
 }
 #footer {
     background-color: #F28627;
-    height: auto;
-    width: 100vw;
-    padding-top: 10px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0
+    padding: 0px !important;
+    padding-top: 11.5px !important;
+}
+#main-content {
+    display:inline-item;
+    justify-content:center;
+
 }
 body {
     margin: 0;
     padding: 0;
     background-color: #0084B4
 }
-
-#team-info {
-    text-align: center;
-    margin: 0;
-    padding: 0
-}
-
-#footer ul {
-    list-style-type: none;
-}
-
-#footer li {
-    color: #fff
+h5 {
+    color: #fff;
+    font-weight: 400 !important;
 }
 #loginBtn {
     border-style: solid;
