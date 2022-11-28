@@ -7,36 +7,18 @@ export class Footer extends Component {
     render() {
         return (
             <footer id='footer' className='fixed-bottom'>
-                <div id="main-content">
-                    <div className=" d-flex justify-content-center">
-                        <div className="row d-flex justify-content-center">
-                            <div>
-                                <h5>Martin Yordanov</h5>
-                            </div>
-                            <div>
-                                <h5>Blagovest Damqnov</h5>
-                            </div>
-                        </div>
-                        <div className="row d-flex justify-content-center">
-                            <div>
-                                <h5>Martin Marinov</h5>
-                            </div>
-                            <div>
-                                <h5>Veli Aschikov</h5>
-                            </div>
-                        </div>
-                        <div className="row d-flex justify-content-center">
-                            <div>
-                                <h5>Kristiqn Manov</h5>
-                            </div>
-                            <div>
-                                <h5>Gabriel Yordanov</h5>
-                            </div>
-                        </div>
-                    </div>
-                   
+                <div className="row" id="dev">
+                    <h5 className=" d-flex justify-content-center">DEVELOPERS:</h5>
                 </div>
-              
+                <div id="main-content" className="row">
+                    <div className="d-flex justify-content-center info">
+                        <span>Blagovest Damyanov,Martin Yordanov,Veli Ashikov</span>
+                    </div>
+                    <div className="d-flex justify-content-center info">
+                        <span>Martin Marinov,Gabriel Yordanov,Kristian Manov</span>
+                    </div>
+                </div>
+
             </footer>
         );
     }
