@@ -68,3 +68,15 @@
 .ManageTenantButtonWrapper .ManageButton:active{
     color: #e7e6e6;
 }
+
+.tenantsListEditButton{
+    font-size: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-left: 44rem;
+    color:#0080ae;
+}
+
+.tenantsListEditButton:hover{
+   cursor: pointer;
+}

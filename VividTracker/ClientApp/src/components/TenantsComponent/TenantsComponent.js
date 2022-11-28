@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Styles/TenantsStyles.css'
-
+import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 export default class TenantsComponent extends Component {
 
     constructor()
@@ -21,8 +22,9 @@ export default class TenantsComponent extends Component {
           <div className='tenantsListWrapper d-flex justify-content-center align-items-center'>
             <h1>All Tenants </h1>
             <div className='tenantsContainer'>
-                <div className='tenantsListHeaderWrapper'>
+                <div className='tenantsListHeaderWrapper d-flex'>
                     <h4 className='tenantsListHeader'>Tenants List</h4>
+                    <FontAwesomeIcon className='tenantsListEditButton' icon={faRectangleList} />
                 </div>
                 <div className='TenantsContainer'>
                     {this.state.tenants.map((tenant) => {
