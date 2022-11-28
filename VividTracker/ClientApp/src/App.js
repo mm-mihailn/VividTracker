@@ -9,7 +9,7 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 
 import './custom.css'
-import TenantsComponent from './components/TenantsComponent';
+import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 
 export default class App extends Component {
