@@ -33,7 +33,12 @@ body {
 }
 h5 {
     color: #fff;
-    font-weight: 400 !important;
+    font-weight: 500 !important;
+   
+}
+h6{
+    color:#fff;
+    font-weight:200 !important;
 }
 #loginBtn {
     border-style: solid;
