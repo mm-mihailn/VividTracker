@@ -1,4 +1,4 @@
-﻿namespace VividTracker.Data.Repositories.Interfaces
+﻿namespace VividTracker.Business.Services.Interfaces
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@
     using System.Threading.Tasks;
     using VividTracker.Data.Models;
 
-    public interface IUserRepository:IRepository<User>
+    public interface IUsersService
     {
-        Task<IEnumerable<User>> GetAllUsers();
+        Task<IEnumerable<User>> GetUserAsync();
     }
 }

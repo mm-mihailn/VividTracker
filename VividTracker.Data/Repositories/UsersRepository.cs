@@ -9,9 +9,9 @@
     using VividTracker.Data.Models;
     using VividTracker.Data.Repositories.Interfaces;
 
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UsersRepository : Repository<User>, IUsersRepository
     {
-        public UserRepository(ApplicationDbContext context) : base(context)
+        public UsersRepository(ApplicationDbContext context) : base(context)
         {
         }
 

@@ -9,11 +9,11 @@
     using VividTracker.Data.Models;
     using VividTracker.Data.Repositories.Interfaces;
 
-    public class UserService : IUserService
+    public class UsersService : IUsersService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUsersRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UsersService(IUsersRepository userRepository)
         {
             _userRepository = userRepository;
         }

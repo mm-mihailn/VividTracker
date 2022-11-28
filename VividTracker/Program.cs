@@ -32,8 +32,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ITenantsRepository, TenantsRepository>();
 builder.Services.AddScoped<ITenantsService, TenantsService>();
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

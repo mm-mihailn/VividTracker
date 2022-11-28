@@ -9,9 +9,9 @@
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUsersRepository _userRepository;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUsersRepository userRepository)
         {
             _userRepository = userRepository;
         }
