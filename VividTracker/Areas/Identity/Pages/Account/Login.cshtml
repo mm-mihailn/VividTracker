@@ -61,6 +61,7 @@
         align-items: center;
         text-align: center;
         border-radius: 35px;
+        background-color: #0084B4;
     }
 
     #back-btn {
@@ -76,18 +77,6 @@
     }
 </style>
 
-<script>
-    function mouseOver() {
-        document.getElementById("back-btn").style.color = "#ffffff";
-        document.getElementById("back-btn").style.backgroundColor = "#0b5ed7";
-    }
-
-    function mouseOut() {
-        document.getElementById("back-btn").style.color = "#0084B4";
-        document.getElementById("back-btn").style.backgroundColor = "#ffffff";
-
-    }
-</script>
 
 
 <section>
@@ -111,11 +100,10 @@
                 </div>
             </div>
         </div>
-        <div class="row ps-4 pe-4 ">
+        <div class="row ps-4 pe-4">
             <div class="gap-3 d-md-flex justify-content-md-end ps-4 pe-4">
-                <a href="https://localhost:44430/" id="back-btn" class="btn btn-lg btn-primary pt-0 pb-0 h-75 "
-                   onmouseover="mouseOver()" onmouseout="mouseOut()">Back</a>
-                <button id="login-submit" type="submit" class="btn btn-lg btn-primary  pt-0 h-75">Login</button>
+                <a href="https://localhost:44430/" id="back-btn" class="btn btn-lg btn-primary pt-0 pb-0 h-75 ">Back</a>
+                <button id="login-submit" type="submit" class="btn btn-lg btn-primary  pt-0 pe-4 ps-4  h-75">Login</button>
             </div>
         </div>
         <!-- #region Unwanted_features -->
