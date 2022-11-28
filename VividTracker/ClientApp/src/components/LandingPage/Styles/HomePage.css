@@ -30,17 +30,6 @@
     }
 }
 
-.logo{
-    width: 300px;
-    height: 90px;
-}
-
-.logoText{
-    color:white;
-    position: absolute;
-    left:350px;
-    top:35px;
-}
 .descriptionText{
     font-weight: 700;
     color: white;
