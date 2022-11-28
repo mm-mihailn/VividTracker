@@ -23,7 +23,7 @@
     font-size: 24px;
 }
 .TenantsContainer{
-    margin-top: 3.4375rem;
+    /* margin-top: 3.4375rem; */
 }
 .TenantContainer{
     background-color: #F3F3F3;
@@ -78,4 +78,18 @@
 
 .tenantsListEditButton:hover{
    cursor: pointer;
+}
+.CreateNewTenantButtonWrapper .CreateNewTenantButton{
+    color: #F28627;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
+    margin-left: 2rem;
+    border-bottom-style: solid;
+    border-bottom-color: #f28627cb;
+    border-bottom-width: 1px;
+}
+.CreateNewTenantButtonWrapper{
+    margin-top: 0.8125rem;
+    
 }
