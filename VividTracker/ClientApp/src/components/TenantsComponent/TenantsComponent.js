@@ -26,6 +26,9 @@ export default class TenantsComponent extends Component {
                     <h4 className='tenantsListHeader'>Tenants List</h4>
                     <FontAwesomeIcon className='tenantsListEditButton' icon={faRectangleList} />
                 </div>
+                <div className='CreateNewTenantButtonWrapper'>
+                        <span className='CreateNewTenantButton'>CreateNewTenant()</span>
+                </div>
                 <div className='TenantsContainer'>
                     {this.state.tenants.map((tenant) => {
                         return(
