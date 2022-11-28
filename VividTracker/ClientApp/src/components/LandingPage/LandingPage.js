@@ -66,7 +66,7 @@ export class LandingPage extends Component {
                   <img className='developerImage' src={Manov} alt='An image showing a man with earphones.'/>
                   <div className='developerInformation'>
                     <p className='dev-info-row devName'><strong>Name:</strong> Kristiyan Manov</p>
-                    <p className='dev-info-row devRole'><strong>Role:</strong> Developer</p>
+                    <p className='dev-info-row devRole'><strong>Role:</strong> Tester </p>
                     <p className='dev-info-row devThing'><strong>Interests:</strong> I have only rocks, but when I throw them they start to roll.</p>
                   </div>
                 </div>

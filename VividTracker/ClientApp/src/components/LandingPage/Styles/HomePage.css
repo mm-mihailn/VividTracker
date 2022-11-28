@@ -85,6 +85,7 @@
 .right{
     margin-top: 50px;
     padding-left: 50px; 
+    margin-right: 10px;
 }
 @media screen and (max-width: 968px) {
     .right{
