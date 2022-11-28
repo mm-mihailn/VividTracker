@@ -2,7 +2,6 @@
     background-color: white;
     position: absolute;
     top: 4.8rem;
-    width: max-content;
     overflow-y: visible;
     overflow-x: hidden;
     border-top-left-radius: 5%;
@@ -91,6 +90,5 @@
     cursor: pointer;
 }
 .CreateNewTenantButtonWrapper{
-    margin-top: 0.8125rem;
-    
+    margin-top: 0.8125rem;   
 }
