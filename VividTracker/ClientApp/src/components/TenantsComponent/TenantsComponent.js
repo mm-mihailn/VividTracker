@@ -24,18 +24,20 @@ export default class TenantsComponent extends Component {
                 <div className='tenantsListHeaderWrapper'>
                     <h4 className='tenantsListHeader'>Tenants List</h4>
                 </div>
-                {this.state.tenants.map((tenant) => {
-                    return(
-                        <div className='TenantContainer d-flex' key={tenant.id}>
-                            <div className='TenantNameWrapper'>
-                                <span className='tenantName'> {tenant.name} </span>
+                <div className='TenantsContainer'>
+                    {this.state.tenants.map((tenant) => {
+                        return(
+                            <div className='TenantContainer d-flex' key={tenant.id}>
+                                <div className='TenantNameWrapper'>
+                                    <span className='tenantName'> {tenant.name} </span>
+                                </div>
+                                <div className='ManageTenantButtonWrapper ml-auto'>
+                                    <button className='ManageButton'>Manage</button>
+                                </div>
                             </div>
-                            <div className='ManageTenantButtonWrapper ml-auto'>
-                                <button className='ManageButton'>Manage</button>
-                            </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
     
             </div>
           </div>

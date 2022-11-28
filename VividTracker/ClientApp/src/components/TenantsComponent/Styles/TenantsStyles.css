@@ -14,16 +14,18 @@
 .tenantsListHeaderWrapper {
     background-color: #D9D9D9;
     color: #0084B4;
-    margin-top: 1rem;
+    margin-top: 2.6875rem;
 }
 .tenantsListHeader{
-    margin-left: 2rem;
+    margin-left: 2.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-weight: 700;
     font-size: 24px;
 }
-
+.TenantsContainer{
+    margin-top: 3.4375rem;
+}
 .TenantContainer{
     background-color: #F3F3F3;
     font-weight: 400;
@@ -34,7 +36,7 @@
 
 }
 .TenantContainer .TenantNameWrapper .tenantName{
-    margin-left: 18px;
+    margin-left: 1.125rem;
 }
 .TenantContainer .TenantNameWrapper
 {
