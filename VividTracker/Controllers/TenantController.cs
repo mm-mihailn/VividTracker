@@ -7,22 +7,22 @@ namespace VividTracker.Controllers
     using System.Linq;
     using VividTracker.Data.Models;
     using VividTracker.Data;
+    using VividTracker.Data.Repositories;
+    using VividTracker.Business.Services.Interfaces;
 
-    //[Authorize]
-
-    [Route("api/getAllTenants")]
     [ApiController]
     public class TenantsController : ControllerBase
     {
-        ApplicationDbContext db;
-        public TenantsController(ApplicationDbContext context)
+        private readonly ITenantsService _tenantsService;
+        public TenantsController(ITenantsService tenantsService)
         {
-            this.db = context;
+            _tenantsService = tenantsService;
         }
         [HttpGet]
-        public List<Tenant> Get()
+        [Route("api/tenants")]
+        public async Task<IEnumerable<Tenant>> GetAllTenants()
         {
-           return db.Tenants.ToList();
+            return await _tenantsService.GetTenantsAsync();
         }
     }
 
