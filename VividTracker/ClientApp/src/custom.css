@@ -35,14 +35,25 @@ body {
 h5 {
     color: #fff;
     font-weight: 500 !important;
-    padding-top:-150px;
+    margin-top:-10px !important;
+    font-size:15px !important;
 }
-h6{
+#main-content {
+    margin-top: -10px;
+}
+span{
     color:#fff;
     font-weight:200 !important;
+    margin-top:0 !important;
+}
+.info{
+    margin-top:0 !important
 }
 .nav-item{
     padding-right:200px;
+}
+#dev{
+   margin-right:16rem !important;
 }
 #loginBtn {
     border-style: solid;
