@@ -60,3 +60,11 @@
     width: 7.85rem;
     height: 2.25rem;
 }
+.ManageTenantButtonWrapper .ManageButton:hover{
+    background-color: #0080ae;
+    color: #F3F3F3;
+}
+
+.ManageTenantButtonWrapper .ManageButton:active{
+    color: #e7e6e6;
+}
