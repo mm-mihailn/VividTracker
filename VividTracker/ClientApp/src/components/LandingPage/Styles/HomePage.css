@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
-.homepageWrapper{
-    /* overflow-y: scroll; */
-}
 .informationBoxes{
     background-color: #2696bf;
     position: absolute;
@@ -9,6 +6,8 @@
     height:65rem;
     overflow-y: visible;
     overflow-x: hidden;
+    border-top-left-radius: 5%;
+    border-bottom-right-radius: 5%;
 }
 @media screen and (min-height: 360px) and (max-height: 880px) {
     .informationBoxes{
