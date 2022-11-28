@@ -20,6 +20,7 @@ code {
     background-color: #F28627;
     padding: 0px !important;
     padding-top: 11.5px !important;
+    justify-content:left
 }
 #main-content {
     display:inline-item;
@@ -34,11 +35,14 @@ body {
 h5 {
     color: #fff;
     font-weight: 500 !important;
-   
+    padding-top:-150px;
 }
 h6{
     color:#fff;
     font-weight:200 !important;
+}
+.nav-item{
+    padding-right:200px;
 }
 #loginBtn {
     border-style: solid;
@@ -48,8 +52,11 @@ h6{
     border-top: none;
     border-right: none;
     font-size: 15px;
-    height: 30px;
     position: absolute;
     bottom: 0px;
     border-bottom: solid;
+    font-size: 18px;
+    padding-bottom: 0;
+    padding-top: 0;
+    font-weight:400;
 }
