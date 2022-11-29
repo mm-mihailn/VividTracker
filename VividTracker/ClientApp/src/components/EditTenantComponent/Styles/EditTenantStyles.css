@@ -1,0 +1,102 @@
+.EditTenantContainer{
+    position: absolute;
+    top: 4.8rem;
+    background-color: white;
+    border-top-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    width: 60rem;
+    height: 799px;
+}
+
+.TenantHeaderWrapper{
+    margin-top: 2.6875rem;
+    padding-top: 0.55rem;
+    font-weight: 700;
+    font-size: 24px;
+    background-color: #D9D9D9;
+    color: #0084B4;
+}
+
+.TenantName{
+    margin-left: 2.5rem;
+}
+.EditTenantIcon{
+    margin-left: 44rem;
+    font-weight: bolder;
+}
+.TenantNameLabel{
+    margin-top: auto;
+    margin-left: 2.5rem;
+}
+.TenantFieldsContainer{
+    margin-top: 2.8125rem;
+}
+.TenantNameInputField{
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+    border-bottom-color: black;
+    width: 23.75rem;
+    margin-left: 0.25rem;
+}
+.TenantNameInputField:focus{
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+    border-bottom-color: black;
+    box-shadow: none !important;
+}
+
+.TenantButtons{
+    margin-top: 1.3125rem;
+}
+.UpdateButton{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 7.85rem;
+    height: 2.25rem;
+    margin-left: 1.5625rem;
+
+}
+.ResetButton{
+    color:#0084B4;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
+    margin-left:22.0625rem;
+}
+
+.TenantUsersHeader{
+    background-color: #D9D9D9;
+    margin-top: 2.1875rem;
+}
+.TenantsHeader{
+    margin-top: 0.75rem;
+    margin-left: 2.5rem;
+}
+.EditUsersIcon{
+    color:#0084B4;
+    margin-left: 50rem;
+    margin-top: 1rem;
+}
+
+.InviteNewUser{
+    color: #F28627;
+    margin-left: 2.5rem;
+}
+
+.InviteNewUserWrapper{
+    margin-top: 0.8625rem;
+    margin-bottom: 0.8625rem;
+    
+}
+
+.pageText{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
+}
