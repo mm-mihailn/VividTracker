@@ -51,5 +51,22 @@ namespace VividTracker.Controllers
 
             return Ok(targetTenant);
         }
+        [HttpPost]
+        [Route("api/create")]
+
+        public async Task<IActionResult> CreateTenant([FromBody] Tenant createTenant)
+        {
+            var existsTenants = await GetAllTenants();
+
+            var isContains = existsTenants.FirstOrDefault(x => x.Name == createTenant.Name);
+
+            if (isContains!=null)
+            {
+                return BadRequest();
+            }
+
+            await _tenantsService.AddTenantAsync(createTenant);
+            return Ok(createTenant);
+        }
     }
 }
