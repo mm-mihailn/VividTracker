@@ -30,23 +30,26 @@ namespace VividTracker.Controllers
 
         [HttpPatch]
         [Route("api/edit/{id}")]
-        public async Task<Tenant> EditTenantName([FromRoute] int id, [FromBody] Tenant newTenant)
+        public async Task<IActionResult> EditTenantName([FromRoute] int id, [FromBody] Tenant newTenant)
         {
             var targetTenant = await _tenantsService.GetTenantByIdAsync(id);
             if (targetTenant == null)
             {
-                throw new Exception("Tenant not found");
+              return NotFound();  
             }
             
-            if (targetTenant.Name == null)
+            if (targetTenant.Name == null||targetTenant.Name==string.Empty)
             {
-                throw new Exception("Tenant Name cannot be null");
+                return BadRequest();
             }
-
+            if (targetTenant.Name == newTenant.Name)
+            {
+                return BadRequest();
+            }
             targetTenant.Name = newTenant.Name;
             await _tenantsService.UpdateTenantAsync(targetTenant);
 
-            return targetTenant;
+            return Ok(targetTenant);
         }
     }
 }
