@@ -11,6 +11,7 @@ namespace VividTracker.Controllers
     using VividTracker.Business.Services.Interfaces;
     using System.Drawing.Text;
     using System.Net;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     [ApiController]
     public class TenantsController : ControllerBase
@@ -32,13 +33,18 @@ namespace VividTracker.Controllers
         public async Task<Tenant> EditTenantName([FromRoute] int id, [FromBody] Tenant newTenant)
         {
             var targetTenant = await _tenantsService.GetTenantByIdAsync(id);
-
-            if (targetTenant != null)
+            if (targetTenant == null)
             {
-                targetTenant.Name = newTenant.Name;
+                throw new Exception("Tenant not found");
+            }
+            
+            if (targetTenant.Name == null)
+            {
+                throw new Exception("Tenant Name cannot be null");
             }
 
-            _tenantsService.UpdateTenantAsync(targetTenant);
+            targetTenant.Name = newTenant.Name;
+            await _tenantsService.UpdateTenantAsync(targetTenant);
 
             return targetTenant;
         }
