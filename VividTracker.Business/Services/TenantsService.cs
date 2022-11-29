@@ -16,5 +16,7 @@ public class TenantsService : ITenantsService
     public async Task<IEnumerable<Tenant>> GetTenantsAsync() => await _tenantsRepository.GetAllTenants();
 
     public async Task<Tenant?> GetTenantByIdAsync(int id) => await _tenantsRepository.FindAsync(id);
+
+    public async Task UpdateTenantAsync(Tenant tenant) => await _tenantsRepository.UpdateAsync(tenant);
     
 }

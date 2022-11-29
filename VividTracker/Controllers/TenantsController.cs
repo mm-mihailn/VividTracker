@@ -9,6 +9,8 @@ namespace VividTracker.Controllers
     using VividTracker.Data;
     using VividTracker.Data.Repositories;
     using VividTracker.Business.Services.Interfaces;
+    using System.Drawing.Text;
+    using System.Net;
 
     [ApiController]
     public class TenantsController : ControllerBase
@@ -24,7 +26,21 @@ namespace VividTracker.Controllers
         {
             return await _tenantsService.GetTenantsAsync();
         }
+
+        [HttpPatch]
+        [Route("api/edit/{id}")]
+        public async Task<Tenant> EditTenantName([FromRoute] int id, [FromBody] Tenant newTenant)
+        {
+            var targetTenant = await _tenantsService.GetTenantByIdAsync(id);
+
+            if (targetTenant != null)
+            {
+                targetTenant.Name = newTenant.Name;
+            }
+
+            _tenantsService.UpdateTenantAsync(targetTenant);
+
+            return targetTenant;
+        }
     }
-
-
 }
