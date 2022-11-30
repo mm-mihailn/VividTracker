@@ -69,7 +69,11 @@
     line-height: 27.24px;
     margin-left:22.0625rem;
 }
-
+.UseTenantButton{
+    color: #0084B4;
+    border-bottom-style: solid;
+    border-width: 1px;
+}
 .TenantUsersHeader{
     background-color: #D9D9D9;
     margin-top: 2.1875rem;
@@ -77,6 +81,37 @@
 .TenantsHeader{
     margin-top: 0.75rem;
     margin-left: 2.5rem;
+}
+.TenantTracker{
+    background-color: #F3F3F3;
+    margin-top: 0.4375rem;
+    margin-bottom: 0.4375rem;
+}
+.TenantTrackerButtonsContainer{
+    display: flex;
+    margin-left: 37.875rem;
+    padding-top: 0.4375rem;
+    padding-bottom: 0.4375rem;
+}
+.ManageTenantTrackerButtonWrapper{
+    margin-left: 2rem;
+}
+.ManageTenantTrackerButton{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 7.85rem;
+    height: 2.25rem;
+}
+.ManageTenantTrackerButton:hover{
+    background-color: #0080ae;
+    color: #F3F3F3;
+}
+.ManageTenantTrackerButton:active{
+    color: #e7e6e6;
 }
 .EditUsersIcon{
     color:#0084B4;
@@ -99,4 +134,23 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 27.24px;
+}
+
+.UseTenantTrackerButtonWrapper{
+    padding-top: 0.18rem;
+}
+
+.TenantTrackerNameWrapper{
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+
+    margin-left: 2.5rem;
+}
+.TenantTrackerName{
+    font-weight: 400;
+    font-size: 20px;
+}
+.TenantTrackersWrapper{
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
