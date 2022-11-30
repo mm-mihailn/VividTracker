@@ -9,6 +9,10 @@ export default class EditTenantComponent extends Component {
         super()
         this.state = {trackers: [{id: 1, name: 'test'}]}
     }
+    componentDidMount()
+    {
+        
+    }
   render() {
     return (
       <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
