@@ -27,7 +27,7 @@
         [HttpGet]
         [Route("api/delete/{id}")]
 
-        public async Task<IActionResult> UpdateUsersDelete([FromRoute] string id)
+        public async Task<IActionResult> UsersSoftDelete([FromRoute] string id)
         {
             var users = await GetAllUsers();
             var targetUser = users.FirstOrDefault(x => x.Id == id);
