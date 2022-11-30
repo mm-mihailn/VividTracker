@@ -12,7 +12,7 @@ export default class TenantsComponent extends Component {
 
     async componentDidMount()
     {
-        await fetch('https://localhost:7091/api/tenants')
+        await fetch('https://localhost:7091/api/tenants ')
         .then((res) => res.json())
         .then((res) => this.setState({tenants: res}))
     
