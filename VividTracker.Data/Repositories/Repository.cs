@@ -94,6 +94,12 @@ namespace VividTracker.Data.Repositories
             return Context.SaveChangesAsync();
         }
 
+        public Task SoftDeleteAsync(TEntity entity)
+        {
+            Context.Entry(entity).State = EntityState.Modified;
+            return Context.SaveChangesAsync();
+        }
+
         #endregion
     }
 }

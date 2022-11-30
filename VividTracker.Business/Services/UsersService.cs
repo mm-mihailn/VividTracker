@@ -21,5 +21,10 @@
         {
             return await _userRepository.GetAllUsers();
         }
+
+        public  Task<User?> SoftDelete(User user)
+        {
+            return (Task<User?>)_userRepository.SoftDeleteAsync(user);
+        }
     }
 }

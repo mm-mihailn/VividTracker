@@ -18,9 +18,32 @@
 
         [HttpGet]
         [Route("api/users")]
-        public async Task<IEnumerable<User>> GetAllTenants()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await _userRepository.GetAllUsers();
+            var users = await _userRepository.GetAllUsers();
+            var updateUsers = users.Where(i => i.IsDelete != true);
+            return updateUsers;
+        }
+        [HttpGet]
+        [Route("api/delete/{id}")]
+
+        public async Task<IActionResult> UpdateUsersDelete([FromRoute] string id)
+        {
+            var users = await GetAllUsers();
+            var targetUser = users.FirstOrDefault(x => x.Id == id);
+            if(targetUser == null)
+            {
+                return NotFound();
+            }
+            if (targetUser.IsDelete)
+            {
+                return BadRequest();
+            }
+
+            targetUser.IsDelete = true;
+            await _userRepository.SoftDeleteAsync(targetUser);
+
+            return Ok(targetUser);
         }
     }
 }
