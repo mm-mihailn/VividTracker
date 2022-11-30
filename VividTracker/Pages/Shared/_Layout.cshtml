@@ -29,7 +29,7 @@
             background-color:#F28627;
             max-width:100%;
             border:0px;
-            padding-bottom: 1px;
+            padding-bottom: 4px;
         }
         #logo-title {
            color: #fff;
@@ -63,7 +63,9 @@
         }
 
         .myfooter{
-        background-color:#F28627;}
+        background-color:#F28627;
+        overflow: auto;
+        /*height: 125px;*/}
 
         .mynav-item{
             padding-top:30px}
@@ -77,11 +79,11 @@
 
                 <img class="logo-img" src="/static/media/logo.04ab97cd80fafe188310.png" width="200" alt="not work">
                 <a id="logo-title" class="a-navbar" href="~/">VividTracker</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
                     @{
                         var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
                     }
@@ -106,7 +108,7 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="footer text-muted myfooter">
+    <footer class="footer text-muted myfooter ">
         <div class="container">
         &copy; 2022 - VividTracker
             

@@ -18,31 +18,42 @@ code {
 }
 #footer {
     background-color: #F28627;
-    height: 98px;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0 ;
+    padding: 0px !important;
+    padding-top: 11.5px !important;
+    justify-content:left
+}
+#main-content {
+    display:inline-item;
+    justify-content:center;
+
 }
 body {
     margin: 0;
     padding: 0;
     background-color: #0084B4
 }
-
-#team-info {
-    text-align: center;
-    margin: 0;
-}
-
-#footer ul {
-    list-style-type: none;
-    padding-bottom:0
-    
-}
-
-#footer li {
+h5 {
     color: #fff;
+    font-weight: 500 !important;
+    margin-top:-10px !important;
+    font-size:15px !important;
+}
+#main-content {
+    margin-top: -10px;
+}
+span{
+    color:#fff;
+    font-weight:200 !important;
+    margin-top:0 !important;
+}
+.info{
+    margin-top:0 !important
+}
+.nav-item{
+    padding-right:200px;
+}
+#dev{
+   margin-right:16rem !important;
 }
 #loginBtn {
     border-style: solid;
@@ -52,8 +63,11 @@ body {
     border-top: none;
     border-right: none;
     font-size: 15px;
-    height: 30px;
     position: absolute;
     bottom: 0px;
     border-bottom: solid;
+    font-size: 18px;
+    padding-bottom: 0;
+    padding-top: 0;
+    font-weight:400;
 }

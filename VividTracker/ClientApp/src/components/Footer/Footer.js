@@ -6,15 +6,19 @@ export class Footer extends Component {
 
     render() {
         return (
-            <footer id='footer'>
-                <div id="team-info">
-                    <ul>
-                        <li>Blagovest Damyanov</li>
-                        <li>Martin Yordanov</li>
-                        <li>Martin Marinov</li>
-                        <li>Veli Ashikov</li>
-                    </ul>
+            <footer id='footer' className='fixed-bottom'>
+                <div className="row" id="dev">
+                    <h5 className=" d-flex justify-content-center">DEVELOPERS:</h5>
                 </div>
+                <div id="main-content" className="row">
+                    <div className="d-flex justify-content-center info">
+                        <span>Blagovest Damyanov,Martin Yordanov,Veli Ashikov</span>
+                    </div>
+                    <div className="d-flex justify-content-center info">
+                        <span>Martin Marinov,Gabriel Yordanov,Kristian Manov</span>
+                    </div>
+                </div>
+
             </footer>
         );
     }
