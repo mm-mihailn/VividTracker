@@ -4,17 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/EditTenantStyles.css'
 
 export default class EditTenantComponent extends Component {
-    constructor()
-    {
-        super()
-        this.state = {trackers: []}
-    }
-    async componentDidMount()
-    {
-        await fetch('https://localhost:7091/api/users')
-        .then((res) => res.json())
-        .then((res) => this.setState({trackers: res}))
-    }
+
   render() {
     return (
       <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
