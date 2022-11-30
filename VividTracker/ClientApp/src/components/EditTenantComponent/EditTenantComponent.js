@@ -7,11 +7,13 @@ export default class EditTenantComponent extends Component {
     constructor()
     {
         super()
-        this.state = {trackers: [{id: 1, name: 'test'}]}
+        this.state = {trackers: []}
     }
-    componentDidMount()
+    async componentDidMount()
     {
-        
+        await fetch('https://localhost:7091/api/users')
+        .then((res) => res.json())
+        .then((res) => this.setState({trackers: res}))
     }
   render() {
     return (
@@ -47,7 +49,7 @@ export default class EditTenantComponent extends Component {
                     return (
                         <div className = 'TenantTracker d-flex' key={tracker.id}>
                                 <div className='TenantTrackerNameWrapper'>
-                                    <span className='TenantTrackerName pageText'> {tracker.name} </span>
+                                    <span className='TenantTrackerName pageText'> {tracker.userName} </span>
                                 </div>
                                 <div className='TenantTrackerButtonsContainer'>
                                     <div className='UseTenantTrackerButtonWrapper ml-auto'>
