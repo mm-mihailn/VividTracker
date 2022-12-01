@@ -49,9 +49,10 @@ namespace VividTracker.Areas.Identity.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
         }
-
+   
         public async Task<IActionResult> OnPostAsync()
         {
+            ForgotPasswordConfirmationEmail.Email = Input.Email;
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
