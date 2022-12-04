@@ -4,6 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/EditTenantStyles.css'
 
 export default class EditTenantComponent extends Component {
+    constructor()
+    {
+        super()
+        this.state = {trackers: [{id: 1, name: 'test'}]}
+    }
   render() {
     return (
       <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
@@ -34,9 +39,23 @@ export default class EditTenantComponent extends Component {
                 <span className='InviteNewUser pageText'> InviteNewUser() </span>
             </div>
             <div className = 'TenantTrackersWrapper'>
-                <div className = 'TenantTracker'>
-                    {/* TODO GET THE TENANT USERS ONCE THAT ENDPOINT IS DONE. */}
-                </div>
+                {this.state.trackers.map(tracker => {
+                    return (
+                        <div className = 'TenantTracker d-flex' key={tracker.id}>
+                                <div className='TenantTrackerNameWrapper'>
+                                    <span className='TenantTrackerName pageText'> {tracker.name} </span>
+                                </div>
+                                <div className='TenantTrackerButtonsContainer'>
+                                    <div className='UseTenantTrackerButtonWrapper ml-auto'>
+                                        <span className='UseTenantButton pageText'>Use</span>
+                                    </div>
+                                    <div className='ManageTenantTrackerButtonWrapper'>
+                                        <button className='ManageTenantTrackerButton'>Manage</button>
+                                    </div>
+                                </div>
+                        </div>
+                    )
+                })}
             </div>
         </div>
       </div>
