@@ -19,6 +19,7 @@
 
 .TenantName{
     margin-left: 2.5rem;
+    
 }
 .EditTenantIcon{
     margin-left: 44rem;
@@ -69,6 +70,9 @@
     line-height: 27.24px;
     margin-left:22.0625rem;
 }
+.ResetButton:hover{
+    cursor: pointer;
+}
 .UseTenantButton{
     color: #0084B4;
     border-bottom-style: solid;
@@ -89,7 +93,8 @@
 }
 .TenantTrackerButtonsContainer{
     display: flex;
-    margin-left: 37.875rem;
+    margin-left: auto;
+    margin-right: 2rem;
     padding-top: 0.4375rem;
     padding-bottom: 0.4375rem;
 }
@@ -121,23 +126,33 @@
 
 .InviteNewUser{
     color: #F28627;
+    border-bottom-color: #f28627cb;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
     margin-left: 2.5rem;
 }
 
 .InviteNewUserWrapper{
     margin-top: 0.8625rem;
     margin-bottom: 0.8625rem;
-    
+}
+.InviteNewUserWrapper:hover{
+    cursor: pointer;
 }
 
 .pageText{
+    font-family: 'Open Sans';
+    font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    line-height: 27.24px;
+    line-height: 27px;
 }
 
 .UseTenantTrackerButtonWrapper{
     padding-top: 0.18rem;
+}
+.UseTenantTrackerButtonWrapper:hover{
+    cursor: pointer;
 }
 
 .TenantTrackerNameWrapper{
@@ -149,6 +164,7 @@
 .TenantTrackerName{
     font-weight: 400;
     font-size: 20px;
+    color: black;
 }
 .TenantTrackersWrapper{
     margin-left: 2rem;
