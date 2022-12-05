@@ -22,9 +22,9 @@
             return await _userRepository.GetAllUsers();
         }
 
-        public  Task<User?> DeleteAsync(User user)
+        public  Task DeleteAsync(User user)
         {
-            return (Task<User?>)_userRepository.DeleteAsync(user);
+            return _userRepository.DeleteAsync(user);
         }
     }
 }

@@ -9,18 +9,18 @@
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUsersRepository _userRepository;
+        private readonly IUsersService _userservice;
 
-        public UserController(IUsersRepository userRepository)
+        public UserController(IUsersService userservice)
         {
-            _userRepository = userRepository;
+            _userservice = userservice;
         }
 
         [HttpGet]
         [Route("api/users")]
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-           return await _userRepository.GetAllUsers();
+           return await _userservice.GetUserAsync();
         }
         [HttpDelete]
         [Route("api/delete/{id}")]
@@ -31,15 +31,13 @@
             var targetUser = users.FirstOrDefault(x => x.Id == id);
             if(targetUser == null)
             {
-                return NotFound();
+                return NotFound("User does't exists");
             }
             if (targetUser.IsDeleted)
             {
-                return BadRequest();
+                return BadRequest("User is already deleted");
             }
-
-            targetUser.IsDeleted = true;
-            await _userRepository.DeleteAsync(targetUser);
+            await _userservice.DeleteAsync(targetUser);
 
             return Ok(targetUser);
         }
