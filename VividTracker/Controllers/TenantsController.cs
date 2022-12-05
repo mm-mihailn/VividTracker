@@ -58,11 +58,11 @@ namespace VividTracker.Controllers
         {
             var existsTenants = await GetAllTenants();
 
-            var isContains = existsTenants.FirstOrDefault(x => x.Name == createTenant.Name);
+            var isContains = existsTenants.Any(x=>x.Name==createTenant.Name);
 
-            if (isContains!=null)
+            if (isContains)
             {
-                return BadRequest();
+                return BadRequest("Tenants is already exists");
             }
 
             await _tenantsService.AddTenantAsync(createTenant);
