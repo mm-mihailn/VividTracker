@@ -10,6 +10,6 @@
     public interface IUsersService
     {
         Task<IEnumerable<User>> GetUserAsync();
-        Task<User?> SoftDelete(User user);
+        Task<User?> DeleteAsync(User user);
     }
 }

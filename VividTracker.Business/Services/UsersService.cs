@@ -22,9 +22,9 @@
             return await _userRepository.GetAllUsers();
         }
 
-        public  Task<User?> SoftDelete(User user)
+        public  Task<User?> DeleteAsync(User user)
         {
-            return (Task<User?>)_userRepository.SoftDeleteAsync(user);
+            return (Task<User?>)_userRepository.DeleteAsync(user);
         }
     }
 }

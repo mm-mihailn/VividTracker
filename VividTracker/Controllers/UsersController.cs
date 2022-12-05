@@ -20,9 +20,7 @@
         [Route("api/users")]
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            var users = await _userRepository.GetAllUsers();
-            var updateUsers = users.Where(i => i.IsDeleted != true);
-            return updateUsers;
+           return await _userRepository.GetAllUsers();
         }
         [HttpDelete]
         [Route("api/delete/{id}")]
@@ -41,7 +39,7 @@
             }
 
             targetUser.IsDeleted = true;
-            await _userRepository.SoftDeleteAsync(targetUser);
+            await _userRepository.DeleteAsync(targetUser);
 
             return Ok(targetUser);
         }

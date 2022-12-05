@@ -17,7 +17,14 @@
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await Entities.ToListAsync();
+            var allUsers = await Entities.ToListAsync();
+            var updateUsers = allUsers.Where(i => i.IsDeleted != true);
+            return updateUsers;
+        }
+        public override Task DeleteAsync(User entity)
+        {
+            Context.Entry(entity).State = EntityState.Modified;
+            return Context.SaveChangesAsync();
         }
     }
 }
