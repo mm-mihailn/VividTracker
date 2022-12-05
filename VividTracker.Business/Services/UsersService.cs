@@ -21,5 +21,10 @@
         {
             return await _userRepository.GetAllUsers();
         }
+
+        public  Task DeleteAsync(User user)
+        {
+            return _userRepository.DeleteAsync(user);
+        }
     }
 }

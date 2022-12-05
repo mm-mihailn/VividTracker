@@ -10,5 +10,6 @@
     public interface IUsersService
     {
         Task<IEnumerable<User>> GetUserAsync();
+        Task DeleteAsync(User user);
     }
 }
