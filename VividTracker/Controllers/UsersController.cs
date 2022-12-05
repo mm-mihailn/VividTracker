@@ -24,7 +24,7 @@
             var updateUsers = users.Where(i => i.IsDeleted != true);
             return updateUsers;
         }
-        [HttpGet]
+        [HttpDelete]
         [Route("api/delete/{id}")]
 
         public async Task<IActionResult> UsersSoftDelete([FromRoute] string id)
