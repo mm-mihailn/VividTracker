@@ -12,7 +12,7 @@ export default class TenantsComponent extends Component {
 
     async componentDidMount()
     {
-        await fetch('https://localhost:7091/api/tenants')
+        await fetch('https://localhost:7091/api/tenants ')
         .then((res) => res.json())
         .then((res) => this.setState({tenants: res}))
     
@@ -27,14 +27,14 @@ export default class TenantsComponent extends Component {
                     <FontAwesomeIcon className='tenantsListEditButton' icon={faRectangleList} />
                 </div>
                 <div className='CreateNewTenantButtonWrapper'>
-                        <span className='CreateNewTenantButton'>CreateNewTenant()</span>
+                        <span className='CreateNewTenantButton pageText'>CreateNewTenant()</span>
                 </div>
                 <div className='TenantsContainer'>
                     {this.state.tenants.map((tenant) => {
                         return(
                             <div className='TenantContainer d-flex' key={tenant.id}>
                                 <div className='TenantNameWrapper'>
-                                    <span className='tenantName'> {tenant.name} </span>
+                                    <span className='tenantName pageText'> {tenant.name} </span>
                                 </div>
                                 <div className='ManageTenantButtonWrapper ml-auto'>
                                     <button className='ManageButton'>Manage</button>

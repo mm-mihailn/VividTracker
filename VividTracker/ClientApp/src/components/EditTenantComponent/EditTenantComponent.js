@@ -14,7 +14,7 @@ export default class EditTenantComponent extends Component {
         await fetch('https://localhost:7091/api/users')
         .then((res) => res.json())
         .then((res) => this.setState({trackers: res}))
-    }
+    } 
   render() {
     return (
       <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
@@ -52,7 +52,7 @@ export default class EditTenantComponent extends Component {
                                     <span className='TenantTrackerName pageText'> {tracker.userName} </span>
                                 </div>
                                 <div className='TenantTrackerButtonsContainer'>
-                                    <div className='UseTenantTrackerButtonWrapper ml-auto'>
+                                    <div className='UseTenantTrackerButtonWrapper'>
                                         <span className='UseTenantButton pageText'>Use</span>
                                     </div>
                                     <div className='ManageTenantTrackerButtonWrapper'>

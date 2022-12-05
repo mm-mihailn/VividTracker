@@ -35,6 +35,7 @@
 }
 .TenantContainer .TenantNameWrapper .tenantName{
     margin-left: 1.125rem;
+    color: black;
 }
 .TenantContainer .TenantNameWrapper
 {
@@ -43,7 +44,7 @@
     margin-top: 0.3rem;
 }
 .ManageTenantButtonWrapper{
-    margin-left: 39rem;
+    margin-left: auto;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
@@ -93,4 +94,23 @@
     margin-top: 0.8125rem;   
     margin-bottom: 0.8125rem;
     margin-left: 1rem;
+}
+
+.pageText{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.EditUsersIcon{
+    font-size: larger;
+}
+.EditUsersIcon:hover{
+    cursor: pointer;
+}
+
+.EditTenantIcon:hover{
+    cursor: pointer
 }
