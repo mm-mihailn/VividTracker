@@ -70,6 +70,9 @@
     line-height: 27.24px;
     margin-left:22.0625rem;
 }
+.ResetButton:hover{
+    cursor: pointer;
+}
 .UseTenantButton{
     color: #0084B4;
     border-bottom-style: solid;
@@ -123,13 +126,18 @@
 
 .InviteNewUser{
     color: #F28627;
+    border-bottom-color: #f28627cb;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
     margin-left: 2.5rem;
 }
 
 .InviteNewUserWrapper{
     margin-top: 0.8625rem;
     margin-bottom: 0.8625rem;
-    
+}
+.InviteNewUserWrapper:hover{
+    cursor: pointer;
 }
 
 .pageText{
@@ -142,6 +150,9 @@
 
 .UseTenantTrackerButtonWrapper{
     padding-top: 0.18rem;
+}
+.UseTenantTrackerButtonWrapper:hover{
+    cursor: pointer;
 }
 
 .TenantTrackerNameWrapper{
