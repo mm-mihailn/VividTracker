@@ -12,7 +12,7 @@ using VividTracker.Data;
 namespace VividTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221205095430_SoftDelete")]
+    [Migration("20221130131609_SoftDelete")]
     partial class SoftDelete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,8 +194,8 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "87df1b20-a697-4982-b41d-b8a3e0443220",
-                            ConcurrencyStamp = "22e57268-1e87-492b-a88a-7714a197bbcf",
+                            Id = "b4166639-a9a8-4e55-84aa-739a77ef101f",
+                            ConcurrencyStamp = "8de3e420-8028-4c1c-8652-d04892bcd322",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -292,8 +292,8 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "a597272e-481d-4142-bfab-30174106a598",
-                            RoleId = "87df1b20-a697-4982-b41d-b8a3e0443220"
+                            UserId = "d0e93f59-c19a-4767-ac05-d97ed5fd8837",
+                            RoleId = "b4166639-a9a8-4e55-84aa-739a77ef101f"
                         });
                 });
 
@@ -616,7 +616,7 @@ namespace VividTracker.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -677,20 +677,20 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a597272e-481d-4142-bfab-30174106a598",
+                            Id = "d0e93f59-c19a-4767-ac05-d97ed5fd8837",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "80d6add5-cc16-4fe4-a122-87d49fa78557",
+                            ConcurrencyStamp = "2e1e3669-c2a8-4687-992e-d6090cf946e3",
                             Email = "admin@vividtracker.net",
                             EmailConfirmed = true,
-                            IsDeleted = false,
+                            IsDelete = false,
                             LockoutEnabled = false,
                             Name = "John Smith",
                             NormalizedEmail = "ADMIN@VIVIDTRACKER.NET",
                             NormalizedUserName = "ADMIN@VIVIDTRACKER.NET",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG7WY3jDJ0rf/A50jh+xWnWWuo0lSSztGYvN0DCeg62xnxPzqMik9GI7xuap40hgVw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL36VMzAAZ4n5cqTuw8zXL5KelyaZfG8bxpHvLtk9b0xOXSQpVk+ym7zoazpo1iCVQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "27f41efe-7ab4-41ce-be90-4c1c1c931095",
+                            SecurityStamp = "a32c20ea-39e3-4fe8-a87d-600d8a94bc2a",
                             TwoFactorEnabled = false,
                             UserName = "admin@vividtracker.net"
                         });

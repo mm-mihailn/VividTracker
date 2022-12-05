@@ -21,7 +21,7 @@
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             var users = await _userRepository.GetAllUsers();
-            var updateUsers = users.Where(i => i.IsDeleted != true);
+            var updateUsers = users.Where(i => i.IsDelete != true);
             return updateUsers;
         }
         [HttpGet]
@@ -35,12 +35,12 @@
             {
                 return NotFound();
             }
-            if (targetUser.IsDeleted)
+            if (targetUser.IsDelete)
             {
                 return BadRequest();
             }
 
-            targetUser.IsDeleted = true;
+            targetUser.IsDelete = true;
             await _userRepository.SoftDeleteAsync(targetUser);
 
             return Ok(targetUser);
