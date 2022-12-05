@@ -19,6 +19,7 @@
 
 .TenantName{
     margin-left: 2.5rem;
+    
 }
 .EditTenantIcon{
     margin-left: 44rem;
@@ -89,7 +90,8 @@
 }
 .TenantTrackerButtonsContainer{
     display: flex;
-    margin-left: 37.875rem;
+    margin-left: auto;
+    margin-right: 2rem;
     padding-top: 0.4375rem;
     padding-bottom: 0.4375rem;
 }
@@ -131,9 +133,11 @@
 }
 
 .pageText{
+    font-family: 'Open Sans';
+    font-style: normal;
     font-weight: 700;
     font-size: 20px;
-    line-height: 27.24px;
+    line-height: 27px;
 }
 
 .UseTenantTrackerButtonWrapper{
@@ -149,6 +153,7 @@
 .TenantTrackerName{
     font-weight: 400;
     font-size: 20px;
+    color: black;
 }
 .TenantTrackersWrapper{
     margin-left: 2rem;

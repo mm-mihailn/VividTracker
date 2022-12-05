@@ -52,7 +52,7 @@ export default class EditTenantComponent extends Component {
                                     <span className='TenantTrackerName pageText'> {tracker.userName} </span>
                                 </div>
                                 <div className='TenantTrackerButtonsContainer'>
-                                    <div className='UseTenantTrackerButtonWrapper ml-auto'>
+                                    <div className='UseTenantTrackerButtonWrapper'>
                                         <span className='UseTenantButton pageText'>Use</span>
                                     </div>
                                     <div className='ManageTenantTrackerButtonWrapper'>
