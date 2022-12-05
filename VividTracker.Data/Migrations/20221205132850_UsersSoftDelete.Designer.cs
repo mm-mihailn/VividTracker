@@ -12,8 +12,8 @@ using VividTracker.Data;
 namespace VividTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221205100336_SoftDelete")]
-    partial class SoftDelete
+    [Migration("20221205132850_UsersSoftDelete")]
+    partial class UsersSoftDelete
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -194,8 +194,8 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "600dec57-b2e2-4ec7-9e08-7e16ca63532f",
-                            ConcurrencyStamp = "fd250967-5b5e-4cbe-9192-5e54e63bc4df",
+                            Id = "6a7b638c-0e79-4e14-bdbe-6dd7cecc2a34",
+                            ConcurrencyStamp = "386e4db1-e56f-4474-a3af-a40c53b4a13f",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -292,8 +292,8 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "0ae24a77-1055-4f38-84ca-a72a3d146794",
-                            RoleId = "600dec57-b2e2-4ec7-9e08-7e16ca63532f"
+                            UserId = "5d4657a9-9418-4fb0-938d-1f6682c8cceb",
+                            RoleId = "6a7b638c-0e79-4e14-bdbe-6dd7cecc2a34"
                         });
                 });
 
@@ -677,9 +677,9 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0ae24a77-1055-4f38-84ca-a72a3d146794",
+                            Id = "5d4657a9-9418-4fb0-938d-1f6682c8cceb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "376a08d4-e662-4214-b211-0ab9ebc5a8a6",
+                            ConcurrencyStamp = "6a9d9ac9-4115-470c-a24e-1a047705571e",
                             Email = "admin@vividtracker.net",
                             EmailConfirmed = true,
                             IsDeleted = false,
@@ -687,10 +687,10 @@ namespace VividTracker.Data.Migrations
                             Name = "John Smith",
                             NormalizedEmail = "ADMIN@VIVIDTRACKER.NET",
                             NormalizedUserName = "ADMIN@VIVIDTRACKER.NET",
-                            PasswordHash = "AQAAAAEAACcQAAAAECJI7fOFQCDD/VRBBTeYK9I1Osc6IZMif7Vb21rUR+ht7UIEqcNLSRcDIt4+/wXH/g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFPomPv0ahgjIdMmJBAkArcbeoDD6TO9wf2LTAUbyaSw5zMb+4/1x3Ft6pv/ElZ7OQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9d6d4953-cf26-4718-9de9-62adef74056d",
+                            SecurityStamp = "6d9273d0-6055-4670-a044-487ca6f7f821",
                             TwoFactorEnabled = false,
                             UserName = "admin@vividtracker.net"
                         });
