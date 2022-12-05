@@ -62,7 +62,7 @@ namespace VividTracker.Controllers
 
             if (isContains)
             {
-                return BadRequest("Tenants is already exists");
+                return BadRequest("The tenant already exists");
             }
 
             await _tenantsService.AddTenantAsync(createTenant);
