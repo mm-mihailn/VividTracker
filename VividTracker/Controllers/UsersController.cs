@@ -22,6 +22,19 @@
         {
            return await _userservice.GetUserAsync();
         }
+
+        [HttpGet]
+        [Route("api/users/{id}")]
+        public async Task<IActionResult> GetUsersByTenantId([FromRoute] int id)
+        {
+            var users = await _userservice.GetUsersByTenantId(id);
+
+            if (users == null)
+            {
+                return NotFound("Users do not exists!");
+            }
+            return Ok(users);
+        }
         [HttpDelete]
         [Route("api/delete/{id}")]
 

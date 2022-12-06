@@ -23,6 +23,6 @@ public class TenantsService : ITenantsService
 
     public async Task<Tenant?> GetTenantByNameAsync(string name)
     {
-        return await _tenantsRepository.GetTenantsByName(name);
+        return await _tenantsRepository.GetTenantByName(name);
     }
 }

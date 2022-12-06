@@ -19,7 +19,7 @@ namespace VividTracker.Data.Repositories
         
         public async Task<IEnumerable<Tenant>> GetAllTenants() => await Entities.ToListAsync();
 
-        public async Task<Tenant?> GetTenantsByName(string name)
+        public async Task<Tenant?> GetTenantByName(string name)
         {
           return await Entities.FirstOrDefaultAsync(t=>t.Name==name);
         }
