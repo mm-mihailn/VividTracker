@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using VividTracker.Data.Models;
 using VividTracker.Data.Repositories.Interfaces;
 
 namespace VividTracker.Data.Repositories
@@ -93,6 +94,7 @@ namespace VividTracker.Data.Repositories
             Entities.RemoveRange(entities);
             return Context.SaveChangesAsync();
         }
+
         #endregion
     }
 }
