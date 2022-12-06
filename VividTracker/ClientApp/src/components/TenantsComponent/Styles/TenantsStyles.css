@@ -31,6 +31,7 @@
     line-height: 27.24px;
     margin-left: 2rem;
     margin-right: 2rem;
+    margin-top: 1rem;
 
 }
 .TenantContainer .TenantNameWrapper .tenantName{
@@ -58,6 +59,7 @@
     border-radius: 20px;
     width: 7.85rem;
     height: 2.25rem;
+    margin-right: 1rem;
 }
 .ManageTenantButtonWrapper .ManageButton:hover{
     background-color: #0080ae;
