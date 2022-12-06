@@ -10,7 +10,9 @@ export default class TenantContainerComponent extends Component {
                 <span className='tenantName pageText'> {this.props.tenantData.name} </span>
             </div>
             <div className='ManageTenantButtonWrapper ml-auto'>
-                <button className='ManageButton'>Manage</button>
+                <button className='ManageButton'> 
+                    <a href={`https://localhost:44430/editTenant/${this.props.tenantData.id}`} className = 'ManageButtonText'>Manage</a>
+                </button>
             </div>
     </div>
     )
