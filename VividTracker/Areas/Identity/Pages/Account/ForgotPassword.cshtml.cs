@@ -20,12 +20,11 @@ namespace VividTracker.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private readonly IEmailSender _emailSender;
+        private EmailSender _emailSender = new EmailSender();
 
-        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<User> userManager)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
         }
 
         /// <summary>
@@ -51,8 +50,7 @@ namespace VividTracker.Areas.Identity.Pages.Account
         }
    
         public async Task<IActionResult> OnPostAsync()
-        {
-            ForgotPasswordConfirmationEmail.Email = Input.Email;
+        { 
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
@@ -66,18 +64,18 @@ namespace VividTracker.Areas.Identity.Pages.Account
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var identity = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(Input.Email));
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
-                    values: new { area = "Identity", code },
+                    values: new { area = "Identity", code , identity},
                     protocol: Request.Scheme);
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                return RedirectToPage("./ForgotPasswordConfirmation", new { area = "Identity", identity });
             }
 
             return Page();
