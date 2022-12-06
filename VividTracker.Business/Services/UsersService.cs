@@ -26,5 +26,10 @@
         {
             return _userRepository.DeleteAsync(user);
         }
+
+        public async Task<User?> GetUserByIdAsync(string id)
+        {
+            return await _userRepository.FindAsync(id);
+        }
     }
 }

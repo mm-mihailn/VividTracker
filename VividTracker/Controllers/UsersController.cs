@@ -27,8 +27,7 @@
 
         public async Task<IActionResult> UsersSoftDelete([FromRoute] string id)
         {
-            var users = await GetAllUsers();
-            var targetUser = users.FirstOrDefault(x => x.Id == id);
+            var targetUser = await  _userservice.GetUserByIdAsync(id);
             if(targetUser == null)
             {
                 return NotFound("User does't exists");
