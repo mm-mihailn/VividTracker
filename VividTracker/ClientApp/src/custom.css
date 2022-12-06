@@ -71,3 +71,20 @@ span{
     padding-top: 0;
     font-weight:400;
 }
+#tenantBtn{
+    border-style: solid;
+    background-color: #f6aa68;
+    color: #fff !important;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 15px;
+    position: absolute;
+    bottom: 0px;
+    border-bottom: solid;
+    font-size: 18px;
+    padding-bottom: 0;
+    padding-top: 0;
+    font-weight:400;
+    margin-left: 7rem;
+}
