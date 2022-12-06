@@ -1,0 +1,50 @@
+.TenantTracker{
+    background-color: #F3F3F3;
+    margin-top: 0.4375rem;
+    margin-bottom: 0.4375rem;
+}
+.TenantTrackerButtonsContainer{
+    display: flex;
+    margin-left: auto;
+    margin-right: 2rem;
+    padding-top: 0.4375rem;
+    padding-bottom: 0.4375rem;
+}
+
+.ManageTenantTrackerButtonWrapper{
+    margin-left: 2rem;
+}
+.ManageTenantTrackerButton{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 7.85rem;
+    height: 2.25rem;
+}
+.ManageTenantTrackerButton:hover{
+    background-color: #0080ae;
+    color: #F3F3F3;
+}
+.ManageTenantTrackerButton:active{
+    color: #e7e6e6;
+}
+
+.pageText{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.ManageButtonText{
+    color: white;
+    text-decoration: none;
+}
+.ManageButtonText:hover{
+    color: white;
+    text-decoration: none;
+}
