@@ -13,6 +13,6 @@ namespace VividTracker.Business.Services.Interfaces
         Task<Tenant?> GetTenantByIdAsync(int id);
         Task UpdateTenantAsync(Tenant tenant);
         Task AddTenantAsync(Tenant tenant);
-        Task<Tenant?> GetTenantByName(string name);
+        Task<Tenant?> GetTenantByNameAsync(string name);
     }
 }

@@ -56,7 +56,7 @@ namespace VividTracker.Controllers
 
         public async Task<IActionResult> CreateTenant([FromBody] Tenant createTenant)
         {
-            var tenant = await _tenantsService.GetTenantsByName(createTenant.Name);
+            var tenant = await _tenantsService.GetTenantByNameAsync(createTenant.Name);
 
             if (tenant != null)
             {
