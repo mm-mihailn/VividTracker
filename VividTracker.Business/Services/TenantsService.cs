@@ -21,7 +21,7 @@ public class TenantsService : ITenantsService
 
     public async Task AddTenantAsync(Tenant tenant) => await _tenantsRepository.AddAsync(tenant);
 
-    public async Task<Tenant?> GetTenantsByName(string name)
+    public async Task<Tenant?> GetTenantByName(string name)
     {
         return await _tenantsRepository.GetTenantsByName(name);
     }
