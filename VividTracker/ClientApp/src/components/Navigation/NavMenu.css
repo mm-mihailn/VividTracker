@@ -27,5 +27,9 @@ html {
 #logo-title {
     color: #fff;
     position: absolute;
-    padding-left: 35px;
+    padding-left: 11rem;
+}
+
+.logo-img{
+  margin-left: 9rem;
 }
