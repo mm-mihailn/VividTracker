@@ -26,7 +26,7 @@
             return Context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<User?>> GetUsersByTenantId(int id)
+        public async Task<IEnumerable<User>> GetUsersByTenantId(int id)
         {
             return await Entities.Where(u => u.TenantId == id).ToListAsync();
         }
