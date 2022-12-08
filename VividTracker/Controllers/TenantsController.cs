@@ -56,13 +56,11 @@ namespace VividTracker.Controllers
 
         public async Task<IActionResult> CreateTenant([FromBody] Tenant createTenant)
         {
-            var existsTenants = await GetAllTenants();
+            var tenant = await _tenantsService.GetTenantByNameAsync(createTenant.Name);
 
-            var isContains = existsTenants.FirstOrDefault(x => x.Name == createTenant.Name);
-
-            if (isContains!=null)
+            if (tenant != null)
             {
-                return BadRequest();
+                return BadRequest("The tenant already exists");
             }
 
             await _tenantsService.AddTenantAsync(createTenant);
