@@ -12,7 +12,9 @@ export default class EditTenantComponent extends Component {
     }
     async componentDidMount()
     {
-        await fetch('https://localhost:7091/api/users')
+        let splittedURL = window.location.pathname.split('/')
+        let targetTenantID = splittedURL[splittedURL.length - 1]
+        await fetch(`https://localhost:7091/api/users/${Number(targetTenantID)}`)
         .then((res) => res.json())
         .then((res) => this.setState({trackers: res}))
     } 
@@ -46,11 +48,15 @@ export default class EditTenantComponent extends Component {
                 <span className='InviteNewUser pageText'> InviteNewUser() </span>
             </div>
             <div className = 'TenantTrackersWrapper'>
-                {this.state.trackers.map(tracker => {
+                {this.state.trackers.length >= 1 ? 
+                    this.state.trackers.map(tracker => {
                     return (
                         <TenantTrackerComponent tracker = {tracker}/>
                     )
-                })}
+                })
+                :
+                <p className='NoUsersMessage pageText'>Users do not exist for this tenant.</p>
+                }
             </div>
         </div>
       </div>
