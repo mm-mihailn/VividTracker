@@ -14,17 +14,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using VividTracker.Data.Models;
+using VividTracker.Business.Services.Interfaces;
 
 namespace VividTracker.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private EmailSender _emailSender = new EmailSender();
-
-        public ForgotPasswordModel(UserManager<User> userManager)
+        private readonly IEmailService _emailSender; 
+        public ForgotPasswordModel(UserManager<User> userManager, IEmailService emailService)
         {
             _userManager = userManager;
+            _emailSender = emailService;
         }
 
         /// <summary>
