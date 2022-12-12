@@ -28,7 +28,7 @@
 
         public async Task<IEnumerable<User>> GetUsersByTenantId(int id)
         {
-            return await Entities.Where(u => u.TenantId == id).ToListAsync();
+            return await Entities.Where(u => u.TenantId == id && u.IsDeleted==false).ToListAsync();
         }
     }
 }
