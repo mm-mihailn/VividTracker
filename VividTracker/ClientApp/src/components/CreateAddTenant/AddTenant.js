@@ -2,6 +2,7 @@
 import './AddTenant.css';
 import $ from 'jquery';
 import { Input } from 'reactstrap';
+import { register } from '../../serviceWorkerRegistration';
 //import 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js';
 //import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css';
 //import 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js';
@@ -19,37 +20,50 @@ export class AddTenant extends Component {
         }
     }
 
-    //componentDidMount() {
-    //    fetch("https://localhost:7091/api/create", {
-
-    //        // Adding method type
-    //        method: "POST",
-
-    //        // Adding body or contents to send
-    //        body: JSON.stringify({
-    //            name: this.addTenant(),
-    //            //tenantId = tenant.id
-    //        }),
-
-    //        // Adding headers to the request
-    //        headers: {
-    //            "Content-type": "application/json; charset=UTF-8"
-    //        }
-
-
-    //    })
-
-    //        // Converting to JSON
-    //    .then(response => response.json())
-
-    //    .then((res) => this.setState({ tenants: res }))
-    //}
-
-
 
     addTenant() {
 
+        //getData();
+
+        //async function getData() {
+
+        //    const response = await fetch('https://localhost:7091/tenants');
+        //    const data = await response.json();
+        //    var length = data.tenantName.length;
+        //    var temp = "";
+        //    for (var i = 0; i < length; i++) {
+        //        temp += data.tenantName[i];
+        //    }
+
+        //    elements.push(temp);
+        //}
+
+
+        getText('https://localhost:7091/api/tenants');   
+
         var input = this.state.tenantName;
+        var elements = [];
+
+        async function getText(url) {
+
+            let object = await fetch(url);
+            let myText = await object.text();
+            var array = myText.split(" ");
+
+
+            if (array.charAt(0) === array.charAt(0).toUpperCase()) {
+                var element = array.charAt(0);
+                elements.push(element);
+            }
+            
+        }
+
+        //var elements = ["Mentormate", "HardSoft Inc.", "Dream Corp",
+        //    "PM Corse Racing Team", "Low Peak High School", "Blue"];
+
+        //var elements = [];
+
+        //var isContaining = elements.find(element => element == input)
 
         if (input.length < 3) {
 
@@ -73,14 +87,18 @@ export class AddTenant extends Component {
             document.getElementById("name").style.borderBottomColor = "red";
             document.getElementById("error").style.visibility = "visible";
         }
-
-        //else if (this.state.tenantName == sameInput) {
+        //else if (elements.includes(input)) {
         //    document.getElementById("error").style.color = "red";
         //    document.getElementById("error").innerHTML = "This tenant is existing.";
         //    document.getElementById("name").style.borderBottomColor = "red";
         //    document.getElementById("error").style.visibility = "visible";
         //}
-
+        //else if (BadRequest) {
+        //    document.getElementById("error").style.color = "red";
+        //    document.getElementById("error").innerHTML = "This tenant is existing.";
+        //    document.getElementById("name").style.borderBottomColor = "red";
+        //    document.getElementById("error").style.visibility = "visible";
+        //}
         else {
 
             document.getElementById("name").style.borderBottomColor = "green";
@@ -96,7 +114,6 @@ export class AddTenant extends Component {
                 .then(response => console.log(JSON.stringify(response)))
         }
     }
-
 
 
     showModal = () => {
@@ -117,7 +134,6 @@ export class AddTenant extends Component {
     componentDidMount() {
 
         this.render()
-
     }
 
     clear() {
@@ -153,16 +169,6 @@ export class AddTenant extends Component {
                                 CreateNewTenant()
                             </button>
                         </div>
-
-                        {/*<div className='TenantsContainer'>*/}
-                        {/*    {this.state.tenants.map((tenant) => {*/}
-                        {/*        return (*/}
-                        {/*            <div className='TenantNameWrapper'>*/}
-                        {/*                <span className='tenantName'> {tenant.name} </span>*/}
-                        {/*            </div>*/}
-                        {/*        );*/}
-                        {/*    })}*/}
-                        {/*</div>*/}
 
                         <div className="modal fade" id="myModal" role="dialog">
                             <div className="modal-dialog">
