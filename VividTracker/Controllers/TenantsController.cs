@@ -46,9 +46,21 @@ namespace VividTracker.Controllers
             {
                 return BadRequest();
             }
+
             targetTenant.Name = newTenant.Name;
             await _tenantsService.UpdateTenantAsync(targetTenant);
 
+            return Ok(targetTenant);
+        }
+        [HttpGet]
+        [Route("api/tenant/{id}")]
+        public async Task<IActionResult> GetTenantById([FromRoute] int id)
+        {
+            var targetTenant = await _tenantsService.GetTenantByIdAsync(id);
+            if (targetTenant == null)
+            {
+                return NotFound();
+            }
             return Ok(targetTenant);
         }
         [HttpPost]
