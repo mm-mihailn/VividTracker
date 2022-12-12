@@ -74,7 +74,8 @@ namespace VividTracker.Areas.Identity.Pages.Account
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"<h2>Forgot your password ?</h2> That’s okay, it happens! Click on the link below to reset your password.<br>" +
+                    $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here.</a>");
                 return RedirectToPage("./ForgotPasswordConfirmation", new { area = "Identity", identity });
             }
 

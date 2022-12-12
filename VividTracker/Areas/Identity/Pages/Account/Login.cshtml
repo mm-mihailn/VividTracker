@@ -82,6 +82,13 @@
         text-decoration-line: underline;
         text-decoration-thickness:1px;
     }
+    input:invalid {
+     border-bottom: 2px solid #F03C31;
+    }
+    input:focus{
+       outline: none;
+        border-bottom: 1px solid #F28627;
+    }
 </style>
 
 
@@ -95,7 +102,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="inputs">
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Email:</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label ">Email:</label>
                 <div class="form-floating col-sm-9">
                     <input asp-for="Input.Email" class="input pe-0" autocomplete="username" aria-required="true" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
