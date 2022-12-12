@@ -8,7 +8,7 @@ export default class EditTenantComponent extends Component {
     constructor()
     {
         super()
-        this.state = {trackers: [], currentTenantName: ''}
+        this.state = {trackers: [], currentTenantName: '', tenantData: undefined}
     }
     componentDidMount = () =>
     {
@@ -31,9 +31,28 @@ export default class EditTenantComponent extends Component {
         .then(async (res) => 
             {
                 let tenantData = await res.json()
+                this.setState({'tenantData': tenantData})
                 this.setState({'currentTenantName': tenantData.name})
             }
         )
+    }
+
+    updateTenantName = async() => {
+        let splittedURL = window.location.pathname.split('/')
+        let targetTenantID = splittedURL[splittedURL.length - 1]
+        this.state.tenantData.name = this.state.currentTenantName
+        let result = await fetch(`https://localhost:7091/api/edit/${Number(targetTenantID)}`, 
+        {
+            method: 'PATCH',
+            headers: {
+             'Content-Type': 'application/json',
+             },
+            body: JSON.stringify(this.state.tenantData)
+        })
+        .then(async (res) =>{
+            let result = await res.json()
+            console.log(result)
+        })
     }
     
     render() {
@@ -52,7 +71,7 @@ export default class EditTenantComponent extends Component {
                     </div>
                     <div className='TenantButtons'>
                         <span className='ResetButton'>Reset</span>
-                        <button className='UpdateButton'>Update</button>
+                        <button className='UpdateButton' onClick={() => this.updateTenantName()}>Update</button>
                     </div>
                 </div>
             </div>
