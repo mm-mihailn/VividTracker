@@ -42,5 +42,10 @@
             var newUser = _userRepository.CreateUser(id, user);
             return await _userRepository.AddAsync(newUser);
         }
+
+        public User GetUserByEmail(string email)
+        {
+            return _userRepository.GetUserByEmail(email);
+        }
     }
 }

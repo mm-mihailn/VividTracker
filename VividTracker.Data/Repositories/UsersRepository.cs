@@ -50,5 +50,10 @@
            
             return newUser;
         }
+
+        public User GetUserByEmail(string email)
+        {
+            return Entities.FirstOrDefault(u => u.Email == email);
+        }
     }
 }

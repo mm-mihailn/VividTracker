@@ -59,6 +59,12 @@
         [Route("api/create/{id}")]
         public async Task<IActionResult> CreateUser([FromRoute] int id, [FromBody]User user)
         {
+            var targetUser = _usersService.GetUserByEmail(user.Email);
+
+            if (targetUser != null)
+            {
+                return BadRequest("User already exist!");
+            }
             await _usersService.CreateUser(id,user);
             return Ok(user);
         }
