@@ -34,6 +34,9 @@ builder.Services.AddScoped<ITenantsService, TenantsService>();
 
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
