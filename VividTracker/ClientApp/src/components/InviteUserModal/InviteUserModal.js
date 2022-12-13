@@ -64,7 +64,7 @@ export default class InviteUserModal extends Component {
         <div className='InviteUserModalWrapper'>
             <div className="container">
                     <div className="container" id="modal">
-                        <span id="inviteUser" className="InviteNewUser pageText" data-bs-toggle="modal" data-bs-target="#InviteUserModal">
+                        <span className="InviteNewUser pageText" data-bs-toggle="modal" data-bs-target="#InviteUserModal">
                             InviteNewUser()
                         </span>
                     </div>
