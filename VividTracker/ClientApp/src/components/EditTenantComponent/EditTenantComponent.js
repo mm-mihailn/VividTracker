@@ -3,6 +3,7 @@ import { faPenToSquare, faRectangleList } from "@fortawesome/free-regular-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/EditTenantStyles.css'
 import TenantTrackerComponent from '../TenantTrackerComponent/TenantTrackerComponent';
+import InviteUserModal from '../InviteUserModal/InviteUserModal';
 
 export default class EditTenantComponent extends Component {
     constructor()
@@ -82,7 +83,8 @@ export default class EditTenantComponent extends Component {
                 </div>
             </div>
             <div className = 'InviteNewUserWrapper'>
-                <span className='InviteNewUser pageText'> InviteNewUser() </span>
+                <InviteUserModal/>
+                {/* <span className='InviteNewUser pageText'> InviteNewUser() </span> */}
             </div>
             <div className = 'TenantTrackersWrapper'>
                 {this.state.trackers.length >= 1 ? 
