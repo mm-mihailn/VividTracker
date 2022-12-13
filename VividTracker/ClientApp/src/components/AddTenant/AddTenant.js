@@ -1,6 +1,9 @@
 ﻿import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './AddTenant.css';
-//import './Input.js'
+import { Form } from '../AddTenant/Form.js';
+import "./Validations.js";
+import { Validations } from "./Validations.js";
 import $ from 'jquery';
 export class AddTenant extends Component {
 
@@ -8,29 +11,36 @@ export class AddTenant extends Component {
         super(props);
         this.state = {
             tenants: [],
-            value: ''
+            value: '',
+            errorMessage: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     validationHandler = () => {
 
         var input = this.state.value;
 
+        const errors = {
+            success: " ",
+            minLength: "Name must be at least 3 characters.",
+            maxLenght: "Name limit is 100 characters.",
+            existingTenant: "This tenant is already existing"
+        }
+
+        const textColor = {
+            error: "red",
+            success: "green"
+        }
+
         if (input.length < 3) {
 
-            document.getElementById("error").style.color = "red";
-            document.getElementById("error").innerHTML = "Name must be at least 3 characters.";
-            document.getElementById("name").style.borderBottomColor = "red";
-            document.getElementById("error").style.visibility = "visible";
-
+            this.setState({ errorMessage: errors.minLength });
         }
         else if (input.length > 100) {
 
-            document.getElementById("error").style.color = "red";
-            document.getElementById("error").innerHTML = "Tenant name limit is 100 characters.";
-            document.getElementById("name").style.borderBottomColor = "red";
-            document.getElementById("error").style.visibility = "visible";
+            this.setState({ errorMessage: errors.maxLength });
 
         }
         else {
@@ -44,21 +54,19 @@ export class AddTenant extends Component {
             })
                 .then((response) => {
                     if (response.status == 400) {
-
-                        document.getElementById("error").style.color = "red";
-                        document.getElementById("error").innerHTML = "This tenant is already existing.";
-                        document.getElementById("name").style.borderBottomColor = "red";
-                        document.getElementById("error").style.visibility = "visible";
+                        this.setState({ errorMessage: errors.existingTenant });
                     }
                     else {
                         document.getElementById("name").style.borderBottomColor = "green";
-                        <span className="text-success" id="messageSuccess">The tenant is added.</span>
-
                     }
                 })
 
         }
+
+
+
     }
+
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
@@ -78,6 +86,7 @@ export class AddTenant extends Component {
     }
 
     componentDidMount() {
+
         this.render();
 
     }
@@ -90,15 +99,12 @@ export class AddTenant extends Component {
         document.getElementById("name").style.borderBottomColor = "gray";
     }
 
+   
+
     render() {
         return (
 
-            <><style>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"> </script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"> </script>
-                <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-            </style>
-                <div className="container">
+            <div className="container">
                     <div className="container" id="modal">
                         <button type="button" id="createTenant" className="btn btn-link" data-bs-toggle="modal" data-bs-target="#myModal">
                             CreateNewTenant()
@@ -121,7 +127,11 @@ export class AddTenant extends Component {
                                                 onChange={(e) => this.setState({ 'value': e.target.value })}>
                                             </input>
                                             <div className="modal-footer border-0">
-                                                <p id="error"></p>
+
+                                                <div id="error">
+                                                    <p>{this.state.errorMessage}</p>
+                                                </div>
+
                                                 <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"
                                                     onClick={() => this.clear()}>Close
                                                 </button>
@@ -136,8 +146,8 @@ export class AddTenant extends Component {
                             </div>
                         </div>
                     </div>
-                </div></>
-
+            </div>
+          
         );
     }
 }
