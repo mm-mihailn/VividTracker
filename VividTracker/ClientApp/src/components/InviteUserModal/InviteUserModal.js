@@ -6,7 +6,7 @@ export default class InviteUserModal extends Component {
   constructor()
   {
     super()
-    this.state = {email: '', currentTenantUsers: [], errorMessage: ''}
+    this.state = {email: '', currentTenantUsers: [], errorMessage: '', valid: 'null'}
   }
   validateEmail(email)
   {
@@ -18,8 +18,6 @@ export default class InviteUserModal extends Component {
   componentDidMount = async() =>
   {
     await this.getCurrentTenantData()
-    
-
   } 
 
   getCurrentTenantData = async() =>
@@ -39,17 +37,13 @@ export default class InviteUserModal extends Component {
   inviteUser = async(event) =>
   {
     event.preventDefault()
-    console.log(this.validateEmail(this.state.email) == true)
     if(this.validateEmail(this.state.email) == true)
     {
+      this.setState({'valid': true})
       this.state.currentTenantUsers.some((user) => {
         if(user.email == this.state.email)
         {
-          this.setState({'errorMessage':'This user has already been invited to this tenant.'})
-          document.getElementById("error").style.color = "red";
-          document.getElementById("error").innerHTML = this.state.errorMessage;
-          document.getElementById("name").style.borderBottomColor = "red";
-          document.getElementById("error").style.visibility = "visible";
+          this.setState({'errorMessage':'This user has already been invited to this tenant.', 'valid': false})
         }
         else
         {
@@ -60,11 +54,7 @@ export default class InviteUserModal extends Component {
     }
     else
     {
-      this.setState({'errorMessage':'Invalid email, please check again.'})
-      document.getElementById("error").style.color = "red";
-      document.getElementById("error").innerHTML = this.state.errorMessage;
-      document.getElementById("name").style.borderBottomColor = "red";
-      document.getElementById("error").style.visibility = "visible";
+      this.setState({'errorMessage':'Invalid email, please check again.', 'valid': false})
     }
   }
 
@@ -91,12 +81,15 @@ export default class InviteUserModal extends Component {
                                     <div id="myForm">
                                         <form onSubmit={(e) => this.inviteUser(e)}>
                                             <label htmlFor="userEmail" id="label-text">Email:</label>
-                                            <input type="text" name="userEmail" className="form-control" id="name"
+                                            <input type="text" name="userEmail" className={this.state.valid == false ? "form-control name name-error" : "form-control name"} id="name"
                                                 onChange={(e) => this.setState({ 'email': e.target.value })}>
                                             </input>
                                             <div className="modal-footer border-0">
-                                                <p id="error"></p>
-                                                <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"                                                  >Cancel
+                                              {this.state.valid == false ?  
+                                                <p className="error">{this.state.errorMessage}</p>
+                                              :
+                                              ""}
+                                                <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal">
                                                   Cancel
                                                 </button>
                                                 <button type="submit" id="submit" method="post" className="btn" name="addTenant"> 

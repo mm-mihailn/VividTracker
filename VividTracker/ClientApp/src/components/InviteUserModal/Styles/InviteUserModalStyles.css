@@ -20,7 +20,7 @@
     text-decoration-line: underline;
 }
 
-#name {
+.name {
     width: 300px;
     height: 41px;
     background: #F3F3F3;
@@ -31,9 +31,14 @@
     border-radius: 0;
 }
 
-#error {
+.name-error{
+    border-bottom-color: red;
+}
+
+.error {
     margin-left: 140px;
-    visibility: hidden;
+    visibility: visible;
+    color: red;
     margin-top: -30px;
     margin-bottom: 0px;
 }
