@@ -84,7 +84,7 @@ export default class EditTenantComponent extends Component {
             </div>
             <div className = 'InviteNewUserWrapper'>
                 <InviteUserModal/>
-                {/* <span className='InviteNewUser pageText'> InviteNewUser() </span> */}
+                {/*<span className='InviteNewUser pageText'> InviteNewUser() </span>  */}
             </div>
             <div className = 'TenantTrackersWrapper'>
                 {this.state.trackers.length >= 1 ? 
