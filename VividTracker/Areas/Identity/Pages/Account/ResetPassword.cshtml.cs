@@ -72,7 +72,7 @@ namespace VividTracker.Areas.Identity.Pages.Account
 
         }
 
-        public IActionResult OnGet(string code = null , string identity = null)
+        public IActionResult OnGet(string code = null)
         {
             if (code == null)
             {
@@ -82,8 +82,7 @@ namespace VividTracker.Areas.Identity.Pages.Account
             {
                 Input = new InputModel
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)),
-                    Email = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(identity))
+                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
                 };
                 return Page();
             }

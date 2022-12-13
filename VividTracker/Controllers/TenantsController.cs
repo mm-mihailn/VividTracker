@@ -46,21 +46,9 @@ namespace VividTracker.Controllers
             {
                 return BadRequest();
             }
-
             targetTenant.Name = newTenant.Name;
             await _tenantsService.UpdateTenantAsync(targetTenant);
 
-            return Ok(targetTenant);
-        }
-        [HttpGet]
-        [Route("api/tenant/{id}")]
-        public async Task<IActionResult> GetTenantById([FromRoute] int id)
-        {
-            var targetTenant = await _tenantsService.GetTenantByIdAsync(id);
-            if (targetTenant == null)
-            {
-                return NotFound();
-            }
             return Ok(targetTenant);
         }
         [HttpPost]
@@ -68,11 +56,13 @@ namespace VividTracker.Controllers
 
         public async Task<IActionResult> CreateTenant([FromBody] Tenant createTenant)
         {
-            var tenant = await _tenantsService.GetTenantByNameAsync(createTenant.Name);
+            var existsTenants = await GetAllTenants();
 
-            if (tenant != null)
+            var isContains = existsTenants.FirstOrDefault(x => x.Name == createTenant.Name);
+
+            if (isContains!=null)
             {
-                return BadRequest("The tenant already exists");
+                return BadRequest();
             }
 
             await _tenantsService.AddTenantAsync(createTenant);

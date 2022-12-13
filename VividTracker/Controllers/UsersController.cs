@@ -9,47 +9,35 @@
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUsersService _usersService;
+        private readonly IUsersService _userservice;
 
-        public UserController(IUsersService userService)
+        public UserController(IUsersService userservice)
         {
-            _usersService = userService;
+            _userservice = userservice;
         }
 
         [HttpGet]
         [Route("api/users")]
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-           return await _usersService.GetUserAsync();
-        }
-
-        [HttpGet]
-        [Route("api/users/{id}")]
-        public async Task<IActionResult> GetUsersByTenantId([FromRoute] int id)
-        {
-            var users = await _usersService.GetUsersByTenantId(id);
-            
-            if (!users.Any())
-            {
-                return NotFound("Users do not exists!");
-            }
-            return Ok(users);
+           return await _userservice.GetUserAsync();
         }
         [HttpDelete]
         [Route("api/delete/{id}")]
 
-        public async Task<IActionResult> DeleteUser([FromRoute] string id)
+        public async Task<IActionResult> UsersSoftDelete([FromRoute] string id)
         {
-            var targetUser = await _usersService.GetUserByIdAsync(id);
+            var users = await GetAllUsers();
+            var targetUser = users.FirstOrDefault(x => x.Id == id);
             if(targetUser == null)
             {
-                return NotFound("User doesn't exists");
+                return NotFound("User does't exists");
             }
             if (targetUser.IsDeleted)
             {
                 return BadRequest("User is already deleted");
             }
-            await _usersService.DeleteAsync(targetUser);
+            await _userservice.DeleteAsync(targetUser);
 
             return Ok(targetUser);
         }

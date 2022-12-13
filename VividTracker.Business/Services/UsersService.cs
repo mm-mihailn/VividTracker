@@ -26,15 +26,5 @@
         {
             return _userRepository.DeleteAsync(user);
         }
-
-        public async Task<User?> GetUserByIdAsync(string id)
-        {
-            return await _userRepository.FindAsync(id);
-        }
-
-        public async Task<IEnumerable<User>> GetUsersByTenantId(int id)
-        {
-            return await _userRepository.GetUsersByTenantId(id);
-        }
     }
 }

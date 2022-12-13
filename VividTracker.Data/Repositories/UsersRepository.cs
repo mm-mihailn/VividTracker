@@ -25,10 +25,5 @@
             entity.IsDeleted = true;
             return Context.SaveChangesAsync();
         }
-
-        public async Task<IEnumerable<User>> GetUsersByTenantId(int id)
-        {
-            return await Entities.Where(u => u.TenantId == id && u.IsDeleted==false).ToListAsync();
-        }
     }
 }

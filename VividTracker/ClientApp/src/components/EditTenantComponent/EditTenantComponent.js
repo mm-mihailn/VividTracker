@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { faPenToSquare, faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/EditTenantStyles.css'
-import TenantTrackerComponent from '../TenantTrackerComponent/TenantTrackerComponent';
 
 export default class EditTenantComponent extends Component {
     constructor()
@@ -12,9 +11,7 @@ export default class EditTenantComponent extends Component {
     }
     async componentDidMount()
     {
-        let splittedURL = window.location.pathname.split('/')
-        let targetTenantID = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/users/${Number(targetTenantID)}`)
+        await fetch('https://localhost:7091/api/users')
         .then((res) => res.json())
         .then((res) => this.setState({trackers: res}))
     } 
@@ -48,15 +45,23 @@ export default class EditTenantComponent extends Component {
                 <span className='InviteNewUser pageText'> InviteNewUser() </span>
             </div>
             <div className = 'TenantTrackersWrapper'>
-                {this.state.trackers.length >= 1 ? 
-                    this.state.trackers.map(tracker => {
+                {this.state.trackers.map(tracker => {
                     return (
-                        <TenantTrackerComponent tracker = {tracker}/>
+                        <div className = 'TenantTracker d-flex' key={tracker.id}>
+                                <div className='TenantTrackerNameWrapper'>
+                                    <span className='TenantTrackerName pageText'> {tracker.userName} </span>
+                                </div>
+                                <div className='TenantTrackerButtonsContainer'>
+                                    <div className='UseTenantTrackerButtonWrapper'>
+                                        <span className='UseTenantButton pageText'>Use</span>
+                                    </div>
+                                    <div className='ManageTenantTrackerButtonWrapper'>
+                                        <button className='ManageTenantTrackerButton'>Manage</button>
+                                    </div>
+                                </div>
+                        </div>
                     )
-                })
-                :
-                <p className='NoUsersMessage pageText'>Users do not exist for this tenant.</p>
-                }
+                })}
             </div>
         </div>
       </div>

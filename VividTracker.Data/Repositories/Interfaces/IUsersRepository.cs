@@ -10,6 +10,5 @@
     public interface IUsersRepository:IRepository<User>
     {
         Task<IEnumerable<User>> GetAllUsers();
-        Task<IEnumerable<User>> GetUsersByTenantId(int id);
     }
 }

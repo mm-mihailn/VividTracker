@@ -11,7 +11,5 @@
     {
         Task<IEnumerable<User>> GetUserAsync();
         Task DeleteAsync(User user);
-        Task<User?> GetUserByIdAsync(string id);
-        Task<IEnumerable<User>> GetUsersByTenantId(int id);
     }
 }
