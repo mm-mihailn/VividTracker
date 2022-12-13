@@ -14,18 +14,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using VividTracker.Data.Models;
+using VividTracker.Business.Services.Interfaces;
 
 namespace VividTracker.Areas.Identity.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private readonly IEmailSender _emailSender;
-
-        public ForgotPasswordModel(UserManager<User> userManager, IEmailSender emailSender)
+        private readonly IEmailService _emailSender; 
+        public ForgotPasswordModel(UserManager<User> userManager, IEmailService emailService)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
+            _emailSender = emailService;
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace VividTracker.Areas.Identity.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
         }
-
+   
         public async Task<IActionResult> OnPostAsync()
-        {
+        { 
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
@@ -65,18 +65,19 @@ namespace VividTracker.Areas.Identity.Pages.Account
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var identity = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(Input.Email));
                 var callbackUrl = Url.Page(
                     "/Account/ResetPassword",
                     pageHandler: null,
-                    values: new { area = "Identity", code },
+                    values: new { area = "Identity", code , identity},
                     protocol: Request.Scheme);
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                    $"<h2>Forgot your password ?</h2> That’s okay, it happens! Click on the link below to reset your password.<br>" +
+                    $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here.</a>");
+                return RedirectToPage("./ForgotPasswordConfirmation", new { area = "Identity", identity });
             }
 
             return Page();

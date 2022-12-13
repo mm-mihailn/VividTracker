@@ -5,8 +5,6 @@
     ViewData["Title"] = "Log in";
 }
 
-@*I use the <style> tag instead of a css file to change the style of the .cshtml because of 
-    an unknown issue with the out-of-the-box template*@
 <style>
     body {
         background-color: #0084B4;
@@ -14,10 +12,6 @@
 
     form {
         background-color: #ffffff;
-        margin: auto;
-        margin-top: 15%;
-        margin-left: 25%;
-        margin-right: 25%;
         border: 5px solid #0084B4;
         padding-top: 25px;
         padding-bottom: 25px;
@@ -34,6 +28,8 @@
     .inputs {
         padding: 25px;
         padding-right: 25px;
+        font-size:18px;
+
     }
 
     .input {
@@ -62,32 +58,53 @@
         text-align: center;
         border-radius: 35px;
         background-color: #0084B4;
+        height:80%;
+        font-family: 'Open Sans'; 
+        font-size:18px;
     }
 
     #back-btn {
         background-color: #ffffff;
         text-align: center;
         text-decoration-line: underline;
+        text-decoration-thickness:1px;
         color: #0084B4;
         border: 0px;
         border-radius: 35px;
         text-align: center;
         border-radius: 35px;
-        font-size: 20px;
+        height:80%;
+        font-family: 'Open Sans'; 
+        font-size:18px;
+    }
+    #forgot-password{
+        color:#F28627;
+        text-decoration-line: underline;
+        text-decoration-thickness:1px;
+    }
+    input:invalid {
+     border-bottom: 2px solid #F03C31;
+    }
+    input:focus{
+       outline: none;
+        border-bottom: 1px solid #F28627;
     }
 </style>
 
 
 
 <section>
+    <div class="ps-lg-5 pe-lg-5">
+    <div class="m-sm-5 ps-sm-5 pe-sm-5 pt-sm-1">
+    <div class="m-md-5  ps-ms-5 pe-ms-5 pt-3">
     <form id="account" method="post">
         <h2 id="title">Login</h2>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="inputs">
             <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Email:</label>
+                <label for="staticEmail" class="col-sm-2 col-form-label ">Email:</label>
                 <div class="form-floating col-sm-9">
-                    <input asp-for="Input.Email" class="input " autocomplete="username" aria-required="true" />
+                    <input asp-for="Input.Email" class="input pe-0" autocomplete="username" aria-required="true" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
             </div>
@@ -99,13 +116,21 @@
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
             </div>
-        </div>
-        <div class="row ps-4 pe-4">
-            <div class="gap-3 d-md-flex justify-content-md-end ps-4 pe-4">
-                <a href="https://localhost:44430/" id="back-btn" class="btn btn-lg btn-primary pt-0 pb-0 h-75 ">Back</a>
-                <button id="login-submit" type="submit" class="btn btn-lg btn-primary  pt-0 pe-4 ps-4  h-75">Login</button>
+            <div class="form-group row">
+                <a id="forgot-password" class="text-end pe-4" asp-page="./ForgotPassword">StartForgotPasswordFlow()</a>
             </div>
         </div>
+
+        <div class="row ps-4 pe-4">
+            <div class="gap-3 d-md-flex justify-content-md-end ps-4 pe-4">
+                <a href="https://localhost:44430/" id="back-btn" class="btn btn-lg btn-primary pt-0 pb-0">Back</a>
+                <button id="login-submit" type="submit" class="btn btn-lg btn-primary  pt-0 pe-4 ps-4 ">Login</button>
+            </div>
+        </div>
+    </form>
+    </div>
+    </div>
+    </div>
         <!-- #region Unwanted_features -->
         @*<div>
             <div class="checkbox">
@@ -116,9 +141,7 @@
             </div>
             </div>
             <div>
-            <p>
-            <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-            </p>
+           
             <p>
             <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
             </p>
@@ -127,7 +150,7 @@
             </p>
             </div>*@
         <!-- #endregion -->
-    </form>
+   
 </section>
 
 <!-- #region Unwanted_features -->

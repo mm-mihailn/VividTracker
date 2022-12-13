@@ -9,10 +9,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VividTracker</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Liberation+Serif+Bold:wght@700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cousine+Bold+Italic:wght@700&display=swap"/>
+    
 
     <environment include="Development">
         <link rel="stylesheet" href="~/Identity/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/Identity/css/site.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Liberation+Serif+Bold:wght@700&display=swap"/>
+         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cousine+Bold+Italic:wght@700&display=swap"/>
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
@@ -20,6 +25,9 @@
               asp-fallback-href="~/Identity/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/Identity/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="./css/Fonts/Open_Sans/stylesheet.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Liberation+Serif+Bold:wght@700&display=swap"/>
+         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cousine+Bold+Italic:wght@700&display=swap"/>
     </environment>
 
     @*I use the <style> tag instead of a css file to change the style of the .cshtml because of 
@@ -29,7 +37,8 @@
             background-color:#F28627;
             max-width:100%;
             border:0px;
-            padding-bottom: 4px;
+            padding-bottom: 5px;
+            border: 1px solid #E9573F;
         }
         #logo-title {
            color: #fff;
@@ -60,11 +69,15 @@
            text-align:end;
            width:60px;
            margin-left:20px;
+           font-family: 'Open Sans'; 
         }
 
-        .myfooter{
+        #footer{
         background-color:#F28627;
-        overflow: auto;
+        overflow: none;
+        font:15px;
+        color:#ffffff;
+        border: 1px solid #E9573F;
         /*height: 125px;*/}
 
         .mynav-item{
@@ -76,7 +89,6 @@
     <header>
         <nav id = "mynav" class="navbar navbar-expand-sm  navbar-light   mb-3 ">
             <div class="container">
-
                 <img class="logo-img" src="/static/media/logo.04ab97cd80fafe188310.png" width="200" alt="not work">
                 <a id="logo-title" class="a-navbar" href="~/">VividTracker</a>
                 <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -108,12 +120,18 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="footer text-muted myfooter ">
-        <div class="container">
-        &copy; 2022 - VividTracker
-            
+    <footer id="footer" class="fixed-bottom ">
+        <div class="row">
+            <h5 class=" d-flex justify-content-center">DEVELOPERS:</h5>
         </div>
-    </footer>
+        <div id="main-content" class="row">
+        <div class="d-flex justify-content-center info">
+            <span>Blagovest Damyanov,Martin Yordanov,Veli Ashikov</span>
+        </div><div class="d-flex justify-content-center info">
+        <span>Martin Marinov,Gabriel Yordanov,Kristian Manov</span>
+        </div>
+        </div>
+        </footer>
 
     <environment include="Development">
         <script src="~/Identity/lib/jquery/dist/jquery.js"></script>
