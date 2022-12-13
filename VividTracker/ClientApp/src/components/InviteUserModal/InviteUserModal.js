@@ -6,7 +6,7 @@ export default class InviteUserModal extends Component {
   constructor()
   {
     super()
-    this.state = {email: ''}
+    this.state = {email: '', currentTenantUsers: []}
   }
   validateEmail(email)
   {
@@ -14,11 +14,57 @@ export default class InviteUserModal extends Component {
     let isEmailValid = emailRegex.test(email)
     return isEmailValid
   }
-  inviteUser(event)
+
+  componentDidMount = async() =>
+  {
+    await this.getCurrentTenantData()
+    console.log(this.state)
+
+  } 
+
+  getCurrentTenantData = async() =>
+  {
+    let currentURL = window.location.href.split('/')
+    let currentTenantID = Number(currentURL[currentURL.length - 1])
+    await fetch(`https://localhost:7091/api/users/${currentTenantID}`).then(async (res) =>{ 
+      let result = await res.json()
+      this.setState({'currentTenantUsers': result})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+  }
+
+  inviteUser = async(event) =>
   {
     event.preventDefault()
-    console.log('Inviting user')
-    console.log(this.validateEmail(this.state.email))
+    console.log(this.validateEmail(this.state.email) == true)
+    if(this.validateEmail(this.state.email) == true)
+    {
+      this.state.currentTenantUsers.some((user) => {
+        if(user.email == this.state.email)
+        {
+          console.log('EXISTS')
+          document.getElementById("error").style.color = "red";
+          document.getElementById("error").innerHTML = "This user has already been invited to this tenant.";
+          document.getElementById("name").style.borderBottomColor = "red";
+          document.getElementById("error").style.visibility = "visible";
+        }
+        else
+        {
+          // TODO: Add user to this tenant
+        }
+      })
+      
+    }
+    else
+    {
+      document.getElementById("error").style.color = "red";
+      document.getElementById("error").innerHTML = "Invalid email, please check again.";
+      document.getElementById("name").style.borderBottomColor = "red";
+      document.getElementById("error").style.visibility = "visible";
+    }
   }
 
   render() {
@@ -27,7 +73,7 @@ export default class InviteUserModal extends Component {
         <div className='InviteUserModalWrapper'>
             <div className="container">
                     <div className="container" id="modal">
-                        <span id="createTenant" className="InviteNewUser pageText" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <span id="inviteUser" className="InviteNewUser pageText" data-bs-toggle="modal" data-bs-target="#myModal">
                             InviteNewUser()
                         </span>
                     </div>
