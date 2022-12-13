@@ -64,11 +64,11 @@ export default class InviteUserModal extends Component {
         <div className='InviteUserModalWrapper'>
             <div className="container">
                     <div className="container" id="modal">
-                        <span id="inviteUser" className="InviteNewUser pageText" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <span id="inviteUser" className="InviteNewUser pageText" data-bs-toggle="modal" data-bs-target="#InviteUserModal">
                             InviteNewUser()
                         </span>
                     </div>
-                    <div className="modal fade" id="myModal" role="dialog">
+                    <div className="modal fade" id="InviteUserModal" role="dialog">
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header border-0">
