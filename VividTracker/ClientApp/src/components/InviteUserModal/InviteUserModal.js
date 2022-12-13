@@ -6,7 +6,7 @@ export default class InviteUserModal extends Component {
   constructor()
   {
     super()
-    this.state = {email: '', currentTenantUsers: []}
+    this.state = {email: '', currentTenantUsers: [], errorMessage: ''}
   }
   validateEmail(email)
   {
@@ -18,7 +18,7 @@ export default class InviteUserModal extends Component {
   componentDidMount = async() =>
   {
     await this.getCurrentTenantData()
-    console.log(this.state)
+    
 
   } 
 
@@ -45,9 +45,9 @@ export default class InviteUserModal extends Component {
       this.state.currentTenantUsers.some((user) => {
         if(user.email == this.state.email)
         {
-          console.log('EXISTS')
+          this.setState({'errorMessage':'This user has already been invited to this tenant.'})
           document.getElementById("error").style.color = "red";
-          document.getElementById("error").innerHTML = "This user has already been invited to this tenant.";
+          document.getElementById("error").innerHTML = this.state.errorMessage;
           document.getElementById("name").style.borderBottomColor = "red";
           document.getElementById("error").style.visibility = "visible";
         }
@@ -60,8 +60,9 @@ export default class InviteUserModal extends Component {
     }
     else
     {
+      this.setState({'errorMessage':'Invalid email, please check again.'})
       document.getElementById("error").style.color = "red";
-      document.getElementById("error").innerHTML = "Invalid email, please check again.";
+      document.getElementById("error").innerHTML = this.state.errorMessage;
       document.getElementById("name").style.borderBottomColor = "red";
       document.getElementById("error").style.visibility = "visible";
     }
