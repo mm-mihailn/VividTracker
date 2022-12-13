@@ -3,7 +3,6 @@
 public interface IRepository<TEntity> where TEntity : class
 {
     Task<TEntity?> FindAsync(params object[] keyValues);
-
     Task<TEntity> AddAsync(TEntity entity);
 
     Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities);

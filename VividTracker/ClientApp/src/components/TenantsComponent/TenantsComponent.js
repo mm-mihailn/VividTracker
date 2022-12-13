@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './Styles/TenantsStyles.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { AddTenant } from '../CreateAddTenant/AddTenant.js'
+import { AddTenant } from '../AddTenant/AddTenant.js'
+import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
 export default class TenantsComponent extends Component {
 
     constructor()
@@ -33,14 +34,7 @@ export default class TenantsComponent extends Component {
                 <div className='TenantsContainer'>
                     {this.state.tenants.map((tenant) => {
                         return(
-                            <div className='TenantContainer d-flex' key={tenant.id}>
-                                <div className='TenantNameWrapper'>
-                                    <span className='tenantName pageText'> {tenant.name} </span>
-                                </div>
-                                <div className='ManageTenantButtonWrapper ml-auto'>
-                                    <button className='ManageButton'>Manage</button>
-                                </div>
-                            </div>
+                           <TenantContainerComponent tenantData = {tenant}/>
                         )
                     })}
                 </div>
