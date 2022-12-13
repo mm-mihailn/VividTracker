@@ -5,6 +5,7 @@
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
     using VividTracker.Data.Repositories.Interfaces;
+    using static Duende.IdentityServer.Models.IdentityResources;
 
     [ApiController]
     public class UserController : ControllerBase
@@ -52,6 +53,14 @@
             await _usersService.DeleteAsync(targetUser);
 
             return Ok(targetUser);
+        }
+
+        [HttpPost]
+        [Route("api/create/{id}")]
+        public async Task<IActionResult> CreateUser([FromRoute] int id, [FromBody]User user)
+        {
+            await _usersService.CreateUser(id,user);
+            return Ok(user);
         }
     }
 }

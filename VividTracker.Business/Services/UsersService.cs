@@ -36,5 +36,11 @@
         {
             return await _userRepository.GetUsersByTenantId(id);
         }
+
+        public async Task<User> CreateUser(int id,User user)
+        {
+            var newUser = _userRepository.CreateUser(id, user);
+            return await _userRepository.AddAsync(newUser);
+        }
     }
 }

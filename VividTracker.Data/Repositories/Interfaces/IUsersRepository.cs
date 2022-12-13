@@ -11,5 +11,6 @@
     {
         Task<IEnumerable<User>> GetAllUsers();
         Task<IEnumerable<User>> GetUsersByTenantId(int id);
+        User CreateUser(int id, User user);
     }
 }
