@@ -1,10 +1,6 @@
 ﻿import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './AddTenant.css';
-import { Form } from '../AddTenant/Form.js';
-import "./Validations.js";
-import { Validations } from "./Validations.js";
-import $ from 'jquery';
+
 export class AddTenant extends Component {
 
     constructor(props) {
@@ -12,35 +8,38 @@ export class AddTenant extends Component {
         this.state = {
             tenants: [],
             value: '',
-            errorMessage: ''
+            errorMessage: '',
+            textColor: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    validationHandler = () => {
+    validationHandler(){
 
         var input = this.state.value;
 
         const errors = {
-            success: " ",
+            success: "Successfully added a new tenant.",
             minLength: "Name must be at least 3 characters.",
-            maxLenght: "Name limit is 100 characters.",
-            existingTenant: "This tenant is already existing"
+            maxLength: "Name must be less than 100 characters.",
+            existingTenant: "This tenant is already existing."
         }
 
-        const textColor = {
+        const color = {
             error: "red",
-            success: "green"
+            success: "green",
         }
 
         if (input.length < 3) {
 
             this.setState({ errorMessage: errors.minLength });
+            this.setState({ textColor: color.error });
         }
-        else if (input.length > 100) {
+        else if (input.length > 10) {
 
             this.setState({ errorMessage: errors.maxLength });
+            this.setState({ textColor: color.error });
 
         }
         else {
@@ -55,16 +54,15 @@ export class AddTenant extends Component {
                 .then((response) => {
                     if (response.status == 400) {
                         this.setState({ errorMessage: errors.existingTenant });
+                        this.setState({ textColor: color.error });
                     }
                     else {
-                        document.getElementById("name").style.borderBottomColor = "green";
+                        this.setState({ errorMessage: errors.success });
+                        this.setState({ textColor: color.success });
                     }
                 })
 
         }
-
-
-
     }
 
     handleChange(event) {
@@ -77,14 +75,6 @@ export class AddTenant extends Component {
         this.validationHandler();
     }
 
-    showModal = () => {
-        $(document).ready(function () {
-            $("#createTenant").click(function () {
-                $("#myModal").modal();
-            });
-        });
-    }
-
     componentDidMount() {
 
         this.render();
@@ -93,13 +83,9 @@ export class AddTenant extends Component {
 
     clear() {
         this.setState({ 'value': '' });
-        document.getElementById("name").value = this.state.value;
-        document.getElementById("error").innerHTML = " ";
-        document.getElementById("error").style.visibility = "hidden";
-        document.getElementById("name").style.borderBottomColor = "gray";
+        this.setState({ errorMessage: '' });
+        this.setState({ textColor: 'gray' })
     }
-
-   
 
     render() {
         return (
@@ -122,22 +108,28 @@ export class AddTenant extends Component {
                                 <div className="modal-body">
                                     <div id="myForm">
                                         <form onSubmit={this.handleSubmit}>
+
                                             <label htmlFor="tenantName" id="label-text">Tenant name:</label>
                                             <input type="text" name="tenantName" className="form-control" id="name"
-                                                onChange={(e) => this.setState({ 'value': e.target.value })}>
-                                            </input>
+
+                                            onChange={(e) => this.setState({ 'value': e.target.value })}
+                                            style={{ borderBottomColor: this.state.textColor }}
+                                            className={this.state.valid == false ? "form-control name name-error" : "form-control name"} 
+                                            
+                                            />
+
                                             <div className="modal-footer border-0">
 
-                                                <div id="error">
-                                                    <p>{this.state.errorMessage}</p>
-                                                </div>
+                                            <div id="error">
+                                                <p style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
+                                            </div>
 
-                                                <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"
-                                                    onClick={() => this.clear()}>Close
-                                                </button>
-                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant"
-                                                > Add
-                                                </button>
+                                            <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"
+                                                onClick={() => this.clear()}>Clear
+                                           
+                                            </button>
+                                            <button type="submit" id="submit" method="post" className="btn" name="addTenant"> Add </button>
+                                           
                                             </div>
                                         </form>
 

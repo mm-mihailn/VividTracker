@@ -31,6 +31,10 @@
     border-radius: 0;
 }
 
+.form-control:focus {
+    border-bottom: 2px solid #F28627 !important;
+}
+
 #error {
     margin-left: 140px;
     margin-top: -30px;
