@@ -14,6 +14,6 @@
         Task<User?> GetUserByIdAsync(string id);
         Task<IEnumerable<User>> GetUsersByTenantId(int id);
         Task<User> AddUser(int tenantId,User user);
-        User GetUserByEmail(string email);
+        User GetUserByEmail(string email,int tenantId);
     }
 }

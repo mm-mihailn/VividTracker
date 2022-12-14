@@ -43,8 +43,6 @@
              user = new User
             {
                 Id = Guid.NewGuid().ToString(),
-                UserName = user.Email,
-                NormalizedUserName = user.Email.ToUpper(),
                 Email = user.Email,
                 NormalizedEmail = user.Email.ToUpper(),
                 EmailConfirmed = true,
@@ -56,9 +54,9 @@
             return await _userRepository.AddAsync(user);
         }
 
-        public User GetUserByEmail(string email)
+        public User GetUserByEmail(string email,int tenantId)
         {
-            return _userRepository.GetUserByEmail(email);
+            return _userRepository.GetUserByEmail(email,tenantId);
         }
     }
 }

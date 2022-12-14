@@ -59,7 +59,7 @@
         [Route("api/create/{tenantId}")]
         public async Task<IActionResult> CreateNewTenantUser([FromRoute] int tenantId, [FromBody]User user)
         {
-            var targetUser = _usersService.GetUserByEmail(user.Email);
+            var targetUser = _usersService.GetUserByEmail(user.Email,tenantId);
 
             if (targetUser != null)
             {
