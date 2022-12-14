@@ -53,6 +53,10 @@ export class AddTenant extends Component {
             })
         }
     }
+    refreshPage() {
+        window.location.reload(false);
+    }
+
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
@@ -102,7 +106,8 @@ export class AddTenant extends Component {
                                                 <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"
                                                     onClick={() => this.clear()}>Clear
                                                 </button>
-                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant"> Add </button>
+
+                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant" onClick={this.refreshPage}>Add</button>
                                             </div>
                                         </form>
                                     </div>
