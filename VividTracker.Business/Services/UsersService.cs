@@ -58,5 +58,10 @@
         {
             return _userRepository.GetUserByEmail(email,tenantId);
         }
+
+        public async Task UnDeleteUser(User user)
+        {
+            await _userRepository.UpdateAsync(user);
+        }
     }
 }

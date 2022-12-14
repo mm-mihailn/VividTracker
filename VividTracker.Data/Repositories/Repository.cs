@@ -94,7 +94,6 @@ namespace VividTracker.Data.Repositories
             Entities.RemoveRange(entities);
             return Context.SaveChangesAsync();
         }
-
         #endregion
     }
 }

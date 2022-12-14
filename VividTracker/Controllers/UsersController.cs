@@ -61,10 +61,17 @@
         {
             var targetUser = _usersService.GetUserByEmail(user.Email,tenantId);
 
-            if (targetUser != null)
+            if (targetUser != null&&targetUser.IsDeleted==true)
+            {
+                 targetUser.IsDeleted = false;
+                await _usersService.UnDeleteUser(targetUser);
+                return Ok(targetUser);
+            }
+            else if(targetUser!=null&&targetUser.IsDeleted == false)
             {
                 return BadRequest("User already exist!");
             }
+            
             await _usersService.AddUser(tenantId,user);
             return Ok(user);
         }
