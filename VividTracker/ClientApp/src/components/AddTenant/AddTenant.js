@@ -53,6 +53,9 @@ export class AddTenant extends Component {
             })
         }
     }
+    refreshPage() {
+        window.location.reload(false);
+    }
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
@@ -94,6 +97,7 @@ export class AddTenant extends Component {
                                                 onChange={(e) => this.setState({ 'value': e.target.value })}
                                                 style={{ borderBottomColor: this.state.textColor }}
                                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"} 
+                                                
                                             />
                                             <div className="modal-footer border-0">
                                                 <div id="error">
@@ -102,7 +106,9 @@ export class AddTenant extends Component {
                                                 <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"
                                                     onClick={() => this.clear()}>Clear
                                                 </button>
-                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant"> Add </button>
+                                            <button type="submit" id="submit" method="post" className="btn" name="addTenant"
+                                                onClick={this.refreshPage}
+                                            >Add</button>
                                             </div>
                                         </form>
                                     </div>
