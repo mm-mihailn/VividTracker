@@ -71,9 +71,12 @@
             {
                 return BadRequest("User already exist!");
             }
+            else
+            {
+                 await _usersService.AddUser(tenantId,user);
+                return Ok(user);
+            }
             
-            await _usersService.AddUser(tenantId,user);
-            return Ok(user);
         }
     }
 }
