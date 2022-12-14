@@ -77,13 +77,18 @@ export default class InviteUserModal extends Component {
                                         <h4 className="modal-title" id="title">InviteNewUser()</h4>
                                     </div>
                                 </div>
+                                
                                 <div className="modal-body">
                                     <div id="myForm">
                                         <form onSubmit={(e) => this.inviteUser(e)}>
                                             <label htmlFor="userEmail" id="label-text">Email:</label>
-                                            <input type="text" name="userEmail" className={this.state.valid == false ? "form-control name name-error" : "form-control name"} id="name"
-                                                onChange={(e) => this.setState({ 'email': e.target.value })}>
-                                            </input>
+                                            <input 
+                                              type="text" 
+                                              name="userEmail" 
+                                              className={this.state.valid == false ? "form-control name name-error" : "form-control name"} 
+                                              id="name"
+                                              onChange={(e) => this.setState({ 'email': e.target.value })}
+                                            />
                                             <div className="modal-footer border-0">
                                               {this.state.valid == false ?  
                                                 <p className="error">{this.state.errorMessage}</p>

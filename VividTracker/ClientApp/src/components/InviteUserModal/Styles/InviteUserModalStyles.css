@@ -105,3 +105,11 @@
 .close {
     display: none;
 }
+
+.form-control:focus{
+    border-bottom: 2px solid #F28627 !important;
+    border-left-color: #ced4da;
+    border-right-color: #ced4da;
+    border-top-color: #ced4da;
+    box-shadow: none;
+}
