@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Styles/TenantsStyles.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { AddTenant } from "../AddTenant/AddTenant.js"
 import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
 export default class TenantsComponent extends Component {
 
@@ -27,8 +28,9 @@ export default class TenantsComponent extends Component {
                     <h4 className='tenantsListHeader'>Tenants List</h4>
                     <FontAwesomeIcon className='tenantsListEditButton' icon={faRectangleList} />
                 </div>
-                <div className='CreateNewTenantButtonWrapper'>
-                        <span className='CreateNewTenantButton pageText'>CreateNewTenant()</span>
+                    <div className='CreateNewTenantButtonWrapper'>
+                        <AddTenant />
+                        {/*<span className='CreateNewTenantButton pageText'>CreateNewTenant()</span>*/}
                 </div>
                 <div className='TenantsContainer'>
                     {this.state.tenants.map((tenant) => {
