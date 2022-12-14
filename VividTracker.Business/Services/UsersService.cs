@@ -54,13 +54,14 @@
             return await _userRepository.AddAsync(user);
         }
 
-        public User GetUserByEmail(string email,int tenantId)
+        public User GetUserByEmail(string email)
         {
-            return _userRepository.GetUserByEmail(email,tenantId);
+            return _userRepository.GetUserByEmail(email);
         }
 
         public async Task UnDeleteUser(User user)
         {
+            user.IsDeleted = false;
             await _userRepository.UpdateAsync(user);
         }
     }

@@ -11,6 +11,6 @@
     {
         Task<IEnumerable<User>> GetAllUsers();
         Task<IEnumerable<User>> GetUsersByTenantId(int id);
-        User GetUserByEmail(string email,int tenantId);
+        User GetUserByEmail(string email);
     }
 }

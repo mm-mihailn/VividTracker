@@ -59,21 +59,20 @@
         [Route("api/create/{tenantId}")]
         public async Task<IActionResult> CreateNewTenantUser([FromRoute] int tenantId, [FromBody]User user)
         {
-            var targetUser = _usersService.GetUserByEmail(user.Email,tenantId);
+            var targetUser = _usersService.GetUserByEmail(user.Email);
 
-            if (targetUser != null&&targetUser.IsDeleted==true)
+            if (targetUser != null && targetUser.IsDeleted == true)
             {
-                 targetUser.IsDeleted = false;
                 await _usersService.UnDeleteUser(targetUser);
                 return Ok("User is added again!");
             }
-            else if(targetUser!=null&&targetUser.IsDeleted == false)
+            else if(targetUser != null&&targetUser.IsDeleted == false)
             {
                 return BadRequest("User already exist!");
             }
             else
             {
-                 await _usersService.AddUser(tenantId,user);
+                 await _usersService.AddUser(tenantId, user);
                 return Ok(user);
             }
             

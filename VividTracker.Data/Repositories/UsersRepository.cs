@@ -32,9 +32,9 @@
         {
             return await Entities.Where(u => u.TenantId == id && u.IsDeleted==false).ToListAsync();
         }
-        public User GetUserByEmail(string email,int tenantId)
+        public User GetUserByEmail(string email)
         {
-            return Entities.FirstOrDefault(u => u.Email == email && u.TenantId==tenantId);
+            return Entities.FirstOrDefault(u => u.Email == email);
         }
     }
 }
