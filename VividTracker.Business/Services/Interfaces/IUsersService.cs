@@ -13,7 +13,7 @@
         Task DeleteAsync(User user);
         Task<User?> GetUserByIdAsync(string id);
         Task<IEnumerable<User>> GetUsersByTenantId(int id);
-        Task<User> CreateUser(int id,User user);
+        Task<User> AddUser(int tenantId,User user);
         User GetUserByEmail(string email);
     }
 }

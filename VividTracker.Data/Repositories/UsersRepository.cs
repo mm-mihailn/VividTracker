@@ -31,26 +31,6 @@
         {
             return await Entities.Where(u => u.TenantId == id && u.IsDeleted==false).ToListAsync();
         }
-
-        public User CreateUser(int id, User user)
-        {
-            var passwordHasher = new PasswordHasher<User>();
-            var newUser = new User
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserName = user.Email,
-                NormalizedUserName = user.Email.ToUpper(),
-                Email = user.Email,
-                NormalizedEmail = user.Email.ToUpper(),
-                EmailConfirmed = true,
-                LockoutEnabled = false,
-                TenantId = id,
-                PasswordHash = passwordHasher.HashPassword(user, "Denev123!")
-            };
-           
-            return newUser;
-        }
-
         public User GetUserByEmail(string email)
         {
             return Entities.FirstOrDefault(u => u.Email == email);
