@@ -66,14 +66,14 @@
                 await _usersService.UnDeleteUser(targetUser);
                 return Ok("User is added again!");
             }
-            else if(targetUser != null&&targetUser.IsDeleted == false)
+            else if(targetUser != null && targetUser.IsDeleted == false)
             {
                 return BadRequest("User already exist!");
             }
             else
             {
                  await _usersService.AddUser(tenantId, user);
-                return Ok(user);
+                 return Ok(user);
             }
             
         }
