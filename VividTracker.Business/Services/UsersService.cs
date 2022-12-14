@@ -1,5 +1,6 @@
 ﻿namespace VividTracker.Business.Services
 {
+    using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -35,6 +36,33 @@
         public async Task<IEnumerable<User>> GetUsersByTenantId(int id)
         {
             return await _userRepository.GetUsersByTenantId(id);
+        }
+
+        public async Task<User> AddUser(int tenantId, User user)
+        {
+             user = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                Email = user.Email,
+                NormalizedEmail = user.Email.ToUpper(),
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+                TenantId=tenantId,
+            };
+            var passwordHasher = new PasswordHasher<User>();
+            user.PasswordHash = passwordHasher.HashPassword(user, "V!v!dTr@ck3r");
+            return await _userRepository.AddAsync(user);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return _userRepository.GetUserByEmail(email);
+        }
+
+        public async Task UnDeleteUser(User user)
+        {
+            user.IsDeleted = false;
+            await _userRepository.UpdateAsync(user);
         }
     }
 }

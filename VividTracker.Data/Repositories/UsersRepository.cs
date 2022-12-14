@@ -1,5 +1,7 @@
 ﻿namespace VividTracker.Data.Repositories
 {
+    using IdentityModel;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
@@ -29,6 +31,10 @@
         public async Task<IEnumerable<User>> GetUsersByTenantId(int id)
         {
             return await Entities.Where(u => u.TenantId == id && u.IsDeleted==false).ToListAsync();
+        }
+        public User GetUserByEmail(string email)
+        {
+            return Entities.FirstOrDefault(u => u.Email == email);
         }
     }
 }

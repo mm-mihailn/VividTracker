@@ -5,6 +5,7 @@
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
     using VividTracker.Data.Repositories.Interfaces;
+    using static Duende.IdentityServer.Models.IdentityResources;
 
     [ApiController]
     public class UserController : ControllerBase
@@ -52,6 +53,29 @@
             await _usersService.DeleteAsync(targetUser);
 
             return Ok(targetUser);
+        }
+
+        [HttpPost]
+        [Route("api/create/{tenantId}")]
+        public async Task<IActionResult> CreateNewTenantUser([FromRoute] int tenantId, [FromBody]User user)
+        {
+            var targetUser = _usersService.GetUserByEmail(user.Email);
+
+            if (targetUser != null && targetUser.IsDeleted == true)
+            {
+                await _usersService.UnDeleteUser(targetUser);
+                return Ok("User is added again!");
+            }
+            else if(targetUser != null && targetUser.IsDeleted == false)
+            {
+                return BadRequest("User already exist!");
+            }
+            else
+            {
+                 await _usersService.AddUser(tenantId, user);
+                 return Ok(user);
+            }
+            
         }
     }
 }
