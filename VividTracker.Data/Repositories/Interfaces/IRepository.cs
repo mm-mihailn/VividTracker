@@ -11,7 +11,6 @@ public interface IRepository<TEntity> where TEntity : class
     Task UpdateRangeAsync(IEnumerable<TEntity> entities);
 
     Task DeleteAsync(TEntity entity);
-
     Task DeleteAsync(params object[] keyValues);
 
     Task DeleteRangeAsync(IEnumerable<TEntity> entities);
