@@ -40,16 +40,51 @@ export default class InviteUserModal extends Component {
     if(this.validateEmail(this.state.email) == true)
     {
       this.setState({'valid': true})
-      this.state.currentTenantUsers.some((user) => {
-        if(user.email == this.state.email)
-        {
-          this.setState({'errorMessage':'This user has already been invited to this tenant.', 'valid': false})
-        }
-        else
-        {
-          // TODO: Add user to this tenant
-        }
-      })
+      if(this.state.currentTenantUsers.length >= 1)
+      {
+        this.state.currentTenantUsers.some( async (user) => {
+          if(user.email == this.state.email)
+          {
+            this.setState({'errorMessage':'This user has already been invited to this tenant.', 'valid': false})
+          }
+          else
+          {
+            let currentURL = window.location.href.split('/')
+            let currentTenantID = Number(currentURL[currentURL.length - 1])
+            let result = await fetch(`https://localhost:7091/api/create/${Number(currentTenantID)}`, {
+              
+                method: 'POST',
+                headers: {
+                 'Content-Type': 'application/json',
+                 },
+                body: JSON.stringify({email:this.state.email})
+            })
+            .then((res) => {
+              console.log(res)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+          }
+        })
+      }
+      else
+      {
+            let currentURL = window.location.href.split('/')
+            let currentTenantID = Number(currentURL[currentURL.length - 1])
+            let result = await fetch(`https://localhost:7091/api/create/${currentTenantID}`, {
+              method: 'POST',
+              body: {
+                email: this.state.email
+              }
+            })
+            .then((res) => {
+              console.log(res)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+      }
       
     }
     else
@@ -80,7 +115,7 @@ export default class InviteUserModal extends Component {
                                 
                                 <div className="modal-body">
                                     <div id="myForm">
-                                        <form onSubmit={(e) => this.inviteUser(e)}>
+                                        <form>
                                             <label htmlFor="userEmail" id="label-text">Email:</label>
                                             <input 
                                               type="text" 
@@ -97,7 +132,7 @@ export default class InviteUserModal extends Component {
                                                 <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal">
                                                   Cancel
                                                 </button>
-                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant"> 
+                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant" onClick={(e) => this.inviteUser(e)}> 
                                                   Add
                                                 </button>
                                             </div>

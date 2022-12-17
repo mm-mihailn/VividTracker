@@ -6,7 +6,8 @@ export default class TenantTrackerComponent extends Component {
     return (
         <div className = 'TenantTracker d-flex' key={this.props.tracker.id}>
             <div className='TenantTrackerNameWrapper'>
-                <span className='TenantTrackerName pageText'> {this.props.tracker.userName} </span>
+                {/* Change username to email ! */}
+                <span className='TenantTrackerName pageText'> {this.props.tracker.email} </span>
             </div>
             <div className='TenantTrackerButtonsContainer'>
                 <div className='UseTenantTrackerButtonWrapper'>
