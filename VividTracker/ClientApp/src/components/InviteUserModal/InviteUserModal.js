@@ -74,9 +74,10 @@ export default class InviteUserModal extends Component {
             let currentTenantID = Number(currentURL[currentURL.length - 1])
             let result = await fetch(`https://localhost:7091/api/create/${currentTenantID}`, {
               method: 'POST',
-              body: {
-                email: this.state.email
-              }
+              headers: {
+                'Content-Type': 'application/json',
+                },
+               body: JSON.stringify({email:this.state.email})
             })
             .then((res) => {
               console.log(res)
