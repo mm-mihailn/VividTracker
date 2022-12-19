@@ -2,6 +2,17 @@ import React, { Component } from 'react'
 import './Styles/TenantTrackerStyles.css'
 
 export default class TenantTrackerComponent extends Component {
+    RemoveUser = async(userID) => {
+    await fetch(`https://localhost:7091/api/delete/${userID}`, {
+        method: 'DELETE'
+    })
+    .then((res) => {
+        console.log(res)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+  }
   render() {
     return (
         <div className = 'TenantTracker d-flex' key={this.props.tracker.id}>
@@ -11,7 +22,7 @@ export default class TenantTrackerComponent extends Component {
             </div>
             <div className='TenantTrackerButtonsContainer'>
                 <div className='UseTenantTrackerButtonWrapper'>
-                    <span className='UseTenantButton pageText'>Use</span>
+                    <span className='UseTenantButton pageText' onClick={() => this.RemoveUser(this.props.tracker.id)}>Remove</span>
                 </div>
                 <div className='ManageTenantTrackerButtonWrapper'>
                     <button className='ManageTenantTrackerButton'>
