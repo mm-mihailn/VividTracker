@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { useState, useEffect } from "react";
 import './AddTenant.css';
 
 export class AddTenant extends Component {
@@ -9,10 +10,11 @@ export class AddTenant extends Component {
             errorMessage: '',
             textColor: '',
         }
+        this.createTenant = this.createTenant.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    createTenant() {
+    createTenant = ()  => {
         var input = this.state.value;
         const errors = {
             success: "Successfully added a new tenant.",
@@ -41,21 +43,18 @@ export class AddTenant extends Component {
                 },
                 body: JSON.stringify({ "name": input })
             })
-                .then((response) => {
-                    if (response.status == 400) {
-                        this.setState({ errorMessage: errors.existingTenant });
-                        this.setState({ textColor: color.error });
-                    }
-                    else {
-                        this.setState({ errorMessage: errors.success });
-                        this.setState({ textColor: color.success });
-                        this.refreshPage();
-                    }
-                })
+            .then((response) => {
+                if (response.status == 400) {
+                    this.setState({ errorMessage: errors.existingTenant });
+                    this.setState({ textColor: color.error });
+                }
+                else {
+                    this.setState({ errorMessage: errors.success });
+                    this.setState({ textColor: color.success });
+                    this.props.onTenantAdded(this.props.value);
+                }
+            })
         }
-    }
-    refreshPage() {
-        window.location.reload(false);
     }
     handleChange(event) {
         this.setState({ value: event.target.value });
@@ -104,10 +103,10 @@ export class AddTenant extends Component {
                                                     <p style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
                                                 </div>
                                                 <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"
-                                                    onClick={() => this.clear()}>Clear
+                                                    onClick={() => this.clear()} >Clear
                                                 </button>
 
-                                            <button type="submit" id="submit" method="post" className="btn" name="addTenant" onClick={this.createTenant}>Add</button>
+                                            <button type="submit" id="submit" method="post" className="btn" name="addTenant">Add</button>
                                             </div>
                                         </form>
                                     </div>
