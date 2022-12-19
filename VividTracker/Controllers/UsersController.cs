@@ -1,7 +1,11 @@
 ﻿namespace VividTracker.Controllers
 {
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.WebUtilities;
+    using System.Text;
+    using System.Text.Encodings.Web;
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
     using VividTracker.Data.Repositories.Interfaces;
@@ -11,10 +15,14 @@
     public class UserController : ControllerBase
     {
         private readonly IUsersService _usersService;
+        private readonly IEmailService _emailService;
+        private readonly UserManager<User> _userManager;
 
-        public UserController(IUsersService userService)
+        public UserController(IUsersService userService, IEmailService emailService, UserManager<User> userManager)
         {
             _usersService = userService;
+            _emailService = emailService;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -73,9 +81,26 @@
             else
             {
                  await _usersService.AddUser(tenantId, user);
-                 return Ok(user);
+
+                //Sending email
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var identity = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(user.Email));
+                var callbackUrl = Url.Page(
+                    "/Account/ResetPassword",
+                    pageHandler: null,
+                    values: new { area = "Identity", code, identity },
+                    protocol: Request.Scheme);
+
+                await _emailService.SendEmailAsync(
+                    user.Email,
+                    "You have been invited to join in VividTraker",
+                    $"<h2>You have been invited to join in VividTraker</h2>Click on the link below to complete your registration and join Vividtracker<br>" +
+                    $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Clicking here.</a>");
+
+                return Ok(user);
             }
             
         }
-    }
+    }   
 }
