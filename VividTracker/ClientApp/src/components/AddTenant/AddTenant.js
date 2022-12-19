@@ -12,9 +12,10 @@ export class AddTenant extends Component {
         }
         this.createTenant = this.createTenant.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    createTenant = ()  => {
+    createTenant = (event) => {
+        event.preventDefault();
+        console.log(this.state.value);
         var input = this.state.value;
         const errors = {
             success: "Successfully added a new tenant.",
@@ -59,11 +60,6 @@ export class AddTenant extends Component {
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
-    handleSubmit(event) {
-        event.preventDefault();
-        console.log(this.state.value);
-        this.createTenant();
-    }
     componentDidMount() {
         this.render();
     }
@@ -91,7 +87,7 @@ export class AddTenant extends Component {
                                 </div>
                                 <div className="modal-body">
                                     <div id="myForm">
-                                        <form onSubmit={this.handleSubmit}>
+                                        <form onSubmit={this.createTenant}>
                                             <label htmlFor="tenantName" id="label-text">Tenant name:</label>
                                             <input type="text" name="tenantName" className="form-control" id="name"
                                                 onChange={(e) => this.setState({ 'value': e.target.value })}
@@ -105,7 +101,6 @@ export class AddTenant extends Component {
                                                 <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"
                                                     onClick={() => this.clear()} >Clear
                                                 </button>
-
                                             <button type="submit" id="submit" method="post" className="btn" name="addTenant">Add</button>
                                             </div>
                                         </form>
