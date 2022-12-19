@@ -44,11 +44,13 @@
             {
                 Id = Guid.NewGuid().ToString(),
                 Email = user.Email,
+                UserName = user.Email,
+                NormalizedUserName = user.Email.ToUpper(),
                 NormalizedEmail = user.Email.ToUpper(),
                 EmailConfirmed = true,
                 LockoutEnabled = false,
-                TenantId=tenantId,
-            };
+                TenantId = tenantId,
+             };
             var passwordHasher = new PasswordHasher<User>();
             user.PasswordHash = passwordHasher.HashPassword(user, "V!v!dTr@ck3r");
             return await _userRepository.AddAsync(user);
