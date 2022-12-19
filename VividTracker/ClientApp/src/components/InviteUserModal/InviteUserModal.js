@@ -65,7 +65,6 @@ export default class InviteUserModal extends Component {
             .catch((err) => {
               console.log(err)
             })
-            window.location.reload()
           }
         })
       }
@@ -87,7 +86,7 @@ export default class InviteUserModal extends Component {
               console.log(err)
             })
       }
-      
+      window.location.reload()
     }
     else
     {
