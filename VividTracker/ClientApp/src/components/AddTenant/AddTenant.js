@@ -7,12 +7,12 @@ export class AddTenant extends Component {
         this.state = {
             value: '',
             errorMessage: '',
-            textColor: ''
+            textColor: '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    validationHandler(){
+    createTenant() {
         var input = this.state.value;
         const errors = {
             success: "Successfully added a new tenant.",
@@ -41,29 +41,29 @@ export class AddTenant extends Component {
                 },
                 body: JSON.stringify({ "name": input })
             })
-            .then((response) => {
-                if (response.status == 400) {
-                    this.setState({ errorMessage: errors.existingTenant });
-                    this.setState({ textColor: color.error });
-                }
-                else {
-                    this.setState({ errorMessage: errors.success });
-                    this.setState({ textColor: color.success });
-                }
-            })
+                .then((response) => {
+                    if (response.status == 400) {
+                        this.setState({ errorMessage: errors.existingTenant });
+                        this.setState({ textColor: color.error });
+                    }
+                    else {
+                        this.setState({ errorMessage: errors.success });
+                        this.setState({ textColor: color.success });
+                        this.refreshPage();
+                    }
+                })
         }
     }
     refreshPage() {
         window.location.reload(false);
     }
-
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state.value);
-        this.validationHandler();
+        this.createTenant();
     }
     componentDidMount() {
         this.render();
@@ -107,7 +107,7 @@ export class AddTenant extends Component {
                                                     onClick={() => this.clear()}>Clear
                                                 </button>
 
-                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant" onClick={this.refreshPage}>Add</button>
+                                            <button type="submit" id="submit" method="post" className="btn" name="addTenant" onClick={this.createTenant}>Add</button>
                                             </div>
                                         </form>
                                     </div>
