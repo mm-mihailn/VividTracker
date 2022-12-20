@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import { useState, useEffect } from "react";
 import './AddTenant.css';
 
 export class AddTenant extends Component {
@@ -72,8 +71,8 @@ export class AddTenant extends Component {
         return (
             <div className="container">
                 <div className="container" id="modal">
-                <button type="button" id="createTenant" className="btn btn-link" data-bs-toggle="modal" data-bs-target="#addTenаntModal">
-                        CreateNewTenant()
+                    <button type="button" id="createTenant" className="btn btn-link" data-bs-toggle="modal" data-bs-target="#addTenаntModal">
+                            CreateNewTenant()
                     </button>
                 </div>
                 <div className="modal fade" id="addTenаntModal" role="dialog">
