@@ -54,6 +54,8 @@ export default class EditTenantComponent extends Component {
             let result = await res.json()
             console.log(result)
         })
+
+        window.location.reload()
     }
     
     render() {

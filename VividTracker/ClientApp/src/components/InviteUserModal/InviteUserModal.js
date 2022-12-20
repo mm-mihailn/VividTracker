@@ -86,7 +86,7 @@ export default class InviteUserModal extends Component {
               console.log(err)
             })
       }
-      
+      window.location.reload()
     }
     else
     {

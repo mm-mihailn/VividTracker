@@ -3,15 +3,16 @@ import './Styles/TenantTrackerStyles.css'
 
 export default class TenantTrackerComponent extends Component {
     RemoveUser = async(userID) => {
-    await fetch(`https://localhost:7091/api/delete/${userID}`, {
-        method: 'DELETE'
-    })
-    .then((res) => {
-        console.log(res)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
+        await fetch(`https://localhost:7091/api/delete/${userID}`, {
+            method: 'DELETE'
+        })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        window.location.reload()
   }
   render() {
     return (
