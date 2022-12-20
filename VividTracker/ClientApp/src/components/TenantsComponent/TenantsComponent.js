@@ -6,18 +6,20 @@ import { AddTenant } from "../AddTenant/AddTenant.js"
 import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
 export default class TenantsComponent extends Component {
 
-    constructor()
+    constructor(props)
     {
-        super()
-        this.state = {tenants: []}
+        super(props)
+        this.state = { tenants: [] }
+        this.loadTenants = this.loadTenants.bind(this);
     }
-
     async componentDidMount()
     {
+        this.loadTenants();
+    }
+    async loadTenants() {
         await fetch('https://localhost:7091/api/tenants ')
         .then((res) => res.json())
-        .then((res) => this.setState({tenants: res}))
-    
+        .then((res) => this.setState({ tenants: res }))
     }
     render () {
         return (
@@ -29,9 +31,8 @@ export default class TenantsComponent extends Component {
                     <FontAwesomeIcon className='tenantsListEditButton' icon={faRectangleList} />
                 </div>
                     <div className='CreateNewTenantButtonWrapper'>
-                        <AddTenant />
-                        {/*<span className='CreateNewTenantButton pageText'>CreateNewTenant()</span>*/}
-                </div>
+                        <AddTenant onTenantAdded={this.loadTenants} />
+                    </div>
                 <div className='TenantsContainer'>
                     {this.state.tenants.map((tenant) => {
                         return(
@@ -39,7 +40,6 @@ export default class TenantsComponent extends Component {
                         )
                     })}
                 </div>
-    
             </div>
           </div>
         );
