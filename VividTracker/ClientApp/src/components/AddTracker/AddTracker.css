@@ -72,20 +72,21 @@
     margin-left: 470px;
     margin-top: 0px;
 }
-.closeButton {
+.cancelButton {
     /*margin-bottom: 30px;*/
+    color: #0084B4;
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
     display: flex;
     align-items: center;
     text-align: center;
-    text-decoration-line: underline;
     margin-left: 350px;
     background: none;
     border: none;
     margin-top: -33px;
     margin-left: 380px;
+    text-decoration-line: underline;
 }
 .closeButton:hover {
     cursor: pointer;

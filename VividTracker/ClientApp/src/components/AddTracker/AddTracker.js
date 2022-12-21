@@ -81,8 +81,8 @@ export class AddTracker extends Component {
                             </div>
                             
                             <div className='trackerButtons'>
-                                <button className='resetButton'>
-                                    <a href={`https://localhost:44430/tenants`}>Close</a>
+                                <button className='resetButton' className="btn btn-link">
+                                    <a href={`https://localhost:44430/tenants`}>Cancel</a>
                                 </button>
                                 <button className='updateButton' onClick={() => this.updateTenantName()}>Save</button>
                             </div>
