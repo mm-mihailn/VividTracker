@@ -16,7 +16,7 @@
         {
         }
 
-        public async Task<IEnumerable<TrackingItem>> GetTrackingItemByTenantId(int tenantId)
+        public async Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId(int tenantId)
         {
             return await Entities.Include(t => t.Tenant).Where(t => t.TenantId == tenantId).ToListAsync();
         }
