@@ -11,8 +11,8 @@ export default class TrackerContainerComponent extends Component {
     render() {
         return (
             <div className="container">
-                <button type="button" id="createTracker" className="btn btn-link">
-                    <a href={`https://localhost:44430/editTenant/${1}`}>CreateNewTracker()</a>
+                <button type="button" id="createTracker" className="btn">
+                    <a href={`https://localhost:44430/createTracker`} id="text">CreateNewTracker()</a>
                 </button>
             </div>
         )

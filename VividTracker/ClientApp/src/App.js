@@ -10,6 +10,7 @@ import './custom.css'
 import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
+import { AddTracker } from './components/AddTracker/AddTracker';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -21,7 +22,8 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
         
         <AuthorizeRoute path='/tenants' component={TenantsComponent} />
-        <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
+            <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
+            <AuthorizeRoute path='/createTracker' component={AddTracker} />
 
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />

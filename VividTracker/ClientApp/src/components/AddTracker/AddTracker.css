@@ -73,8 +73,6 @@
     margin-top: 0px;
 }
 .cancelButton {
-    /*margin-bottom: 30px;*/
-    color: #0084B4;
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
@@ -87,6 +85,9 @@
     margin-top: -33px;
     margin-left: 380px;
     text-decoration-line: underline;
+}
+#cancelText {
+    color: #0084B4;
 }
 .closeButton:hover {
     cursor: pointer;
