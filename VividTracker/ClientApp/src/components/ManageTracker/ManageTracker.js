@@ -3,6 +3,28 @@ import './Styles/ManageTracker.css'
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 export default class ManageTracker extends Component {
+    constructor()
+    {
+        super()
+        this.state = {
+            records: [
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'ExcluCV', 
+                    'details': [
+                        {
+                            'name': 'ExcluCV backend'
+                        },
+                        {
+                            'name': 'ExcluCV iOS'
+                        }
+                    ]
+                },
+                {'name': 'Twin City Outdoor Services', 'details': []},
+            ]
+        }
+    }
   render() {
     return (
     <div className = 'TrackerContainerWrapper d-flex justify-content-center align-items-center'>
@@ -36,8 +58,38 @@ export default class ManageTracker extends Component {
             <div className='TrackerItemsContainer'>
                 <p>??????? WHat is supposed to go in here?</p>
             </div>
+
+            <div className='RecordsHeaderWrapper'>
+                <h4 className='RecordsHeader'>Tracker Records</h4>
+            </div>
+            <div className='RecordsContainer'>
+                {this.state.records.map((record) => {
+                        if(record.details.length < 1)
+                        {
+                            return (
+                                <div className='RecordContainer'>
+                                    <p className='RecordName'>{record.name}</p>
+                                </div>   
+                            )
+                        }
+                        else
+                        {
+                            return (
+                                <div className='RecordContainer'>
+                                    <p className='RecordName'>{record.name}</p>
+                                    {record.details.map((detail) => {
+                                        return(
+                                        <div className='RecordDetailContainer'>
+                                             <p className='RecordDetailName'>{detail.name}</p> 
+                                        </div>)
+                                    })}
+                                </div>   
+                            )
+                        }
+                    }
+                )}
+            </div>
         </div>
-    </div>
+    </div>               
     )
-  }
-}
+}}
