@@ -1,0 +1,98 @@
+.TrackerContainer{
+    background-color: white;
+    position: absolute;
+    top: 4.8rem;
+    overflow-y: visible;
+    overflow-x: hidden;
+    border-top-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    width: 60rem;
+    height: 799px;
+}
+
+.TrackerHeaderWrapper {
+    background-color: #D9D9D9;
+    color: #0084B4;
+    margin-top: 2.6875rem;
+    display: flex;
+}
+.TrackerHeader{
+    margin-left: 2.5rem;
+    padding-top: 0.55rem;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.TrackerHeaderIcon{
+    margin-left: auto;
+    font-size: x-large;
+    margin-top: 0.55rem;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+}
+.TrackerNameLabel, .TrackerRecordLabel{
+    margin-top: auto;
+    margin-left: 2.5rem;
+    float: left;
+}
+.TrackerFieldsContainer{
+    margin-top: 2.8125rem;
+    display:block;
+}
+
+.TrackerNameFieldWrapper{
+    display: flex;
+}
+
+.RecordNameFieldWrapper{
+    display: flex;
+    margin-top: 1.5rem;
+}
+.TrackerRecordInputField{
+    margin-left: 0.5rem !important;
+    width: 24.2rem !important;
+}
+.TrackerNameInputField{
+    margin-left: 0.5rem !important;
+}
+.TrackerNameInputField, .TrackerRecordInputField{
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+    border-bottom-color: black;
+    width: 23.75rem;
+    margin-left: 0.25rem;
+}
+.TrackerNameInputField:focus, .TrackerRecordInputField:focus{
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+    border-bottom-color: black;
+    box-shadow: none !important;
+}
+
+.TrackerButtons{
+    margin-top: 1.3125rem;
+}
+.UpdateButton{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 7.85rem;
+    height: 2.25rem;
+    margin-left: 1.5625rem;
+
+}
+.ResetButton{
+    color:#0084B4;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
+    margin-left:22.0625rem;
+}
+.ResetButton:hover{
+    cursor: pointer;
+}

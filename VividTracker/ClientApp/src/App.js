@@ -11,6 +11,7 @@ import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
 import TenantTrackerItemsList from './components/TenantTrackerItemsList/TenantTrackerItemsList';
+import ManageTracker from './components/ManageTracker/ManageTracker';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -21,7 +22,8 @@ export default class App extends Component {
         <Route exact path='/' component={LandingPage} />
         <Route path='/counter' component={Counter} />
         <AuthorizeRoute path='/tenantTrackers/:tenantID' component={TenantTrackerItemsList} />
-        
+        <AuthorizeRoute path='/manageTracker/:trackerID' component={ManageTracker} />
+
         <AuthorizeRoute path='/tenants' component={TenantsComponent} />
 
         <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
