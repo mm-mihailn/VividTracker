@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './Styles/TrackerItemList.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { AddTracker } from "../AddTracker/AddTracker"
+
 export default class TrackerItemList extends Component {
   render() {
     return (
@@ -13,7 +15,7 @@ export default class TrackerItemList extends Component {
                 <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
             </div>
                 <div className='CreateNewTrackerButtonWrapper'>
-                    {/* <AddTenant onTenantAdded={this.loadTenants} /> */}
+                     <AddTracker onTrackerAdded={this.loadTenants} />
                 </div>
             <div className='TrackerContainer'>
                     {/* {this.state.tenants.map((tenant) => {
