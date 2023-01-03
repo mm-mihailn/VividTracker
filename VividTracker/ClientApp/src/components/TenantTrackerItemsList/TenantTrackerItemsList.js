@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AddTracker } from "../AddTracker/AddTracker"
 import TrackerContainerComponent from '../TrackerContainer/TrackerContainer';
 
-export default class ManageTrackerItems extends Component {
+export default class TenantTrackerItemsList extends Component {
   constructor(props)
   {
       super(props)

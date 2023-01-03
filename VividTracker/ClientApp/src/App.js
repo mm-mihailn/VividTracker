@@ -10,7 +10,7 @@ import './custom.css'
 import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
-import ManageTrackerItems from './components/ManageTrackerItems/ManageTrackerItems';
+import TenantTrackerItemsList from './components/TenantTrackerItemsList/TenantTrackerItemsList';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -20,7 +20,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={LandingPage} />
         <Route path='/counter' component={Counter} />
-        <AuthorizeRoute path='/manageTenantTrackers/:tenantID' component={ManageTrackerItems} />
+        <AuthorizeRoute path='/tenantTrackers/:tenantID' component={TenantTrackerItemsList} />
         
         <AuthorizeRoute path='/tenants' component={TenantsComponent} />
 
