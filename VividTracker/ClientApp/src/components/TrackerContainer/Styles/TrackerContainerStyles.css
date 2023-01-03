@@ -1,0 +1,84 @@
+.TrackerContainer{
+    background-color: #F3F3F3;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27.24px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+
+}
+.TrackerContainer .TrackerNameWrapper .TrackerName{
+    margin-left: 1.125rem;
+    color: black;
+}
+.TrackerContainer .TrackerNameWrapper
+{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 0.3rem;
+}
+
+.pageText{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.btn-wrapper{
+    margin-left: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.btn-wrapper .btn
+{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 7.85rem;
+    height: 2.25rem;
+    margin-right: 1rem;
+}
+.btn-wrapper .btn:hover{
+    background-color: #0080ae;
+    color: #F3F3F3;
+}
+
+.btn-wrapper .btn:active{
+    color: #e7e6e6;
+}
+
+.btn-text{
+    color: white;
+    text-decoration: none;
+}
+.btn-text:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.UseButtonText {
+    color: #0084B4;
+    width: 7.85rem;
+    height: 2.25rem;
+    font-weight: 700;
+    font-size: 20px;
+    border-bottom: 1px solid;
+}
+.UseTrackerButtonWrapper{
+    margin-right: 2rem;
+}
+.UseButtonText:hover {
+    color: #0084B4;
+    cursor: pointer;
+}
+
+.TrackerButtonsWrapper{
+    display:flex;
+    margin-left: auto;
+}

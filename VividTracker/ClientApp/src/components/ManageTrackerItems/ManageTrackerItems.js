@@ -3,7 +3,7 @@ import './Styles/TrackerItemList.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AddTracker } from "../AddTracker/AddTracker"
-import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
+import TrackerContainerComponent from '../TrackerContainer/TrackerContainer';
 
 export default class ManageTrackerItems extends Component {
   constructor(props)
@@ -17,7 +17,8 @@ export default class ManageTrackerItems extends Component {
       this.loadTrackers();
   }
   async loadTrackers() {
-      await fetch('https://localhost:7091/api/trackers ')
+      //TODO: Replace this with the trackers endpoint, once it's ready
+      await fetch('https://localhost:7091/api/tenants')
       .then((res) => res.json())
       .then((res) => this.setState({ trackers: res }))
   }
@@ -33,10 +34,10 @@ export default class ManageTrackerItems extends Component {
                 <div className='CreateNewTrackerButtonWrapper'>
                      <AddTracker onTrackerAdded={this.loadTrackers} />
                 </div>
-            <div className='TrackerContainer'>
-                    {this.state.trackers.map((tenant) => {
+            <div className='TrackersContainer'>
+                    {this.state.trackers.map((tracker) => {
                         return(
-                          <TenantContainerComponent tenantData = {tenant}/>
+                          <TrackerContainerComponent TrackerData = {tracker}/>
                         )
                     })}
             </div>
