@@ -17,10 +17,15 @@ export default class ManageTrackerItems extends Component {
       this.loadTrackers();
   }
   async loadTrackers() {
-      //TODO: Replace this with the trackers endpoint, once it's ready
-      await fetch('https://localhost:7091/api/tenants')
-      .then((res) => res.json())
-      .then((res) => this.setState({ trackers: res }))
+        let splittedURL = window.location.pathname.split('/')
+        let targetTenantID = splittedURL[splittedURL.length - 1]
+        await fetch(`https://localhost:7091/api/tenant/${Number(targetTenantID)}`)
+        .then(async (res) => 
+            {
+                let tenantData = await res.json()
+                this.setState({'trackers': tenantData.trackingItems})
+            }
+        )
   }
   render() {
     return (
@@ -34,6 +39,7 @@ export default class ManageTrackerItems extends Component {
                 <div className='CreateNewTrackerButtonWrapper'>
                      <AddTracker onTrackerAdded={this.loadTrackers} />
                 </div>
+            {this.state.trackers.length >= 1 ?
             <div className='TrackersContainer'>
                     {this.state.trackers.map((tracker) => {
                         return(
@@ -41,6 +47,12 @@ export default class ManageTrackerItems extends Component {
                         )
                     })}
             </div>
+            :
+            <div className='TrackersContainer'>
+              <p>No trackers found for this tenant.</p>
+            </div>
+
+            }
         </div>
       </div>
     )
