@@ -10,6 +10,7 @@ import './custom.css'
 import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
+import TrackerItemList from './components/TrackerItemList/TrackerItemList';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -21,6 +22,8 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
         
         <AuthorizeRoute path='/tenants' component={TenantsComponent} />
+        <AuthorizeRoute path='/trackersList' component={TrackerItemList} />
+
         <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
 
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
