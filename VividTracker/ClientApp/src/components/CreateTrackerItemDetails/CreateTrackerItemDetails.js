@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/CreateTrackerItemDetails.css'
+import { Link } from "react-router-dom";
 export default class CreateTrackerItemDetails extends Component {
+
   render() {
     return (
         <div className = 'CreateTrackerItemDetailsWrapper d-flex justify-content-center align-items-center'>
@@ -23,7 +25,7 @@ export default class CreateTrackerItemDetails extends Component {
                         <input className = 'TrackerItemDetailsNameInputField form-control' type = 'text' value={''} onChange = {()=>{}}/>
                     </div>
                     <div className='TrackerItemDetailsButtons'>
-                        <span className='CancelButton'>Cancel</span>
+                        <Link to = '/trackersList' className='CancelButton'>Cancel</Link>
                         {/* Create function that will handle the request for the tracker item creation */}
                         <button className='CreateButton' onClick={()=>{}}>Create</button>
                     </div>

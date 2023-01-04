@@ -69,9 +69,11 @@
     font-size: 20px;
     line-height: 27.24px;
     margin-left:22.0625rem;
+    text-decoration: none;
 }
 .CancelButton:hover{
     cursor: pointer;
+    color:#0084B4;
 }
 .UseTrackerItemDetailsButton{
     color: #0084B4;
