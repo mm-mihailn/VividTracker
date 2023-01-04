@@ -22,7 +22,11 @@ export default class CreateTrackerItemDetails extends Component {
                     </div>
                     <div className = 'TrackerItemDetailsFieldsContainer d-flex'>
                     <label className = 'TrackerItemDetailsNameLabel pageText'>Tracker Item Type:</label>
-                        <input className = 'TrackerItemDetailsNameInputField form-control' type = 'text' value={''} onChange = {()=>{}}/>
+                        <select className = 'TrackerItemDetailsNameInputField form-select'>
+                            <option selected>percentage %</option>
+                            <option>bool yes/no</option>
+                            <option>number 1-10</option>
+                        </select>
                     </div>
                     <div className='TrackerItemDetailsButtons'>
                         <Link to = '/trackersList' className='CancelButton'>Cancel</Link>
