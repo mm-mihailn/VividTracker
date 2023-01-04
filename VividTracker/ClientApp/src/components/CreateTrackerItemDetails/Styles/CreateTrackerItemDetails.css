@@ -1,0 +1,119 @@
+.CreateTrackerItemDetailsContainer{
+    position: absolute;
+    top: 4.8rem;
+    background-color: white;
+    border-top-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    width: 60rem;
+    height: 799px;
+}
+
+.TrackerItemDetailsHeaderWrapper{
+    margin-top: 2.6875rem;
+    padding-top: 0.55rem;
+    font-weight: 700;
+    font-size: 24px;
+    background-color: #D9D9D9;
+    color: #0084B4;
+}
+
+.TrackerItemDetailsName{
+    margin-left: 2.5rem;
+    
+}
+.CreateTrackerItemDetailsIcon{
+    margin-left: 44rem;
+    font-weight: bolder;
+}
+.TrackerItemDetailsNameLabel{
+    margin-top: auto;
+    margin-left: 2.5rem;
+}
+.TrackerItemDetailsFieldsContainer{
+    margin-top: 2.8125rem;
+}
+.TrackerItemDetailsNameInputField{
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+    border-bottom-color: black;
+    width: 23.75rem;
+    margin-left: 0.25rem;
+}
+.TrackerItemDetailsNameInputField:focus{
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+    border-bottom-color: black;
+    box-shadow: none !important;
+}
+
+.TrackerItemDetailsButtons{
+    margin-top: 1.3125rem;
+}
+.CreateButton{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 7.85rem;
+    height: 2.25rem;
+    margin-left: 1.5625rem;
+
+}
+.CancelButton{
+    color:#0084B4;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
+    margin-left:22.0625rem;
+}
+.CancelButton:hover{
+    cursor: pointer;
+}
+.UseTrackerItemDetailsButton{
+    color: #0084B4;
+    border-bottom-style: solid;
+    border-width: 1px;
+}
+.TrackerItemDetailsUsersHeader{
+    background-color: #D9D9D9;
+    margin-top: 2.1875rem;
+}
+.TrackerItemDetailssHeader{
+    margin-top: 0.75rem;
+    margin-left: 2.5rem;
+}
+
+.pageText{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.UseTrackerItemDetailsTrackerButtonWrapper{
+    padding-top: 0.18rem;
+}
+.UseTrackerItemDetailsTrackerButtonWrapper:hover{
+    cursor: pointer;
+}
+
+.TrackerItemDetailsTrackerNameWrapper{
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+
+    margin-left: 2.5rem;
+}
+.TrackerItemDetailsTrackerName{
+    font-weight: 400;
+    font-size: 20px;
+    color: black;
+}
+.TrackerItemDetailsTrackersWrapper{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
