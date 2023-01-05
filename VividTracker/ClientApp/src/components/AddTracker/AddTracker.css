@@ -1,4 +1,4 @@
-﻿#addTenаntModal {
+#addTrackerModal {
     border: 0 none;
     margin-top: 0;
     position: absolute;
@@ -12,7 +12,7 @@
     overflow-y: hidden;
 }
 
-#createTenant{
+#createTracker{
     color: #F28627;
     font-family: sans-serif;
     font-size: 20px;
