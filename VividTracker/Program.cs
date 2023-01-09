@@ -35,6 +35,10 @@ builder.Services.AddScoped<ITenantsService, TenantsService>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 
+builder.Services.AddScoped<ITrackersRepository, TrackersRepository>();
+builder.Services.AddScoped<ITrackersService, TrackersService>();
+
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();

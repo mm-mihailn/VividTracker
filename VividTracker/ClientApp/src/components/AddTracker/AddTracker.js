@@ -37,7 +37,7 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch('https://localhost:7091/api/trackers', {
+            fetch('https://localhost:7091/api/create/tracker', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
