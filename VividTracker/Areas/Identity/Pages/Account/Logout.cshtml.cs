@@ -28,9 +28,11 @@ namespace VividTracker.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+           // returnUrl ??= Url.Content("/authentication/login");
+
             if (returnUrl != null)
             {
-                return LocalRedirect(returnUrl);
+                return LocalRedirect(Url.Content("/"));
             }
             else
             {

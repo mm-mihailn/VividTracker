@@ -20,8 +20,9 @@
         private Tenant? _tenant;
         public Tenant Tenant
         {
-            get => _tenant ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Tenant));
+            //get => _tenant ?? throw new InvalidOperationException("Uninitialized property: " + nameof(Tenant));
             set => _tenant = value;
+            get => _tenant;
         }
         public string? Label { get; set; }
         public ICollection<TrackingItem> TrackingItems { get; set; }
