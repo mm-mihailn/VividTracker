@@ -27,6 +27,13 @@
             }
            return Ok(trackingItems);
         }
-
+        [HttpPost]
+        [Route("api/trackingItems/add/{tenantId}")]
+        public async Task<IActionResult> CreateTrackingItem([FromRoute] int tenantId, [FromBody] TrackingItem trackingItems)
+        {
+            var result = await _trackingItemsService.AddTrackingItem(tenantId, trackingItems);
+            
+            return Ok(trackingItems);
+        }
     }
 }

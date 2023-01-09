@@ -10,5 +10,6 @@
     public interface ITrackingItemsService
     {
         Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId (int id);
+        Task<TrackingItem> AddTrackingItem(int tenantId,TrackingItem item);
     }
 }

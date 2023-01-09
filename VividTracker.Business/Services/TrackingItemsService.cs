@@ -22,5 +22,22 @@
         {
             return await _trackingItemsRepository.GetTrackingItemsByTenantId(id);
         }
+        public async Task<TrackingItem> AddTrackingItem(int tenantId,TrackingItem tr)
+        {
+            tr = new TrackingItem()
+            {
+                TenantId = tenantId,
+                IrrelevantAllowed = tr.IrrelevantAllowed,
+                MandatoryComment = tr.MandatoryComment,
+                MaxValueColor = tr.MaxValueColor,
+                MinValueColor = tr.MinValueColor,
+                IrrelevantColor = tr.IrrelevantColor,
+                Target = tr.Target,
+                Type = tr.Type,
+                Name = tr.Name
+            };
+            await _trackingItemsRepository.AddAsync(tr);
+            return tr;
+        }
     }
 }
