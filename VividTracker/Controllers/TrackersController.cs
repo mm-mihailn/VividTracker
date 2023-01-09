@@ -1,30 +1,38 @@
 ﻿namespace VividTracker.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using VividTracker.Business.Services.Interfaces;
+    using VividTracker.Data.Models;
 
     [ApiController]
-    public class TrackersController : Controller
+    public class TrackersController : ControllerBase
     {
         private readonly ITrackersService _trackersService;
         public TrackersController(ITrackersService trackersService)
         {
             _trackersService = trackersService;
         }
+        [HttpGet]
+        [Route("api/trackers")]
+        public async Task<IEnumerable<TrackingGroup>> GetAllTrackers()
+        {
+            return await _trackersService.GetTrackersAsync();
+        }
 
         [HttpPost]
-        [Route("api/create")]
+        [Route("api/create/tracker")]
 
-        //public async Task<IActionResult> CreateTenant([FromBody] Tenant createTenant)
-        //{
-        //    var tenant = await _tenantsService.GetTenantByNameAsync(createTenant.Name);
+        public async Task<IActionResult> CreateTracker([FromBody] TrackingGroup createTracker)
+        {
+            var tracker = await _trackersService.GetTrackerByNameAsync(createTracker.Name);
 
-        //    if (tenant != null)
-        //    {
-        //        return BadRequest("The tenant already exists");
-        //    }
+            if (tracker != null)
+            {
+                return BadRequest("The tracker already exists");
+            }
 
-        //    await _tenantsService.AddTenantAsync(createTenant);
-        //    return Ok(createTenant);
-        //}
+            await _trackersService.AddTrackerAsync(createTracker);
+            return Ok(createTracker);
+        }
     }
 }

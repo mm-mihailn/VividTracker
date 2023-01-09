@@ -7,7 +7,7 @@ export class AddTenant extends Component {
         this.state = {
             value: '',
             errorMessage: '',
-            textColor: '',
+            textColor: ''
         }
         this.createTenant = this.createTenant.bind(this);
         this.handleChange = this.handleChange.bind(this);

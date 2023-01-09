@@ -7,8 +7,12 @@ using VividTracker.Data.Models;
 
 namespace VividTracker.Business.Services.Interfaces
 {
-    internal interface ITrackersService
+    public interface ITrackersService
     {
-        Task<Tracker?> GetTenantByNameAsync(string name);
+        Task<IEnumerable<TrackingGroup>> GetTrackersAsync();
+        Task<TrackingGroup?> GetTrackerByNameAsync(string name);
+        Task AddTrackerAsync(TrackingGroup tracker);
+        Task<TrackingGroup?> GetTrackerByIdAsync(int id);
+        Task UpdateTrackerAsync(TrackingGroup tracker);
     }
 }
