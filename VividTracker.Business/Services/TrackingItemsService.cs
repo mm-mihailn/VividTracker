@@ -20,7 +20,7 @@
 
         public async Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId(int id)
         {
-            return await _trackingItemsRepository.GetTrackingItemsByTenantId (id);
+            return await _trackingItemsRepository.GetTrackingItemsByTenantId(id);
         }
     }
 }

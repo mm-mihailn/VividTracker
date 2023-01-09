@@ -92,6 +92,7 @@ export default class EditTenantComponent extends Component {
                 {this.state.trackers.length >= 1 ? 
                     this.state.trackers.map(tracker => {
                     return (
+                        // TODO: Rename component to TenantUser!
                         <TenantTrackerComponent tracker = {tracker}/>
                     )
                 })

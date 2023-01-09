@@ -11,6 +11,7 @@ import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import TrackersComponent from './components/TrackersComponent/TrackersComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
+import TenantTrackerItemsList from './components/TenantTrackerItemsList/TenantTrackerItemsList';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -21,6 +22,7 @@ export default class App extends Component {
                 <Route exact path='/' component={LandingPage} />
                 <Route path='/counter' component={Counter} />
                 <AuthorizeRoute path='/trackers/:id' component={TrackersComponent} />
+                <AuthorizeRoute path='/tenantTrackers/:tenantID' component={TenantTrackerItemsList} />
                 <AuthorizeRoute path='/tenants' component={TenantsComponent} />
                 <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
                 <AuthorizeRoute path='/fetch-data' component={FetchData} />
