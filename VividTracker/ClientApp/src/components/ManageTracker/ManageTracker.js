@@ -38,6 +38,12 @@ export default class ManageTracker extends Component {
                 {'name': 'Augeo Afinity Marketing', 'details': []},
                 {'name': 'Augeo Afinity Marketing', 'details': []},
                 {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Augeo Afinity Tesxting', 'details': []},
+
+            ],
+            trackerItems: [
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Augeo Afinity Marketing', 'details': []},
                 {'name': 'Augeo Afinity Marketing', 'details': []},
 
             ],
@@ -162,11 +168,38 @@ export default class ManageTracker extends Component {
                         </div>
                     </div>
                 </div>
-                
-
             </div>
             : 
-            ""}
+            <div className='RecordsWrapper d-flex'>
+                <div className='RecordsContainer'>
+                    {this.state.trackerItems.map((record) => {
+                        return (
+                            <div className='RecordContainer'>
+                                <p className='RecordName'>{record.name}</p>
+                            </div>   
+                        )           
+                    }
+                    )}
+                </div>
+
+                <div className='AlreadyExistingRecordsWrapper ItemSectionRecords'>
+                        <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
+                            Already Existing Records:
+                        </span>
+                        <div className='AlreadyExistingRecords'>
+                            {this.state.alreadyExistingRecords.map((alreadyExistingRecord) => {
+                                return(
+                                    <div className='AlreadyExistingRecord'>
+                                        <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
+                                        <span className='AddTrackingButton'>Add</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                
+            </div>
+            }
         </div>
     </div>               
     )
