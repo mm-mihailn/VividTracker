@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Styles/ManageTracker.css'
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faL } from '@fortawesome/free-solid-svg-icons';
 export default class ManageTracker extends Component {
     constructor()
     {
@@ -11,6 +12,10 @@ export default class ManageTracker extends Component {
                 {'name': 'Augeo Afinity Marketing', 'details': []},
                 {'name': 'Augeo Afinity Marketing', 'details': []},
                 {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+
                 {'name': 'ExcluCV', 
                     'details': [
                         {
@@ -22,8 +27,43 @@ export default class ManageTracker extends Component {
                     ]
                 },
                 {'name': 'Twin City Outdoor Services', 'details': []},
-            ]
+            ],
+            alreadyExistingRecords: [
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'Edmentum Inc', 'details': []},
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+                {'name': 'Augeo Afinity Marketing', 'details': []},
+
+            ],
+            isItemsSelected: true,
+            isRecordsSelected: false,
+            newRecordName: ''
         }
+    }
+
+    selectItems = () => {
+        if(this.state.isItemsSelected == false)
+        {
+            this.setState({'isItemsSelected': true})
+            this.setState({'isRecordsSelected': false})
+        }
+    }
+    
+    selectRecords = () => {
+        if(this.state.isRecordsSelected == false)
+        {
+            this.setState({'isRecordsSelected': true})
+            this.setState({'isItemsSelected': false})
+        }
+    }
+    AddTracker = () => {
+        
     }
   render() {
     return (
@@ -51,44 +91,82 @@ export default class ManageTracker extends Component {
                     </div>
                 </div>
             </div>
-
-            <div className='TrackerHeaderWrapper'>
-                <h4 className='TrackerHeader'>Tracker Items</h4>
+            <div className='TrackerOptionsWrapper'>
+                <div 
+                    className={this.state.isItemsSelected == true ? 'TrackerOptionWrapperSelected' : 'TrackerOptionWrapper'} 
+                    tabindex="0" 
+                    onClick={()=>{this.selectItems()}}
+                >
+                    <span className='TrackerOption'>Items</span>
+                </div>
+                <div 
+                    className={this.state.isRecordsSelected == true ? 'TrackerOptionWrapperSelected' : 'TrackerOptionWrapper'} 
+                    tabindex="1"
+                    onClick={() => {this.selectRecords()}}>
+                    <span className='TrackerOption'>Records</span>
+                </div>
             </div>
-            <div className='TrackerItemsContainer'>
-                <p>??????? WHat is supposed to go in here?</p>
-            </div>
-
-            <div className='RecordsHeaderWrapper'>
-                <h4 className='RecordsHeader'>Tracker Records</h4>
-            </div>
-            <div className='RecordsContainer'>
-                {this.state.records.map((record) => {
-                        if(record.details.length < 1)
-                        {
-                            return (
-                                <div className='RecordContainer'>
-                                    <p className='RecordName'>{record.name}</p>
-                                </div>   
-                            )
+            {this.state.isRecordsSelected == true 
+            ?
+            <div className='RecordsWrapper d-flex'>
+                <div className='RecordsContainer'>
+                    {this.state.records.map((record) => {
+                            if(record.details.length < 1)
+                            {
+                                return (
+                                    <div className='RecordContainer'>
+                                        <p className='RecordName'>{record.name}</p>
+                                    </div>   
+                                )
+                            }
+                            else
+                            {
+                                return (
+                                    <div className='RecordContainer'>
+                                        <p className='RecordName'>{record.name}</p>
+                                        {record.details.map((detail) => {
+                                            return(
+                                            <div className='RecordDetailContainer'>
+                                                <p className='RecordDetailName'>{detail.name}</p> 
+                                            </div>)
+                                        })}
+                                    </div>   
+                                )
+                            }
                         }
-                        else
-                        {
-                            return (
-                                <div className='RecordContainer'>
-                                    <p className='RecordName'>{record.name}</p>
-                                    {record.details.map((detail) => {
-                                        return(
-                                        <div className='RecordDetailContainer'>
-                                             <p className='RecordDetailName'>{detail.name}</p> 
-                                        </div>)
-                                    })}
-                                </div>   
-                            )
-                        }
-                    }
-                )}
+                    )}
+                </div>
+
+                <div className='RecordsInteraction'>
+                    <div className='RecordsInteractionFieldWrapper d-flex'>
+                        <label className = 'RecordNameLabel pageText'>New Record: </label>
+                        <input className = 'RecordNameInputField form-control' type = 'text' value='' onChange = {(e) => this.setState({'newRecordName': e.target.value})}/>
+                    </div>
+                    <div className='RecordButtons'>
+                        <span className='CancelButton'><strong>Cancel</strong></span>
+                        <button className='UpdateButton' onClick={() => this.AddTracker()}>Add</button>
+                    </div>
+                    <div className='AlreadyExistingRecordsWrapper'>
+                        <span className='AlreadyExistingRecordsHeader'>
+                            Already Existing Records:
+                        </span>
+                        <div className='AlreadyExistingRecords'>
+                            {this.state.alreadyExistingRecords.map((alreadyExistingRecord) => {
+                                return(
+                                    <div className='AlreadyExistingRecord'>
+                                        <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
+                                        <span className='AddTrackingButton'>Add</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+                
+
             </div>
+            : 
+            ""}
         </div>
     </div>               
     )
