@@ -8,6 +8,7 @@ using VividTracker.Data;
 using VividTracker.Data.Models;
 using VividTracker.Data.Repositories.Interfaces;
 using VividTracker.Data.Repositories;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,12 +33,30 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ITenantsRepository, TenantsRepository>();
 builder.Services.AddScoped<ITenantsService, TenantsService>();
 
+
+
+builder.Services.AddScoped<ITrackingGroupRecordsRepository, TrackingGroupRecordsRepository>();
+builder.Services.AddScoped<ITrackingGroupRecordsService, TrackingGroupRecordService>();
+
+
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 
+<<<<<<< HEAD
 builder.Services.AddScoped<ITrackersRepository, TrackersRepository>();
 builder.Services.AddScoped<ITrackersService, TrackersService>();
 
+=======
+builder.Services.AddScoped<ITrackingItemsRepository, TrackingItemsRepository>();
+builder.Services.AddScoped<ITrackingItemsService, TrackingItemsService>();
+
+builder.Services.AddScoped<ITrackingGroupsRepository, TrackingGroupsRepository>();
+builder.Services.AddScoped<ITrackingGroupsService, TrackingGroupsService>();
+>>>>>>> main
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 

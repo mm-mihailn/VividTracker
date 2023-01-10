@@ -126,6 +126,35 @@ export default class EditTenantComponent extends Component {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         );
     }
+=======
+            <div className = 'TenantUsersWrapper'>
+                <div className = 'TenantUsersHeader d-flex'>
+                    <p className='TenantsHeader'>Users</p>
+                    <FontAwesomeIcon className = 'EditUsersIcon' icon = {faRectangleList}/>
+                </div>
+            </div>
+            <div className = 'InviteNewUserWrapper'>
+                <InviteUserModal/>
+                {/*<span className='InviteNewUser pageText'> InviteNewUser() </span>  */}
+            </div>
+            <div className = 'TenantTrackersWrapper'>
+                {this.state.trackers.length >= 1 ? 
+                    this.state.trackers.map(tracker => {
+                    return (
+                        // TODO: Rename component to TenantUser!
+                        <TenantTrackerComponent tracker = {tracker}/>
+                    )
+                })
+                :
+                <p className='NoUsersMessage pageText'>Users do not exist for this tenant.</p>
+                }
+            </div>
+        </div>
+      </div>
+    )
+  }
+>>>>>>> main
 }
