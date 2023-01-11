@@ -3,9 +3,8 @@ import './Styles/TenantsStyles.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AddTenant } from "../AddTenant/AddTenant.js"
-import { AddTracker } from "../AddTracker/AddTracker.js"
 import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
-import TrackerContainerComponent from '../TrackerContainerComponent/TrackerContainerComponent.js'
+
 export default class TenantsComponent extends Component {
 
     constructor(props)
@@ -27,25 +26,24 @@ export default class TenantsComponent extends Component {
         return (
           <div className='tenantsListWrapper d-flex justify-content-center align-items-center'>
             <h1>All Tenants </h1>
-            <div className='tenantsContainer'>
-                <div className='tenantsListHeaderWrapper d-flex'>
-                    <h4 className='tenantsListHeader'>Tenants List</h4>
-                    <FontAwesomeIcon className='tenantsListEditButton' icon={faRectangleList} />
-                </div>
-                    <div className='CreateNewTenantButtonWrapper'>
-                        <AddTenant onTenantAdded={this.loadTenants} />
+                <div className='tenantsContainer'>
+                    <div className='tenantsContent'>
+                        <div className='tenantsListHeaderWrapper d-flex'>
+                            <h4 className='tenantsListHeader'>Tenants List</h4>
+                            <FontAwesomeIcon className='tenantsListEditButton' icon={faRectangleList} />
+                        </div>
+                        <div className='CreateNewTenantButtonWrapper'>
+                            <AddTenant onTenantAdded={this.loadTenants} />
+                        </div>
+                        <div className='TenantsContainer'>
+                            {this.state.tenants.map((tenant) => {
+                                return (
+                                    <TenantContainerComponent tenantData={tenant} />
+                                )
+                            })}
+                        </div>
                     </div>
-                    <div className='CreateNewTenantButtonWrapper'>
-                        <TrackerContainerComponent></TrackerContainerComponent>
-                    </div>
-                <div className='TenantsContainer'>
-                    {this.state.tenants.map((tenant) => {
-                        return(
-                           <TenantContainerComponent tenantData = {tenant}/>
-                        )
-                    })}
                 </div>
-            </div>
           </div>
 
            

@@ -46,17 +46,11 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 
-<<<<<<< HEAD
-builder.Services.AddScoped<ITrackersRepository, TrackersRepository>();
-builder.Services.AddScoped<ITrackersService, TrackersService>();
-
-=======
 builder.Services.AddScoped<ITrackingItemsRepository, TrackingItemsRepository>();
 builder.Services.AddScoped<ITrackingItemsService, TrackingItemsService>();
 
 builder.Services.AddScoped<ITrackingGroupsRepository, TrackingGroupsRepository>();
 builder.Services.AddScoped<ITrackingGroupsService, TrackingGroupsService>();
->>>>>>> main
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 

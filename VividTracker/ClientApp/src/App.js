@@ -11,37 +11,18 @@ import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import TrackersComponent from './components/TrackersComponent/TrackersComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
-<<<<<<< HEAD
 import { AddTracker } from './components/AddTracker/AddTracker';
-=======
 import TenantTrackerItemsList from './components/TenantTrackerItemsList/TenantTrackerItemsList';
->>>>>>> main
 
 export default class App extends Component {
     static displayName = App.name;
 
-<<<<<<< HEAD
-  render () {
-    return (
-      <Layout>
-        <Route exact path='/' component={LandingPage} />
-        <Route path='/counter' component={Counter} />
-        
-        <AuthorizeRoute path='/tenants' component={TenantsComponent} />
-            <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
-            <AuthorizeRoute path='/createTracker' component={AddTracker} />
-
-        <AuthorizeRoute path='/fetch-data' component={FetchData} />
-        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-      </Layout>
-    );
-  }
-=======
     render() {
         return (
             <Layout>
                 <Route exact path='/' component={LandingPage} />
                 <Route path='/counter' component={Counter} />
+                <AuthorizeRoute path='/createTracker' component={AddTracker} />
                 <AuthorizeRoute path='/trackers/:id' component={TrackersComponent} />
                 <AuthorizeRoute path='/tenantTrackers/:tenantID' component={TenantTrackerItemsList} />
                 <AuthorizeRoute path='/tenants' component={TenantsComponent} />
@@ -51,5 +32,4 @@ export default class App extends Component {
             </Layout>
         );
     }
->>>>>>> main
 }
