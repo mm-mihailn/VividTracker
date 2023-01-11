@@ -3,9 +3,7 @@ import './Styles/TrackersContainerStyles.css'
 import './Styles/TrackersStyles.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-//import { AddTenant } from "../AddTenant/AddTenant.js"
-import TrackerContainerComponent from './TrackerContainerComponent';
-
+import TrackerContainerComponent from '../TrackerContainerComponent/TrackerContainerComponent.js'
 export default class TrackersComponent extends Component {
     constructor(props) {
         super(props)
@@ -32,7 +30,7 @@ export default class TrackersComponent extends Component {
                     </div>
                     <div className="container">
                         <button type="button" id="" className="btn btn-link link_orange ps-5" data-bs-toggle="" data-bs-target="">
-                            CreateNewTracker()
+                            <TrackerContainerComponent></TrackerContainerComponent>
                         </button>
                     </div>
                     <div className='TrackersContainer'>

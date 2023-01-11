@@ -1,32 +1,40 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using VividTracker.Business.Services.Interfaces;
-using VividTracker.Data.Models;
-
-
 namespace VividTracker.Controllers
 {
+    using global::VividTracker.Business.Services.Interfaces;
+    using global::VividTracker.Data.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using VividTracker.Business.Services.Interfaces;
+    using VividTracker.Data.Models;
+
     [ApiController]
     public class TrackersController : ControllerBase
     {
-        private readonly ITrackingGroupsService _trackingGroupsService;
-
-        public TrackersController(ITrackingGroupsService trackingGroupsService)
+        private readonly ITrackersService _trackersService;
+        public TrackersController(ITrackersService trackersService)
         {
-            _trackingGroupsService = trackingGroupsService;
+            _trackersService = trackersService;
+        }
+        [HttpGet]
+        [Route("api/trackers")]
+        public async Task<IEnumerable<TrackingGroup>> GetAllTrackers()
+        {
+            return await _trackersService.GetTrackersAsync();
         }
 
-        [HttpGet]
-        [Route("api/trackers/{tenantId}")]
-        public async Task<IActionResult> GetTrackingGroupsByTenantId([FromRoute] int tenantId)
-         {
-            var trackingGroups = await _trackingGroupsService.GetTrackingGroupsByTenantId(tenantId);
+        [HttpPost]
+        [Route("api/create/tracker")]
 
-            if (!trackingGroups.Any())
+        public async Task<IActionResult> CreateTracker([FromBody] TrackingGroup createTracker)
+        {
+            var tracker = await _trackersService.GetTrackerByNameAsync(createTracker.Name);
+
+            if (tracker != null)
             {
-                return BadRequest("No exist tracking groups!");
+                return BadRequest("The tracker already exists");
             }
-            return Ok(trackingGroups);
+
+            await _trackersService.AddTrackerAsync(createTracker);
+            return Ok(createTracker);
         }
     }
 }

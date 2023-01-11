@@ -1,17 +1,8 @@
 namespace VividTracker.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using System.Collections;
-    using System.Linq;
-    using VividTracker.Data.Models;
-    using VividTracker.Data;
-    using VividTracker.Data.Repositories;
-    using VividTracker.Business.Services.Interfaces;
-    using System.Drawing.Text;
-    using System.Net;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using global::VividTracker.Business.Services.Interfaces;
+    using global::VividTracker.Data.Models;
 
     [ApiController]
     public class TenantsController : ControllerBase
