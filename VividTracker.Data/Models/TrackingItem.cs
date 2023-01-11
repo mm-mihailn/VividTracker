@@ -4,6 +4,7 @@ namespace VividTracker.Data.Models
 {
     public class TrackingItem
     {
+        //TODO: CHECK ID PROBLEM!
         public TrackingItem()
         {
             Name = Guid.NewGuid().ToString();
@@ -15,8 +16,9 @@ namespace VividTracker.Data.Models
             TrackingGroups = new List<TrackingGroup>();
         }
 
-        public TrackingItem(string name,bool irrelevantAllowed, bool mandatoryComment, decimal? defaultValue, string maxValueColor, string minValueColor, string irrelevantColor, decimal target, PropertyType type) :this()
+        public TrackingItem(int tenantId,string name,bool irrelevantAllowed, bool mandatoryComment, decimal? defaultValue, string maxValueColor, string minValueColor, string irrelevantColor, decimal target, PropertyType type) :this()
         {
+            TenantId=tenantId;
             Name = name ?? throw new ArgumentNullException(nameof(name));
             IrrelevantAllowed = irrelevantAllowed;
             MandatoryComment = mandatoryComment;

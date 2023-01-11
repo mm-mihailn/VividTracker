@@ -22,5 +22,9 @@
         {
             return await _trackingItemsRepository.GetTrackingItemsByTenantId(id);
         }
+        public async Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem)
+        {
+           return await _trackingItemsRepository.AddAsync(trackingItem);
+        } 
     }
 }
