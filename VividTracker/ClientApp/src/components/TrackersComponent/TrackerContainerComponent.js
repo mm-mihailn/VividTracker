@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './Styles/TrackersContainerStyles.css'
+import '../TrackerContainerComponent/TrackerContainerComponent.css'
+import '../AddTracker/AddTracker.js'
 
 export default class TrackerContainerComponent extends Component {
     
@@ -15,6 +17,9 @@ export default class TrackerContainerComponent extends Component {
                 </button>
                 <button className='ManageButton'> 
                     <a href={`https://localhost:44430/Todo`} className = 'ManageButtonText'>Manage</a>
+                </button>
+                <button id="createTracker" className="createTrackerButton">
+                    <a href={`https://localhost:44430/createTracker`}>CreateNewTracker()</a>
                 </button>
             </div>
     </div>

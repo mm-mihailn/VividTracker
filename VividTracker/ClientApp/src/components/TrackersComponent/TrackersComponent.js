@@ -42,8 +42,9 @@ export default class TrackersComponent extends Component {
                             )
                          })
                                 :
-                                <div className="container">
-                                    <p className='pageText ps-5'>Trackers do not exist for this tenant.</p></div>
+                            <div className="container">
+                                <p className='pageText ps-5'>Trackers do not exist for this tenant.</p>
+                            </div>
                          }
 
                     </div>

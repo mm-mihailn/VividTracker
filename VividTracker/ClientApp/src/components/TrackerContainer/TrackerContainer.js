@@ -20,7 +20,11 @@ export default class TrackerContainerComponent extends Component {
                         <a href='' className = 'ManageButtonText btn-text'>Manage</a>
                     </button>
                 </div>
-
+                <div className="CreateNewTrackerButtonWrapper">
+                    <button type="button" id="createTracker" className="btn">
+                        <a href={`https://localhost:44430/createTracker`}>CreateNewTracker()</a>
+                    </button>
+                </div>
             </div>
     </div>
     )

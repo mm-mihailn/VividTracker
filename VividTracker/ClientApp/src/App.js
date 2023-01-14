@@ -23,6 +23,7 @@ export default class App extends Component {
                 <Route exact path='/' component={LandingPage} />
                 <Route path='/counter' component={Counter} />
                 <AuthorizeRoute path='/createTracker' component={AddTracker} />
+                <AuthorizeRoute path='/trackersList' component={TrackersComponent} />
                 <AuthorizeRoute path='/trackers/:id' component={TrackersComponent} />
                 <AuthorizeRoute path='/tenantTrackers/:tenantID' component={TenantTrackerItemsList} />
                 <AuthorizeRoute path='/tenants' component={TenantsComponent} />
