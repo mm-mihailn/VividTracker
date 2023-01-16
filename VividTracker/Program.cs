@@ -33,7 +33,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ITenantsRepository, TenantsRepository>();
 builder.Services.AddScoped<ITenantsService, TenantsService>();
 
-
+builder.Services.AddScoped<ITrackersRepository, TrackersRepository>();
+builder.Services.AddScoped<ITrackersService, TrackersService>();
 
 builder.Services.AddScoped<ITrackingGroupRecordsRepository, TrackingGroupRecordsRepository>();
 builder.Services.AddScoped<ITrackingGroupRecordsService, TrackingGroupRecordService>();

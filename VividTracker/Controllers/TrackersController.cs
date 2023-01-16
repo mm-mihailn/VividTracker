@@ -3,8 +3,6 @@ namespace VividTracker.Controllers
     using global::VividTracker.Business.Services.Interfaces;
     using global::VividTracker.Data.Models;
     using Microsoft.AspNetCore.Mvc;
-    using VividTracker.Business.Services.Interfaces;
-    using VividTracker.Data.Models;
 
     [ApiController]
     public class TrackersController : ControllerBase

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import './Styles/TrackerContainerStyles.css'
+import './Styles/TrackerContainerStyles.css';
+import { TrackerContainerComponent } from '../TrackerContainerComponent/TrackerContainerComponent.js';
 
-export default class TrackerContainerComponent extends Component {
+export default class TrackerContainer extends Component {
     
   render() {
     return (

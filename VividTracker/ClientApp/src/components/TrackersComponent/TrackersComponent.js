@@ -29,6 +29,7 @@ export default class TrackersComponent extends Component {
                         <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
                     </div>
                     <div className="container">
+                        {/*USING THE COMPONENT WITH ONLY CREATE NEW TRACKER BUTTON*/}
                         <button type="button" id="" className="btn btn-link link_orange ps-5" data-bs-toggle="" data-bs-target="">
                             <TrackerContainerComponent></TrackerContainerComponent>
                         </button>

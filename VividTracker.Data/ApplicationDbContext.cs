@@ -3,9 +3,8 @@ using IdentityModel;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Options;
 using VividTracker.Data.EntityConfigurations;
 using VividTracker.Data.Models;
 

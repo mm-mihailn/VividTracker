@@ -13,14 +13,16 @@ export class AddTracker extends Component {
             errorMessage: '',
             textColor: ''
         }
+        this.createTracker = this.createTracker.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     createTracker = (event) => {
-        event.preventDefault();
+        //PREVENT DEFAULT IS NOT WORKING
+        //event.preventDefault();
         var name = this.state.trackerName;
         var record = this.state.trackerRecord;
-        this.createTracker = this.createTracker.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        
         const color = {
             error: "red",
             success: "green"
@@ -40,7 +42,8 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch('https://localhost:7091/api/create', {
+            //THE POST REQUEST IS NOT WORKING
+            fetch('https://localhost:7091/api/create/tracker', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -55,7 +58,6 @@ export class AddTracker extends Component {
                     else {
                         this.setState({ errorMessage: errors.success });
                         this.setState({ textColor: color.success });
-                        this.props.onTrackerAdded(this.props.value);
                     }
                 });
         }
