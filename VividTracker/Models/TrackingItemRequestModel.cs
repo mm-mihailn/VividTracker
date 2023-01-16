@@ -33,5 +33,16 @@
                 Tenant=tenant
             };
         }
+
+        public TrackingItem GetTrackingItem(int trackingItemId,Tenant tenant)
+        {
+            return new TrackingItem()
+            {
+                TenantId = tenant.Id,
+                Id = trackingItemId,
+                Name = Name,
+                Tenant = tenant
+            };
+        }
     }
 }
