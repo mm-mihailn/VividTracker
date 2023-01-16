@@ -58,5 +58,18 @@
             }
             return BadRequest("Error!");
         }
+        [HttpGet]
+        [Route("api/getTrackingItem/{trackingItemId}")]
+        public async Task<IActionResult> GetTrackingItemById([FromRoute] int trackingItemId)
+        {
+            var result = await _trackingItemsService.GetTrackingItemById(trackingItemId);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest();
+        }
     }
 }
