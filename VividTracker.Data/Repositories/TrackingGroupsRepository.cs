@@ -19,5 +19,13 @@ namespace VividTracker.Data.Repositories
         {
             return await Entities.Include(t => t.Tenant).Where(t => t.TenantId == tenantId).ToListAsync();
         }
+        public async Task<IEnumerable<TrackingGroup>> GetAllTrackers() => await Entities.ToListAsync();
+
+        public async Task<int> GetCountAsync() => await Entities.CountAsync();
+
+        public async Task<TrackingGroup?> GetTrackerByName(string name)
+        {
+            return await Entities.FirstOrDefaultAsync(t => t.Name == name);
+        }
     }
 }

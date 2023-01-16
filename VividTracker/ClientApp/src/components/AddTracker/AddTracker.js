@@ -49,15 +49,18 @@ export class AddTracker extends Component {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ "name": name, "label": record })
+               
             })
                 .then((response) => {
                     if (response.status == 400) {
                         this.setState({ errorMessage: errors.existingTenant });
                         this.setState({ textColor: color.error });
+                        console.log(name + " " + record);
                     }
                     else {
                         this.setState({ errorMessage: errors.success });
                         this.setState({ textColor: color.success });
+                        console.log(name + " " + record);
                     }
                 });
         }

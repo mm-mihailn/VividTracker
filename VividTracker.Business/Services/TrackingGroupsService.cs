@@ -21,5 +21,17 @@ namespace VividTracker.Business.Services
         {
             return await _trackingGroupsRepository.GetTrackingGroupsByTenantId(id);
         }
+        public async Task AddTrackerAsync(TrackingGroup tracker) => await _trackingGroupsRepository.AddAsync(tracker);
+
+        public async Task<TrackingGroup?> GetTrackerByNameAsync(string name)
+        {
+            return await _trackingGroupsRepository.GetTrackerByName(name);
+        }
+
+        public async Task<IEnumerable<TrackingGroup>> GetTrackersAsync() => await _trackingGroupsRepository.GetAllTrackers();
+
+        public async Task<TrackingGroup?> GetTrackerByIdAsync(int id) => await _trackingGroupsRepository.FindAsync(id);
+
+        public async Task UpdateTrackerAsync(TrackingGroup TrackingGroup) => await _trackingGroupsRepository.UpdateAsync(TrackingGroup);
     }
 }
