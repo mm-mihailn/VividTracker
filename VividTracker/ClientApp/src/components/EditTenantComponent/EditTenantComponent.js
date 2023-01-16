@@ -59,49 +59,47 @@ export default class EditTenantComponent extends Component {
     }
     
     render() {
-    return (
-      <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
-        <div className = 'EditTenantContainer'>
-            <div className = 'TenantHeaderWrapper d-flex'>
-                <h4 className = 'TenantName pageText'>Tenant Name</h4>
-                <FontAwesomeIcon className = 'EditTenantIcon' icon = {faPenToSquare}/>
+        return (
+            <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
+              <div className = 'EditTenantContainer'>
+                  <div className = 'TenantHeaderWrapper d-flex'>
+                      <h4 className = 'TenantName pageText'>Tenant Name</h4>
+                      <FontAwesomeIcon className = 'EditTenantIcon' icon = {faPenToSquare}/>
+                  </div>
+                  <div className = 'TenantFormWrapper'>
+                      <div className = 'TenantFormContainer'>
+                          <div className = 'TenantFieldsContainer d-flex'>
+                              <label className = 'TenantNameLabel pageText'>Tenant Name:</label>
+                              <input className = 'TenantNameInputField form-control' type = 'text' value={this.state.currentTenantName} onChange = {(e) => this.setState({'currentTenantName': e.target.value})}/>
+                          </div>
+                          <div className='TenantButtons'>
+                              <span className='ResetButton'>Reset</span>
+                              <button className='UpdateButton' onClick={() => this.updateTenantName()}>Update</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div className = 'TenantUsersWrapper'>
+                      <div className = 'TenantUsersHeader d-flex'>
+                          <p className='TenantsHeader'>Users</p>
+                          <FontAwesomeIcon className = 'EditUsersIcon' icon = {faRectangleList}/>
+                      </div>
+                  </div>
+                  <div className = 'InviteNewUserWrapper'>
+                      <InviteUserModal/>
+                  </div>
+                  <div className = 'TenantTrackersWrapper'>
+                      {this.state.trackers.length >= 1 ?
+                          this.state.trackers.map(tracker => {
+                          return (
+                              <TenantTrackerComponent tracker = {tracker}/>
+                          )
+                      })
+                      :
+                      <p className='NoUsersMessage pageText'>Users do not exist for this tenant.</p>
+                      }
+                  </div>
+              </div>
             </div>
-            <div className = 'TenantFormWrapper'>
-                <div className = 'TenantFormContainer'>
-                    <div className = 'TenantFieldsContainer d-flex'>
-                        <label className = 'TenantNameLabel pageText'>Tenant Name:</label>
-                        <input className = 'TenantNameInputField form-control' type = 'text' value={this.state.currentTenantName} onChange = {(e) => this.setState({'currentTenantName': e.target.value})}/>
-                    </div>
-                    <div className='TenantButtons'>
-                        <span className='ResetButton'>Reset</span>
-                        <button className='UpdateButton' onClick={() => this.updateTenantName()}>Update</button>
-                    </div>
-                </div>
-            </div>
-            <div className = 'TenantUsersWrapper'>
-                <div className = 'TenantUsersHeader d-flex'>
-                    <p className='TenantsHeader'>Users</p>
-                    <FontAwesomeIcon className = 'EditUsersIcon' icon = {faRectangleList}/>
-                </div>
-            </div>
-            <div className = 'InviteNewUserWrapper'>
-                <InviteUserModal/>
-                {/*<span className='InviteNewUser pageText'> InviteNewUser() </span>  */}
-            </div>
-            <div className = 'TenantTrackersWrapper'>
-                {this.state.trackers.length >= 1 ? 
-                    this.state.trackers.map(tracker => {
-                    return (
-                        // TODO: Rename component to TenantUser!
-                        <TenantTrackerComponent tracker = {tracker}/>
-                    )
-                })
-                :
-                <p className='NoUsersMessage pageText'>Users do not exist for this tenant.</p>
-                }
-            </div>
-        </div>
-      </div>
-    )
-  }
+        );
+    }
 }
