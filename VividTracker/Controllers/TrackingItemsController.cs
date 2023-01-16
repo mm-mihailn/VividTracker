@@ -44,5 +44,19 @@
             }
             return BadRequest("Already exist!");
         }
+        [HttpPatch]
+        [Route("api/trackingItems/update/{tenantId}/{trackingItemId}")]
+        public async Task<IActionResult> UpdateTrackingName([FromRoute] int tenantId, [FromRoute] int trackingItemId, [FromBody] TrackingItemRequestModel trackingItemRequestModel)
+        {
+            var tenant = await _tenantsService.GetTenantByIdAsync(tenantId);
+            var trackingItem = trackingItemRequestModel.GetTrackingItem(trackingItemId,tenant);
+            var result = await _trackingItemsService.UpdateTrackingGroupName(trackingItem);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest("Error!");
+        }
     }
 }

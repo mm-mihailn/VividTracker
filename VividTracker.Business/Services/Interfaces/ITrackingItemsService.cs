@@ -11,5 +11,6 @@
     {
         Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId (int id);
         public Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem);
+        public Task<TrackingItem> UpdateTrackingGroupName(TrackingItem trackingItem);
     }
 }
