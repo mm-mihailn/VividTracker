@@ -49,11 +49,11 @@ export class LoginMenu extends Component {
             {/*<NavItem>*/}
             {/*    <NavLink tag={Link} className="text-dark" to={profilePath}>Hello {userName}</NavLink>*/}
             {/*</NavItem>*/}
+            {/*<NavItem>*/}
+            {/*    <NavLink tag={Link} className="text-dark" id="trackerBtn" to={'trackersList'}>Trackers</NavLink>*/}
+            {/*</NavItem>*/}
             <NavItem>
-                <NavLink tag={Link} className="text-dark" id="trackerBtn" to={'trackersList'}>Trackers</NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink tag={Link} className="text-dark" id="tenantBtn" to={'tenants'}>Tenants</NavLink>
+                <NavLink tag={Link} className="text-dark" id="tenantBtn" to={'/tenants'}>Tenants</NavLink>
             </NavItem>
             <NavItem>
                 <NavLink tag={Link} className="text-dark" id="loginBtn" to={logoutPath}>Logout</NavLink>

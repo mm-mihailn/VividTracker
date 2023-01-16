@@ -8,13 +8,14 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import './custom.css'
 import TenantsComponent from './components/TenantsComponent/TenantsComponent';
+import TrackersComponent from './components/TrackersComponent/TrackersComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
 import TenantTrackerItemsList from './components/TenantTrackerItemsList/TenantTrackerItemsList';
 import ManageTracker from './components/ManageTracker/ManageTracker';
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
   render () {
     return (
