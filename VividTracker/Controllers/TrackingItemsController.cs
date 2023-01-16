@@ -4,15 +4,17 @@
     using Microsoft.AspNetCore.Mvc;
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
+    using VividTracker.Models;
 
     [ApiController]
     public class TrackingItemsController : ControllerBase
     {
         private readonly ITrackingItemsService _trackingItemsService;
-
-        public TrackingItemsController(ITrackingItemsService trackingItemsService)
+        private readonly ITenantsService _tenantsService;
+        public TrackingItemsController(ITrackingItemsService trackingItemsService, ITenantsService tenantsService)
         {
             _trackingItemsService = trackingItemsService;
+            _tenantsService = tenantsService;
         }
 
         [HttpGet]
@@ -27,6 +29,34 @@
             }
            return Ok(trackingItems);
         }
+        [HttpPost]
+        [Route("api/trackingItems/create/{tenantId}")]
+        public async Task<IActionResult> CreateTrackingItem([FromRoute] int tenantId, [FromBody] TrackingItemRequestModel trackingItemRequestModel)
+        {
+            var tenant = await _tenantsService.GetTenantByIdAsync(tenantId);
+            var trackingItem = trackingItemRequestModel.ToCreateTrackingItem(tenantId,tenant);
 
+            var result = await _trackingItemsService.AddTrackingItem(trackingItem);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest("Already exist!");
+        }
+        [HttpPatch]
+        [Route("api/trackingItems/update/{tenantId}/{trackingItemId}")]
+        public async Task<IActionResult> UpdateTrackingName([FromRoute] int tenantId, [FromRoute] int trackingItemId, [FromBody] TrackingItemRequestModel trackingItemRequestModel)
+        {
+            var tenant = await _tenantsService.GetTenantByIdAsync(tenantId);
+            var trackingItem = trackingItemRequestModel.GetTrackingItem(trackingItemId,tenant);
+            var result = await _trackingItemsService.UpdateTrackingGroupName(trackingItem);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest("Error!");
+        }
     }
 }

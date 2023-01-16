@@ -10,7 +10,8 @@ namespace VividTracker.Business.Services.Interfaces
     public interface ITrackingGroupsService
     {
         Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int id);
-
+        Task<TrackingGroup?>GetTrackingGroupById(int id);
+        Task<TrackingGroup> UpdateTrackingGroupName(TrackingGroup trackingGroup);
         Task<IEnumerable<TrackingGroup>> GetTrackersAsync();
         Task<TrackingGroup?> GetTrackerByNameAsync(string name);
         Task AddTrackerAsync(TrackingGroup tracker);
