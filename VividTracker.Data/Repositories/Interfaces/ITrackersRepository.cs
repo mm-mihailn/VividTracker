@@ -1,10 +1,10 @@
-﻿using VividTracker.Data.Models;
+﻿//using VividTracker.Data.Models;
 
-namespace VividTracker.Data.Repositories.Interfaces;
+//namespace VividTracker.Data.Repositories.Interfaces;
 
-public interface ITrackersRepository : IRepository<TrackingGroup>
-{
-    Task<int> GetCountAsync();
-    Task<IEnumerable<TrackingGroup>> GetAllTrackers();
-    Task<TrackingGroup?> GetTrackerByName(string name);
-}
+//public interface ITrackersRepository : IRepository<TrackingGroup>
+//{
+//    Task<int> GetCountAsync();
+//    Task<IEnumerable<TrackingGroup>> GetAllTrackers();
+//    Task<TrackingGroup?> GetTrackerByName(string name);
+//}
