@@ -74,7 +74,7 @@ export class AddTracker extends Component {
                 <div className="container" id="modal">
                 <button type="button" id="createTracker" className="btn btn-link" data-bs-toggle="modal" data-bs-target="#addTenаntModal">
                         CreateNewTracker()
-                    </button>
+                </button>
                 </div>
                 <div className="modal fade" id="addTenаntModal" role="dialog">
                         <div className="modal-dialog">
@@ -89,10 +89,9 @@ export class AddTracker extends Component {
                                     <div id="myForm">
                                         <form onSubmit={this.createTracker}>
                                             <label htmlFor="tenantName" id="label-text">Tracker name:</label>
-                                            <input type="text" name="tenantName" className="form-control" id="name"
+                                            <input type="text" name="tenantName" className={this.state.valid == false ? "form-control name name-error" : "form-control name"}  id="name"
                                                 onChange={(e) => this.setState({ 'value': e.target.value })}
                                                 style={{ borderBottomColor: this.state.textColor }}
-                                                className={this.state.valid == false ? "form-control name name-error" : "form-control name"} 
                                             />
                                             <div className="modal-footer border-0">
                                                 <div id="error">
