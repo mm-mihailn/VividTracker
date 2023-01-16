@@ -23,9 +23,12 @@ export default class TenantTrackerItemsList extends Component {
         .then(async (res) => 
             {
                 let tenantData = await res.json()
-                this.setState({'trackers': tenantData.trackingItems})
+                this.setState({'trackers': tenantData})
             }
         )
+        .catch((err) => {
+          console.log(err)
+        })
   }
   render() {
     return (
