@@ -71,3 +71,7 @@
 .TrackerButtonsWrapper{
     margin-right: 4rem;
 }
+
+.errorMessage{
+    top: 10rem;
+}

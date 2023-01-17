@@ -50,7 +50,7 @@ export default class TenantTrackerItemsList extends Component {
                       })}
               </div>
             :
-              <div className='TrackersContainer'>
+              <div className='TrackersContainer errorMessage'>
                 <p>No trackers found for this tenant.</p>
               </div>
             }
