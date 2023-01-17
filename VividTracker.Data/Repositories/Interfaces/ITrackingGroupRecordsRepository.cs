@@ -7,9 +7,8 @@
     using System.Threading.Tasks;
     using VividTracker.Data.Models;
 
-    public interface ITrackingItemsRepository:IRepository<TrackingItem>
+    public interface ITrackingGroupRecordsRepository:IRepository<TrackingGroupRecord>
     {
-        Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId(int tenantId);
-        public Task<TrackingItem> GetTrackingItemById(int id);
+        Task<IEnumerable<TrackingGroupRecord>> GetAllRecordsAsync(int trackingGroupId);
     }
 }
