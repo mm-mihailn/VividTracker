@@ -11,6 +11,7 @@ import TenantsComponent from './components/TenantsComponent/TenantsComponent';
 import TrackersComponent from './components/TrackersComponent/TrackersComponent';
 import {LandingPage} from './components/LandingPage/LandingPage'
 import EditTenantComponent from './components/EditTenantComponent/EditTenantComponent';
+import { AddTracker } from './components/AddTracker/AddTracker';
 import TenantTrackerItemsList from './components/TenantTrackerItemsList/TenantTrackerItemsList';
 import ManageTracker from './components/ManageTracker/ManageTracker';
 
