@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 .TrackerContainer{
     background-color: white;
     position: absolute;
@@ -9,11 +11,44 @@
     overflow: hidden;
 }
 
-.TrackerHeaderWrapper, .RecordsHeaderWrapper {
+.TrackerHeaderWrapper, .RecordsHeaderWrapper, .TrackerOptionsWrapper {
     background-color: #D9D9D9;
     color: #0084B4;
     margin-top: 2.6875rem;
     display: flex;
+}
+.TrackerOptionWrapper{
+    display: inline-block;
+    background-color: rgba(255,255,255,0.3);
+    padding: 10px;
+
+}
+.TrackerOptionWrapperSelected{
+    display: inline-block;
+    background-color: rgba(255,255,255,0.3);
+    padding: 10px;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+}
+.TrackerOptionWrapper:nth-child(1), .TrackerOptionWrapperSelected:nth-child(1)
+{
+    margin-left: 2.5625rem;
+}
+.TrackerOptionWrapper:nth-child(2), .TrackerOptionWrapperSelected:nth-child(2)
+{
+    margin-left: 0.375rem;
+}
+.TrackerOption, 
+.RecordNameLabel, 
+.AlreadyExistingRecordsHeader{
+    color: black;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 27.24px;
+    font-family: 'Open Sans', sans-serif;
+}   
+.TrackerOptionWrapper:hover{
+    cursor: pointer;
 }
 .TrackerHeader, .RecordsHeader{
     margin-left: 2.5rem;
@@ -42,7 +77,6 @@
 .TrackerNameFieldWrapper{
     display: flex;
 }
-
 
 .TrackerItemsContainer{
     height:12vh;
@@ -78,14 +112,24 @@
 .RecordsContainer{
     margin-top: 1rem;
     margin-left: 2.5rem;
-    width: 381px;
-    height: 190px;
-    overflow:scroll;
+    width: 70%;
+    height: 40vh;
+    overflow-y:scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+    border-right-style: solid;
+    border-color: #D9D9D9;
+    border-width: 8px;
+    padding-right: 2.5rem;
+}
+.RecordsContainer::-webkit-scrollbar
+{
+    display: none;
 }
 .RecordContainer{
     padding-top: 1px;
     padding-bottom: 1px;
-    margin-top: 0.125rem;
+    /* margin-top: 0.125rem; */
 }
 .RecordName{
     background-color: #D9D9D9;
@@ -94,25 +138,26 @@
     line-height: 1.191875rem;
     padding-left: 1.625rem;
     padding-top: 0.3rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
 
 .RecordDetailContainer{
     margin-left: 2rem;
+    margin-top: 2px;
 
 }
 .RecordDetailName{
+    background-color: #D9D9D9;
     font-weight: 400;
     font-size: 0.875rem;
+    line-height: 1.191875rem;
     padding-left: 1.625rem;
-    padding-top: 0.3rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    margin-bottom: 0rem;
     border-left-style: solid;
-    background-color: #D9D9D9;
-
 }
 
 .UpdateButton{
@@ -138,4 +183,89 @@
 }
 .ResetButton:hover{
     cursor: pointer;
+}
+
+.RecordsInteractionFieldWrapper{
+    margin-top: 1rem;
+}
+
+.RecordNameLabel{
+    margin-top: auto;
+    margin-left: 2.5rem;
+    float: left;
+}
+.RecordNameInputField {
+    background-color: #F3F3F3;
+    border-color: #F3F3F3;
+      border-bottom-color: rgb(243, 243, 243);
+    border-bottom-color: rgb(243, 243, 243);
+    border-bottom-color: black;
+    width: 22.25rem;
+    margin-left: 0.5625rem;
+    margin-right: 2rem;
+}
+.CancelButton{
+    color: #0084B4;
+    border-bottom: solid;
+    border-bottom-width: medium;
+    border-bottom-width: 1px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27.24px;
+}
+.RecordButtons{
+  margin-left: 16rem;
+  margin-top: 1rem;
+}
+.CancelButton:hover{
+    cursor: pointer;
+}
+.AlreadyExistingRecordsWrapper{
+    padding-left: 2rem;
+    margin-top: 4rem;
+    padding-right: 2rem;
+    
+}
+.AlreadyExistingRecordsWrapper::-webkit-scrollbar{
+    display: none;
+}
+.AlreadyExistingRecord{
+    background-color: #D9D9D9;
+    margin-top: 2px !important;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+.AlreadyExistingRecordName{
+    padding-left: 2rem;
+    margin-bottom: 0rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16.34px;
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+}
+.AddTrackingButton{
+   color: #0084B4;
+   font-size: 12px;
+   font-weight: 400 !important;
+   line-height:30.34px;
+   margin-right: 2rem;
+   float:right;
+}
+.AddTrackingButton:hover{
+    cursor: pointer;
+}
+.ItemSectionRecords{
+    margin-top: auto;
+    width: 100%;
+    padding-right: 2rem;
+}
+.AlreadyExistingRecords{
+    height: 17.9vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 }

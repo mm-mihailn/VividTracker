@@ -1,13 +1,12 @@
 .trackersContainer{
     background-color: white;
-    position: absolute;
-    top: 4.8rem;
-    overflow-y: visible;
-    overflow-x: hidden;
+    /* position: absolute; */
+    /* top: 4.8rem; */
     border-top-left-radius: 5%;
     border-bottom-right-radius: 5%;
-    width: 60rem;
-    height: 799px;
+    /* width: 60rem; */
+    /* height: 799px; */
+    overflow: hidden;
 }
 
 .trackersListHeaderWrapper {
@@ -67,4 +66,12 @@
 
 .EditTenantIcon:hover{
     cursor: pointer
+}
+
+.TrackerButtonsWrapper{
+    margin-right: 4rem;
+}
+
+.errorMessage{
+    top: 10rem;
 }
