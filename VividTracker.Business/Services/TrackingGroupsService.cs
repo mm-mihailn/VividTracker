@@ -43,5 +43,9 @@ namespace VividTracker.Business.Services
             }
             return null;
         }
+        public async Task<TrackingGroup> CreateTrackingGroup(TrackingGroup trackingGroup)
+        {
+            return await _trackingGroupsRepository.AddAsync(trackingGroup);
+        }
     }
 }
