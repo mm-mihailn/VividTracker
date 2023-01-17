@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using VividTracker.Business.Services;
 using VividTracker.Business.Services.Interfaces;
 using VividTracker.Data.Models;
+using VividTracker.Models;
 using VividTracker.ViewModels;
 
 namespace VividTracker.Controllers
@@ -11,9 +12,15 @@ namespace VividTracker.Controllers
     public class TrackersController : ControllerBase
     {
         private readonly ITrackingGroupsService _trackingGroupsService;
+
+        private readonly ITenantsService _tenantsService;
+        public TrackersController(ITrackingGroupsService trackingGroupsService,ITenantsService tenantsService)
+
         public TrackersController(ITrackingGroupsService trackingGroupsService)
+
         {
             _trackingGroupsService = trackingGroupsService;
+            _tenantsService = tenantsService;
         }
 
         [HttpGet]
@@ -42,6 +49,22 @@ namespace VividTracker.Controllers
             return BadRequest("Error!");
         }
 
+        [HttpPost]
+        [Route("api/trackingGroup/create/{tenandId}")]
+        public async Task<IActionResult> CreateTrackingGroup([FromRoute] int tenandId, [FromBody] TrackingGroupRequestModel trackingGroupRequestModel)
+        {
+            var tenant = await _tenantsService.GetTenantByIdAsync(tenandId);
+
+            var tracker = trackingGroupRequestModel.ToCreateTrackingGroup(tenant);
+            var result = await _trackingGroupsService.CreateTrackingGroup(tracker);
+
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest("Error!");
+
+
         [HttpGet]
         [Route("api/trackers")]
         public async Task<IEnumerable<TrackingGroup>> GetAllTrackers()
@@ -62,6 +85,7 @@ namespace VividTracker.Controllers
 
             await _trackingGroupsService.AddTrackerAsync(createTracker);
             return Ok(createTracker);
+
         }
     }
 }
