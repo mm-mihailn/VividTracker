@@ -54,7 +54,8 @@ export default class ManageTracker extends Component {
             allRecords:[],
             allItems: [],
             currentTrackingGroup: [],
-            currentTrackerName: ''
+            currentTrackerName: '',
+            currentTrackerItems: []
         }
     }
 
@@ -138,6 +139,31 @@ export default class ManageTracker extends Component {
             },
         })
     }
+
+
+    GetCurrentTrackerItems = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+
+        let result = await fetch(url).then((
+            async(res) => {
+                let result = await res.json()
+                this.setState({'currentTrackerItems': result})
+        }))
+    }
+
+    ResetNames = async() => {
+        // currentTrackerName
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+        let result = await fetch(url).then((
+            async(res) => {
+                let result = await res.json()
+                this.setState({'currentTrackerName': result[0].name})
+        }))
+    }
     
     componentDidMount()
     {
@@ -145,6 +171,7 @@ export default class ManageTracker extends Component {
         this.GetAllRecords()
         this.GetAllTrackingItems()
         this.GetTrackingGroup()
+        this.GetCurrentTrackerItems()
     }
   render() {
     return (
@@ -175,7 +202,7 @@ export default class ManageTracker extends Component {
                         </div>
                     </div>
                     <div className='TrackerButtons'>
-                        <span className='ResetButton'><strong>Reset</strong></span>
+                        <span className='ResetButton' onClick={() => this.ResetNames()}><strong>Reset</strong></span>
                         <button className='UpdateButton' onClick={() => this.updateTrackerName()}>Update</button>
                     </div>
                 </div>
@@ -238,10 +265,10 @@ export default class ManageTracker extends Component {
             : 
             <div className='RecordsWrapper d-flex'>
                 <div className='RecordsContainer'>
-                    {this.state.trackerItems.map((record) => {
+                    {this.state.currentTrackerItems.map((trackerItem) => {
                         return (
                             <div className='RecordContainer'>
-                                <p className='RecordName'>{record.name}</p>
+                                <p className='RecordName'>{trackerItem.name}</p>
                             </div>   
                         )           
                     }
