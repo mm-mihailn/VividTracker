@@ -49,7 +49,8 @@ export default class ManageTracker extends Component {
             ],
             isItemsSelected: true,
             isRecordsSelected: false,
-            newRecordName: ''
+            newRecordName: '',
+            trackingGroupRecords: []
         }
     }
 
@@ -70,6 +71,23 @@ export default class ManageTracker extends Component {
     }
     AddTracker = () => {
         
+    }
+
+    getTrackingGroupRecords = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = `https://localhost:7091/api/trackingGroupRecords/${Number(trackingGroupId)}`
+        let result = await fetch(url).then((
+            async(res) => {
+                let result = await res.json()
+                this.setState({'trackingGroupRecords': result})
+        }))
+    }
+
+    
+    componentDidMount()
+    {
+        this.getTrackingGroupRecords()
     }
   render() {
     return (
@@ -116,29 +134,12 @@ export default class ManageTracker extends Component {
             ?
             <div className='RecordsWrapper d-flex'>
                 <div className='RecordsContainer'>
-                    {this.state.records.map((record) => {
-                            if(record.details.length < 1)
-                            {
-                                return (
-                                    <div className='RecordContainer'>
-                                        <p className='RecordName'>{record.name}</p>
-                                    </div>   
-                                )
-                            }
-                            else
-                            {
-                                return (
-                                    <div className='RecordContainer'>
-                                        <p className='RecordName'>{record.name}</p>
-                                        {record.details.map((detail) => {
-                                            return(
-                                            <div className='RecordDetailContainer'>
-                                                <p className='RecordDetailName'>{detail.name}</p> 
-                                            </div>)
-                                        })}
-                                    </div>   
-                                )
-                            }
+                    {this.state.trackingGroupRecords.map((record) => {
+                            return (
+                                <div className='RecordContainer'>
+                                    <p className='RecordName'>{record.name}</p>
+                                </div>   
+                            )
                         }
                     )}
                 </div>

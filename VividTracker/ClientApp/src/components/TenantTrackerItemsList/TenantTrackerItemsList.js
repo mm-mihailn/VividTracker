@@ -19,7 +19,7 @@ export default class TenantTrackerItemsList extends Component {
   async loadTrackers() {
         let splittedURL = window.location.pathname.split('/')
         let targetTenantID = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/trackingItems/${Number(targetTenantID)}`)
+        await fetch(`https://localhost:7091/api/trackingGroupRecords/${Number(targetTenantID)}`)
         .then(async (res) => 
             {
                 let tenantData = await res.json()
