@@ -50,7 +50,11 @@ export default class ManageTracker extends Component {
             isItemsSelected: true,
             isRecordsSelected: false,
             newRecordName: '',
-            trackingGroupRecords: []
+            trackingGroupRecords: [],
+            allRecords:[],
+            allItems: [],
+            currentTrackingGroup: [],
+            currentTrackerName: ''
         }
     }
 
@@ -69,9 +73,6 @@ export default class ManageTracker extends Component {
             this.setState({'isItemsSelected': false})
         }
     }
-    AddTracker = () => {
-        
-    }
 
     getTrackingGroupRecords = async() => {
         let pageLocationSplitted = window.location.href.split('/')
@@ -84,10 +85,66 @@ export default class ManageTracker extends Component {
         }))
     }
 
+    GetAllRecords = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+                // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
+        let url = `https://localhost:7091/api/trackingGroupRecords/${Number(trackingGroupId)}`
+
+        let result = await fetch(url).then((
+            async(res) => {
+                let result = await res.json()
+                this.setState({'allRecords': result})
+        }))
+    }
+
+    GetAllTrackingItems = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
+        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+
+        let result = await fetch(url).then((
+            async(res) => {
+                let result = await res.json()
+                this.setState({'allItems': result})
+        }))
+    }
+
+    GetTrackingGroup = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+        let result = await fetch(url).then((
+            async(res) => {
+                let result = await res.json()
+                this.setState({'currentTrackingGroup': result[0]})
+                this.setState({'currentTrackerName': result[0].name})
+        }))
+    }
+
+    updateTrackerName = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = `https://localhost:7091/api/trackingGroup/edit/${trackingGroupId}`
+        let result = await fetch(url, 
+        {
+            method: 'PATCH',
+            body: 
+            JSON.stringify({"Name":this.state.currentTrackerName}),
+            headers: 
+            {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+    }
     
     componentDidMount()
     {
         this.getTrackingGroupRecords()
+        this.GetAllRecords()
+        this.GetAllTrackingItems()
+        this.GetTrackingGroup()
     }
   render() {
     return (
@@ -102,7 +159,15 @@ export default class ManageTracker extends Component {
                     <div className = 'TrackerFieldsContainer'>
                         <div className='TrackerNameFieldWrapper'>
                             <label className = 'TrackerNameLabel pageText'>Tracker Name: </label>
-                            <input className = 'TrackerNameInputField form-control' type = 'text' value='' onChange = {(e) => this.setState({'currentTrackerName': e.target.value})}/>
+                            <input 
+                                className = 'TrackerNameInputField form-control' 
+                                type = 'text' 
+                                value={this.state.currentTrackerName} 
+                                onChange = {
+                                    (e) => 
+                                    this.setState({'currentTrackerName': e.target.value})
+                                }
+                            />
                         </div>
                         <div className='RecordNameFieldWrapper'>
                             <label className = 'TrackerRecordLabel pageText'>Record Name: </label>
@@ -158,7 +223,7 @@ export default class ManageTracker extends Component {
                             Already Existing Records:
                         </span>
                         <div className='AlreadyExistingRecords'>
-                            {this.state.alreadyExistingRecords.map((alreadyExistingRecord) => {
+                            {this.state.allRecords.map((alreadyExistingRecord) => {
                                 return(
                                     <div className='AlreadyExistingRecord'>
                                         <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
@@ -185,13 +250,13 @@ export default class ManageTracker extends Component {
 
                 <div className='AlreadyExistingRecordsWrapper ItemSectionRecords'>
                         <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
-                            Already Existing Records:
+                            Already Existing Items:
                         </span>
                         <div className='AlreadyExistingRecords'>
-                            {this.state.alreadyExistingRecords.map((alreadyExistingRecord) => {
+                            {this.state.allItems.map((alreadyExistingItem) => {
                                 return(
                                     <div className='AlreadyExistingRecord'>
-                                        <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
+                                        <p className='AlreadyExistingRecordName'>{alreadyExistingItem.name}</p>
                                         <span className='AddTrackingButton'>Add</span>
                                     </div>
                                 )

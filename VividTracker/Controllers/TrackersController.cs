@@ -15,9 +15,6 @@ namespace VividTracker.Controllers
 
         private readonly ITenantsService _tenantsService;
         public TrackersController(ITrackingGroupsService trackingGroupsService,ITenantsService tenantsService)
-
-        public TrackersController(ITrackingGroupsService trackingGroupsService)
-
         {
             _trackingGroupsService = trackingGroupsService;
             _tenantsService = tenantsService;
@@ -63,6 +60,7 @@ namespace VividTracker.Controllers
                 return Ok(result);
             }
             return BadRequest("Error!");
+        }
 
 
         [HttpGet]
