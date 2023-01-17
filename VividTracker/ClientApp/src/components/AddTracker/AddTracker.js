@@ -15,12 +15,11 @@ export class AddTracker extends Component {
         }
     }
 
-    createTracker = (event) => {
+    createTracker(event){
         event.preventDefault();
         var name = this.state.trackerName;
         var record = this.state.trackerRecord;
-        this.createTracker = this.createTracker.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+
         const color = {
             error: "red",
             success: "green"
@@ -40,22 +39,24 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch('https://localhost:7091/api/create/tracker', {
+            fetch('https://localhost:7091/api/trackingGroup/create/1', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ "name": name, "label": record })
+                body: JSON.stringify({
+                    "Name": name,
+                    "Label": record
+                })
             })
                 .then((response) => {
                     if (response.status == 400) {
-                        this.setState({ errorMessage: errors.existingTenant });
+                        this.setState({ errorMessage: errors.existingTracker });
                         this.setState({ textColor: color.error });
                     }
                     else {
                         this.setState({ errorMessage: errors.success });
                         this.setState({ textColor: color.success });
-                        this.props.onTrackerAdded(this.props.value);
                     }
                 });
         }
@@ -69,7 +70,8 @@ export class AddTracker extends Component {
     }
 
     handleChange(event) {
-        this.setState({ value: event.target.value });
+        this.setState({ trackerName: event.target.value });
+        this.setState({ trackerRecord: event.target.value });
     }
     componentDidMount() {
         this.render();
@@ -91,7 +93,7 @@ export class AddTracker extends Component {
                                 />
                                 <label className='recordNameLabel pageText'>Record Name:</label>
                                 <input className='recordNameInputField form-control' type='text'
-                                    onChange={(e) => this.setState({ 'recordName': e.target.value })}
+                                    onChange={(e) => this.setState({ 'trackerRecord': e.target.value })}
                                 />
 
                             </div>
@@ -99,7 +101,7 @@ export class AddTracker extends Component {
                                 <div id="error">
                                     <p style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
                                 </div>
-                                <button className='saveButton' method="post" onClick={() => this.createTracker()}>Save</button>
+                                <button className='saveButton' method="post" onClick={(event) => this.createTracker(event)}>Save</button>
                                 <button className='cancelButton'>
                                     <a href={`https://localhost:44430/trackersList`} id="cancelText" onClick={() => this.clear()}>Cancel</a>
                                 </button>
