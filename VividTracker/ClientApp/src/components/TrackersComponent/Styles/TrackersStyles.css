@@ -2,27 +2,38 @@
     background-color: white;
     position: absolute;
     top: 4.8rem;
-    overflow-y: visible;
-    overflow-x: hidden;
     border-top-left-radius: 5%;
     border-bottom-right-radius: 5%;
     width: 60rem;
-    height: 799px;
+    height: max-content;
+    padding-bottom: 10vh;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 .trackersListHeaderWrapper {
     background-color: #D9D9D9;
     color: #0084B4;
-    margin-top: 2.6875rem;
+    margin-top: 4rem;
 }
 .trackersListHeader {
     margin-left: 2.5rem;
     padding-top: 0.55rem;
     font-weight: 700;
     font-size: 24px;
-}
-.TrackersContainer {
-    /* margin-top: 3.4375rem; */
 }
 
 .trackersListEditButton {

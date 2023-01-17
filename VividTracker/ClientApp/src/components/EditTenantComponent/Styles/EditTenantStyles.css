@@ -1,12 +1,28 @@
-.EditTenantContainer{
+.EditTenantContainer {
+    background-color: white;
     position: absolute;
     top: 4.8rem;
-    background-color: white;
     border-top-left-radius: 5%;
     border-bottom-right-radius: 5%;
     width: 60rem;
-    height: 799px;
+    height: max-content;
+    padding-bottom: 10vh;
 }
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 
 .TenantHeaderWrapper{
     margin-top: 2.6875rem;

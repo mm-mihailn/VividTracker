@@ -1,42 +1,56 @@
-.tenantsContainer{
+.tenantsContainer {
     background-color: white;
     position: absolute;
     top: 4.8rem;
-    overflow-y: visible;
-    overflow-x: hidden;
     border-top-left-radius: 5%;
     border-bottom-right-radius: 5%;
     width: 60rem;
-    height: 799px;
+    height: max-content;
+    padding-bottom: 10vh;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
 
 .tenantsListHeaderWrapper {
     background-color: #D9D9D9;
     color: #0084B4;
-    margin-top: 2.6875rem;
+    margin-top: 4rem;
 }
-.tenantsListHeader{
+
+.tenantsListHeader {
     margin-left: 2.5rem;
     padding-top: 0.55rem;
     font-weight: 700;
     font-size: 24px;
 }
-.TenantsContainer{
-    /* margin-top: 3.4375rem; */
-}
 
-.tenantsListEditButton{
+.tenantsListEditButton {
     font-size: 2rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin-left: 44rem;
-    color:#0080ae;
+    color: #0080ae;
 }
 
-.tenantsListEditButton:hover{
-   cursor: pointer;
-}
-.CreateNewTenantButtonWrapper .CreateNewTenantButton{
+    .tenantsListEditButton:hover {
+        cursor: pointer;
+    }
+
+.CreateNewTenantButtonWrapper .CreateNewTenantButton {
     color: #F28627;
     font-weight: 700;
     font-size: 20px;
@@ -47,13 +61,14 @@
     border-bottom-width: 1px;
     cursor: pointer;
 }
-.CreateNewTenantButtonWrapper{
-    margin-top: 0.8125rem;   
+
+.CreateNewTenantButtonWrapper {
+    margin-top: 0.8125rem;
     margin-bottom: 0.8125rem;
     margin-left: 1rem;
 }
 
-.pageText{
+.pageText {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
@@ -61,13 +76,14 @@
     line-height: 27px;
 }
 
-.EditUsersIcon{
+.EditUsersIcon {
     font-size: larger;
 }
-.EditUsersIcon:hover{
-    cursor: pointer;
-}
 
-.EditTenantIcon:hover{
+    .EditUsersIcon:hover {
+        cursor: pointer;
+    }
+
+.EditTenantIcon:hover {
     cursor: pointer
 }
