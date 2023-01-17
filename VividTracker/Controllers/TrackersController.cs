@@ -60,6 +60,7 @@ namespace VividTracker.Controllers
                 return Ok(result);
             }
             return BadRequest("Error!");
+        }
 
 
         [HttpGet]

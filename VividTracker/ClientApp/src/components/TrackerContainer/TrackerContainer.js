@@ -17,7 +17,9 @@ export default class TrackerContainerComponent extends Component {
                 </div>
                 <div className='ManageTrackerButtonWrapper btn-wrapper ml-auto'>
                     <button className='ManageButton btn'> 
-                        <a href='' className = 'ManageButtonText btn-text'>Manage</a>
+                        <a href={`/manageTracker/${this.props.TrackerData.id}`} className = 'ManageButtonText btn-text'>
+                            Manage
+                        </a>
                     </button>
                 </div>
 

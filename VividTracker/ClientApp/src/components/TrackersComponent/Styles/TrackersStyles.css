@@ -23,6 +23,8 @@
 }
 .TrackersContainer {
     /* margin-top: 3.4375rem; */
+    position: absolute;
+    top: 4rem;
 }
 
 .trackersListEditButton {
