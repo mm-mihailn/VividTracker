@@ -51,16 +51,19 @@ export class AddTracker extends Component {
                     "Label": record
                 })
             })
-                .then((response) => {
-                    if (response.status == 400) {
-                        this.setState({ errorMessage: errors.existingTracker });
-                        this.setState({ textColor: color.error });
-                    }
-                    else {
-                        this.setState({ errorMessage: errors.success });
-                        this.setState({ textColor: color.success });
-                    }
-                });
+            .then((response) => {
+                if (response.status == 400) {
+                    this.setState({ errorMessage: errors.existingTracker });
+                    this.setState({ textColor: color.error });
+                }
+                else {
+                    this.setState({ errorMessage: errors.success });
+                    this.setState({ textColor: color.success });
+                }
+
+            });
+            //this.setState({ errorMessage: errors.success });
+            //this.setState({ textColor: color.success });
         }
     }
 
@@ -100,8 +103,8 @@ export class AddTracker extends Component {
 
                             </div>
                             <div className='trackerButtons'>
-                                <div id="error">
-                                    <p style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
+                                <div>
+                                    <p id="error" style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
                                 </div>
                                 <button className='saveButton' type="submit" method="post" onClick={(event) => this.createTracker(event)}>Save</button>
                                 <button className='cancelButton'>
