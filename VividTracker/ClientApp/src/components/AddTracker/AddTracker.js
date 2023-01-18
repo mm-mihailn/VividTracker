@@ -13,6 +13,8 @@ export class AddTracker extends Component {
             errorMessage: '',
             textColor: ''
         }
+        this.createTracker = this.createTracker.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     createTracker(event){
@@ -101,7 +103,7 @@ export class AddTracker extends Component {
                                 <div id="error">
                                     <p style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
                                 </div>
-                                <button className='saveButton' method="post" onClick={(event) => this.createTracker(event)}>Save</button>
+                                <button className='saveButton' type="submit" method="post" onClick={(event) => this.createTracker(event)}>Save</button>
                                 <button className='cancelButton'>
                                     <a href={`https://localhost:44430/trackersList`} id="cancelText" onClick={() => this.clear()}>Cancel</a>
                                 </button>
