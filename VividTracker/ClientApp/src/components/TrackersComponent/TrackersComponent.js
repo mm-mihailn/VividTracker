@@ -3,8 +3,8 @@ import './Styles/TrackersContainerStyles.css'
 import './Styles/TrackersStyles.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-//import { AddTenant } from "../AddTenant/AddTenant.js"
-import TrackerContainerComponent from './TrackerContainerComponent';
+import TrackerContainerComponent from './TrackerContainerComponent'
+import { AddTracker } from "../AddTracker/AddTracker.js"
 
 export default class TrackersComponent extends Component {
     constructor(props) {
@@ -31,9 +31,9 @@ export default class TrackersComponent extends Component {
                         <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
                     </div>
                     <div className="container">
-                        <button type="button" id="" className="btn btn-link link_orange ps-5" data-bs-toggle="" data-bs-target="">
+                        <a className=" link_orange ps-5" data-bs-toggle=""  href={`https://localhost:44430/createTracker`}>
                             CreateNewTracker()
-                        </button>
+                        </a>
                     </div>
                     <div className='TrackersContainer'>
                         {
@@ -44,13 +44,14 @@ export default class TrackersComponent extends Component {
                             )
                          })
                                 :
-                                <div className="container">
-                                    <p className='pageText ps-5'>Trackers do not exist for this tenant.</p></div>
+                            <div className="container">
+                                <p className='pageText ps-5'>Trackers do not exist for this tenant.</p>
+                            </div>
                          }
 
                     </div>
                     <div className="container">
-                        <button type="button" id="" className="btn btn-link link_orange align-end " data-bs-toggle="" data-bs-target="">
+                        <button type="button" id="" className=" link_orange align-end " data-bs-toggle="" data-bs-target="">
                             ...archivedTrackers
                         </button>
                     </div>

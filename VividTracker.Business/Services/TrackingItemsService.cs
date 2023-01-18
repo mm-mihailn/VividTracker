@@ -43,6 +43,9 @@
             }
             return null;
         }
-
+        public async Task<TrackingItem> GetTrackingItemById(int trackingItem)
+        {
+            return await _trackingItemsRepository.GetTrackingItemById(trackingItem);
+        }
     }
 }

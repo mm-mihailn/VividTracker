@@ -19,39 +19,40 @@ export default class TenantTrackerItemsList extends Component {
   async loadTrackers() {
         let splittedURL = window.location.pathname.split('/')
         let targetTenantID = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/trackingItems/${Number(targetTenantID)}`)
+        await fetch(`https://localhost:7091/api/trackers/${Number(targetTenantID)}`)
         .then(async (res) => 
             {
                 let tenantData = await res.json()
-                this.setState({'trackers': tenantData.trackingItems})
+                this.setState({'trackers': tenantData})
             }
         )
+        .catch((err) => {
+          console.log(err)
+        })
   }
   render() {
     return (
-        <div className='TrackersListWrapper d-flex justify-content-center align-items-center'>
-        <h1>All Tenants </h1>
+      <div className='TrackersListWrapper d-flex justify-content-center align-items-center'>
         <div className='trackersContainer'>
             <div className='trackersListHeaderWrapper d-flex'>
                 <h4 className='trackersListHeader'>Trackers List</h4>
                 <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
             </div>
-                <div className='CreateNewTrackerButtonWrapper'>
-                     <AddTracker onTrackerAdded={this.loadTrackers} />
-                </div>
+            <div className='CreateNewTrackerButtonWrapper'>
+                <AddTracker onTrackerAdded={this.loadTrackers} />
+            </div>
             {this.state.trackers.length >= 1 ?
-            <div className='TrackersContainer'>
-                    {this.state.trackers.map((tracker) => {
-                        return(
-                          <TrackerContainerComponent TrackerData = {tracker}/>
-                        )
-                    })}
-            </div>
+              <div className='TrackersContainer'>
+                      {this.state.trackers.map((tracker) => {
+                          return(
+                            <TrackerContainerComponent TrackerData = {tracker}/>
+                          )
+                      })}
+              </div>
             :
-            <div className='TrackersContainer'>
-              <p>No trackers found for this tenant.</p>
-            </div>
-
+              <div className='TrackersContainer errorMessage'>
+                <p>No trackers found for this tenant.</p>
+              </div>
             }
         </div>
       </div>
