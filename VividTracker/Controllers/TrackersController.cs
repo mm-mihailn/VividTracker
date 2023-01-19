@@ -14,6 +14,7 @@ namespace VividTracker.Controllers
         private readonly ITrackingGroupsService _trackingGroupsService;
 
         private readonly ITenantsService _tenantsService;
+
         public TrackersController(ITrackingGroupsService trackingGroupsService,ITenantsService tenantsService)
         {
             _trackingGroupsService = trackingGroupsService;
@@ -32,6 +33,7 @@ namespace VividTracker.Controllers
             }
             return Ok(trackingGroups);
         }
+
         [HttpPatch]
         [Route("api/trackingGroup/edit/{trackingGroupId}")]
         public async Task<IActionResult> EditTrackingGroupName([FromRoute] int trackingGroupId, [FromBody] TrackerRequestModel trackerRequestModel)
@@ -51,39 +53,26 @@ namespace VividTracker.Controllers
         public async Task<IActionResult> CreateTrackingGroup([FromRoute] int tenandId, [FromBody] TrackingGroupRequestModel trackingGroupRequestModel)
         {
             var tenant = await _tenantsService.GetTenantByIdAsync(tenandId);
-
+           
             var tracker = trackingGroupRequestModel.ToCreateTrackingGroup(tenant);
             var result = await _trackingGroupsService.CreateTrackingGroup(tracker);
 
-            if (result != null)
+            if (result == null)
+            {
+                return BadRequest("The tracker already exists");
+            }
+            else
             {
                 return Ok(result);
             }
-            return BadRequest("Error!");
-        }
 
+        }
 
         [HttpGet]
         [Route("api/trackers")]
         public async Task<IEnumerable<TrackingGroup>> GetAllTrackers()
         {
             return await _trackingGroupsService.GetTrackersAsync();
-        }
-
-        [HttpPost]
-        [Route("api/create/tracker")]
-        public async Task<IActionResult> CreateTracker([FromBody] TrackingGroup createTracker)
-        {
-            var tracker = await _trackingGroupsService.GetTrackerByNameAsync(createTracker.Name);
-
-            if (tracker != null)
-            {
-                return BadRequest("The tracker already exists");
-            }
-
-            await _trackingGroupsService.AddTrackerAsync(createTracker);
-            return Ok(createTracker);
-
         }
     }
 }

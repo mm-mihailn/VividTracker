@@ -4,7 +4,6 @@ import './Styles/TrackersStyles.css'
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TrackerContainerComponent from './TrackerContainerComponent'
-import { AddTracker } from "../AddTracker/AddTracker.js"
 
 export default class TrackersComponent extends Component {
     constructor(props) {
@@ -31,7 +30,7 @@ export default class TrackersComponent extends Component {
                         <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
                     </div>
                     <div className="container">
-                        <a className=" link_orange ps-5" data-bs-toggle=""  href={`https://localhost:44430/createTracker`}>
+                        <a className=" link_orange ps-5" data-bs-toggle="" href={`https://localhost:44430/createTrackingGroup`}>
                             CreateNewTracker()
                         </a>
                     </div>
@@ -39,8 +38,8 @@ export default class TrackersComponent extends Component {
                         {
                             this.state.trackers.length >= 1 ?
                             this.state.trackers.map((tracker) => {
-                            return (
-                                <TrackerContainerComponent trackerData={tracker} />
+                                return (
+                                    <TrackerContainerComponent trackerData={tracker}/>
                             )
                          })
                                 :

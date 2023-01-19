@@ -31,21 +31,27 @@ namespace VividTracker.Business.Services
        public async Task<TrackingGroup> UpdateTrackingGroupName(TrackingGroup trackingGroup)
         {
             var tracker = await _trackingGroupsRepository.FindTrackingGroup(trackingGroup.Id);
-            if (tracker != null)
-            {
-                if (tracker.Name == trackingGroup.Name)
+            
+                if (tracker != null)
                 {
-                    return null;
+                    if (tracker.Name == trackingGroup.Name)
+                    {
+                        return null;
+                    }
+                    tracker.Name = trackingGroup.Name;
+                    await _trackingGroupsRepository.UpdateAsync(tracker);
+                    return tracker;
                 }
-                tracker.Name = trackingGroup.Name;
-                await _trackingGroupsRepository.UpdateAsync(tracker);
-                return tracker;
-            }
-            return null;
+                return null;
         }
 
         public async Task<TrackingGroup> CreateTrackingGroup(TrackingGroup trackingGroup)
         {
+            var isExist = await _trackingGroupsRepository.GetTrackerByName(trackingGroup.Name);
+            if (isExist != null)
+            {
+                return null;
+            }
             return await _trackingGroupsRepository.AddAsync(trackingGroup);
         }
 
