@@ -53,16 +53,19 @@ namespace VividTracker.Controllers
         public async Task<IActionResult> CreateTrackingGroup([FromRoute] int tenandId, [FromBody] TrackingGroupRequestModel trackingGroupRequestModel)
         {
             var tenant = await _tenantsService.GetTenantByIdAsync(tenandId);
-
-            var trackingGroup = await _trackingGroupsService.GetTrackerByNameAsync(trackingGroupRequestModel.Name);
+           
             var tracker = trackingGroupRequestModel.ToCreateTrackingGroup(tenant);
             var result = await _trackingGroupsService.CreateTrackingGroup(tracker);
 
-            if (trackingGroup != null)
+            if (result == null)
             {
                 return BadRequest("The tracker already exists");
             }
-            return Ok(result);
+            else
+            {
+                return Ok(result);
+            }
+
         }
 
         [HttpGet]
