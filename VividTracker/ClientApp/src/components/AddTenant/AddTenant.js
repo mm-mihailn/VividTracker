@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import './AddTenant.css';
+import {endpoints} from "../../endpoints";
 
 export class AddTenant extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ export class AddTenant extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch('https://localhost:7091/api/create', {
+            fetch(endpoints.createTenant(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

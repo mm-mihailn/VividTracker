@@ -28,25 +28,27 @@
     color: #0084B4;
     margin-top: 4rem;
 }
-.tenantsListHeader{
+
+.tenantsListHeader {
     margin-left: 2.5rem;
     padding-top: 0.55rem;
     font-weight: 700;
     font-size: 24px;
 }
 
-.tenantsListEditButton{
+.tenantsListEditButton {
     font-size: 2rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin-left: 44rem;
-    color:#0080ae;
+    color: #0080ae;
 }
 
-.tenantsListEditButton:hover{
-   cursor: pointer;
-}
-.CreateNewTenantButtonWrapper .CreateNewTenantButton{
+    .tenantsListEditButton:hover {
+        cursor: pointer;
+    }
+
+.CreateNewTenantButtonWrapper .CreateNewTenantButton {
     color: #F28627;
     font-weight: 700;
     font-size: 20px;
@@ -57,13 +59,14 @@
     border-bottom-width: 1px;
     cursor: pointer;
 }
-.CreateNewTenantButtonWrapper{
-    margin-top: 0.8125rem;   
+
+.CreateNewTenantButtonWrapper {
+    margin-top: 0.8125rem;
     margin-bottom: 0.8125rem;
     margin-left: 1rem;
 }
 
-.pageText{
+.pageText {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
@@ -71,14 +74,15 @@
     line-height: 27px;
 }
 
-.EditUsersIcon{
+.EditUsersIcon {
     font-size: larger;
 }
-.EditUsersIcon:hover{
-    cursor: pointer;
-}
 
-.EditTenantIcon:hover{
+    .EditUsersIcon:hover {
+        cursor: pointer;
+    }
+
+.EditTenantIcon:hover {
     cursor: pointer
 }
 
