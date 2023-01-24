@@ -7,6 +7,15 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+@font-face {
+    font-family: 'Open Sanss';
+    src: url('/css/OpenSans.woff') format('woff');
+}
+
+.Font_OpenSans{
+    font-family:'Open Sanss'
+}
+
 a {
   color: #0077cc;
 }
