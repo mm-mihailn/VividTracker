@@ -15,6 +15,6 @@
         Task<IEnumerable<User>> GetUsersByTenantId(int id);
         Task<User> AddUser(int tenantId,User user);
         User GetUserByEmail(string email);
-        Task UnDeleteUser(User user);
+        Task UnDeleteUser(User user,int tenantId);
     }
 }

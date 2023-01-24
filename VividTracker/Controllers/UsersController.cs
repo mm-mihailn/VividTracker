@@ -71,7 +71,7 @@
 
             if (targetUser != null && targetUser.IsDeleted == true)
             {
-                await _usersService.UnDeleteUser(targetUser);
+                await _usersService.UnDeleteUser(targetUser,tenantId);
                 return Ok("User is added again!");
             }
             else if(targetUser != null && targetUser.IsDeleted == false)
