@@ -2,6 +2,7 @@
 import { faPenToSquare, faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './AddTracker.css';
+import { endpoints } from "../../endpoints";
 
 export class AddTracker extends Component {
     
@@ -41,7 +42,7 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch('https://localhost:7091/api/trackingGroup/create/1', {
+            fetch(endpoints.createTracker(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -62,8 +63,6 @@ export class AddTracker extends Component {
                 }
 
             });
-            //this.setState({ errorMessage: errors.success });
-            //this.setState({ textColor: color.success });
         }
     }
 
