@@ -38,7 +38,7 @@ export default class TenantsComponent extends Component {
                         <div className='TenantsContainer'>
                             {this.state.tenants.map((tenant) => {
                                 return (
-                                    <TenantContainerComponent tenantData={tenant} />
+                                    <TenantContainerComponent tenantData={tenant} key = {tenant.id}/>
                                 )
                             })}
                         </div>
