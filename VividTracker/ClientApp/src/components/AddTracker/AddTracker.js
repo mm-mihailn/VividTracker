@@ -18,10 +18,11 @@ export class AddTracker extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    createTracker(event){
-        event.preventDefault();
+    createTracker(tenantId){
         var name = this.state.trackerName;
         var record = this.state.trackerRecord;
+        let splittedURL = window.location.pathname.split('/')
+        tenantId = splittedURL[splittedURL.length - 1]
 
         const color = {
             error: "red",
@@ -42,14 +43,15 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch(endpoints.createTracker(), {
+            fetch(endpoints.createTracker(tenantId), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     "Name": name,
-                    "Label": record
+                    "Label": record,
+                    "TenantId": tenantId
                 })
             })
             .then((response) => {
@@ -105,7 +107,7 @@ export class AddTracker extends Component {
                                 <div>
                                     <p id="error" style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
                                 </div>
-                                <button className='saveButton' type="submit" method="post" onClick={(event) => this.createTracker(event)}>Save</button>
+                                <button className='saveButton' type="submit" method="post" onClick={(tenantId) => this.createTracker(tenantId)}>Save</button>
                                 <button className='cancelButton'>
                                     <a href={`https://localhost:44430/trackersList`} id="cancelText" onClick={() => this.clear()}>Cancel</a>
                                 </button>

@@ -95,7 +95,7 @@ export class AddTenant extends Component {
                                             className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                                         />
                                         <div className="modal-footer border-0">
-                                            <div id="error">
+                                            <div id="errorTenant">
                                                 <p style={{ color: this.state.textColor }}>{this.state.errorMessage}</p>
                                             </div>
                                             <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal"

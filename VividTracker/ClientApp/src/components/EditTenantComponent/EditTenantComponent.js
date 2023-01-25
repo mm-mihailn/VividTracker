@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/EditTenantStyles.css'
 import TenantTrackerComponent from '../TenantTrackerComponent/TenantTrackerComponent';
 import InviteUserModal from '../InviteUserModal/InviteUserModal';
+import { endpoints } from '../../endpoints';
 
 export default class EditTenantComponent extends Component {
     constructor()
@@ -18,17 +19,17 @@ export default class EditTenantComponent extends Component {
         
     } 
 
-    getTenantUsers = async() => {
+    getTenantUsers = async(tenantId) => {
         let splittedURL = window.location.pathname.split('/')
-        let targetTenantID = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/users/${Number(targetTenantID)}`)
+        tenantId = splittedURL[splittedURL.length - 1]
+        await fetch(endpoints.getTenantUsers(tenantId))
         .then(async (res) => this.setState({'trackers': await res.json()}))
     }
 
-    getTenantName = async() => {
+    getTenantName = async(tenantId) => {
         let splittedURL = window.location.pathname.split('/')
-        let targetTenantID = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/tenant/${Number(targetTenantID)}`)
+        tenantId = splittedURL[splittedURL.length - 1]
+        await fetch(endpoints.getTenantName(tenantId))
         .then(async (res) => 
             {
                 let tenantData = await res.json()
@@ -38,11 +39,11 @@ export default class EditTenantComponent extends Component {
         )
     }
 
-    updateTenantName = async() => {
+    updateTenantName = async(tenantId) => {
         let splittedURL = window.location.pathname.split('/')
-        let targetTenantID = splittedURL[splittedURL.length - 1]
+        tenantId = splittedURL[splittedURL.length - 1]
         this.state.tenantData.name = this.state.currentTenantName
-        let result = await fetch(`https://localhost:7091/api/edit/${Number(targetTenantID)}`, 
+        let result = await fetch(endpoints.updateTenantName(tenantId), 
         {
             method: 'PATCH',
             headers: {
@@ -57,7 +58,19 @@ export default class EditTenantComponent extends Component {
 
         window.location.reload()
     }
-    
+    //TODO reset the tenant's name
+    resetTenantName = async (tenantId) => {
+        // currentTenantName
+        let pageLocationSplitted = window.location.href.split('/')
+        tenantId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.resetTenantName(tenantId)
+        let result = await fetch(url).then((
+            async (res) => {
+                let result = await res.json()
+                this.setState({ 'currentTenantName': result[0].name })
+            }))
+    }
+
     render() {
         return (
             <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
@@ -73,7 +86,7 @@ export default class EditTenantComponent extends Component {
                               <input className = 'TenantNameInputField form-control' type = 'text' value={this.state.currentTenantName} onChange = {(e) => this.setState({'currentTenantName': e.target.value})}/>
                           </div>
                           <div className='TenantButtons'>
-                              <span className='ResetButton'>Reset</span>
+                              <span className='ResetButton' onClick={() => this.resetTenantName()}>Reset</span>
                               <button className='UpdateButton' onClick={() => this.updateTenantName()}>Update</button>
                           </div>
                       </div>

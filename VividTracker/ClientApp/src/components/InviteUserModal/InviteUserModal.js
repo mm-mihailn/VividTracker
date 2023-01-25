@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import './Styles/InviteUserModalStyles.css'
+import { endpoints } from '../../endpoints';
 export default class InviteUserModal extends Component {
 
   constructor()
@@ -20,13 +21,13 @@ export default class InviteUserModal extends Component {
     await this.getCurrentTenantData()
   } 
 
-  getCurrentTenantData = async() =>
+  getCurrentTenantData = async(tenantId) =>
   {
     let currentURL = window.location.href.split('/')
-    let currentTenantID = Number(currentURL[currentURL.length - 1])
-    await fetch(`https://localhost:7091/api/users/${currentTenantID}`).then(async (res) =>{ 
-      let result = await res.json()
-      this.setState({'currentTenantUsers': result})
+    tenantId = Number(currentURL[currentURL.length - 1])
+    await fetch(endpoints.getCurrentTenantData(tenantId)).then(async (res) => { 
+    let result = await res.json()
+    this.setState({'currentTenantUsers': result})
     })
     .catch((err) => {
       console.log(err)
@@ -50,14 +51,14 @@ export default class InviteUserModal extends Component {
           else
           {
             let currentURL = window.location.href.split('/')
-            let currentTenantID = Number(currentURL[currentURL.length - 1])
-            let result = await fetch(`https://localhost:7091/api/create/${Number(currentTenantID)}`, {
+            let tenantId = Number(currentURL[currentURL.length - 1])
+            let result = await fetch(endpoints.inviteUser(tenantId), {
               
-                method: 'POST',
-                headers: {
-                 'Content-Type': 'application/json',
-                 },
-                body: JSON.stringify({email:this.state.email})
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+            body: JSON.stringify({email:this.state.email})
             })
             .then((res) => {
               console.log(res)
@@ -71,8 +72,8 @@ export default class InviteUserModal extends Component {
       else
       {
             let currentURL = window.location.href.split('/')
-            let currentTenantID = Number(currentURL[currentURL.length - 1])
-            let result = await fetch(`https://localhost:7091/api/create/${currentTenantID}`, {
+            let tenantId = Number(currentURL[currentURL.length - 1])
+            let result = await fetch(endpoints.inviteUser(tenantId), {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

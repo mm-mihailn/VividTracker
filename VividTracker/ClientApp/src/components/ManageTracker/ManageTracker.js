@@ -3,6 +3,7 @@ import './Styles/ManageTracker.css'
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faL } from '@fortawesome/free-solid-svg-icons';
+import { endpoints } from '../../endpoints';
 export default class ManageTracker extends Component {
     constructor()
     {
@@ -75,10 +76,10 @@ export default class ManageTracker extends Component {
         }
     }
 
-    getTrackingGroupRecords = async() => {
+    getTrackingGroupRecords = async(trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = `https://localhost:7091/api/trackingGroupRecords/${Number(trackingGroupId)}`
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.getTrackingGroupRecords(trackingGroupId)
         let result = await fetch(url).then((
             async(res) => {
                 let result = await res.json()
@@ -112,10 +113,10 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    GetTrackingGroup = async() => {
+    GetTrackingGroup = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.GetTrackingGroup(trackingGroupId)
         let result = await fetch(url).then((
             async(res) => {
                 let result = await res.json()
@@ -124,10 +125,10 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    updateTrackerName = async() => {
+    updateTrackerName = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = `https://localhost:7091/api/trackingGroup/edit/${trackingGroupId}`
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.updateTrackerName(trackingGroupId)
         let result = await fetch(url, 
         {
             method: 'PATCH',
@@ -141,10 +142,10 @@ export default class ManageTracker extends Component {
     }
 
 
-    GetCurrentTrackerItems = async() => {
+    GetCurrentTrackerItems = async(trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.GetCurrentTrackerItems(trackingGroupId)
 
         let result = await fetch(url).then((
             async(res) => {
@@ -153,11 +154,11 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    ResetNames = async() => {
+    ResetNames = async(trackingGroupId) => {
         // currentTrackerName
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.ResetNames(trackingGroupId)
         let result = await fetch(url).then((
             async(res) => {
                 let result = await res.json()

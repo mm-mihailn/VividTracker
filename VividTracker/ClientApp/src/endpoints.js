@@ -1,5 +1,21 @@
 const apiBaseUrl = 'https://localhost:7091'
 export const endpoints = {
     createTenant: () => `${apiBaseUrl}/api/create`,
-    createTracker: () => `${apiBaseUrl}/api/trackingGroup/create/1`
+    loadTrackers: (tenantId) => `${apiBaseUrl}/api/trackers/${tenantId}`,
+    createTracker: (tenantId) => `${apiBaseUrl}/api/trackingGroup/create/${tenantId}`,
+    loadTenants: () => `${apiBaseUrl}/api/tenants`,
+    createTrackingItem: (tenantId) => `${apiBaseUrl}/api/trackingItems/create/${tenantId}`,
+    getTenantUsers: (tenantId) => `${apiBaseUrl}/api/users/${tenantId}`,
+    getTenantName: (tenantId) => `${apiBaseUrl}/api/tenant/${tenantId}`,
+    updateTenantName: (tenantId) => `${apiBaseUrl}/api/edit/${tenantId}`,
+    getTrackingGroupRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupRecords/${trackingGroupId}`,
+    GetTrackingGroup: (trackingGroupId) => `${apiBaseUrl}/api/trackers/${trackingGroupId}`,
+    updateTrackerName: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroup/edit/${trackingGroupId}`,
+    GetCurrentTrackerItems: (trackingGroupId) => `${apiBaseUrl}/api/trackers/${trackingGroupId}`,
+    ResetNames: (trackingGroupId) => `${apiBaseUrl}/api/trackers/${trackingGroupId}`,
+    editTracker: (trackerId) => `${apiBaseUrl}/api/editTracker/${trackerId}`,
+    RemoveUser: (userId) => `${apiBaseUrl}/api/delete/${userId}`,
+    getCurrentTenantData: (tenantId) => `${apiBaseUrl}/api/users/${tenantId}`,
+    inviteUser: (tenantId) => `${apiBaseUrl}/api/create/${tenantId}`,
+    resetTenantName: (tenantId) => `${apiBaseUrl}/api/tenants/${tenantId}`,
 }
