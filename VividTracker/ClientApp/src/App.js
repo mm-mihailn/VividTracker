@@ -33,6 +33,9 @@ export default class App extends Component {
 
         <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
 
+        <AuthorizeRoute path='/createTrackingGroup' component={AddTracker} />
+        <AuthorizeRoute path='/trackersList' component={TrackersComponent} />
+
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>

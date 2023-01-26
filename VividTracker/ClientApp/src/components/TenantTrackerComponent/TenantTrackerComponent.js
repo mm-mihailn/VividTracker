@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { endpoints } from '../../endpoints'
 import './Styles/TenantTrackerStyles.css'
 
 export default class TenantTrackerComponent extends Component {
-    RemoveUser = async(userID) => {
-        await fetch(`https://localhost:7091/api/delete/${userID}`, {
+    RemoveUser = async (userId) => {
+        await fetch(endpoints.RemoveUser(userId), {
             method: 'DELETE'
         })
         .then((res) => {
@@ -27,7 +28,7 @@ export default class TenantTrackerComponent extends Component {
                 </div>
                 <div className='ManageTenantTrackerButtonWrapper'>
                     <button className='ManageTenantTrackerButton'>
-                        <a href={`https://localhost:44430/editTracker/${this.props.tracker.id}`} className = 'ManageButtonText'>Manage</a>
+                        <a href={endpoints.editTracker(this.props.tracker.id)} className='ManageButtonText'>Manage</a>
                     </button>
                 </div>
             </div>

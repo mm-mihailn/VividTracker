@@ -14,7 +14,7 @@ export default class TenantContainerComponent extends Component {
                     <a href={`https://localhost:44430/editTenant/${this.props.tenantData.id}`} className = 'ManageButtonText'>Manage</a>
                 </button>
             </div>
-    </div>
+        </div>
     )
   }
 }
