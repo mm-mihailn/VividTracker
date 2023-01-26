@@ -3,6 +3,7 @@ import {faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/CreateTrackerItemDetails.css'
 import { Link } from "react-router-dom";
+import { endpoints } from '../../endpoints';
 export default class CreateTrackerItemDetails extends Component {
 
     constructor()
@@ -21,10 +22,10 @@ export default class CreateTrackerItemDetails extends Component {
   }
 
 
-  createTrackingItem = async () => {
+  createTrackingItem = async (tenantId) => {
     let pageLocationSplitted = window.location.href.split('/')
-    let tenantID = pageLocationSplitted[pageLocationSplitted.length - 1]
-    let url = `https://localhost:7091/api/trackingItems/create/${tenantID}`
+    tenantId = pageLocationSplitted[pageLocationSplitted.length - 1]
+    let url = endpoints.createTrackingItem(tenantId)
     await fetch(url, {
         method: 'POST',
         body: JSON.stringify({"Name": this.state.trackingItemName, Type: this.state.trackingItemType}),

@@ -1,9 +1,10 @@
-﻿import React, { Component } from 'react'
-import './Styles/TrackersContainerStyles.css'
-import './Styles/TrackersStyles.css'
+﻿import React, { Component } from 'react';
+import './Styles/TrackersContainerStyles.css';
+import './Styles/TrackersStyles.css';
 import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import TrackerContainerComponent from './TrackerContainerComponent'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TrackerContainerComponent from './TrackerContainerComponent';
+import { endpoints } from '../../endpoints';
 
 export default class TrackersComponent extends Component {
     constructor(props) {
@@ -14,9 +15,9 @@ export default class TrackersComponent extends Component {
     async componentDidMount() {
         this.loadTrackers();
     }
-    async loadTrackers() {
+    async loadTrackers(tenantId) {
         let splittedURL = window.location.pathname.split('/')
-        let tenantId = splittedURL[splittedURL.length - 1]
+        tenantId = splittedURL[splittedURL.length - 1]
         await fetch(`https://localhost:7091/api/TrackersList/${Number(tenantId)}`)
             .then((res) => res.json())
             .then((res) => this.setState({ trackers: res }))
