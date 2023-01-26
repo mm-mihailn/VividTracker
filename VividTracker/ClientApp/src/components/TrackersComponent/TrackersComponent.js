@@ -17,7 +17,7 @@ export default class TrackersComponent extends Component {
     async loadTrackers() {
         let splittedURL = window.location.pathname.split('/')
         let tenantId = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/trackers/${Number(tenantId)}`)
+        await fetch(`https://localhost:7091/api/TrackersList/${Number(tenantId)}`)
             .then((res) => res.json())
             .then((res) => this.setState({ trackers: res }))
     }
