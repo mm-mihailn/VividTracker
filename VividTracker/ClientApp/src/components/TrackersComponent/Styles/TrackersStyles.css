@@ -5,8 +5,9 @@
     border-top-left-radius: 5%;
     border-bottom-right-radius: 5%;
     width: 60rem;
-    height: max-content;
+    height: -webkit-fill-available;
     padding-bottom: 10vh;
+    margin-bottom: 70px;
 }
 
 ::-webkit-scrollbar {
@@ -36,9 +37,8 @@
     font-size: 24px;
 }
 .TrackersContainer {
-    /* margin-top: 3.4375rem; */
-    position: absolute;
-    top: 4rem;
+/*    position: absolute;
+    top: 4rem;*/
 }
 
 .trackersListEditButton {

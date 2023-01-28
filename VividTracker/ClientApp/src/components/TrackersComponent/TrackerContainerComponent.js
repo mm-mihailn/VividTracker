@@ -5,7 +5,7 @@ export default class TrackerContainerComponent extends Component {
     
   render() {
     return (
-        <div className='TrackerContainer d-flex' key={this.props.trackerData?.id}>
+        <div className='MyTrackerContainer d-flex' key={this.props.trackerData?.id}>
             <div className='TrackerNameWrapper'>
                 <span className='trackerName pageText'> {this.props.trackerData?.name} </span>
             </div>

@@ -2,194 +2,208 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+	ViewData["Title"] = "Log in";
 }
-
+<head><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"></head>
 <style>
-    body {
-        background-color: #0084B4;
-    }
+	body {
+		background-color: #0084B4;
+	}
 
-    form {
-        background-color: #ffffff;
-        border: 5px solid #0084B4;
-        padding-top: 25px;
-        padding-bottom: 25px;
-        border-radius: 30px;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 0;
-        box-sizing: border-box;
-    }
+	form {
+		background-color: #ffffff;
+		border: 5px solid #0084B4;
+		padding-top: 25px;
+		padding-bottom: 25px;
+		border-radius: 30px;
+		border-top-right-radius: 0;
+		border-bottom-left-radius: 0;
+		box-sizing: border-box;
+	}
 
-    label {
-        margin-right: 20px;
-    }
+	label {
+		margin-right: 20px;
+	}
 
-    .inputs {
-        padding: 25px;
-        padding-right: 25px;
-        font-size:18px;
+	.inputs {
+		padding: 25px;
+		padding-right: 25px;
+		font-size: 18px;
+	}
 
-    }
+	.input {
+		border: 0px;
+		background: #F3F3F3;
+		border-bottom: 1px solid #000000;
+		width: 100%;
+		display: flex;
+	}
 
-    .input {
-        border: 0px;
-        background: #F3F3F3;
-        border-bottom: 1px solid #000000;
-        width: 100%;
-        display: flex;
-    }
+	#title {
+		background-color: #D9D9D9;
+		color: #0084B4;
+		width: 100%;
+		font-style: normal;
+		font-size: 24px;
+		line-height: 33px;
+		display: flex;
+		align-items: center;
+		padding: 6px;
+		padding-left: 20px;
+		font-weight: 600;
+	}
 
-    #title {
-        background-color: #D9D9D9;
-        color: #0084B4;
-        width: 100%;
-        font-style: normal;
-        font-size: 24px;
-        line-height: 33px;
-        display: flex;
-        align-items: center;
-        padding-left: 20px;
-    }
+	#login-submit {
+		left: 60px;
+		align-items: center;
+		text-align: center;
+		border-radius: 35px;
+		background-color: #0084B4;
+		height: 80%;
+		font-family: 'Open Sans';
+		font-size: 18px;
+	}
 
-    #login-submit {
-        left: 60px;
-        align-items: center;
-        text-align: center;
-        border-radius: 35px;
-        background-color: #0084B4;
-        height:80%;
-        font-family: 'Open Sans'; 
-        font-size:18px;
-    }
+	#back-btn {
+		background-color: #ffffff;
+		text-align: center;
+		text-decoration-line: underline;
+		text-decoration-thickness: 1px;
+		color: #0084B4;
+		border: 0px;
+		border-radius: 35px;
+		text-align: center;
+		border-radius: 35px;
+		height: 80%;
+		font-family: 'Open Sans';
+		font-size: 18px;
+	}
 
-    #back-btn {
-        background-color: #ffffff;
-        text-align: center;
-        text-decoration-line: underline;
-        text-decoration-thickness:1px;
-        color: #0084B4;
-        border: 0px;
-        border-radius: 35px;
-        text-align: center;
-        border-radius: 35px;
-        height:80%;
-        font-family: 'Open Sans'; 
-        font-size:18px;
-    }
-    #forgot-password{
-        color:#F28627;
-        text-decoration-line: underline;
-        text-decoration-thickness:1px;
-    }
-    input:invalid {
-     border-bottom: 2px solid #F03C31;
-    }
-    input:focus{
-       outline: none;
-        border-bottom: 1px solid #F28627;
-    }
+	#forgot-password {
+		color: #F28627;
+		text-decoration-line: underline;
+		text-decoration-thickness: 1px;
+	}
+
+	input:invalid {
+		border-bottom: 2px solid #F03C31;
+	}
+
+	input:focus {
+		outline: none;
+		border-bottom: 1px solid #F28627;
+	}
+
+	@@font-face {
+		font-family: 'Open Sans';
+		src: url("@Url.Content("~/css/OpenSans.woff")") format('woff');
+	}
+
+	.Font_OpenSans {
+		font-family: 'Open Sans'
+	}
 </style>
 
 
 
-<section>
-    <div class="ps-lg-5 pe-lg-5">
-    <div class="m-sm-5 ps-sm-5 pe-sm-5 pt-sm-1">
-    <div class="m-md-5  ps-ms-5 pe-ms-5 pt-3">
-    <form id="account" method="post">
-        <h2 id="title">Login</h2>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="inputs">
-            <div class="form-group row">
-                <label for="staticEmail" class="col-sm-2 col-form-label ">Email:</label>
-                <div class="form-floating col-sm-9">
-                    <input asp-for="Input.Email" class="input pe-0" autocomplete="username" aria-required="true" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
-                <div class="form-floating col-sm-9">
-                    <input asp-for="Input.Password" class="input" autocomplete="current-password"
-                        aria-required="true" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <a id="forgot-password" class="text-end pe-4" asp-page="./ForgotPassword">StartForgotPasswordFlow()</a>
-            </div>
-        </div>
 
-        <div class="row ps-4 pe-4">
-            <div class="gap-3 d-md-flex justify-content-md-end ps-4 pe-4">
-                <a href="https://localhost:44430/" id="back-btn" class="btn btn-lg btn-primary pt-0 pb-0">Back</a>
-                <button id="login-submit" type="submit" class="btn btn-lg btn-primary  pt-0 pe-4 ps-4 ">Login</button>
-            </div>
-        </div>
-    </form>
-    </div>
-    </div>
-    </div>
-        <!-- #region Unwanted_features -->
-        @*<div>
-            <div class="checkbox">
-            <label asp-for="Input.RememberMe" class="form-label">
-            <input class="form-check-input" asp-for="Input.RememberMe" />
-            @Html.DisplayNameFor(m => m.Input.RememberMe)
-            </label>
-            </div>
-            </div>
-            <div>
-           
-            <p>
-            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-            </p>
-            <p>
-            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-            </p>
-            </div>*@
-        <!-- #endregion -->
-   
+<section class="Font_OpenSans" style="">
+	<div class="ps-lg-5 pe-lg-5">
+		<div class="m-sm-5 ps-sm-5 pe-sm-5 pt-sm-1">
+			<div class="m-md-5  ps-ms-5 pe-ms-5 pt-3">
+				<form id="account" method="post">
+					<h2 id="title">Login</h2>
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<div class="inputs">
+						<div class="form-group row">
+							<label for="staticEmail" class="col-sm-2 col-form-label ">Email:</label>
+							<div class="form-floating col-sm-9">
+								<input asp-for="Input.Email" class="input pe-0" autocomplete="username" aria-required="true" />
+								<span asp-validation-for="Input.Email" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
+							<div class="form-floating col-sm-9">
+								<input asp-for="Input.Password" class="input" autocomplete="current-password"
+									   aria-required="true" />
+								<span asp-validation-for="Input.Password" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-group row">
+							<a id="forgot-password" class="text-end pe-4" asp-page="./ForgotPassword">StartForgotPasswordFlow()</a>
+						</div>
+					</div>
+
+					<div class="row ps-4 pe-4">
+						<div class="gap-3 d-md-flex justify-content-md-end ps-4 pe-4">
+							<a href="https://localhost:44430/" id="back-btn" class="btn btn-lg btn-primary pt-0 pb-0">Back</a>
+							<button id="login-submit" type="submit" class="btn btn-lg btn-primary  pt-0 pe-4 ps-4 ">Login</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- #region Unwanted_features -->
+	@*<div>
+		<div class="checkbox">
+		<label asp-for="Input.RememberMe" class="form-label">
+		<input class="form-check-input" asp-for="Input.RememberMe" />
+		@Html.DisplayNameFor(m => m.Input.RememberMe)
+		</label>
+		</div>
+		</div>
+		<div>
+
+		<p>
+		<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+		</p>
+		<p>
+		<a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+		</p>
+		</div>*@
+	<!-- #endregion -->
+
 </section>
 
 <!-- #region Unwanted_features -->
 @* <div class="col-md-6 col-md-offset-2">
-    <section>
-    <h3>Use another service to log in.</h3>
-    <hr />
-    @{
-    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-    {
-    <div>
-    <p>
-    There are no external authentication services configured. See this <a
-    href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-    about setting up this ASP.NET application to support logging in via external services</a>.
-    </p>
-    </div>
-    }
-    else
-    {
-    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post"
-    class="form-horizontal">
-    <div>
-    <p>
-    @foreach (var provider in Model.ExternalLogins)
-    {
-    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your
-    @provider.DisplayName account">@provider.DisplayName</button>
-    }
-    </p>
-    </div>
-    </form>
-    }
-    }
-    </section>
-    </div>*@
+	<section>
+	<h3>Use another service to log in.</h3>
+	<hr />
+	@{
+	if ((Model.ExternalLogins?.Count ?? 0) == 0)
+	{
+	<div>
+	<p>
+	There are no external authentication services configured. See this <a
+	href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+	about setting up this ASP.NET application to support logging in via external services</a>.
+	</p>
+	</div>
+	}
+	else
+	{
+	<form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post"
+	class="form-horizontal">
+	<div>
+	<p>
+	@foreach (var provider in Model.ExternalLogins)
+	{
+	<button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your
+	@provider.DisplayName account">@provider.DisplayName</button>
+	}
+	</p>
+	</div>
+	</form>
+	}
+	}
+	</section>
+	</div>*@
 <!-- #endregion -->
-
-
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 }

@@ -1,7 +1,7 @@
 const apiBaseUrl = 'https://localhost:7091'
 export const endpoints = {
     createTenant: () => `${apiBaseUrl}/api/create`,
-    loadTrackers: (tenantId) => `${apiBaseUrl}/api/trackers/${tenantId}`,
+    loadTrackers: (tenantId) => `${apiBaseUrl}api/TrackersList/${Number(tenantId)}`,
     createTracker: (tenantId) => `${apiBaseUrl}/api/trackingGroup/create/${tenantId}`,
     loadTenants: () => `${apiBaseUrl}/api/tenants`,
     createTrackingItem: (tenantId) => `${apiBaseUrl}/api/trackingItems/create/${tenantId}`,
