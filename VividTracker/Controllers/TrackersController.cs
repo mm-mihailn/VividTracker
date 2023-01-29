@@ -22,14 +22,14 @@ namespace VividTracker.Controllers
         }
 
         [HttpGet]
-        [Route("api/TrackersList/{tenantId}")]
+        [Route("api/trackersList/{tenantId}")]
         public async Task<IActionResult> GetTrackingGroupsByTenantId([FromRoute] int tenantId)
         {
             var trackingGroups = await _trackingGroupsService.GetTrackingGroupsByTenantId(tenantId);
 
             if (!trackingGroups.Any())
             {
-                return BadRequest("No exist tracking groups!");
+                return BadRequest("No existing tracking groups!");
             }
             return Ok(trackingGroups);
         }
