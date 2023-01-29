@@ -28,5 +28,11 @@
            return Ok(records);
         }
 
+        [HttpGet]
+        [Route("api/trackingGroupsRecords")]
+        public async Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecords()
+        {
+            return await _trackingGroupRecordsService.GetAllTrackingGroupsRecordsAsync();
+        }
     }
 }

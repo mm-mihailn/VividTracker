@@ -90,8 +90,8 @@ export default class ManageTracker extends Component {
     getAllRecords = async() => {
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-                // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
-        let url = `https://localhost:7091/api/trackingGroupRecords/${Number(trackingGroupId)}`
+        // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
+        let url = endpoints.getAllRecords(trackingGroupId);
 
         let result = await fetch(url).then((
             async(res) => {

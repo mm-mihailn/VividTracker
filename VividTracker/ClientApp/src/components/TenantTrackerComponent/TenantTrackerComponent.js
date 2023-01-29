@@ -17,7 +17,7 @@ export default class TenantTrackerComponent extends Component {
   }
   render() {
     return (
-        <div className = 'TenantTracker d-flex' key={this.props.tracker.id}>
+        <div className='TenantTracker d-flex' key={this.props.tracker.id}>
             <div className='TenantTrackerNameWrapper'>
                 {/* Change username to email ! */}
                 <span className='TenantTrackerName pageText'> {this.props.tracker.email} </span>
@@ -25,6 +25,11 @@ export default class TenantTrackerComponent extends Component {
             <div className='TenantTrackerButtonsContainer'>
                 <div className='UseTenantTrackerButtonWrapper'>
                     <span className='UseTenantButton pageText' onClick={() => this.removeUser(this.props.tracker.id)}>Remove</span>
+                </div>
+                <div className='ManageTenantTrackerButtonWrapper'>
+                    <button className='ManageTenantTrackerButton'>
+                        <a href={endpoints.editTracker(this.props.tracker.id)} className='ManageButtonText'>Manage</a>
+                    </button>
                 </div>
             </div>
         </div>

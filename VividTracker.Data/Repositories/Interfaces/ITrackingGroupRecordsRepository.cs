@@ -10,5 +10,6 @@
     public interface ITrackingGroupRecordsRepository:IRepository<TrackingGroupRecord>
     {
         Task<IEnumerable<TrackingGroupRecord>> GetAllRecordsAsync(int trackingGroupId);
+        Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecords();
     }
 }
