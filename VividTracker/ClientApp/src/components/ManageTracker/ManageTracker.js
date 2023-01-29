@@ -154,11 +154,11 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    resetNames = async(trackingGroupId) => {
+    resetName = async(trackingGroupId) => {
         // currentTrackerName
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.resetNames(trackingGroupId)
+        let url = endpoints.resetName(trackingGroupId)
         let result = await fetch(url).then((
             async(res) => {
                 let result = await res.json()
