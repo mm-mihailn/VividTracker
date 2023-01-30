@@ -81,7 +81,7 @@ export default class ManageTracker extends Component {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupRecords(trackingGroupId)
-        let result = await fetch(url)
+        await fetch(url)
         .then((
             async(res) => {
                 let result = await res.json()
@@ -97,8 +97,7 @@ export default class ManageTracker extends Component {
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
         let url = endpoints.getAllRecords(trackingGroupId);
-
-        let result = await fetch(url)
+        await fetch(url)
         .then((
             async(res) => {
                 let result = await res.json()
@@ -179,8 +178,9 @@ export default class ManageTracker extends Component {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
-
-        let result = await fetch(url)
+        await fetch(url, {
+            method: 'GET'
+        })
         .then((
             async(res) => {
                 let result = await res.json()
