@@ -123,7 +123,6 @@ export default class ManageTracker extends Component {
         .then((
             async(res) => {
                 let result = await res.json()
-                console.log(result)
                 this.setState({'allItems': result})
         }))
         .catch((err) => {
@@ -346,14 +345,14 @@ export default class ManageTracker extends Component {
                             Already Existing Items:
                         </span>
                         <div className='AlreadyExistingRecords'>
-                            {/* {this.state.allItems.map((alreadyExistingItem) => {
+                            {this.state.allItems.map((alreadyExistingItem) => {
                                 return(
                                     <div className='AlreadyExistingRecord'>
                                         <p className='AlreadyExistingRecordName'>{alreadyExistingItem.name}</p>
                                         <span className='AddTrackingButton'>Add</span>
                                     </div>
                                 )
-                            })} */}
+                            })} 
                         </div>
                     </div>
                 
