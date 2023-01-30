@@ -56,6 +56,7 @@ export default class ManageTracker extends Component {
             allItems: [],
             currentTrackingGroup: [],
             currentTrackerName: '',
+            newTrackerName: '',
             currentTrackerItems: []
         }
     }
@@ -135,6 +136,8 @@ export default class ManageTracker extends Component {
                 let result = await res.json()
                 this.setState({'currentTrackingGroup': result[0]})
                 this.setState({'currentTrackerName': result[0].name})
+                this.setState({'newTrackerName': result[0].name})
+
         }))
         .catch((err) => {
             console.log(err)
@@ -149,7 +152,7 @@ export default class ManageTracker extends Component {
         {
             method: 'PATCH',
             body: 
-            JSON.stringify({"Name":this.state.currentTrackerName}),
+            JSON.stringify({"Name":this.state.newTrackerName}),
             headers: 
             {
                 'Content-type': 'application/json; charset=UTF-8',
@@ -220,10 +223,10 @@ export default class ManageTracker extends Component {
                             <input 
                                 className = 'TrackerNameInputField form-control' 
                                 type = 'text' 
-                                value={this.state.currentTrackerName} 
+                                value={this.state.newTrackerName} 
                                 onChange = {
                                     (e) => 
-                                    this.setState({'currentTrackerName': e.target.value})
+                                    this.setState({'newTrackerName': e.target.value})
                                 }
                             />
                         </div>
