@@ -230,17 +230,26 @@ export default class ManageTracker extends Component {
 
     createTrackerItem = async() => 
     {
-        console.log('creating tracker item with data:')
-        console.log(this.state.createdItemName)
-        console.log(this.state.createdItemMinColorCode)
-        console.log(this.state.createdItemMaxColorCode)
-        console.log(this.state.createdItemIrrelevantColorCode) 
-        console.log(this.state.createdItemDefaultValue)
-        console.log(this.state.createdItemPropertyType) // not working
-        console.log(this.state.createdItemTarget) 
-        console.log(this.state.createdItemIrrelevantAllowed) 
-        console.log(this.state.createdItemMandatoryCommentAvailable)
+        // console.log('creating tracker item with data:')
+        // console.log(this.state.createdItemName)
+        // console.log(this.state.createdItemMinColorCode)
+        // console.log(this.state.createdItemMaxColorCode)
+        // console.log(this.state.createdItemIrrelevantColorCode) 
+        // console.log(this.state.createdItemDefaultValue)
+        // console.log(this.state.createdItemPropertyType) // not working
+        // console.log(this.state.createdItemTarget) 
+        // console.log(this.state.createdItemIrrelevantAllowed) 
+        // console.log(this.state.createdItemMandatoryCommentAvailable)
 
+        this.checkIfColorCodeIsValid(this.state.createdItemMinColorCode)
+
+    }
+
+    checkIfColorCodeIsValid(colorCodeString)
+    {
+        let colorCodeRegex = new RegExp(`^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$`)
+        let isColorCodeValid = colorCodeRegex.test(colorCodeString)
+        return isColorCodeValid
     }
     
     componentDidMount()
