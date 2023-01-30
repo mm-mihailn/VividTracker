@@ -251,6 +251,30 @@ export default class ManageTracker extends Component {
         let isColorCodeValid = colorCodeRegex.test(colorCodeString)
         return isColorCodeValid
     }
+
+    checkIfItemNameIsValid(ItemName)
+    {
+        if(ItemName.length > 0 && ItemName <= 255)
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+
+    checkIfValueIsNullOrEmpty(value)
+    {
+        if(value == null || !value)
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
     
     componentDidMount()
     {
