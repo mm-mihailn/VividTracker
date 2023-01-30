@@ -80,11 +80,15 @@ export default class ManageTracker extends Component {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupRecords(trackingGroupId)
-        let result = await fetch(url).then((
+        let result = await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'trackingGroupRecords': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     getAllRecords = async() => {
@@ -93,11 +97,15 @@ export default class ManageTracker extends Component {
         // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
         let url = endpoints.getAllRecords(trackingGroupId);
 
-        let result = await fetch(url).then((
+        let result = await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'allRecords': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     getAllTrackingItems = async() => {
@@ -106,23 +114,31 @@ export default class ManageTracker extends Component {
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
         let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
 
-        let result = await fetch(url).then((
+        let result = await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'allItems': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     getTrackingGroup = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroup(trackingGroupId)
-        let result = await fetch(url).then((
+        let result = await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'currentTrackingGroup': result[0]})
                 this.setState({'currentTrackerName': result[0].name})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     updateTrackerName = async (trackingGroupId) => {
@@ -139,6 +155,12 @@ export default class ManageTracker extends Component {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
 
@@ -147,11 +169,15 @@ export default class ManageTracker extends Component {
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
 
-        let result = await fetch(url).then((
+        let result = await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'currentTrackerItems': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     resetName = async(trackingGroupId) => {
@@ -159,11 +185,15 @@ export default class ManageTracker extends Component {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.resetName(trackingGroupId)
-        let result = await fetch(url).then((
+        let result = await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'currentTrackerName': result[0].name})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
     
     componentDidMount()
