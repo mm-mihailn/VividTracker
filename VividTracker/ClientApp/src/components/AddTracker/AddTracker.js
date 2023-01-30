@@ -22,8 +22,7 @@ export class AddTracker extends Component {
     async createTracker(){
         var name = this.state.trackerName;
         var record = this.state.trackerRecord;
-        let splittedURL = window.location.pathname.split('/')
-        let tenantId = splittedURL[splittedURL.length - 1]
+        let tenantId = this.props.location.state.split('/')[2]
         
         console.log(name,record,tenantId)
 
@@ -58,15 +57,14 @@ export class AddTracker extends Component {
                 })
             })      
             .then((response) => {
-                console.log(response)
-                // if (response.status == 400) {
-                //     this.setState({ errorMessage: errors.existingTracker });
-                //     this.setState({ textColor: color.error });
-                // }
-                // else {
-                //     this.setState({ errorMessage: errors.success });
-                //     this.setState({ textColor: color.success });
-                // }
+                if (response.status == 400) {
+                    this.setState({ errorMessage: errors.existingTracker });
+                    this.setState({ textColor: color.error });
+                }
+                else {
+                    this.setState({ errorMessage: errors.success });
+                    this.setState({ textColor: color.success });
+                }
 
             });
         }
