@@ -57,7 +57,7 @@ export default class ManageTracker extends Component {
             currentTrackingGroup: [],
             currentTrackerName: '',
             newTrackerName: '',
-            currentTrackerItems: []
+            currentTrackerItems: [],
         }
     }
 
@@ -115,7 +115,12 @@ export default class ManageTracker extends Component {
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
         let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
 
-        let result = await fetch(url)
+        let result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
         .then((
             async(res) => {
                 let result = await res.json()
@@ -129,19 +134,22 @@ export default class ManageTracker extends Component {
     getTrackingGroup = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        // ERROR: THE BELOW LINE IS AN INVALID URL, BECAUSE IT DOES NOT EXIST IN ANY CONTROLLER !
         let url = endpoints.getTrackingGroup(trackingGroupId)
-        let result = await fetch(url)
+
+        await fetch(url)
         .then((
             async(res) => {
                 let result = await res.json()
-                this.setState({'currentTrackingGroup': result[0]})
-                this.setState({'currentTrackerName': result[0].name})
-                this.setState({'newTrackerName': result[0].name})
+                this.setState({'currentTrackingGroup': result})
+                this.setState({'currentTrackerName': result.name})
+                this.setState({'newTrackerName': result.name})
 
         }))
         .catch((err) => {
             console.log(err)
         })
+
     }
 
     updateTrackerName = async (trackingGroupId) => {
@@ -192,7 +200,7 @@ export default class ManageTracker extends Component {
         .then((
             async(res) => {
                 let result = await res.json()
-                this.setState({'currentTrackerName': result[0].name})
+                this.setState({'newTrackerName': result[0].name})
         }))
         .catch((err) => {
             console.log(err)
@@ -203,7 +211,7 @@ export default class ManageTracker extends Component {
     {
         this.getTrackingGroupRecords()
         this.getAllRecords()
-        this.getAllTrackingItems()
+        // this.getAllTrackingItems()
         this.getTrackingGroup()
         this.getTrackingGroupTrackingItems()
     }
