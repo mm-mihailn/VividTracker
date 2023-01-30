@@ -172,7 +172,7 @@ export default class ManageTracker extends Component {
         this.getAllRecords()
         this.getAllTrackingItems()
         this.getTrackingGroup()
-        this.getCurrentTrackerItems()
+        this.getTrackingGroupTrackingItems()
     }
   render() {
     return (
