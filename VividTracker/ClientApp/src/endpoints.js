@@ -21,5 +21,5 @@ export const endpoints = {
     resetName: (trackingGroupId) => `${apiBaseUrl}/api/reset/tracker/${trackingGroupId}`,
     editTracker: (trackerId) => `${apiBaseUrl}/api/editTracker/${trackerId}`,
     getAllRecords: () => `${apiBaseUrl}/api/trackingGroupsRecords`,
-    getAllTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/trackers/${trackingGroupId}`,
+    getAllTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/trackingItems/${trackingGroupId}`,
 }
