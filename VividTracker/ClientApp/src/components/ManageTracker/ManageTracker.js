@@ -230,18 +230,44 @@ export default class ManageTracker extends Component {
 
     createTrackerItem = async() => 
     {
-        // console.log('creating tracker item with data:')
-        // console.log(this.state.createdItemName)
-        // console.log(this.state.createdItemMinColorCode)
-        // console.log(this.state.createdItemMaxColorCode)
-        // console.log(this.state.createdItemIrrelevantColorCode) 
-        // console.log(this.state.createdItemDefaultValue)
-        // console.log(this.state.createdItemPropertyType) // not working
-        // console.log(this.state.createdItemTarget) 
-        // console.log(this.state.createdItemIrrelevantAllowed) 
-        // console.log(this.state.createdItemMandatoryCommentAvailable)
+        let trackerItemName = this.state.createdItemName
+        let trackerItemMinColorCode = this.state.createdItemMinColorCode
+        let trackerItemMaxColorCode = this.state.createdItemMaxColorCode
+        let trackerItemIrrelevantColorCode = this.state.createdItemIrrelevantColorCode
+        let trackerItemDecimalValue = this.state.createdItemDefaultValue
+        let trackerItemPropertyType = this.state.createdItemPropertyType
+        let trackerItemTarget = this.state.createdItemTarget
+        let trackerItemIrrelevantAllowed = this.state.createdItemIrrelevantAllowed
+        let trackerItemMandatoryCommentAvailable = this.state.createdItemMandatoryCommentAvailable
 
-        this.checkIfDecimalIsValid(this.state.createdItemDefaultValue)
+        if( this.checkIfValueIsNullOrEmpty(this.state.createdItemName) && 
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemMinColorCode) &&
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemMaxColorCode) &&
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemIrrelevantColorCode) &&
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemDefaultValue) &&
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemPropertyType) &&
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemTarget) &&
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemIrrelevantAllowed) &&
+            this.checkIfValueIsNullOrEmpty(this.state.createdItemMandatoryCommentAvailable)
+        )
+        {
+            if(this.checkIfItemNameIsValid(this.state.createdItemName) && 
+            this.checkIfColorCodeIsValid(this.state.createdItemMinColorCode) && 
+            this.checkIfColorCodeIsValid(this.state.createdItemMaxColorCode)&& 
+            this.checkIfColorCodeIsValid(this.state.createdItemIrrelevantColorCode) &&
+            this.checkIfDecimalIsValid(this.state.createdItemDefaultValue))
+            {
+                // call create tracker item endpoint
+            }
+            else
+            {
+                console.log('Invalid name or color code!')
+            }
+        }
+        else
+        {
+            console.log('Invalid value found!')
+        }
 
     }
 
