@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AddTracker } from "../AddTracker/AddTracker"
 import TrackerContainerComponent from '../TrackerContainer/TrackerContainer';
 import { endpoints } from '../../endpoints';
+import {Link} from 'react-router-dom'
 
 export default class TenantTrackerItemsList extends Component {
   constructor(props)
   {
       super(props)
-      this.state = { trackers: [] }
+      this.state = { trackers: [], tenantID: null }
       this.loadTrackers = this.loadTrackers.bind(this);
   }
   async componentDidMount()
@@ -20,6 +21,7 @@ export default class TenantTrackerItemsList extends Component {
   async loadTrackers(tenantId) {
         let splittedURL = window.location.pathname.split('/')
         tenantId = splittedURL[splittedURL.length - 1]
+        this.setState({'tenantID': tenantId})
         await fetch(endpoints.loadTrackers(tenantId))
         .then(async (res) => 
             {
@@ -40,9 +42,15 @@ export default class TenantTrackerItemsList extends Component {
                 <h4 className='trackersListHeader'>Trackers List</h4>
                 <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
             </div>
-            {/* <div className='CreateNewTrackerButtonWrapper'>
-                <AddTracker onTrackerAdded={this.loadTrackers} />
-            </div> */}
+
+            <div className='CreateNewTrackerButtonWrapper'>
+                {/* <AddTracker onTrackerAdded={this.loadTrackers} /> */}
+                <div className="container" id="modal">
+                    <Link className="btn btn-link" to={{pathname:'/createTrackingGroup', state: '/tenantTrackers/' + this.state.tenantID}}>
+                        CreateNewTracker()
+                    </Link>
+                </div>
+            </div> 
             {this.state.trackers.length >= 1 ?
               <div className='TrackersContainer'>
                       {this.state.trackers.map((tracker) => {

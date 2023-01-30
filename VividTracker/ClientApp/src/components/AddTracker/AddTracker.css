@@ -1,4 +1,4 @@
-﻿.editTrackerContainer {
+﻿.addTrackerContainer {
     position: absolute;
     top: 4.8rem;
     background-color: white;
@@ -6,6 +6,7 @@
     border-bottom-right-radius: 5%;
     width: 60rem;
     height: 799px;
+    display: none;
 }
 .trackerHeaderWrapper {
     margin-top: 2.6875rem;
@@ -236,4 +237,16 @@
 
 .close {
     display: none;
+}
+.editTrackerWrapper{
+    position: absolute;
+    width: 60rem;
+    top: 5rem;
+    background-color: white;
+    padding-bottom: 10vh;
+    margin-bottom: 70px;
+    left:25%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
 }

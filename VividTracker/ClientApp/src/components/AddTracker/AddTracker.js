@@ -3,6 +3,7 @@ import { faPenToSquare, faRectangleList } from "@fortawesome/free-regular-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './AddTracker.css';
 import { endpoints } from "../../endpoints";
+import {Link} from 'react-router-dom'
 
 export class AddTracker extends Component {
     
@@ -18,11 +19,13 @@ export class AddTracker extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    createTracker(tenantId){
+    async createTracker(){
         var name = this.state.trackerName;
         var record = this.state.trackerRecord;
         let splittedURL = window.location.pathname.split('/')
-        tenantId = splittedURL[splittedURL.length - 1]
+        let tenantId = splittedURL[splittedURL.length - 1]
+        
+        console.log(name,record,tenantId)
 
         const color = {
             error: "red",
@@ -43,7 +46,7 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch(endpoints.createTracker(tenantId), {
+            await fetch(endpoints.createTracker(tenantId), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,16 +56,17 @@ export class AddTracker extends Component {
                     "Label": record,
                     "TenantId": tenantId
                 })
-            })
+            })      
             .then((response) => {
-                if (response.status == 400) {
-                    this.setState({ errorMessage: errors.existingTracker });
-                    this.setState({ textColor: color.error });
-                }
-                else {
-                    this.setState({ errorMessage: errors.success });
-                    this.setState({ textColor: color.success });
-                }
+                console.log(response)
+                // if (response.status == 400) {
+                //     this.setState({ errorMessage: errors.existingTracker });
+                //     this.setState({ textColor: color.error });
+                // }
+                // else {
+                //     this.setState({ errorMessage: errors.success });
+                //     this.setState({ textColor: color.success });
+                // }
 
             });
         }
@@ -109,7 +113,7 @@ export class AddTracker extends Component {
                                 </div>
                                 <button className='saveButton' type="submit" method="post" onClick={(tenantId) => this.createTracker(tenantId)}>Save</button>
                                 <button className='cancelButton'>
-                                    <a href={`https://localhost:44430/trackersList`} id="cancelText" onClick={() => this.clear()}>Cancel</a>
+                                    <Link to={{pathname: `${this.props.location.state}`}} id="cancelText" onClick={() => this.clear()}>Cancel</Link>
                                 </button>
                             </div>
                         </div>
