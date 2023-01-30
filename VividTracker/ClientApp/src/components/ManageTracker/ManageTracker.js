@@ -66,7 +66,7 @@ export default class ManageTracker extends Component {
             createdItemName: null,
             createdItemMaxColorCode: null,
             createdItemMinColorCode: null,
-            createdItemIrrelevantColoCode: null,
+            createdItemIrrelevantColorCode: null,
             createdItemIrrelevantAllowed: false,
             createdItemMandatoryCommentAvailable: false,
             createdItemTarget: null,
@@ -227,6 +227,21 @@ export default class ManageTracker extends Component {
             console.log(err)
         })
     }
+
+    createTrackerItem = async() => 
+    {
+        console.log('creating tracker item with data:')
+        console.log(this.state.createdItemName)
+        console.log(this.state.createdItemMinColorCode)
+        console.log(this.state.createdItemMaxColorCode)
+        console.log(this.state.createdItemIrrelevantColorCode) 
+        console.log(this.state.createdItemDefaultValue)
+        console.log(this.state.createdItemPropertyType) // not working
+        console.log(this.state.createdItemTarget) 
+        console.log(this.state.createdItemIrrelevantAllowed) 
+        console.log(this.state.createdItemMandatoryCommentAvailable)
+
+    }
     
     componentDidMount()
     {
@@ -364,6 +379,7 @@ export default class ManageTracker extends Component {
                                     className = 'form-control' 
                                     type = 'text' 
                                     placeholder='Tracker item name'
+                                    onChange={(e) => this.setState({'createdItemName': e.target.value})}
                                 />
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
@@ -371,6 +387,7 @@ export default class ManageTracker extends Component {
                                 className = 'form-control' 
                                 type = 'text' 
                                 placeholder='Max hex color code'
+                                onChange={(e) => this.setState({'createdItemMaxColorCode': e.target.value})}
                             />
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
@@ -378,6 +395,8 @@ export default class ManageTracker extends Component {
                                     className = 'form-control' 
                                     type = 'text' 
                                     placeholder='Min hex color code'
+                                    onChange={(e) => this.setState({'createdItemMinColorCode': e.target.value})}
+
                                 />
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
@@ -385,22 +404,24 @@ export default class ManageTracker extends Component {
                                     className = 'form-control' 
                                     type = 'text' 
                                     placeholder='Irrelevant hex color code'
+                                    onChange={(e) => this.setState({'createdItemIrrelevantColorCode': e.target.value})}
+
                                 />
                             </div>
                         </div>
                         <div className="form-group row">
                             <div className="col-sm-6 inputWrapperItemCreation">
-                                <select className = 'form-control' placeholder='Irrelevant allowed'>
+                                <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
                                     <option value="" disabled selected>Irrelevant allowed</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value={true}>Yes</option>
+                                    <option value={false}>No</option>
                                 </select>
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
-                                <select className = 'form-control'>
+                                <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
                                     <option value="" disabled selected>Mandatory comment allowed</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+                                    <option value={true}>Yes</option>
+                                    <option value={false}>No</option>
                                 </select>
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
@@ -408,16 +429,23 @@ export default class ManageTracker extends Component {
                                     className = 'form-control' 
                                     type = 'text' 
                                     placeholder='Item target'
+                                    onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
                                 />
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
 
-                                <select className = 'form-control' placeholder='Mandatory comment allowed'>
+                                <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
                                     <option value="" disabled selected>Property type</option>
-                                    {Object.keys(this.state.PropertyTypes).map((propertyType) => {
-                                        return(<option>{propertyType}</option>)
+                                    {
+                                        Object.keys(this.state.PropertyTypes)
+                                        .map((propertyType) => 
+                                        {
+                                            return(
+                                                <option value={propertyType}>{propertyType}</option>
+                                            )
 
-                                    })}
+                                        })
+                                    }
 
                                 </select>
                             </div>
@@ -428,10 +456,11 @@ export default class ManageTracker extends Component {
                                     className = 'form-control' 
                                     type = 'text' 
                                     placeholder='Default value decimal'
-                                />
+                                    onChange={(e) => this.setState({'createdItemDefaultValue':e.target.value})}
+/> 
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
-                                <button>Create tracker item</button>
+                                <button onClick={() => this.createTrackerItem()}>Create tracker item</button>
                             </div>
                         </div>
                     </div>
