@@ -58,8 +58,14 @@ export default class ManageTracker extends Component {
             currentTrackerName: '',
             newTrackerName: '',
             currentTrackerItems: [],
+            PropertyTypes: {
+                '@Bool': 1,
+                'Percentage': 2,
+                'ValueRange': 3
+            }
         }
     }
+    
 
     selectItems = () => {
         if(this.state.isItemsSelected == false)
@@ -341,6 +347,86 @@ export default class ManageTracker extends Component {
                 } 
 
                 <div className='AlreadyExistingRecordsWrapper ItemSectionRecords'>
+                    <div className='CreateItemField'>
+                        <p className='createItemHeader'>Create tracker item</p>
+                        <div className="form-group row">
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Tracker item name'
+                                />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                            <input 
+                                className = 'form-control' 
+                                type = 'text' 
+                                placeholder='Max hex color code'
+                            />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Min hex color code'
+                                />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Irrelevant hex color code'
+                                />
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <select className = 'form-control' placeholder='Irrelevant allowed'>
+                                    <option value="" disabled selected>Irrelevant allowed</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <select className = 'form-control' placeholder='Mandatory comment allowed'>
+                                    <option value="" disabled selected>Mandatory comment allowed</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Item target'
+                                />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+
+                                <select className = 'form-control' placeholder='Mandatory comment allowed'>
+                                    <option value="" disabled selected>Property type</option>
+                                    {Object.keys(this.state.PropertyTypes).map((propertyType) => {
+                                        return(<option>{propertyType}</option>)
+
+                                    })}
+
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Default value decimal'
+                                />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <button>Create tracker item</button>
+                            </div>
+                        </div>
+                    </div>
+
                         <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
                             Already Existing Items:
                         </span>

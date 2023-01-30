@@ -270,3 +270,10 @@
     -ms-overflow-style: none;  
     scrollbar-width: none;  
 }
+
+.inputWrapperItemCreation{
+    margin-top: 1rem;
+}
+.createItemHeader{
+    color: black;
+}
