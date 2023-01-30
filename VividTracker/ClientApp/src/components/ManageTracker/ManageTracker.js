@@ -246,7 +246,7 @@ export default class ManageTracker extends Component {
                         </div>
                         <div className='RecordNameFieldWrapper'>
                             <label className = 'TrackerRecordLabel pageText'>Record Name: </label>
-                            <input className = 'TrackerRecordInputField form-control' type = 'text' value='' onChange = {(e) => this.setState({'currentRecordName': e.target.value})}/>
+                            <input className = 'TrackerRecordInputField form-control' type = 'text' value={this.state.currentRecordName} onChange = {(e) => this.setState({'currentRecordName': e.target.value})}/>
                         </div>
                     </div>
                     <div className='TrackerButtons'>
@@ -273,16 +273,25 @@ export default class ManageTracker extends Component {
             {this.state.isRecordsSelected == true 
             ?
             <div className='RecordsWrapper d-flex'>
-                <div className='RecordsContainer'>
-                    {this.state.trackingGroupRecords.map((record) => {
-                            return (
-                                <div className='RecordContainer'>
-                                    <p className='RecordName'>{record.name}</p>
-                                </div>   
-                            )
-                        }
-                    )}
-                </div>
+                 {
+                    this.state.trackingGroupRecords.length > 0 ?
+                    <div className='RecordsContainer'>
+                        {this.state.trackingGroupRecords.map((record) => {
+                                return (
+                                    <div className='RecordContainer'>
+                                        <p className='RecordName'>{record.name}</p>
+                                    </div>   
+                                )
+                            }
+                        )}
+                    </div>
+                    :
+                    <div className='RecordsContainer'>
+                        <div className='RecordContainer'>
+                            <p className=''>No records found.</p>
+                        </div>   
+                    </div>
+                }
 
                 <div className='RecordsInteraction'>
                     <div className='RecordsInteractionFieldWrapper d-flex'>
@@ -312,6 +321,7 @@ export default class ManageTracker extends Component {
             </div>
             : 
             <div className='RecordsWrapper d-flex'>
+                {this.state.currentTrackerItems.length > 0?
                 <div className='RecordsContainer'>
                     {this.state.currentTrackerItems.map((trackerItem) => {
                         return (
@@ -322,6 +332,13 @@ export default class ManageTracker extends Component {
                     }
                     )}
                 </div>
+                :
+                <div className='RecordsContainer'>
+                        <div className='RecordContainer'>
+                            <p className=''>No items found.</p>
+                        </div>   
+                    </div>
+                } 
 
                 <div className='AlreadyExistingRecordsWrapper ItemSectionRecords'>
                         <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
