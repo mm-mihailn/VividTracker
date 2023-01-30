@@ -153,23 +153,30 @@ export default class ManageTracker extends Component {
     updateTrackerName = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.updateTrackerName(trackingGroupId)
-        let result = await fetch(url, 
+        if(this.state.newTrackerName.length > 3)
         {
-            method: 'PATCH',
-            body: 
-            JSON.stringify({"Name":this.state.newTrackerName}),
-            headers: 
+            let url = endpoints.updateTrackerName(trackingGroupId)
+            let result = await fetch(url, 
             {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-        .then((res) => {
-            console.log(res)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+                method: 'PATCH',
+                body: 
+                JSON.stringify({"Name":this.state.newTrackerName}),
+                headers: 
+                {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+        else
+        {
+            //TODO: Tell the user the new tracker name is invalid
+        }
     }
 
 
@@ -280,7 +287,7 @@ export default class ManageTracker extends Component {
                 <div className='RecordsInteraction'>
                     <div className='RecordsInteractionFieldWrapper d-flex'>
                         <label className = 'RecordNameLabel pageText'>New Record: </label>
-                        <input className = 'RecordNameInputField form-control' type = 'text' value='' onChange = {(e) => this.setState({'newRecordName': e.target.value})}/>
+                        <input className = 'RecordNameInputField form-control' type = 'text' value={this.state.newRecordName} onChange = {(e) => this.setState({'newRecordName': e.target.value})}/>
                     </div>
                     <div className='RecordButtonsManageTrackerPage'>
                         <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
