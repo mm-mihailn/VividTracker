@@ -241,7 +241,7 @@ export default class ManageTracker extends Component {
         // console.log(this.state.createdItemIrrelevantAllowed) 
         // console.log(this.state.createdItemMandatoryCommentAvailable)
 
-        this.checkIfColorCodeIsValid(this.state.createdItemMinColorCode)
+        this.checkIfDecimalIsValid(this.state.createdItemDefaultValue)
 
     }
 
@@ -274,6 +274,15 @@ export default class ManageTracker extends Component {
         {
             return true
         }
+    }
+
+    checkIfDecimalIsValid(decimalValue)
+    {
+        let validDecimalRegex = new RegExp("^\\d{3}\\.\\d{2}$");
+        let shortenedDecimalValue = Number(decimalValue).toFixed(2).toString()
+        let isDecimalValueValid = validDecimalRegex.test(shortenedDecimalValue)
+        return isDecimalValueValid
+        
     }
     
     componentDidMount()
