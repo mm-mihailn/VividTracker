@@ -209,7 +209,7 @@ export default class ManageTracker extends Component {
     <div className = 'TrackerContainerWrapper d-flex justify-content-center align-items-center'>
         <div className='TrackerContainer'>
             <div className='TrackerHeaderWrapper'>
-                <h4 className='TrackerHeader'>{this.state.currentTrackerName}/New Tracker</h4>
+                <h4 className='TrackerHeader'>{this.state.currentTrackerName}</h4>
                 <FontAwesomeIcon className='TrackerHeaderIcon' icon = {faPenToSquare}/>
             </div>
             <div className='TrackerInteractionField'>
