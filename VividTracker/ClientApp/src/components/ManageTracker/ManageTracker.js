@@ -240,24 +240,53 @@ export default class ManageTracker extends Component {
         let trackerItemIrrelevantAllowed = this.state.createdItemIrrelevantAllowed
         let trackerItemMandatoryCommentAvailable = this.state.createdItemMandatoryCommentAvailable
 
-        if( this.checkIfValueIsNullOrEmpty(this.state.createdItemName) && 
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemMinColorCode) &&
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemMaxColorCode) &&
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemIrrelevantColorCode) &&
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemDefaultValue) &&
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemPropertyType) &&
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemTarget) &&
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemIrrelevantAllowed) &&
-            this.checkIfValueIsNullOrEmpty(this.state.createdItemMandatoryCommentAvailable)
+        if( this.checkIfValueIsNullOrEmpty(trackerItemName) && 
+            this.checkIfValueIsNullOrEmpty(trackerItemMinColorCode) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemMaxColorCode) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemIrrelevantColorCode) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemDecimalValue) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemPropertyType) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemTarget) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemIrrelevantAllowed) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemMandatoryCommentAvailable)
         )
         {
-            if(this.checkIfItemNameIsValid(this.state.createdItemName) && 
-            this.checkIfColorCodeIsValid(this.state.createdItemMinColorCode) && 
-            this.checkIfColorCodeIsValid(this.state.createdItemMaxColorCode)&& 
-            this.checkIfColorCodeIsValid(this.state.createdItemIrrelevantColorCode) &&
-            this.checkIfDecimalIsValid(this.state.createdItemDefaultValue))
+            if(this.checkIfItemNameIsValid(trackerItemName) && 
+            this.checkIfColorCodeIsValid(trackerItemMinColorCode) && 
+            this.checkIfColorCodeIsValid(trackerItemMaxColorCode)&& 
+            this.checkIfColorCodeIsValid(trackerItemIrrelevantColorCode) &&
+            this.checkIfDecimalIsValid(trackerItemDecimalValue))
             {
                 // call create tracker item endpoint
+                let pageLocationSplitted = window.location.href.split('/')
+                let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+                let createTrackingItemURL = endpoints.createTrackingItem(trackingGroupId)
+                let trackingItemRequestModel = {
+                    Name: trackerItemName,
+                    MaxValueColor: trackerItemMaxColorCode,
+                    MinValueColor: trackerItemMinColorCode,
+                    IrrelevantColor: trackerItemIrrelevantColorCode,
+                    IrrelevantAllowed: Boolean(trackerItemIrrelevantAllowed),
+                    Target: Number(trackerItemTarget),
+                    Type: Number(trackerItemPropertyType),
+                    MandatoryComment: Boolean(trackerItemMandatoryCommentAvailable),
+                    DefaultValue: trackerItemDecimalValue
+                  };
+                  console.log(trackingItemRequestModel)
+                await fetch(createTrackingItemURL, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(trackingItemRequestModel)
+                })
+                .then((
+                    async(res) => {
+                        console.log('item successfully created')
+                    }))
+                .catch((err) => {
+                    console.log(err)
+                })
             }
             else
             {
@@ -273,14 +302,14 @@ export default class ManageTracker extends Component {
 
     checkIfColorCodeIsValid(colorCodeString)
     {
-        let colorCodeRegex = new RegExp(`^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$`)
+        let colorCodeRegex = new RegExp(`^#[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}$`)
         let isColorCodeValid = colorCodeRegex.test(colorCodeString)
         return isColorCodeValid
     }
 
     checkIfItemNameIsValid(ItemName)
     {
-        if(ItemName.length > 0 && ItemName <= 255)
+        if(ItemName.length > 0 && ItemName.length <= 255)
         {
             return true
         }
@@ -509,7 +538,7 @@ export default class ManageTracker extends Component {
                                         .map((propertyType) => 
                                         {
                                             return(
-                                                <option value={propertyType}>{propertyType}</option>
+                                                <option value={this.state.PropertyTypes[propertyType]}>{propertyType}</option>
                                             )
 
                                         })
