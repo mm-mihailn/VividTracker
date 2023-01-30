@@ -33,7 +33,7 @@ export default class TrackersComponent extends Component {
                         <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
                     </div>
                     <div className="container">
-                        <a className=" link_orange ps-5" data-bs-toggle="" href={`https://localhost:7091/createTrackingGroup/${this.tenantId}`}>
+                        <a className=" link_orange ps-5" data-bs-toggle="" href={`https://localhost:44430/createTrackingGroup/${this.tenantId}`}>
                             CreateNewTracker()
                         </a>
                     </div>
