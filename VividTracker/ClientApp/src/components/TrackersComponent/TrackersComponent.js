@@ -11,6 +11,8 @@ export default class TrackersComponent extends Component {
         super(props)
         this.state = { trackers: [] }
         this.loadTrackers = this.loadTrackers.bind(this);
+        let splittedURL = window.location.pathname.split('/');
+        this.tenantId = splittedURL[splittedURL.length - 1];
     }
     async componentDidMount() {
         this.loadTrackers();
@@ -31,7 +33,7 @@ export default class TrackersComponent extends Component {
                         <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
                     </div>
                     <div className="container">
-                        <a className=" link_orange ps-5" data-bs-toggle="" href={`https://localhost:44430/createTrackingGroup`}>
+                        <a className=" link_orange ps-5" data-bs-toggle="" href={`https://localhost:44430/createTrackingGroup/${this.tenantId}`}>
                             CreateNewTracker()
                         </a>
                     </div>
