@@ -74,5 +74,19 @@ namespace VividTracker.Controllers
         {
             return await _trackingGroupsService.GetTrackersAsync();
         }
+
+        [HttpGet]
+        [Route("api/trackers/{trackingGroupId}")]
+        public async Task<IActionResult> GetTrackingGroupById([FromRoute] int trackingGroupID)
+        {
+            var trackingGroup = await _trackingGroupsService.GetTrackingGroupById(trackingGroupID);
+
+            if (trackingGroup == null)
+            {
+                return BadRequest("No existing tracking groups!");
+            }
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            return Ok(trackingGroup);
+        }
     }
 }
