@@ -554,10 +554,10 @@ export default class ManageTracker extends Component {
                                     type = 'text' 
                                     placeholder='Default value decimal'
                                     onChange={(e) => this.setState({'createdItemDefaultValue':e.target.value})}
-/> 
+                                /> 
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
-                                <button onClick={() => this.createTrackerItem()}>Create tracker item</button>
+                                <button onClick={() => this.createTrackerItem()} className = 'CreateItemButtonManageTrackerPage'>Create tracker item</button>
                             </div>
                         </div>
                     </div>
@@ -565,7 +565,7 @@ export default class ManageTracker extends Component {
                         <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
                             Already Existing Items:
                         </span>
-                        <div className='AlreadyExistingRecords'>
+                        <div className='AlreadyExistingItems'>
                             {this.state.allItems.map((alreadyExistingItem) => {
                                 return(
                                     <div className='AlreadyExistingRecord'>

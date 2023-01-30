@@ -225,6 +225,7 @@
     padding-left: 2rem;
     margin-top: 4rem;
     padding-right: 2rem;
+
     
 }
 .AlreadyExistingRecordsWrapper::-webkit-scrollbar{
@@ -276,4 +277,24 @@
 }
 .createItemHeader{
     color: black;
+}
+.AlreadyExistingItems{
+    overflow-y: scroll;
+    height: 6vh;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+.AlreadyExistingItems::-webkit-scrollbar {
+    display: none;
+}
+
+.CreateItemButtonManageTrackerPage{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 100%;
+    height: 2.25rem;
 }
