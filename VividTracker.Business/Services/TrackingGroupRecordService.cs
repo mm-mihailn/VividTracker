@@ -21,5 +21,7 @@
         {
             return await _trackingGroupRecordsRepository.GetAllRecordsAsync(trackingGroupId);
         }
+
+        public async Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecordsAsync() => await _trackingGroupRecordsRepository.GetAllTrackingGroupsRecords();
     }
 }

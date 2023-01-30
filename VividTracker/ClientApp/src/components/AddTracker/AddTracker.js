@@ -32,7 +32,7 @@ export class AddTracker extends Component {
             success: "Successfully added a new tracker.",
             minLength: "Input must be at least 3 characters.",
             maxLength: "Input must be less than 100 characters.",
-            existingTracker: "This tracker is already existing"
+            existingTracker: "This tracker is already existing."
         }
         if (name.length < 3) {
             this.setState({ errorMessage: errors.minLength });

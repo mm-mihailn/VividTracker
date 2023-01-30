@@ -5,9 +5,9 @@ export default class TrackerContainerComponent extends Component {
     
   render() {
     return (
-        <div className='TrackerContainer d-flex' key={this.props.TrackerData.id}>
+        <div className='TrackerContainer d-flex' key={this.props.trackerData.id}>
             <div className='TrackerNameWrapper'>
-                <span className='TrackerName pageText'> {this.props.TrackerData.name} </span>
+                <span className='TrackerName pageText'> {this.props.trackerData.name} </span>
             </div>
             <div className='TrackerButtonsWrapper'>
                 <div className='UseTrackerButtonWrapper ml-auto'>
@@ -17,7 +17,7 @@ export default class TrackerContainerComponent extends Component {
                 </div>
                 <div className='ManageTrackerButtonWrapper btn-wrapper ml-auto'>
                     <button className='ManageButton btn'> 
-                        <a href={`/manageTracker/${this.props.TrackerData.id}`} className = 'ManageButtonText btn-text'>
+                        <a href={`https://localhost:44430/manageTracker/${this.props.trackerData.id}`} className = 'ManageButtonText btn-text'>
                             Manage
                         </a>
                     </button>

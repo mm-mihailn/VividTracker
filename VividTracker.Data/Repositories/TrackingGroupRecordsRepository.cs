@@ -19,5 +19,10 @@
         {
             return await Entities.Include(t=>t.TrackingGroup.Tenant).Where(t=>t.TrackingGroupId==trackingGroupId).ToListAsync();
         }
+
+        public async Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecords()
+        {
+            return await Entities.ToListAsync();
+        }
     }
 }

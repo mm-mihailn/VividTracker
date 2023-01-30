@@ -87,11 +87,11 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    GetAllRecords = async() => {
+    getAllRecords = async() => {
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-                // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
-        let url = `https://localhost:7091/api/trackingGroupRecords/${Number(trackingGroupId)}`
+        // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
+        let url = endpoints.getAllRecords(trackingGroupId);
 
         let result = await fetch(url).then((
             async(res) => {
@@ -100,7 +100,7 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    GetAllTrackingItems = async() => {
+    getAllTrackingItems = async() => {
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
@@ -113,10 +113,10 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    GetTrackingGroup = async (trackingGroupId) => {
+    getTrackingGroup = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.GetTrackingGroup(trackingGroupId)
+        let url = endpoints.getTrackingGroup(trackingGroupId)
         let result = await fetch(url).then((
             async(res) => {
                 let result = await res.json()
@@ -142,10 +142,10 @@ export default class ManageTracker extends Component {
     }
 
 
-    GetCurrentTrackerItems = async(trackingGroupId) => {
+    getTrackingGroupTrackingItems = async(trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.GetCurrentTrackerItems(trackingGroupId)
+        let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
 
         let result = await fetch(url).then((
             async(res) => {
@@ -154,11 +154,11 @@ export default class ManageTracker extends Component {
         }))
     }
 
-    ResetNames = async(trackingGroupId) => {
+    resetName = async(trackingGroupId) => {
         // currentTrackerName
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.ResetNames(trackingGroupId)
+        let url = endpoints.resetName(trackingGroupId)
         let result = await fetch(url).then((
             async(res) => {
                 let result = await res.json()
@@ -169,10 +169,10 @@ export default class ManageTracker extends Component {
     componentDidMount()
     {
         this.getTrackingGroupRecords()
-        this.GetAllRecords()
-        this.GetAllTrackingItems()
-        this.GetTrackingGroup()
-        this.GetCurrentTrackerItems()
+        this.getAllRecords()
+        this.getAllTrackingItems()
+        this.getTrackingGroup()
+        this.getCurrentTrackerItems()
     }
   render() {
     return (
@@ -203,7 +203,7 @@ export default class ManageTracker extends Component {
                         </div>
                     </div>
                     <div className='TrackerButtons'>
-                        <span className='ResetButton' onClick={() => this.ResetNames()}><strong>Reset</strong></span>
+                        <span className='ResetButton' onClick={() => this.resetNames()}><strong>Reset</strong></span>
                         <button className='UpdateButton' onClick={() => this.updateTrackerName()}>Update</button>
                     </div>
                 </div>
@@ -211,14 +211,14 @@ export default class ManageTracker extends Component {
             <div className='TrackerOptionsWrapper'>
                 <div 
                     className={this.state.isItemsSelected == true ? 'TrackerOptionWrapperSelected' : 'TrackerOptionWrapper'} 
-                    tabindex="0" 
+                    tabIndex="0" 
                     onClick={()=>{this.selectItems()}}
                 >
                     <span className='TrackerOption'>Items</span>
                 </div>
                 <div 
                     className={this.state.isRecordsSelected == true ? 'TrackerOptionWrapperSelected' : 'TrackerOptionWrapper'} 
-                    tabindex="1"
+                    tabIndex="1"
                     onClick={() => {this.selectRecords()}}>
                     <span className='TrackerOption'>Records</span>
                 </div>

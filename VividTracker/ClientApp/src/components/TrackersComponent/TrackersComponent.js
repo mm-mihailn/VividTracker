@@ -18,7 +18,7 @@ export default class TrackersComponent extends Component {
     async loadTrackers(tenantId) {
         let splittedURL = window.location.pathname.split('/')
         tenantId = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/TrackersList/${Number(tenantId)}`)
+        await fetch(`https://localhost:7091/api/trackersList/${Number(tenantId)}`)
             .then((res) => res.json())
             .then((res) => this.setState({ trackers: res }))
     }
@@ -51,7 +51,7 @@ export default class TrackersComponent extends Component {
 
                     </div>
                     <div className="container">
-                        <button type="button" id="" className=" link_orange align-end " data-bs-toggle="" data-bs-target="">
+                        <button type="button" id="msg-archived" className=" link_orange align-end " data-bs-toggle="" data-bs-target="">
                             ...archivedTrackers
                         </button>
                     </div>

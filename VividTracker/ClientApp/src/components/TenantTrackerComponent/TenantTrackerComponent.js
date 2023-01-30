@@ -3,8 +3,8 @@ import { endpoints } from '../../endpoints'
 import './Styles/TenantTrackerStyles.css'
 
 export default class TenantTrackerComponent extends Component {
-    RemoveUser = async (userId) => {
-        await fetch(endpoints.RemoveUser(userId), {
+    removeUser = async (userId) => {
+        await fetch(endpoints.removeUser(userId), {
             method: 'DELETE'
         })
         .then((res) => {
@@ -17,14 +17,14 @@ export default class TenantTrackerComponent extends Component {
   }
   render() {
     return (
-        <div className = 'TenantTracker d-flex' key={this.props.tracker.id}>
+        <div className='TenantTracker d-flex' key={this.props.tracker.id}>
             <div className='TenantTrackerNameWrapper'>
                 {/* Change username to email ! */}
                 <span className='TenantTrackerName pageText'> {this.props.tracker.email} </span>
             </div>
             <div className='TenantTrackerButtonsContainer'>
                 <div className='UseTenantTrackerButtonWrapper'>
-                    <span className='UseTenantButton pageText' onClick={() => this.RemoveUser(this.props.tracker.id)}>Remove</span>
+                    <span className='UseTenantButton pageText' onClick={() => this.removeUser(this.props.tracker.id)}>Remove</span>
                 </div>
                 <div className='ManageTenantTrackerButtonWrapper'>
                     <button className='ManageTenantTrackerButton'>
