@@ -62,7 +62,16 @@ export default class ManageTracker extends Component {
                 '@Bool': 1,
                 'Percentage': 2,
                 'ValueRange': 3
-            }
+            },
+            createdItemName: null,
+            createdItemMaxColorCode: null,
+            createdItemMinColorCode: null,
+            createdItemIrrelevantColoCode: null,
+            createdItemIrrelevantAllowed: false,
+            createdItemMandatoryCommentAvailable: false,
+            createdItemTarget: null,
+            createdItemPropertyType: null,
+            createdItemDefaultValue: null
         }
     }
     
@@ -388,7 +397,7 @@ export default class ManageTracker extends Component {
                                 </select>
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
-                                <select className = 'form-control' placeholder='Mandatory comment allowed'>
+                                <select className = 'form-control'>
                                     <option value="" disabled selected>Mandatory comment allowed</option>
                                     <option>Yes</option>
                                     <option>No</option>
