@@ -22,7 +22,7 @@
 
         public async Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecords()
         {
-            return await Entities.ToListAsync();
+            return await Entities.Include(t => t.TrackingGroup.Tenant).ToListAsync();
         }
     }
 }
