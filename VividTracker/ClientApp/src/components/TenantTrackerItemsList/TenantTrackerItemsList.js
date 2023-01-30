@@ -44,9 +44,8 @@ export default class TenantTrackerItemsList extends Component {
             </div>
 
             <div className='CreateNewTrackerButtonWrapper'>
-                {/* <AddTracker onTrackerAdded={this.loadTrackers} /> */}
                 <div className="container" id="modal">
-                    <Link className="btn btn-link" to={{pathname:'/createTrackingGroup', state: '/tenantTrackers/' + this.state.tenantID}}>
+                    <Link className="CreateNewTrackerButton" to={{pathname:'/createTrackingGroup', state: '/tenantTrackers/' + this.state.tenantID}}>
                         CreateNewTracker()
                     </Link>
                 </div>
