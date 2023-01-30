@@ -282,9 +282,9 @@ export default class ManageTracker extends Component {
                         <label className = 'RecordNameLabel pageText'>New Record: </label>
                         <input className = 'RecordNameInputField form-control' type = 'text' value='' onChange = {(e) => this.setState({'newRecordName': e.target.value})}/>
                     </div>
-                    <div className='RecordButtons'>
-                        <span className='CancelButton'><strong>Cancel</strong></span>
-                        <button className='UpdateButton' onClick={() => this.AddTracker()}>Add</button>
+                    <div className='RecordButtonsManageTrackerPage'>
+                        <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
+                        <button className='UpdateButtonManageTrackerPage' onClick={() => this.AddTracker()}>Add</button>
                     </div>
                     <div className='AlreadyExistingRecordsWrapper'>
                         <span className='AlreadyExistingRecordsHeader'>

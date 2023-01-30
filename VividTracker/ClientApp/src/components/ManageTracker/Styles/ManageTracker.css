@@ -160,7 +160,7 @@
     border-left-style: solid;
 }
 
-.UpdateButton{
+.UpdateButtonManageTrackerPage{
     background-color: #0084B4;
     color: white;
     border-style: none;
@@ -172,7 +172,7 @@
     margin-left: 1.5625rem;
 
 }
-.ResetButton{
+.ResetButtonManageTrackerPage{
     color:#0084B4;
     border-bottom: solid;
     border-bottom-width: 1px;
@@ -181,7 +181,7 @@
     line-height: 27.24px;
     margin-left:22.0625rem;
 }
-.ResetButton:hover{
+.ResetButtonManageTrackerPage:hover{
     cursor: pointer;
 }
 
@@ -204,7 +204,7 @@
     margin-left: 0.5625rem;
     margin-right: 2rem;
 }
-.CancelButton{
+.CancelButtonManageTrackerPage{
     color: #0084B4;
     border-bottom: solid;
     border-bottom-width: medium;
@@ -213,11 +213,11 @@
     font-size: 20px;
     line-height: 27.24px;
 }
-.RecordButtons{
+.RecordButtonsManageTrackerPage{
   margin-left: 16rem;
   margin-top: 1rem;
 }
-.CancelButton:hover{
+.CancelButtonManageTrackerPage:hover{
     cursor: pointer;
 }
 .AlreadyExistingRecordsWrapper{
