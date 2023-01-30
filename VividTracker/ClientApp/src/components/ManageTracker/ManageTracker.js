@@ -133,7 +133,6 @@ export default class ManageTracker extends Component {
     getTrackingGroup = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        // ERROR: THE BELOW LINE IS AN INVALID URL, BECAUSE IT DOES NOT EXIST IN ANY CONTROLLER !
         let url = endpoints.getTrackingGroup(trackingGroupId)
 
         await fetch(url)
@@ -195,12 +194,12 @@ export default class ManageTracker extends Component {
         // currentTrackerName
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.resetName(trackingGroupId)
+        let url = endpoints.getTrackingGroup(trackingGroupId)
         let result = await fetch(url)
         .then((
             async(res) => {
                 let result = await res.json()
-                this.setState({'newTrackerName': result[0].name})
+                this.setState({'newTrackerName': result.name})
         }))
         .catch((err) => {
             console.log(err)
@@ -244,7 +243,7 @@ export default class ManageTracker extends Component {
                         </div>
                     </div>
                     <div className='TrackerButtons'>
-                        <span className='ResetButton' onClick={() => this.resetNames()}><strong>Reset</strong></span>
+                        <span className='ResetButton' onClick={() => this.resetName()}><strong>Reset</strong></span>
                         <button className='UpdateButton' onClick={() => this.updateTrackerName()}>Update</button>
                     </div>
                 </div>
