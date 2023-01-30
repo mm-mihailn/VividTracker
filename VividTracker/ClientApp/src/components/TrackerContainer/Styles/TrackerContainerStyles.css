@@ -1,4 +1,4 @@
-.TrackerContainer{
+.TrackerContainerIndividual{
     background-color: #F3F3F3;
     font-weight: 400;
     font-size: 20px;
@@ -8,11 +8,11 @@
     margin-top: 1rem;
 
 }
-.TrackerContainer .TrackerNameWrapper .TrackerName{
+.TrackerContainerIndividual .TrackerNameWrapper .TrackerName{
     margin-left: 1.125rem;
     color: black;
 }
-.TrackerContainer .TrackerNameWrapper
+.TrackerContainerIndividual .TrackerNameWrapper
 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;

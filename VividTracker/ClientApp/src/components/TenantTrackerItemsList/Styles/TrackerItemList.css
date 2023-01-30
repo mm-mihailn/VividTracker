@@ -1,11 +1,7 @@
 .trackersContainer{
     background-color: white;
-    /* position: absolute; */
-    /* top: 4.8rem; */
     border-top-left-radius: 5%;
     border-bottom-right-radius: 5%;
-    /* width: 60rem; */
-    /* height: 799px; */
     overflow: hidden;
 }
 

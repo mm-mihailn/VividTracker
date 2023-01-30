@@ -23,8 +23,9 @@ export default class TenantTrackerItemsList extends Component {
         await fetch(endpoints.loadTrackers(tenantId))
         .then(async (res) => 
             {
-                let tenantData = await res.json()
-                this.setState({'trackers': tenantData})
+                let tenantTrackers = await res.json()
+                
+                this.setState({'trackers': tenantTrackers})
             }
         )
         .catch((err) => {
@@ -39,9 +40,9 @@ export default class TenantTrackerItemsList extends Component {
                 <h4 className='trackersListHeader'>Trackers List</h4>
                 <FontAwesomeIcon className='trackersListEditButton' icon={faRectangleList} />
             </div>
-            <div className='CreateNewTrackerButtonWrapper'>
+            {/* <div className='CreateNewTrackerButtonWrapper'>
                 <AddTracker onTrackerAdded={this.loadTrackers} />
-            </div>
+            </div> */}
             {this.state.trackers.length >= 1 ?
               <div className='TrackersContainer'>
                       {this.state.trackers.map((tracker) => {
