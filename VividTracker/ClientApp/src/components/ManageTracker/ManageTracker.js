@@ -168,7 +168,7 @@ export default class ManageTracker extends Component {
     updateTrackerName = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        if(this.state.newTrackerName.length > 3)
+        if(this.checkIfItemNameIsValid(this.state.newTrackerName))
         {
             let url = endpoints.updateTrackerName(trackingGroupId)
             let result = await fetch(url, 
