@@ -22,9 +22,9 @@ export class AddTracker extends Component {
     async createTracker(){
         var name = this.state.trackerName;
         var record = this.state.trackerRecord;
-        let tenantId = this.props.location.state.split('/')[2]
+        let tenantId = this.props.location.pathname.split('/')[2]
         
-        console.log(name,record,tenantId)
+        // console.log(name,record,tenantId)
 
         const color = {
             error: "red",
@@ -75,6 +75,7 @@ export class AddTracker extends Component {
         this.setState({ 'trackerRecord': '' });
         this.setState({ errorMessage: '' });
         this.setState({ textColor: 'gray' })
+        this.props.history.goBack()
     }
 
     handleChange(event) {
@@ -111,7 +112,7 @@ export class AddTracker extends Component {
                                 </div>
                                 <button className='saveButton' type="submit" method="post" onClick={(tenantId) => this.createTracker(tenantId)}>Save</button>
                                 <button className='cancelButton'>
-                                    <Link to={{pathname: `${this.props.location.state}`}} id="cancelText" onClick={() => this.clear()}>Cancel</Link>
+                                    <Link id="cancelText" onClick={() => this.clear()}>Cancel</Link>
                                 </button>
                             </div>
                         </div>
