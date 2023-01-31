@@ -160,7 +160,7 @@
     border-left-style: solid;
 }
 
-.UpdateButton{
+.UpdateButtonManageTrackerPage{
     background-color: #0084B4;
     color: white;
     border-style: none;
@@ -172,7 +172,7 @@
     margin-left: 1.5625rem;
 
 }
-.ResetButton{
+.ResetButtonManageTrackerPage{
     color:#0084B4;
     border-bottom: solid;
     border-bottom-width: 1px;
@@ -181,7 +181,7 @@
     line-height: 27.24px;
     margin-left:22.0625rem;
 }
-.ResetButton:hover{
+.ResetButtonManageTrackerPage:hover{
     cursor: pointer;
 }
 
@@ -203,8 +203,9 @@
     width: 22.25rem;
     margin-left: 0.5625rem;
     margin-right: 2rem;
+    height: 50px;
 }
-.CancelButton{
+.CancelButtonManageTrackerPage{
     color: #0084B4;
     border-bottom: solid;
     border-bottom-width: medium;
@@ -213,17 +214,18 @@
     font-size: 20px;
     line-height: 27.24px;
 }
-.RecordButtons{
+.RecordButtonsManageTrackerPage{
   margin-left: 16rem;
   margin-top: 1rem;
 }
-.CancelButton:hover{
+.CancelButtonManageTrackerPage:hover{
     cursor: pointer;
 }
 .AlreadyExistingRecordsWrapper{
     padding-left: 2rem;
     margin-top: 4rem;
     padding-right: 2rem;
+
     
 }
 .AlreadyExistingRecordsWrapper::-webkit-scrollbar{
@@ -268,4 +270,31 @@
     overflow-y: scroll;
     -ms-overflow-style: none;  
     scrollbar-width: none;  
+}
+
+.inputWrapperItemCreation{
+    margin-top: 1rem;
+}
+.createItemHeader{
+    color: black;
+}
+.AlreadyExistingItems{
+    overflow-y: scroll;
+    height: 6vh;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+.AlreadyExistingItems::-webkit-scrollbar {
+    display: none;
+}
+
+.CreateItemButtonManageTrackerPage{
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 100%;
+    height: 2.25rem;
 }

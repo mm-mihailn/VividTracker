@@ -56,9 +56,25 @@ export default class ManageTracker extends Component {
             allItems: [],
             currentTrackingGroup: [],
             currentTrackerName: '',
-            currentTrackerItems: []
+            newTrackerName: '',
+            currentTrackerItems: [],
+            PropertyTypes: {
+                '@Bool': 1,
+                'Percentage': 2,
+                'ValueRange': 3
+            },
+            createdItemName: null,
+            createdItemMaxColorCode: null,
+            createdItemMinColorCode: null,
+            createdItemIrrelevantColorCode: null,
+            createdItemIrrelevantAllowed: false,
+            createdItemMandatoryCommentAvailable: false,
+            createdItemTarget: null,
+            createdItemPropertyType: null,
+            createdItemDefaultValue: null
         }
     }
+    
 
     selectItems = () => {
         if(this.state.isItemsSelected == false)
@@ -80,11 +96,15 @@ export default class ManageTracker extends Component {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupRecords(trackingGroupId)
-        let result = await fetch(url).then((
+        await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'trackingGroupRecords': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     getAllRecords = async() => {
@@ -92,53 +112,86 @@ export default class ManageTracker extends Component {
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
         let url = endpoints.getAllRecords(trackingGroupId);
-
-        let result = await fetch(url).then((
+        await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'allRecords': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     getAllTrackingItems = async() => {
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
-        let url = `https://localhost:7091/api/trackers/${trackingGroupId}`
+        let url = endpoints.getAllTrackingItems(trackingGroupId)
 
-        let result = await fetch(url).then((
+        await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'allItems': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     getTrackingGroup = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroup(trackingGroupId)
-        let result = await fetch(url).then((
+
+        await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
-                this.setState({'currentTrackingGroup': result[0]})
-                this.setState({'currentTrackerName': result[0].name})
+                this.setState({'currentTrackingGroup': result})
+                this.setState({'currentTrackerName': result.name})
+                this.setState({'newTrackerName': result.name})
+
         }))
+        .catch((err) => {
+            console.log(err)
+        })
+
     }
 
     updateTrackerName = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.updateTrackerName(trackingGroupId)
-        let result = await fetch(url, 
+        if(this.checkIfItemNameIsValid(this.state.newTrackerName))
         {
-            method: 'PATCH',
-            body: 
-            JSON.stringify({"Name":this.state.currentTrackerName}),
-            headers: 
+            let url = endpoints.updateTrackerName(trackingGroupId)
+            let result = await fetch(url, 
             {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
+                method: 'PATCH',
+                body: 
+                JSON.stringify({"Name":this.state.newTrackerName}),
+                headers: 
+                {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+        else
+        {
+            //TODO: Tell the user the new tracker name is invalid
+        }
     }
 
 
@@ -146,24 +199,145 @@ export default class ManageTracker extends Component {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
-
-        let result = await fetch(url).then((
+        await fetch(url, {
+            method: 'GET'
+        })
+        .then((
             async(res) => {
                 let result = await res.json()
                 this.setState({'currentTrackerItems': result})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     resetName = async(trackingGroupId) => {
         // currentTrackerName
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.resetName(trackingGroupId)
-        let result = await fetch(url).then((
+        let url = endpoints.getTrackingGroup(trackingGroupId)
+        let result = await fetch(url)
+        .then((
             async(res) => {
                 let result = await res.json()
-                this.setState({'currentTrackerName': result[0].name})
+                this.setState({'newTrackerName': result.name})
         }))
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    createTrackerItem = async() => 
+    {
+        let trackerItemName = this.state.createdItemName
+        let trackerItemMinColorCode = this.state.createdItemMinColorCode
+        let trackerItemMaxColorCode = this.state.createdItemMaxColorCode
+        let trackerItemIrrelevantColorCode = this.state.createdItemIrrelevantColorCode
+        let trackerItemDecimalValue = this.state.createdItemDefaultValue
+        let trackerItemPropertyType = this.state.createdItemPropertyType
+        let trackerItemTarget = this.state.createdItemTarget
+        let trackerItemIrrelevantAllowed = this.state.createdItemIrrelevantAllowed
+        let trackerItemMandatoryCommentAvailable = this.state.createdItemMandatoryCommentAvailable
+
+        if( this.checkIfValueIsNullOrEmpty(trackerItemName) && 
+            this.checkIfValueIsNullOrEmpty(trackerItemMinColorCode) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemMaxColorCode) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemIrrelevantColorCode) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemDecimalValue) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemPropertyType) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemTarget) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemIrrelevantAllowed) &&
+            this.checkIfValueIsNullOrEmpty(trackerItemMandatoryCommentAvailable)
+        )
+        {
+            if(this.checkIfItemNameIsValid(trackerItemName) && 
+            this.checkIfColorCodeIsValid(trackerItemMinColorCode) && 
+            this.checkIfColorCodeIsValid(trackerItemMaxColorCode)&& 
+            this.checkIfColorCodeIsValid(trackerItemIrrelevantColorCode) &&
+            this.checkIfDecimalIsValid(trackerItemDecimalValue))
+            {
+                // call create tracker item endpoint
+                let pageLocationSplitted = window.location.href.split('/')
+                let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+                let createTrackingItemURL = endpoints.createTrackingItem(trackingGroupId)
+                let trackingItemRequestModel = {
+                    Name: trackerItemName,
+                    MaxValueColor: trackerItemMaxColorCode,
+                    MinValueColor: trackerItemMinColorCode,
+                    IrrelevantColor: trackerItemIrrelevantColorCode,
+                    IrrelevantAllowed: Boolean(trackerItemIrrelevantAllowed),
+                    Target: Number(trackerItemTarget),
+                    Type: Number(trackerItemPropertyType),
+                    MandatoryComment: Boolean(trackerItemMandatoryCommentAvailable),
+                    DefaultValue: trackerItemDecimalValue
+                  };
+                  console.log(trackingItemRequestModel)
+                await fetch(createTrackingItemURL, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(trackingItemRequestModel)
+                })
+                .then((
+                    async(res) => {
+                        console.log('item successfully created')
+                    }))
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
+            else
+            {
+                console.log('Invalid name or color code!')
+            }
+        }
+        else
+        {
+            console.log('Invalid value found!')
+        }
+
+    }
+
+    checkIfColorCodeIsValid(colorCodeString)
+    {
+        let colorCodeRegex = new RegExp(`^#[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}$`)
+        let isColorCodeValid = colorCodeRegex.test(colorCodeString)
+        return isColorCodeValid
+    }
+
+    checkIfItemNameIsValid(ItemName)
+    {
+        if(ItemName.length > 0 && ItemName.length <= 255)
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+
+    checkIfValueIsNullOrEmpty(value)
+    {
+        if(value == null || !value)
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
+
+    checkIfDecimalIsValid(decimalValue)
+    {
+        let validDecimalRegex = new RegExp("^\\d{3}\\.\\d{2}$");
+        let shortenedDecimalValue = Number(decimalValue).toFixed(2).toString()
+        let isDecimalValueValid = validDecimalRegex.test(shortenedDecimalValue)
+        return isDecimalValueValid
+        
     }
     
     componentDidMount()
@@ -172,14 +346,14 @@ export default class ManageTracker extends Component {
         this.getAllRecords()
         this.getAllTrackingItems()
         this.getTrackingGroup()
-        this.getCurrentTrackerItems()
+        this.getTrackingGroupTrackingItems()
     }
   render() {
     return (
     <div className = 'TrackerContainerWrapper d-flex justify-content-center align-items-center'>
         <div className='TrackerContainer'>
             <div className='TrackerHeaderWrapper'>
-                <h4 className='TrackerHeader'>{this.state.currentTrackerName}/New Tracker</h4>
+                <h4 className='TrackerHeader'>{this.state.currentTrackerName}</h4>
                 <FontAwesomeIcon className='TrackerHeaderIcon' icon = {faPenToSquare}/>
             </div>
             <div className='TrackerInteractionField'>
@@ -190,20 +364,20 @@ export default class ManageTracker extends Component {
                             <input 
                                 className = 'TrackerNameInputField form-control' 
                                 type = 'text' 
-                                value={this.state.currentTrackerName} 
+                                value={this.state.newTrackerName} 
                                 onChange = {
                                     (e) => 
-                                    this.setState({'currentTrackerName': e.target.value})
+                                    this.setState({'newTrackerName': e.target.value})
                                 }
                             />
                         </div>
                         <div className='RecordNameFieldWrapper'>
                             <label className = 'TrackerRecordLabel pageText'>Record Name: </label>
-                            <input className = 'TrackerRecordInputField form-control' type = 'text' value='' onChange = {(e) => this.setState({'currentRecordName': e.target.value})}/>
+                            <input className = 'TrackerRecordInputField form-control' type = 'text' value={this.state.currentRecordName} onChange = {(e) => this.setState({'currentRecordName': e.target.value})}/>
                         </div>
                     </div>
                     <div className='TrackerButtons'>
-                        <span className='ResetButton' onClick={() => this.resetNames()}><strong>Reset</strong></span>
+                        <span className='ResetButton' onClick={() => this.resetName()}><strong>Reset</strong></span>
                         <button className='UpdateButton' onClick={() => this.updateTrackerName()}>Update</button>
                     </div>
                 </div>
@@ -226,25 +400,34 @@ export default class ManageTracker extends Component {
             {this.state.isRecordsSelected == true 
             ?
             <div className='RecordsWrapper d-flex'>
-                <div className='RecordsContainer'>
-                    {this.state.trackingGroupRecords.map((record) => {
-                            return (
-                                <div className='RecordContainer'>
-                                    <p className='RecordName'>{record.name}</p>
-                                </div>   
-                            )
-                        }
-                    )}
-                </div>
+                 {
+                    this.state.trackingGroupRecords.length > 0 ?
+                    <div className='RecordsContainer'>
+                        {this.state.trackingGroupRecords.map((record) => {
+                                return (
+                                    <div className='RecordContainer'>
+                                        <p className='RecordName'>{record.name}</p>
+                                    </div>   
+                                )
+                            }
+                        )}
+                    </div>
+                    :
+                    <div className='RecordsContainer'>
+                        <div className='RecordContainer'>
+                            <p className=''>No records found.</p>
+                        </div>   
+                    </div>
+                }
 
                 <div className='RecordsInteraction'>
                     <div className='RecordsInteractionFieldWrapper d-flex'>
                         <label className = 'RecordNameLabel pageText'>New Record: </label>
-                        <input className = 'RecordNameInputField form-control' type = 'text' value='' onChange = {(e) => this.setState({'newRecordName': e.target.value})}/>
+                        <input className = 'RecordNameInputField form-control' type = 'text' value={this.state.newRecordName} onChange = {(e) => this.setState({'newRecordName': e.target.value})}/>
                     </div>
-                    <div className='RecordButtons'>
-                        <span className='CancelButton'><strong>Cancel</strong></span>
-                        <button className='UpdateButton' onClick={() => this.AddTracker()}>Add</button>
+                    <div className='RecordButtonsManageTrackerPage'>
+                        <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
+                        <button className='UpdateButtonManageTrackerPage' onClick={() => this.AddTracker()}>Add</button>
                     </div>
                     <div className='AlreadyExistingRecordsWrapper'>
                         <span className='AlreadyExistingRecordsHeader'>
@@ -265,6 +448,7 @@ export default class ManageTracker extends Component {
             </div>
             : 
             <div className='RecordsWrapper d-flex'>
+                {this.state.currentTrackerItems.length > 0?
                 <div className='RecordsContainer'>
                     {this.state.currentTrackerItems.map((trackerItem) => {
                         return (
@@ -275,12 +459,113 @@ export default class ManageTracker extends Component {
                     }
                     )}
                 </div>
+                :
+                <div className='RecordsContainer'>
+                        <div className='RecordContainer'>
+                            <p className=''>No items found.</p>
+                        </div>   
+                    </div>
+                } 
 
                 <div className='AlreadyExistingRecordsWrapper ItemSectionRecords'>
+                    <div className='CreateItemField'>
+                        <p className='createItemHeader'>Create tracker item</p>
+                        <div className="form-group row">
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Tracker item name'
+                                    onChange={(e) => this.setState({'createdItemName': e.target.value})}
+                                />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                            <input 
+                                className = 'form-control' 
+                                type = 'text' 
+                                placeholder='Max hex color code'
+                                onChange={(e) => this.setState({'createdItemMaxColorCode': e.target.value})}
+                            />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Min hex color code'
+                                    onChange={(e) => this.setState({'createdItemMinColorCode': e.target.value})}
+
+                                />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Irrelevant hex color code'
+                                    onChange={(e) => this.setState({'createdItemIrrelevantColorCode': e.target.value})}
+
+                                />
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
+                                    <option value="" disabled selected>Irrelevant allowed</option>
+                                    <option value={true}>Yes</option>
+                                    <option value={false}>No</option>
+                                </select>
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
+                                    <option value="" disabled selected>Mandatory comment allowed</option>
+                                    <option value={true}>Yes</option>
+                                    <option value={false}>No</option>
+                                </select>
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Item target'
+                                    onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
+                                />
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+
+                                <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
+                                    <option value="" disabled selected>Property type</option>
+                                    {
+                                        Object.keys(this.state.PropertyTypes)
+                                        .map((propertyType) => 
+                                        {
+                                            return(
+                                                <option value={this.state.PropertyTypes[propertyType]}>{propertyType}</option>
+                                            )
+
+                                        })
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Default value decimal'
+                                    onChange={(e) => this.setState({'createdItemDefaultValue':e.target.value})}
+                                /> 
+                            </div>
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <button onClick={() => this.createTrackerItem()} className = 'CreateItemButtonManageTrackerPage'>Create tracker item</button>
+                            </div>
+                        </div>
+                    </div>
+
                         <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
                             Already Existing Items:
                         </span>
-                        <div className='AlreadyExistingRecords'>
+                        <div className='AlreadyExistingItems'>
                             {this.state.allItems.map((alreadyExistingItem) => {
                                 return(
                                     <div className='AlreadyExistingRecord'>
@@ -288,7 +573,7 @@ export default class ManageTracker extends Component {
                                         <span className='AddTrackingButton'>Add</span>
                                     </div>
                                 )
-                            })}
+                            })} 
                         </div>
                     </div>
                 
