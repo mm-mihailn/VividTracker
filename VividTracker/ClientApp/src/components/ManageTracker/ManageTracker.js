@@ -103,7 +103,7 @@ export default class ManageTracker extends Component {
                 this.setState({'trackingGroupRecords': result})
         }))
         .catch((err) => {
-            console.log(err)
+            // TODO: Do some action when an error occurs
         })
     }
 
@@ -119,7 +119,7 @@ export default class ManageTracker extends Component {
                 this.setState({'allRecords': result})
         }))
         .catch((err) => {
-            console.log(err)
+            // TODO: Do some action when an error occurs
         })
     }
 
@@ -141,7 +141,7 @@ export default class ManageTracker extends Component {
                 this.setState({'allItems': result})
         }))
         .catch((err) => {
-            console.log(err)
+            // TODO: Do some action when an error occurs
         })
     }
 
@@ -160,7 +160,7 @@ export default class ManageTracker extends Component {
 
         }))
         .catch((err) => {
-            console.log(err)
+            // TODO: Do some action when an error occurs
         })
 
     }
@@ -185,7 +185,7 @@ export default class ManageTracker extends Component {
                 console.log(res)
             })
             .catch((err) => {
-                console.log(err)
+                // TODO: Do some action when an error occurs
             })
         }
         else
@@ -208,7 +208,7 @@ export default class ManageTracker extends Component {
                 this.setState({'currentTrackerItems': result})
         }))
         .catch((err) => {
-            console.log(err)
+            // TODO: Do some action when an error occurs
         })
     }
 
@@ -224,7 +224,7 @@ export default class ManageTracker extends Component {
                 this.setState({'newTrackerName': result.name})
         }))
         .catch((err) => {
-            console.log(err)
+            // TODO: Do some action when an error occurs
         })
     }
 
