@@ -165,12 +165,17 @@ export default class ManageTracker extends Component {
 
     }
 
-    updateTrackerName = async (trackingGroupId) => {
+    handleUpdate = () => {
         let pageLocationSplitted = window.location.href.split('/')
-        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        this.updateTrackerName(trackingGroupId)
+        this.updateTrackerLabel(trackingGroupId)
+    }
+    updateTrackerName = async (trackingGroupId) => {
+        
         if(this.checkIfItemNameIsValid(this.state.newTrackerName))
         {
-            let url = endpoints.updateTrackerLabel(trackingGroupId)
+            let url = endpoints.updateTrackerName(trackingGroupId)
             await fetch(url, 
             {
                 method: 'PATCH',
@@ -189,24 +194,34 @@ export default class ManageTracker extends Component {
                 // TODO: Do some action when an error occurs
             })
 
+        }
+        else
+        {
+            //TODO: Tell the user the new tracker name is invalid
+        }
+    }
+
+    updateTrackerLabel = async (trackingGroupId) => {
+        if(this.checkIfItemNameIsValid(this.state.newTrackerName))
+        {
+            let url = endpoints.updateTrackerLabel(trackingGroupId)
             await fetch(url, 
+            {
+                method: 'PATCH',
+                body: 
+                JSON.stringify({"Label":this.state.currentRecordName}),
+                headers: 
                 {
-                    method: 'PATCH',
-                    body: 
-                    JSON.stringify({"Label":this.state.currentRecordName}),
-                    headers: 
-                    {
-                        'Content-type': 'application/json; charset=UTF-8',
-                    },
-                })
-                .then((res) => {
-                    console.log(res)
-                    this.getTrackingGroup(trackingGroupId)
-    
-                })
-                .catch((err) => {
-                    // TODO: Do some action when an error occurs
-                })
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then((res) => {
+                this.getTrackingGroup(trackingGroupId)
+
+            })
+            .catch((err) => {
+                // TODO: Do some action when an error occurs
+            })
 
         }
         else
@@ -401,7 +416,7 @@ export default class ManageTracker extends Component {
                     </div>
                     <div className='TrackerButtons'>
                         <span className='ResetButton' onClick={() => this.resetName()}><strong>Reset</strong></span>
-                        <button className='UpdateButton' onClick={() => this.updateTrackerName()}>Update</button>
+                        <button className='UpdateButton' onClick={() => this.handleUpdate()}>Update</button>
                     </div>
                 </div>
             </div>
