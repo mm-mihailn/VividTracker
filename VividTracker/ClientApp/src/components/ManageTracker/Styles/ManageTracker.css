@@ -261,7 +261,7 @@
     cursor: pointer;
 }
 .ItemSectionRecords{
-    margin-top: auto;
+    margin-top: 0;
     width: 100%;
     padding-right: 2rem;
 }
@@ -301,4 +301,21 @@
 
 .inputWrapperItemCreation{
     width: 100%;
+}
+.TrackerItemOption
+{
+    color: black;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 27.24px;
+    font-family: 'Open Sans', sans-serif;
+}
+.TrackerItemOption:hover{
+    cursor: pointer;
+}
+.TrackerItemOptionSelected{
+    border-bottom-style: solid;
+}
+.AlreadyExistingItemsButtonWrapper{
+    margin-left: auto;
 }

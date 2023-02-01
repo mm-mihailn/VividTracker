@@ -71,7 +71,8 @@ export default class ManageTracker extends Component {
             createdItemMandatoryCommentAvailable: false,
             createdItemTarget: null,
             createdItemPropertyType: 1,
-            createdItemDefaultValue: null
+            createdItemDefaultValue: null,
+            isCreateTrackerItemSelected: true
         }
     }
     
@@ -377,7 +378,17 @@ export default class ManageTracker extends Component {
         return isDecimalValueValid
         
     }
-    
+    selectTrackerItemOption()
+    {
+        if(this.state.isCreateTrackerItemSelected == true)
+        {
+            this.setState({'isCreateTrackerItemSelected' : false})
+        }
+        else
+        {
+            this.setState({'isCreateTrackerItemSelected' : true})
+        }
+    }
     componentDidMount()
     {
         this.getTrackingGroupRecords()
@@ -506,117 +517,135 @@ export default class ManageTracker extends Component {
                 } 
 
                 <div className='AlreadyExistingRecordsWrapper ItemSectionRecords'>
-                    <div className='CreateItemField'>
-                        <p className='createItemHeader'>Create tracker item</p>
-                        <div className="form-group row">
-                            <div className="col-sm-12 inputWrapperItemCreation">
-                                <input 
-                                    className = 'form-control' 
-                                    type = 'text' 
-                                    placeholder='Tracker item name'
-                                    onChange={(e) => this.setState({'createdItemName': e.target.value})}
-                                />
-                            </div>
+                    <div className='ItemsInteractionMenu d-flex'>
+                        <div className={ this.state.isCreateTrackerItemSelected == true ? 
+                            'CreateTrackerItemButtonWrapper TrackerItemOptionSelected' : 
+                            'CreateTrackerItemButtonWrapper'
+                        } onClick={() => this.selectTrackerItemOption()}>
+                            <span className='TrackerItemOption'>Create tracker item</span>
                         </div>
-                        <div className='form-group row '>
-                            <div className="col-sm-6 d-flex inputWrapperItemCreation">
-                                <input 
-                                    className = 'form-control' 
-                                    type = 'text' 
-                                    placeholder='Max color'
-                                    onChange={(e) => this.setState({'createdItemMaxColorCode': e.target.value})}
-                                />
-                                
-                                    <input 
-                                        className = 'form-control' 
-                                        type = 'text' 
-                                        placeholder='Min color'
-                                        onChange={(e) => this.setState({'createdItemMinColorCode': e.target.value})}
-
-                                    />
-                                
-                                    <input 
-                                        className = 'form-control' 
-                                        type = 'text' 
-                                        placeholder='Irrelevant color'
-                                        onChange={(e) => this.setState({'createdItemIrrelevantColorCode': e.target.value})}
-
-                                    />
-                                </div>
+                        <div className={ this.state.isCreateTrackerItemSelected == false ? 
+                            'AlreadyExistingItemsButtonWrapper TrackerItemOptionSelected' : 
+                            'AlreadyExistingItemsButtonWrapper'
+                        } onClick={() => this.selectTrackerItemOption()}>
+                            <span className='TrackerItemOption'>Already existing items</span>
                         </div>
-                        <div className="form-group row">
-                            <div className="col-sm-6 d-flex inputWrapperItemCreation">
-                                <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
-                                    <option value="" disabled >Irrelevant allowed</option>
-                                    <option value={true}>Yes</option>
-                                    <option value={false}>No</option>
-                                </select>                  
-                                <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
-                                    <option value="" disabled >Mandatory comment allowed</option>
-                                    <option value={true}>Yes</option>
-                                    <option value={false}>No</option>
-                                </select>
-                                <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
-                                    <option value="" disabled >Property type</option>
-                                    {
-                                        Object.keys(this.state.PropertyTypes)
-                                        .map((propertyType) => 
-                                        {
-                                            return(
-                                                <option value={this.state.PropertyTypes[propertyType]} key = {propertyType}>{propertyType}</option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
-
-                        </div>
-                        <div className="form-group row">
-                            <div className="col-sm-6 inputWrapperItemCreation">
-                                <input 
-                                    className = 'form-control' 
-                                    type = 'text' 
-                                    placeholder='Default value'
-                                    onChange={(e) => this.setState({'createdItemDefaultValue':e.target.value})}
-                                /> 
-                            </div>
-                            
-                            <div className="col-sm-6 inputWrapperItemCreation">
-                                <input 
-                                    className = 'form-control' 
-                                    type = 'text' 
-                                    placeholder='Item target'
-                                    onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
-                                />
-                            </div>
-                            <div className={this.state.createdItemPropertyType == 3 ? "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-block" : "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-none"}>
-                                <input 
-                                    className = 'form-range' 
-                                    type = 'range'
-                                    min="0"
-                                    max="1200"
-                                />
-                            </div>
-
-                        </div>
-                            <div className="col-sm-6 inputWrapperItemCreation">
-                                <button onClick={() => this.createTrackerItem()} className = 'CreateItemButtonManageTrackerPage'>Create tracker item</button>
-                            </div>
                     </div>
-
-                        <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
-                            Already Existing Items:
-                        </span>
-                        <div className='AlreadyExistingItems'>
-                            {this.state.allItems.map((alreadyExistingItem) => {
-                                return(
-                                    <div className='AlreadyExistingRecord' key={alreadyExistingItem.id}>
-                                        <p className='AlreadyExistingRecordName'>{alreadyExistingItem.name}</p>
-                                        <span className='AddTrackingButton'>Add</span>
+                        { this.state.isCreateTrackerItemSelected == true ?
+                            <div className='CreateItemField'>
+                                {/* <p className='createItemHeader'>Create tracker item</p> */}
+                                <div className="form-group row">
+                                    <div className="col-sm-12 inputWrapperItemCreation">
+                                        <input 
+                                            className = 'form-control' 
+                                            type = 'text' 
+                                            placeholder='Tracker item name'
+                                            onChange={(e) => this.setState({'createdItemName': e.target.value})}
+                                        />
                                     </div>
-                                )
-                            })} 
+                                </div>
+                                <div className='form-group row '>
+                                    <div className="col-sm-6 d-flex inputWrapperItemCreation">
+                                        <input 
+                                            className = 'form-control' 
+                                            type = 'text' 
+                                            placeholder='Max color'
+                                            onChange={(e) => this.setState({'createdItemMaxColorCode': e.target.value})}
+                                        />
+                                        
+                                            <input 
+                                                className = 'form-control' 
+                                                type = 'text' 
+                                                placeholder='Min color'
+                                                onChange={(e) => this.setState({'createdItemMinColorCode': e.target.value})}
+
+                                            />
+                                        
+                                            <input 
+                                                className = 'form-control' 
+                                                type = 'text' 
+                                                placeholder='Irrelevant color'
+                                                onChange={(e) => this.setState({'createdItemIrrelevantColorCode': e.target.value})}
+
+                                            />
+                                        </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-sm-6 d-flex inputWrapperItemCreation">
+                                        <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
+                                            <option value="" disabled >Irrelevant allowed</option>
+                                            <option value={true}>Yes</option>
+                                            <option value={false}>No</option>
+                                        </select>                  
+                                        <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
+                                            <option value="" disabled >Mandatory comment allowed</option>
+                                            <option value={true}>Yes</option>
+                                            <option value={false}>No</option>
+                                        </select>
+                                        <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
+                                            <option value="" disabled >Property type</option>
+                                            {
+                                                Object.keys(this.state.PropertyTypes)
+                                                .map((propertyType) => 
+                                                {
+                                                    return(
+                                                        <option value={this.state.PropertyTypes[propertyType]} key = {propertyType}>{propertyType}</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div className="form-group row">
+                                    <div className="col-sm-6 inputWrapperItemCreation">
+                                        <input 
+                                            className = 'form-control' 
+                                            type = 'text' 
+                                            placeholder='Default value'
+                                            onChange={(e) => this.setState({'createdItemDefaultValue':e.target.value})}
+                                        /> 
+                                    </div>
+                                    
+                                    <div className="col-sm-6 inputWrapperItemCreation">
+                                        <input 
+                                            className = 'form-control' 
+                                            type = 'text' 
+                                            placeholder='Item target value'
+                                            onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
+                                        />
+                                    </div>
+                                    <div className={this.state.createdItemPropertyType == 3 ? "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-block" : "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-none"}>
+                                        <input 
+                                            className = 'form-range' 
+                                            type = 'range'
+                                            min="0"
+                                            max="1200"
+                                        />
+                                    </div>
+
+                                </div>
+                                <div className="col-sm-6 inputWrapperItemCreation">
+                                    <button onClick={() => this.createTrackerItem()} className = 'CreateItemButtonManageTrackerPage'>Create tracker item</button>
+                                </div>
+                            </div>
+                        :
+                        <div>
+                            <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
+                                Already Existing Items:
+                            </span>
+                            <div className='AlreadyExistingItems'>
+                                {this.state.allItems.map((alreadyExistingItem) => {
+                                    return(
+                                        <div className='AlreadyExistingRecord' key={alreadyExistingItem.id}>
+                                            <p className='AlreadyExistingRecordName'>{alreadyExistingItem.name}</p>
+                                            <span className='AddTrackingButton'>Add</span>
+                                        </div>
+                                    )
+                                })} 
+                            </div>
                         </div>
+                        }
                     </div>
                 
             </div>
