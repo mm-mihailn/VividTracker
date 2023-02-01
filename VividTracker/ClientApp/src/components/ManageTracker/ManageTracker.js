@@ -508,15 +508,15 @@ export default class ManageTracker extends Component {
                         </div>
                         <div className="form-group row">
                             <div className="col-sm-6 inputWrapperItemCreation">
-                                <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
-                                    <option value="" disabled selected>Irrelevant allowed</option>
+                                <select className='form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({ 'createdItemIrrelevantAllowed': e.target.value })}>
+                                    <option value="" disabled defaultValue>Irrelevant allowed</option>
                                     <option value={true}>Yes</option>
                                     <option value={false}>No</option>
                                 </select>
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
                                 <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
-                                    <option value="" disabled selected>Mandatory comment allowed</option>
+                                    <option value="" disabled defaultValue>Mandatory comment allowed</option>
                                     <option value={true}>Yes</option>
                                     <option value={false}>No</option>
                                 </select>
@@ -532,7 +532,7 @@ export default class ManageTracker extends Component {
                             <div className="col-sm-6 inputWrapperItemCreation">
 
                                 <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
-                                    <option value="" disabled selected>Property type</option>
+                                    <option value="" disabled defaultValue>Property type</option>
                                     {
                                         Object.keys(this.state.PropertyTypes)
                                         .map((propertyType) => 
