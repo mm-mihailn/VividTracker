@@ -60,15 +60,7 @@ export default class EditTenantComponent extends Component {
     }
     //TODO reset the tenant's name
     resetTenantName = async (tenantId) => {
-        // currentTenantName
-        let pageLocationSplitted = window.location.href.split('/')
-        tenantId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.resetTenantName(tenantId)
-        let result = await fetch(url).then((
-            async (res) => {
-                let result = await res.json()
-                this.setState({ 'currentTenantName': result[0].name })
-            }))
+        this.getTenantName(tenantId)
     }
 
     render() {
