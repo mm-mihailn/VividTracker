@@ -279,8 +279,9 @@
     color: black;
 }
 .AlreadyExistingItems{
+    margin-top: 1rem;
     overflow-y: scroll;
-    height: 6vh;
+    height: 35vh;
     -ms-overflow-style: none; 
     scrollbar-width: none;
 }
@@ -318,4 +319,7 @@
 }
 .AlreadyExistingItemsButtonWrapper{
     margin-left: auto;
+}
+.ItemsInteractionMenu{
+    margin-top: 1rem;
 }

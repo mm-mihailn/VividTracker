@@ -199,6 +199,7 @@ export default class ManageTracker extends Component {
         else
         {
             //TODO: Tell the user the new tracker name is invalid
+            console.log('invalid tracker name error')
         }
     }
 
@@ -348,6 +349,7 @@ export default class ManageTracker extends Component {
 
     checkIfItemNameIsValid(ItemName)
     {
+        
         if(ItemName.length > 0 && ItemName.length <= 255)
         {
             return true
@@ -626,14 +628,11 @@ export default class ManageTracker extends Component {
 
                                 </div>
                                 <div className="col-sm-6 inputWrapperItemCreation">
-                                    <button onClick={() => this.createTrackerItem()} className = 'CreateItemButtonManageTrackerPage'>Create tracker item</button>
+                                    <button onClick={() => this.createTrackerItem()} className = 'CreateItemButtonManageTrackerPage'>Create</button>
                                 </div>
                             </div>
                         :
                         <div>
-                            <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
-                                Already Existing Items:
-                            </span>
                             <div className='AlreadyExistingItems'>
                                 {this.state.allItems.map((alreadyExistingItem) => {
                                     return(
