@@ -76,7 +76,6 @@ export default class ManageTracker extends Component {
         }
     }
     
-
     selectItems = () => {
         if(this.state.isItemsSelected == false)
         {
@@ -84,7 +83,6 @@ export default class ManageTracker extends Component {
             this.setState({'isRecordsSelected': false})
         }
     }
-    
     selectRecords = () => {
         if(this.state.isRecordsSelected == false)
         {
@@ -92,7 +90,6 @@ export default class ManageTracker extends Component {
             this.setState({'isItemsSelected': false})
         }
     }
-
     getTrackingGroupRecords = async(trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
@@ -107,7 +104,6 @@ export default class ManageTracker extends Component {
             // TODO: Do some action when an error occurs
         })
     }
-
     getAllRecords = async() => {
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
@@ -123,7 +119,6 @@ export default class ManageTracker extends Component {
             // TODO: Do some action when an error occurs
         })
     }
-
     getAllTrackingItems = async() => {
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
@@ -145,7 +140,6 @@ export default class ManageTracker extends Component {
             // TODO: Do some action when an error occurs
         })
     }
-
     getTrackingGroup = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
@@ -165,7 +159,6 @@ export default class ManageTracker extends Component {
         })
 
     }
-
     handleUpdate = () => {
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
@@ -231,7 +224,6 @@ export default class ManageTracker extends Component {
             //TODO: Tell the user the new tracker name is invalid
         }
     }
-
 
     getTrackingGroupTrackingItems = async(trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
@@ -617,13 +609,18 @@ export default class ManageTracker extends Component {
                                             onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
                                         />
                                     </div>
-                                    <div className={this.state.createdItemPropertyType == 3 ? "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-block" : "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-none"}>
+                                    <div className={this.state.createdItemPropertyType == 3 ? "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-flex" : "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-none"}>
+
                                         <input 
-                                            className = 'form-range' 
-                                            type = 'range'
-                                            min="0"
-                                            max="1200"
+                                            className = 'form-control' 
+                                            type = 'text'
+                                            placeholder='Minimal value'
                                         />
+                                    <input 
+                                            className = 'form-control' 
+                                            type = 'text'
+                                            placeholder='Maximal value'
+                                        />         
                                     </div>
 
                                 </div>
