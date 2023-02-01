@@ -170,8 +170,8 @@ export default class ManageTracker extends Component {
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         if(this.checkIfItemNameIsValid(this.state.newTrackerName))
         {
-            let url = endpoints.updateTrackerName(trackingGroupId)
-            let result = await fetch(url, 
+            let url = endpoints.updateTrackerLabel(trackingGroupId)
+            await fetch(url, 
             {
                 method: 'PATCH',
                 body: 
@@ -182,13 +182,32 @@ export default class ManageTracker extends Component {
                 },
             })
             .then((res) => {
-                console.log(res)
                 this.getTrackingGroup(trackingGroupId)
 
             })
             .catch((err) => {
                 // TODO: Do some action when an error occurs
             })
+
+            await fetch(url, 
+                {
+                    method: 'PATCH',
+                    body: 
+                    JSON.stringify({"Label":this.state.currentRecordName}),
+                    headers: 
+                    {
+                        'Content-type': 'application/json; charset=UTF-8',
+                    },
+                })
+                .then((res) => {
+                    console.log(res)
+                    this.getTrackingGroup(trackingGroupId)
+    
+                })
+                .catch((err) => {
+                    // TODO: Do some action when an error occurs
+                })
+
         }
         else
         {
