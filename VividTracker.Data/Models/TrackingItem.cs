@@ -16,7 +16,7 @@ namespace VividTracker.Data.Models
             TrackingGroups = new List<TrackingGroup>();
         }
 
-        public TrackingItem(int tenantId,string name,bool irrelevantAllowed, bool mandatoryComment, decimal? defaultValue, string maxValueColor, string minValueColor, string irrelevantColor, decimal target, PropertyType type) :this()
+        public TrackingItem(int tenantId,string name,bool irrelevantAllowed, bool mandatoryComment, decimal? defaultValue, string maxValueColor, string minValueColor, string irrelevantColor, decimal target, PropertyType type,decimal? minValueType,decimal? maxValueType) :this()
         {
             TenantId=tenantId;
             Name = name ?? throw new ArgumentNullException(nameof(name));
@@ -28,6 +28,8 @@ namespace VividTracker.Data.Models
             IrrelevantColor = irrelevantColor;
             Target = target;
             Type = type;
+            MinValueType = minValueType;
+            MaxValueType = maxValueType;
         }
         public int Id { get; set; }
         public int TenantId { get; set; }
@@ -46,6 +48,8 @@ namespace VividTracker.Data.Models
         public decimal Target { get; set; }
         public PropertyType Type { get; set; }
         public string Name { get; set; }
+        public decimal? MinValueType { get; set; }
+        public decimal? MaxValueType { get; set; }
         public ICollection<TrackingItemValue> TrackingItemsValues{ get; set; }
         public ICollection<TrackingItemUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }
         public ICollection<TrackingGroup> TrackingGroups { get; set; }
