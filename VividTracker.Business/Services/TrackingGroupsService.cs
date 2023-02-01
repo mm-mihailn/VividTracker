@@ -69,5 +69,21 @@ namespace VividTracker.Business.Services
 
         public async Task UpdateTrackerAsync(TrackingGroup TrackingGroup) => await _trackingGroupsRepository.UpdateAsync(TrackingGroup);
 
+        public async Task<TrackingGroup> UpdateTrackingGroupLabel(TrackingGroup trackingGroup)
+        {
+            var tracker = await _trackingGroupsRepository.FindTrackingGroup(trackingGroup.Id);
+
+            if (tracker != null)
+            {
+                if (tracker.Label == trackingGroup.Label)
+                {
+                    return null;
+                }
+                tracker.Label = trackingGroup.Label;
+                await _trackingGroupsRepository.UpdateAsync(tracker);
+                return tracker;
+            }
+            return null;
+        }
     }
 }

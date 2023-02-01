@@ -11,5 +11,6 @@
     {
         Task<IEnumerable<TrackingGroupRecord>> GetAllRecords(int trackingGroupId);
         Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecordsAsync();
+        Task<TrackingGroupRecord> CreateTrackingGroupRecord(TrackingGroupRecord trackingGroupRecord);
     }
 }
