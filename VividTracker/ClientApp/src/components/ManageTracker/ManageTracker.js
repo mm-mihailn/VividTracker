@@ -156,8 +156,8 @@ export default class ManageTracker extends Component {
                 let result = await res.json()
                 this.setState({'currentTrackingGroup': result})
                 this.setState({'currentTrackerName': result.name})
+                this.setState({'currentRecordName': result.label})
                 this.setState({'newTrackerName': result.name})
-
         }))
         .catch((err) => {
             // TODO: Do some action when an error occurs
