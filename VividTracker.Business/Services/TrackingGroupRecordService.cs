@@ -12,11 +12,16 @@
     public class TrackingGroupRecordService : ITrackingGroupRecordsService
     {
         private readonly ITrackingGroupRecordsRepository  _trackingGroupRecordsRepository;
-
         public TrackingGroupRecordService(ITrackingGroupRecordsRepository trackingGroupRecordsRepository)
         {
             _trackingGroupRecordsRepository = trackingGroupRecordsRepository;
         }
+
+        public async Task<TrackingGroupRecord> CreateTrackingGroupRecord(TrackingGroupRecord trackingGroupRecord)
+        {
+            return await _trackingGroupRecordsRepository.AddAsync(trackingGroupRecord);
+        }
+
         public async Task<IEnumerable<TrackingGroupRecord>> GetAllRecords(int trackingGroupId)
         {
             return await _trackingGroupRecordsRepository.GetAllRecordsAsync(trackingGroupId);
