@@ -509,14 +509,14 @@ export default class ManageTracker extends Component {
                         <div className="form-group row">
                             <div className="col-sm-6 inputWrapperItemCreation">
                                 <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
-                                    <option value="" disabled selected>Irrelevant allowed</option>
+                                    <option value="" disabled >Irrelevant allowed</option>
                                     <option value={true}>Yes</option>
                                     <option value={false}>No</option>
                                 </select>
                             </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
                                 <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
-                                    <option value="" disabled selected>Mandatory comment allowed</option>
+                                    <option value="" disabled >Mandatory comment allowed</option>
                                     <option value={true}>Yes</option>
                                     <option value={false}>No</option>
                                 </select>
@@ -532,13 +532,13 @@ export default class ManageTracker extends Component {
                             <div className="col-sm-6 inputWrapperItemCreation">
 
                                 <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
-                                    <option value="" disabled selected>Property type</option>
+                                    <option value="" disabled >Property type</option>
                                     {
                                         Object.keys(this.state.PropertyTypes)
                                         .map((propertyType) => 
                                         {
                                             return(
-                                                <option value={this.state.PropertyTypes[propertyType]}>{propertyType}</option>
+                                                <option value={this.state.PropertyTypes[propertyType]} key = {propertyType}>{propertyType}</option>
                                             )
 
                                         })
