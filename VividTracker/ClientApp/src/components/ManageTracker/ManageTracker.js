@@ -509,7 +509,7 @@ export default class ManageTracker extends Component {
                     <div className='CreateItemField'>
                         <p className='createItemHeader'>Create tracker item</p>
                         <div className="form-group row">
-                            <div className="col-sm-6 inputWrapperItemCreation">
+                            <div className="col-sm-12 inputWrapperItemCreation">
                                 <input 
                                     className = 'form-control' 
                                     type = 'text' 
@@ -517,58 +517,45 @@ export default class ManageTracker extends Component {
                                     onChange={(e) => this.setState({'createdItemName': e.target.value})}
                                 />
                             </div>
-                            <div className="col-sm-6 inputWrapperItemCreation">
-                            <input 
-                                className = 'form-control' 
-                                type = 'text' 
-                                placeholder='Max hex color code'
-                                onChange={(e) => this.setState({'createdItemMaxColorCode': e.target.value})}
-                            />
-                            </div>
-                            <div className="col-sm-6 inputWrapperItemCreation">
+                        </div>
+                        <div className='form-group row '>
+                            <div className="col-sm-6 d-flex inputWrapperItemCreation">
                                 <input 
                                     className = 'form-control' 
                                     type = 'text' 
-                                    placeholder='Min hex color code'
-                                    onChange={(e) => this.setState({'createdItemMinColorCode': e.target.value})}
-
+                                    placeholder='Max color'
+                                    onChange={(e) => this.setState({'createdItemMaxColorCode': e.target.value})}
                                 />
-                            </div>
-                            <div className="col-sm-6 inputWrapperItemCreation">
-                                <input 
-                                    className = 'form-control' 
-                                    type = 'text' 
-                                    placeholder='Irrelevant hex color code'
-                                    onChange={(e) => this.setState({'createdItemIrrelevantColorCode': e.target.value})}
+                                
+                                    <input 
+                                        className = 'form-control' 
+                                        type = 'text' 
+                                        placeholder='Min color'
+                                        onChange={(e) => this.setState({'createdItemMinColorCode': e.target.value})}
 
-                                />
-                            </div>
+                                    />
+                                
+                                    <input 
+                                        className = 'form-control' 
+                                        type = 'text' 
+                                        placeholder='Irrelevant color'
+                                        onChange={(e) => this.setState({'createdItemIrrelevantColorCode': e.target.value})}
+
+                                    />
+                                </div>
                         </div>
                         <div className="form-group row">
-                            <div className="col-sm-6 inputWrapperItemCreation">
+                            <div className="col-sm-6 d-flex inputWrapperItemCreation">
                                 <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
                                     <option value="" disabled >Irrelevant allowed</option>
                                     <option value={true}>Yes</option>
                                     <option value={false}>No</option>
-                                </select>
-                            </div>
-                            <div className="col-sm-6 inputWrapperItemCreation">
+                                </select>                  
                                 <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
                                     <option value="" disabled >Mandatory comment allowed</option>
                                     <option value={true}>Yes</option>
                                     <option value={false}>No</option>
                                 </select>
-                            </div>
-                            <div className="col-sm-6 inputWrapperItemCreation">
-                                <input 
-                                    className = 'form-control' 
-                                    type = 'text' 
-                                    placeholder='Item target'
-                                    onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
-                                />
-                            </div>
-                            <div className="col-sm-6 inputWrapperItemCreation">
-
                                 <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
                                     <option value="" disabled >Property type</option>
                                     {
@@ -578,26 +565,44 @@ export default class ManageTracker extends Component {
                                             return(
                                                 <option value={this.state.PropertyTypes[propertyType]} key = {propertyType}>{propertyType}</option>
                                             )
-
                                         })
                                     }
-
                                 </select>
                             </div>
+
                         </div>
                         <div className="form-group row">
                             <div className="col-sm-6 inputWrapperItemCreation">
                                 <input 
                                     className = 'form-control' 
                                     type = 'text' 
-                                    placeholder='Default value decimal'
+                                    placeholder='Default value'
                                     onChange={(e) => this.setState({'createdItemDefaultValue':e.target.value})}
                                 /> 
                             </div>
+                            
+                            <div className="col-sm-6 inputWrapperItemCreation">
+                                <input 
+                                    className = 'form-control' 
+                                    type = 'text' 
+                                    placeholder='Item target'
+                                    onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
+                                />
+                            </div>
+
+                            <div className="col-sm-6 inputWrapperItemCreation valueRangeWrapper">
+                                <input 
+                                    className = 'form-range' 
+                                    type = 'range'
+                                    min="0"
+                                    max="1200"
+                                />
+                            </div>
+
+                        </div>
                             <div className="col-sm-6 inputWrapperItemCreation">
                                 <button onClick={() => this.createTrackerItem()} className = 'CreateItemButtonManageTrackerPage'>Create tracker item</button>
                             </div>
-                        </div>
                     </div>
 
                         <span className='AlreadyExistingRecordsHeader itemsRecordsHeader'>
