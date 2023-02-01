@@ -4,15 +4,17 @@
     using Microsoft.AspNetCore.Mvc;
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
+    using VividTracker.Models;
 
     [ApiController]
     public class TrackingGroupRecordController : ControllerBase
     {
         private readonly ITrackingGroupRecordsService _trackingGroupRecordsService;
-
-        public TrackingGroupRecordController(ITrackingGroupRecordsService trackingGroupRecordsService)
+        private readonly ITrackingGroupsService _trackingGroupsService;
+        public TrackingGroupRecordController(ITrackingGroupRecordsService trackingGroupRecordsService, ITrackingGroupsService trackingGroupsService)
         {
             _trackingGroupRecordsService = trackingGroupRecordsService;
+            _trackingGroupsService = trackingGroupsService;
         }
 
         [HttpGet]
@@ -33,6 +35,17 @@
         public async Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecords()
         {
             return await _trackingGroupRecordsService.GetAllTrackingGroupsRecordsAsync();
+        }
+        [HttpPost]
+        [Route("api/create/trackingGroupsRecords/{trackingGroupId}")]
+        public async Task<IActionResult> CreateTrackingGroupRecords([FromRoute] int trackingGroupId, [FromBody] TrackingGroupRecordsRequestModel trackingGroupRecordsRequestModel)
+        {
+            var trackingGroup = await _trackingGroupsService.GetTrackingGroupById(trackingGroupId);
+            var trackingGroupRecord = trackingGroupRecordsRequestModel.TrackingGroupRecords(trackingGroup);
+
+            var result = await _trackingGroupRecordsService.CreateTrackingGroupRecord(trackingGroupRecord);
+
+            return Ok(result);
         }
     }
 }
