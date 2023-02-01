@@ -72,7 +72,9 @@ export default class ManageTracker extends Component {
             createdItemTarget: null,
             createdItemPropertyType: 1,
             createdItemDefaultValue: null,
-            isCreateTrackerItemSelected: true
+            isCreateTrackerItemSelected: true,
+            minimalValue: null,
+            maximalValue: null
         }
     }
     
@@ -268,9 +270,12 @@ export default class ManageTracker extends Component {
         let trackerItemIrrelevantColorCode = this.state.createdItemIrrelevantColorCode
         let trackerItemDecimalValue = this.state.createdItemDefaultValue
         let trackerItemPropertyType = this.state.createdItemPropertyType
-        let trackerItemTarget = this.state.createdItemTarget
         let trackerItemIrrelevantAllowed = this.state.createdItemIrrelevantAllowed
         let trackerItemMandatoryCommentAvailable = this.state.createdItemMandatoryCommentAvailable
+        let trackerItemTarget = this.state.createdItemTarget
+        let trackerItemMaxTypeValue = this.state.maximalValue
+        let trackerItemMinTypeValue = this.state.minimalValue
+
 
         if( this.checkIfValueIsNullOrEmpty(trackerItemName) && 
             this.checkIfValueIsNullOrEmpty(trackerItemMinColorCode) &&
@@ -293,19 +298,43 @@ export default class ManageTracker extends Component {
                 let pageLocationSplitted = window.location.href.split('/')
                 let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
                 let createTrackingItemURL = endpoints.createTrackingItem(trackingGroupId)
-                let trackingItemRequestModel = {
-                    Name: trackerItemName,
-                    MaxValueColor: trackerItemMaxColorCode,
-                    MinValueColor: trackerItemMinColorCode,
-                    IrrelevantColor: trackerItemIrrelevantColorCode,
-                    IrrelevantAllowed: Boolean(trackerItemIrrelevantAllowed),
-                    Target: Number(trackerItemTarget),
-                    Type: Number(trackerItemPropertyType),
-                    MandatoryComment: Boolean(trackerItemMandatoryCommentAvailable),
-                    DefaultValue: trackerItemDecimalValue
-                  };
-                  console.log(trackingItemRequestModel)
-                await fetch(createTrackingItemURL, {
+                let trackingItemRequestModel = {}
+                if(
+                    this.checkIfValueIsNullOrEmpty(trackerItemMaxTypeValue) &&
+                    this.checkIfValueIsNullOrEmpty(trackerItemMinTypeValue))
+                {
+                    trackingItemRequestModel = {
+                       Name: trackerItemName,
+                       MaxValueColor: trackerItemMaxColorCode,
+                       MinValueColor: trackerItemMinColorCode,
+                       IrrelevantColor: trackerItemIrrelevantColorCode,
+                       IrrelevantAllowed: Boolean(trackerItemIrrelevantAllowed),
+                       Target: Number(trackerItemTarget),
+                       Type: Number(trackerItemPropertyType),
+                       MandatoryComment: Boolean(trackerItemMandatoryCommentAvailable),
+                       DefaultValue: trackerItemDecimalValue,
+                       MinValueType: trackerItemMinTypeValue,
+                       MaxValueType: trackerItemMaxTypeValue
+                     };
+                }
+                else
+                {
+                    trackingItemRequestModel = {
+                        Name: trackerItemName,
+                        MaxValueColor: trackerItemMaxColorCode,
+                        MinValueColor: trackerItemMinColorCode,
+                        IrrelevantColor: trackerItemIrrelevantColorCode,
+                        IrrelevantAllowed: Boolean(trackerItemIrrelevantAllowed),
+                        Target: Number(trackerItemTarget),
+                        Type: Number(trackerItemPropertyType),
+                        MandatoryComment: Boolean(trackerItemMandatoryCommentAvailable),
+                        DefaultValue: trackerItemDecimalValue,
+                        MinValueType: null,
+                        MaxValueType: null
+                      };
+                }
+
+                  await fetch(createTrackingItemURL, {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json"
@@ -615,11 +644,13 @@ export default class ManageTracker extends Component {
                                             className = 'form-control' 
                                             type = 'text'
                                             placeholder='Minimal value'
+                                            onChange={(e) => this.setState({'minimalValue': e.target.value})}
                                         />
                                     <input 
                                             className = 'form-control' 
                                             type = 'text'
                                             placeholder='Maximal value'
+                                            onChange={(e) => this.setState({'maximalValue': e.target.value})}
                                         />         
                                     </div>
 
