@@ -1,4 +1,5 @@
-﻿using VividTracker.Data.Enums;
+﻿using Microsoft.EntityFrameworkCore;
+using VividTracker.Data.Enums;
 
 namespace VividTracker.Data.Models
 {
@@ -48,7 +49,10 @@ namespace VividTracker.Data.Models
         public decimal Target { get; set; }
         public PropertyType Type { get; set; }
         public string Name { get; set; }
+
+        [Precision(5,2)]
         public decimal? MinValueType { get; set; }
+        [Precision(5, 2)]
         public decimal? MaxValueType { get; set; }
         public ICollection<TrackingItemValue> TrackingItemsValues{ get; set; }
         public ICollection<TrackingItemUserGroupsVisibility> TrackingItemsUserGroupsVisibilities { get; set; }

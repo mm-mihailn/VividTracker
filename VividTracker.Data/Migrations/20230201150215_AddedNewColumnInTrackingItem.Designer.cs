@@ -12,7 +12,7 @@ using VividTracker.Data;
 namespace VividTracker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230201145215_AddedNewColumnInTrackingItem")]
+    [Migration("20230201150215_AddedNewColumnInTrackingItem")]
     partial class AddedNewColumnInTrackingItem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -194,8 +194,8 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8a5ef89a-0877-4511-abe9-10108547f0db",
-                            ConcurrencyStamp = "70bec768-99ca-4533-a0cd-36b996cbe4e7",
+                            Id = "06b59261-acc9-4326-bfaa-bb9dbdaf9406",
+                            ConcurrencyStamp = "61724c5c-d3de-4f5a-af27-67eeca4f1fec",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -292,8 +292,8 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "c17fdbe7-1bc6-4168-bf52-d0436584f73e",
-                            RoleId = "8a5ef89a-0877-4511-abe9-10108547f0db"
+                            UserId = "4ed71084-4651-41b2-ba56-1b0156c8b800",
+                            RoleId = "06b59261-acc9-4326-bfaa-bb9dbdaf9406"
                         });
                 });
 
@@ -480,7 +480,8 @@ namespace VividTracker.Data.Migrations
                         .HasColumnType("nvarchar(7)");
 
                     b.Property<decimal?>("MaxValueType")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<string>("MinValueColor")
                         .IsRequired()
@@ -488,7 +489,8 @@ namespace VividTracker.Data.Migrations
                         .HasColumnType("nvarchar(7)");
 
                     b.Property<decimal?>("MinValueType")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -683,9 +685,9 @@ namespace VividTracker.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c17fdbe7-1bc6-4168-bf52-d0436584f73e",
+                            Id = "4ed71084-4651-41b2-ba56-1b0156c8b800",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc867809-129c-47ab-b7ab-9574863f028c",
+                            ConcurrencyStamp = "82e9a3ee-b50b-43c5-bed4-e38749e43b37",
                             Email = "admin@vividtracker.net",
                             EmailConfirmed = true,
                             IsDeleted = false,
@@ -693,10 +695,10 @@ namespace VividTracker.Data.Migrations
                             Name = "John Smith",
                             NormalizedEmail = "ADMIN@VIVIDTRACKER.NET",
                             NormalizedUserName = "ADMIN@VIVIDTRACKER.NET",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK/2s6KZ3E8cEnRl3j+QSm3FUnzc6A0iChritMZ1kX2UUdBqWrWK/qEISaHrSOghIg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEETZTM24GiMW/HVbwcOUq8gZOKsDmznnj14jUWx0plfwOcCqBwdZ9AoT86an0STQKA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "66236977-947e-484a-af7b-8a6da95b4e38",
+                            SecurityStamp = "e3b5c12f-91c3-4fc8-8300-7faadf53e6b2",
                             TwoFactorEnabled = false,
                             UserName = "admin@vividtracker.net"
                         });

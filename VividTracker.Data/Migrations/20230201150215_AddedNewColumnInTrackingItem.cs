@@ -11,13 +11,17 @@ namespace VividTracker.Data.Migrations
             migrationBuilder.AddColumn<decimal>(
                 name: "MinValueType",
                 table: "TrackingItems",
-                type: "decimal(18,2)",
+                type: "decimal(5,2)",
+                precision: 5,
+                scale: 2,
                 nullable: true);
 
             migrationBuilder.AddColumn<decimal>(
                 name: "MaxValueType",
                 table: "TrackingItems",
-                type: "decimal(18,2)",
+                type: "decimal(5,2)",
+                precision: 5,
+                scale: 2,
                 nullable: true);
 
         }
