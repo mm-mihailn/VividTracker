@@ -183,6 +183,8 @@ export default class ManageTracker extends Component {
             })
             .then((res) => {
                 console.log(res)
+                this.getTrackingGroup(trackingGroupId)
+
             })
             .catch((err) => {
                 // TODO: Do some action when an error occurs
@@ -290,7 +292,7 @@ export default class ManageTracker extends Component {
             }
             else
             {
-                console.log('Invalid name or color code!')
+                console.log('Invalid name or color code or decimal value!')
             }
         }
         else
@@ -353,7 +355,7 @@ export default class ManageTracker extends Component {
     <div className = 'TrackerContainerWrapper d-flex justify-content-center align-items-center'>
         <div className='TrackerContainer'>
             <div className='TrackerHeaderWrapper'>
-                <h4 className='TrackerHeader'>{this.state.currentTrackerName}</h4>
+                <h4 className='TrackerHeader'>{this.state.currentTrackingGroup.name}</h4>
                 <FontAwesomeIcon className='TrackerHeaderIcon' icon = {faPenToSquare}/>
             </div>
             <div className='TrackerInteractionField'>
