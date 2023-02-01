@@ -47,7 +47,19 @@ namespace VividTracker.Controllers
             }
             return BadRequest("Error!");
         }
+        [HttpPatch]
+        [Route("api/trackingGroup/edit/label/{trackingGroupId}")]
+        public async Task<IActionResult> EditTrackingGroupLabel([FromRoute] int trackingGroupId, [FromBody] TrackerRequestModel trackerRequestModel)
+        {
+            var tracker = trackerRequestModel.ToTrackerModel(trackingGroupId);
+            var result = await _trackingGroupsService.UpdateTrackingGroupLabel(tracker);
 
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest("Error!");
+        }
         [HttpPost]
         [Route("api/trackingGroup/create/{tenandId}")]
         public async Task<IActionResult> CreateTrackingGroup([FromRoute] int tenandId, [FromBody] TrackingGroupRequestModel trackingGroupRequestModel)
