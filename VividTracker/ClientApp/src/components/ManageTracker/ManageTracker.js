@@ -70,7 +70,7 @@ export default class ManageTracker extends Component {
             createdItemIrrelevantAllowed: false,
             createdItemMandatoryCommentAvailable: false,
             createdItemTarget: null,
-            createdItemPropertyType: null,
+            createdItemPropertyType: 1,
             createdItemDefaultValue: null
         }
     }
@@ -589,8 +589,7 @@ export default class ManageTracker extends Component {
                                     onChange={(e) => this.setState({'createdItemTarget':e.target.value})}
                                 />
                             </div>
-
-                            <div className="col-sm-6 inputWrapperItemCreation valueRangeWrapper">
+                            <div className={this.state.createdItemPropertyType == 3 ? "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-block" : "col-sm-6 inputWrapperItemCreation valueRangeWrapper d-none"}>
                                 <input 
                                     className = 'form-range' 
                                     type = 'range'
