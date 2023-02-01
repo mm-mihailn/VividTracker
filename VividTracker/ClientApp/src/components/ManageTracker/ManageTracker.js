@@ -59,7 +59,7 @@ export default class ManageTracker extends Component {
             newTrackerName: '',
             currentTrackerItems: [],
             PropertyTypes: {
-                '@Bool': 1,
+                'Bool': 1,
                 'Percentage': 2,
                 'ValueRange': 3
             },
@@ -409,7 +409,7 @@ export default class ManageTracker extends Component {
                     <div className='RecordsContainer'>
                         {this.state.trackingGroupRecords.map((record) => {
                                 return (
-                                    <div className='RecordContainer'>
+                                    <div className='RecordContainer' key = {record.id}>
                                         <p className='RecordName'>{record.name}</p>
                                     </div>   
                                 )
@@ -440,7 +440,7 @@ export default class ManageTracker extends Component {
                         <div className='AlreadyExistingRecords'>
                             {this.state.allRecords.map((alreadyExistingRecord) => {
                                 return(
-                                    <div className='AlreadyExistingRecord'>
+                                    <div className='AlreadyExistingRecord' key = {alreadyExistingRecord.id}>
                                         <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
                                         <span className='AddTrackingButton'>Add</span>
                                     </div>
@@ -456,7 +456,7 @@ export default class ManageTracker extends Component {
                 <div className='RecordsContainer'>
                     {this.state.currentTrackerItems.map((trackerItem) => {
                         return (
-                            <div className='RecordContainer'>
+                            <div className='RecordContainer' key = {trackerItem.id}>
                                 <p className='RecordName'>{trackerItem.name}</p>
                             </div>   
                         )           
@@ -572,7 +572,7 @@ export default class ManageTracker extends Component {
                         <div className='AlreadyExistingItems'>
                             {this.state.allItems.map((alreadyExistingItem) => {
                                 return(
-                                    <div className='AlreadyExistingRecord'>
+                                    <div className='AlreadyExistingRecord' key={alreadyExistingItem.id}>
                                         <p className='AlreadyExistingRecordName'>{alreadyExistingItem.name}</p>
                                         <span className='AddTrackingButton'>Add</span>
                                     </div>
