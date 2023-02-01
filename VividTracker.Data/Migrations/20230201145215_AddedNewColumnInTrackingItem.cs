@@ -9,27 +9,29 @@ namespace VividTracker.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<decimal>(
-                name: "MaxValueType",
+                name: "MinValueType",
                 table: "TrackingItems",
                 type: "decimal(18,2)",
                 nullable: true);
 
             migrationBuilder.AddColumn<decimal>(
-                name: "MinValueType",
+                name: "MaxValueType",
                 table: "TrackingItems",
                 type: "decimal(18,2)",
                 nullable: true);
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "MaxValueType",
+                name: "MinValueType",
                 table: "TrackingItems");
 
             migrationBuilder.DropColumn(
-                name: "MinValueType",
+                name: "MaxValueType",
                 table: "TrackingItems");
+
         }
     }
 }
