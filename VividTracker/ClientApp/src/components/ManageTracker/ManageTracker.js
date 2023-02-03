@@ -291,7 +291,9 @@ export default class ManageTracker extends Component {
             if(this.checkIfItemNameIsValid(trackerItemName) && 
             this.checkIfColorCodeIsValid(trackerItemMinColorCode) && 
             this.checkIfColorCodeIsValid(trackerItemMaxColorCode)&& 
-            this.checkIfColorCodeIsValid(trackerItemIrrelevantColorCode))
+            this.checkIfColorCodeIsValid(trackerItemIrrelevantColorCode) &&
+            this.checkIfDecimalIsValid(trackerItemDecimalValue) &&
+            this.checkIfDecimalIsValid(trackerItemTarget))
             {
                 // call create tracker item endpoint
                 let pageLocationSplitted = window.location.href.split('/')
@@ -366,7 +368,17 @@ export default class ManageTracker extends Component {
         let isColorCodeValid = colorCodeRegex.test(colorCodeString)
         return isColorCodeValid
     }
-
+    checkIfDecimalIsValid(decimal)
+    {
+        if(decimal > 999.99)
+        {
+            return false
+        }
+        else
+        {
+            return true
+        }
+    }
     checkIfItemNameIsValid(ItemName)
     {
         
