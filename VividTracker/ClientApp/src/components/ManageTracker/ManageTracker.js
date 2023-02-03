@@ -291,8 +291,7 @@ export default class ManageTracker extends Component {
             if(this.checkIfItemNameIsValid(trackerItemName) && 
             this.checkIfColorCodeIsValid(trackerItemMinColorCode) && 
             this.checkIfColorCodeIsValid(trackerItemMaxColorCode)&& 
-            this.checkIfColorCodeIsValid(trackerItemIrrelevantColorCode) &&
-            this.checkIfDecimalIsValid(trackerItemDecimalValue))
+            this.checkIfColorCodeIsValid(trackerItemIrrelevantColorCode))
             {
                 // call create tracker item endpoint
                 let pageLocationSplitted = window.location.href.split('/')
@@ -391,15 +390,6 @@ export default class ManageTracker extends Component {
         {
             return true
         }
-    }
-
-    checkIfDecimalIsValid(decimalValue)
-    {
-        let validDecimalRegex = new RegExp("^\\d{3}\\.\\d{2}$");
-        let shortenedDecimalValue = Number(decimalValue).toFixed(2).toString()
-        let isDecimalValueValid = validDecimalRegex.test(shortenedDecimalValue)
-        return isDecimalValueValid
-        
     }
     selectTrackerItemOption()
     {
