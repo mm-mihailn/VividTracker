@@ -10,7 +10,7 @@ export default class EditTenantComponent extends Component {
     constructor()
     {
         super()
-        this.state = {trackers: [], currentTenantName: '', tenantData: undefined}
+        this.state = {trackers: [], currentTenantName: '', tenantData: undefined, tenantHeaderName: ''}
     }
     componentDidMount = () =>
     {
@@ -35,6 +35,7 @@ export default class EditTenantComponent extends Component {
                 let tenantData = await res.json()
                 this.setState({'tenantData': tenantData})
                 this.setState({'currentTenantName': tenantData.name})
+                this.setState({'tenantHeaderName': tenantData.name})
             }
         )
     }
@@ -53,22 +54,12 @@ export default class EditTenantComponent extends Component {
         })
         .then(async (res) =>{
             let result = await res.json()
-            console.log(result)
+            this.getTenantName(tenantId)
         })
-
-        window.location.reload()
     }
     //TODO reset the tenant's name
     resetTenantName = async (tenantId) => {
-        // currentTenantName
-        let pageLocationSplitted = window.location.href.split('/')
-        tenantId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.resetTenantName(tenantId)
-        let result = await fetch(url).then((
-            async (res) => {
-                let result = await res.json()
-                this.setState({ 'currentTenantName': result[0].name })
-            }))
+        this.getTenantName(tenantId)
     }
 
     render() {
@@ -76,7 +67,7 @@ export default class EditTenantComponent extends Component {
             <div className = 'EditTenantWrapper d-flex justify-content-center align-items-center'>
               <div className = 'EditTenantContainer'>
                   <div className = 'TenantHeaderWrapper d-flex'>
-                      <h4 className = 'TenantName pageText'>Tenant Name</h4>
+                      <h4 className = 'TenantName pageText'>{this.state.tenantHeaderName}</h4>
                       <FontAwesomeIcon className = 'EditTenantIcon' icon = {faPenToSquare}/>
                   </div>
                   <div className = 'TenantFormWrapper'>
@@ -104,7 +95,7 @@ export default class EditTenantComponent extends Component {
                       {this.state.trackers.length >= 1 ?
                           this.state.trackers.map(tracker => {
                           return (
-                              <TenantTrackerComponent tracker = {tracker}/>
+                              <TenantTrackerComponent tracker = {tracker} key={tracker.id}/>
                           )
                       })
                       :

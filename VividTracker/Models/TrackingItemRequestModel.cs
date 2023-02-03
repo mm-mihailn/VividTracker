@@ -9,6 +9,8 @@
         public bool IrrelevanAllowed { get; set; }
         public bool MandatoryComment { get; set; }
         public decimal DefaultValue { get; set; }
+        public decimal? MinValueType { get; set; }
+        public decimal? MaxValueType { get; set; }
         public string? MaxValueColor { get; set; }
         public string? MinValueColor { get; set; }
         public string? IrrelevantColor { get; set; }
@@ -30,6 +32,8 @@
                 Target = Target,
                 Type = Type,
                 Name = Name,
+                MinValueType = MinValueType,
+                MaxValueType = MaxValueType,
                 Tenant=tenant
             };
         }

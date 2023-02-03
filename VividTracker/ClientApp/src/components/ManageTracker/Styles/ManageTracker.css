@@ -261,7 +261,7 @@
     cursor: pointer;
 }
 .ItemSectionRecords{
-    margin-top: auto;
+    margin-top: 0;
     width: 100%;
     padding-right: 2rem;
 }
@@ -279,8 +279,9 @@
     color: black;
 }
 .AlreadyExistingItems{
+    margin-top: 1rem;
     overflow-y: scroll;
-    height: 6vh;
+    height: 35vh;
     -ms-overflow-style: none; 
     scrollbar-width: none;
 }
@@ -297,4 +298,25 @@
     border-radius: 20px;
     width: 100%;
     height: 2.25rem;
+}
+
+.inputWrapperItemCreation{
+    width: 100%;
+}
+.TrackerItemOption
+{
+    color: black;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    line-height: 27.24px;
+    font-family: 'Open Sans', sans-serif;
+}
+.TrackerItemOption:hover{
+    cursor: pointer;
+}
+.TrackerItemOptionSelected{
+    border-bottom-style: solid;
+}
+.AlreadyExistingItemsButtonWrapper{
+    margin-left: auto;
 }
