@@ -67,8 +67,8 @@ export default class ManageTracker extends Component {
             createdItemMaxColorCode: null,
             createdItemMinColorCode: null,
             createdItemIrrelevantColorCode: null,
-            createdItemIrrelevantAllowed: false,
-            createdItemMandatoryCommentAvailable: false,
+            createdItemIrrelevantAllowed: 'false',
+            createdItemMandatoryCommentAvailable: 'false',
             createdItemTarget: null,
             createdItemPropertyType: 1,
             createdItemDefaultValue: null,
@@ -595,18 +595,25 @@ export default class ManageTracker extends Component {
                                 </div>
                                 <div className="form-group row">
                                     <div className="col-sm-6 d-flex inputWrapperItemCreation">
-                                        <select className = 'form-control' placeholder='Irrelevant allowed' onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}>
-                                            <option value="" disabled >Irrelevant allowed</option>
+                                        <select className = 'form-control'
+                                         placeholder='Irrelevant allowed'
+                                          onChange={(e) => this.setState({'createdItemIrrelevantAllowed': e.target.value})}
+                                          value = {this.state.createdItemIrrelevantAllowed}>
+                                            <option disabled >Irrelevant allowed</option>
                                             <option value={true}>Yes</option>
                                             <option value={false}>No</option>
                                         </select>                  
-                                        <select className = 'form-control' onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}>
-                                            <option value="" disabled >Mandatory comment allowed</option>
+                                        <select className = 'form-control' 
+                                        onChange={(e) => this.setState({'createdItemMandatoryCommentAvailable': e.target.value})}
+                                        value = {this.state.createdItemMandatoryCommentAvailable}>
+                                            <option disabled >Mandatory comment allowed</option>
                                             <option value={true}>Yes</option>
                                             <option value={false}>No</option>
                                         </select>
-                                        <select className = 'form-control'  onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}>
-                                            <option value="" disabled >Property type</option>
+                                        <select className = 'form-control'  
+                                        onChange={(e) => this.setState({'createdItemPropertyType': e.target.value})}
+                                        value = {this.state.createdItemPropertyType}>
+                                            <option disabled >Property type</option>
                                             {
                                                 Object.keys(this.state.PropertyTypes)
                                                 .map((propertyType) => 
