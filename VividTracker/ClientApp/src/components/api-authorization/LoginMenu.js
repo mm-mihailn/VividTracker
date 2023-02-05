@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
 import '../../custom.css'
+import { endpoints } from '../../endpoints';
 
 export class LoginMenu extends Component {
     constructor(props) {
@@ -41,13 +42,16 @@ export class LoginMenu extends Component {
             const profilePath = `${ApplicationPaths.Profile}`;
             const logoutPath = { pathname: `${ApplicationPaths.LogOut}`, state: { local: true } };
             return this.authenticatedView(userName, profilePath, logoutPath);
+           
         }
     }
 
     authenticatedView(userName, profilePath, logoutPath) {
+        let pageLocationSplitted = window.location.href.split('/')
+        const tenantId = pageLocationSplitted[pageLocationSplitted.length - 1]
         return (<Fragment>
             <NavItem>
-                <NavLink tag={Link} className="text-dark" id="trackerBtn" to={'trackersList'}>Trackers</NavLink>
+                <NavLink tag={Link} className="text-dark" id="trackerBtn" to={`/trackersList/${Number(tenantId)}`}>Trackers</NavLink>
             </NavItem>
             <NavItem>
                 <NavLink tag={Link} className="text-dark" id="tenantBtn" to={'/tenants'}>Tenants</NavLink>
