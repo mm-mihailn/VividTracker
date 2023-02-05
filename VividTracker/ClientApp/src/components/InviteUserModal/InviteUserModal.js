@@ -134,7 +134,7 @@ export default class InviteUserModal extends Component {
                                                 <button type="reset" id="close" className="btn btn-link" data-bs-dismiss="modal">
                                                   Cancel
                                                 </button>
-                                                <button type="submit" id="submit" method="post" className="btn" name="addTenant" onClick={(e) => this.inviteUser(e)}> 
+                                                <button type="submit" id="submit" method="post" className="btn" onClick={(e) => this.inviteUser(e)}> 
                                                   Add
                                                 </button>
                                             </div>
