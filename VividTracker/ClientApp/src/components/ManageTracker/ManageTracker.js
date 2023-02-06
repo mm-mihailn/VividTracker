@@ -92,7 +92,7 @@ export default class ManageTracker extends Component {
     }
     getTrackingGroupRecords = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupRecords(trackingGroupId)
         await fetch(url)
             .then((
