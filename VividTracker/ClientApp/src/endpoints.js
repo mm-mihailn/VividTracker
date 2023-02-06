@@ -12,7 +12,7 @@ export const endpoints = {
 
     loadTrackers: (tenantId) => `${apiBaseUrl}/api/trackersList/${Number(tenantId)}`,
     createTracker: (tenantId) => `${apiBaseUrl}/api/trackingGroup/create/${tenantId}`,
-    createTrackingItem: (tenantId) => `${apiBaseUrl}/api/trackingItems/create/${tenantId}`,
+    createTrackingItem: (tenantId, trackingGroupId) => `${apiBaseUrl}/api/trackingItems/create/${tenantId}`,
     getTrackingGroupRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupRecords/${trackingGroupId}`,
     getTrackingGroup: (trackingGroupId) => `${apiBaseUrl}/api/trackers/${trackingGroupId}`,
     updateTrackerName: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroup/edit/${trackingGroupId}`,
