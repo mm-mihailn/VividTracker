@@ -87,11 +87,11 @@ export class AddTracker extends Component {
     }
     render() {
         return (
-            <div className='editTrackerWrapper d-flex justify-content-center align-items-center'>
-                <div className='editTrackerContainer'>
+            <div className='TrackerWrapper d-flex justify-content-center align-items-center'>
+                <div className='TrackerContainer'>
                     <div className='trackerHeaderWrapper d-flex'>
-                        <h4 className='trackerName pageText'>New Tracker</h4>
-                        <FontAwesomeIcon className='editTrackerIcon' icon={faPenToSquare} />
+                        <h4 className='trackerName pageText'>New Trackers</h4>
+                        <FontAwesomeIcon className='TrackerIcon' icon={faPenToSquare} />
                     </div>
                     <div className='trackerFormWrapper'>
                         <div className='trackerFormContainer'>
