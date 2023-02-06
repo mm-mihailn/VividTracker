@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using VividTracker.Business.Services;
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
     using VividTracker.Models;
@@ -11,10 +12,12 @@
     {
         private readonly ITrackingItemsService _trackingItemsService;
         private readonly ITenantsService _tenantsService;
-        public TrackingItemsController(ITrackingItemsService trackingItemsService, ITenantsService tenantsService)
+        private readonly ITrackingGroupsService _trackingGroupsService;
+        public TrackingItemsController(ITrackingItemsService trackingItemsService, ITenantsService tenantsService, ITrackingGroupsService trackingGroupsService)
         {
             _trackingItemsService = trackingItemsService;
             _tenantsService = tenantsService;
+            _trackingGroupsService = trackingGroupsService;
         }
 
         [HttpGet]
@@ -30,11 +33,15 @@
            return Ok(trackingItems);
         }
         [HttpPost]
-        [Route("api/trackingItems/create/{tenantId}")]
-        public async Task<IActionResult> CreateTrackingItem([FromRoute] int tenantId, [FromBody] TrackingItemRequestModel trackingItemRequestModel)
+        [Route("api/trackingItems/create/{tenantId}/{trackingGroupId}")]
+        public async Task<IActionResult> CreateTrackingItem([FromRoute] int tenantId, int trackingGroupId, [FromBody] TrackingItemRequestModel trackingItemRequestModel)
         {
             var tenant = await _tenantsService.GetTenantByIdAsync(tenantId);
-            var trackingItem = trackingItemRequestModel.ToCreateTrackingItem(tenantId,tenant);
+            var trackingGroup = await _trackingGroupsService.GetTrackingGroupById(trackingGroupId);
+
+            var trackingItem = trackingItemRequestModel.ToCreateTrackingItem(tenantId, tenant);
+
+            trackingItem.TrackingGroups.Add(trackingGroup);
 
             var result = await _trackingItemsService.AddTrackingItem(trackingItem);
 
