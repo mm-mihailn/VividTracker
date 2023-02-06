@@ -391,6 +391,33 @@ export default class ManageTracker extends Component {
             this.setState({ 'isCreateTrackerItemSelected': true })
         }
     }
+    createRecord = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.createTrackingGroupRecord(trackingGroupId)
+
+        await fetch(url,
+            {
+                method: 'POST',
+                body:
+                    JSON.stringify({ 
+                        "Name": this.state.newRecordName, 
+                        "Disabled": true
+                    }),
+                headers:
+                {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then((res) => {
+                this.getTrackingGroup(trackingGroupId)
+
+            })
+            .catch((err) => {
+                // TODO: Do some action when an error occurs
+            })
+        
+    }
     componentDidMount() {
         this.getTrackingGroupRecords()
         this.getAllRecords()
@@ -477,7 +504,7 @@ export default class ManageTracker extends Component {
                                 </div>
                                 <div className='RecordButtonsManageTrackerPage'>
                                     <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
-                                    <button className='UpdateButtonManageTrackerPage' onClick={() => this.AddTracker()}>Add</button>
+                                    <button className='UpdateButtonManageTrackerPage' onClick={() => this.createRecord()}>Add</button>
                                 </div>
                                 <div className='AlreadyExistingRecordsWrapper'>
                                     <span className='AlreadyExistingRecordsHeader'>
