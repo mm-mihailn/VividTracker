@@ -10,8 +10,9 @@
     public interface ITrackingItemsService
     {
         Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId (int id);
-        public Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem);
-        public Task<TrackingItem> UpdateTrackingGroupName(TrackingItem trackingItem);
-        public Task<TrackingItem> GetTrackingItemById(int trackingItem);
+        Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem);
+        Task<TrackingItem> UpdateTrackingGroupName(TrackingItem trackingItem);
+        Task<TrackingItem> GetTrackingItemById(int trackingItem);
+        Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int trackingGroupId);
     }
 }

@@ -47,5 +47,10 @@
         {
             return await _trackingItemsRepository.GetTrackingItemById(trackingItem);
         }
+
+        public async Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int trackingGroupId)
+        {
+            return await _trackingItemsRepository.GetTrackingItemsByTrackingGroupId(trackingGroupId);
+        }
     }
 }
