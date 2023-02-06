@@ -92,7 +92,7 @@ export default class ManageTracker extends Component {
     }
     getTrackingGroupRecords = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
         let url = endpoints.getTrackingGroupRecords(trackingGroupId)
         await fetch(url)
             .then((
@@ -106,7 +106,7 @@ export default class ManageTracker extends Component {
     }
     getAllRecords = async () => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
         // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
         let url = endpoints.getAllRecords(trackingGroupId);
         await fetch(url)
@@ -121,9 +121,9 @@ export default class ManageTracker extends Component {
     }
     getAllTrackingItems = async () => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
-        let url = endpoints.getAllTrackingItems(trackingGroupId)
+        let url = endpoints.getAllTrackingItems(tenantId)
 
         await fetch(url, {
             method: 'GET',
@@ -223,7 +223,7 @@ export default class ManageTracker extends Component {
 
     getTrackingGroupTrackingItems = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
         await fetch(url, {
             method: 'GET'
@@ -291,7 +291,7 @@ export default class ManageTracker extends Component {
                 let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
                 let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
 
-                let createTrackingItemURL = endpoints.createTrackingItem(tenantId)
+                let createTrackingItemURL = endpoints.createTrackingItem(tenantId, trackingGroupId)
                 let trackingItemRequestModel = {}
                 if (
                     this.checkIfValueIsNullOrEmpty(trackerItemMaxTypeValue) &&
