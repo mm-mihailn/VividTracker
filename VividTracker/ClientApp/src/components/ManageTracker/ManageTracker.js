@@ -123,7 +123,7 @@ export default class ManageTracker extends Component {
     }
     getAllTrackingItems = async() => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
         let url = endpoints.getAllTrackingItems(trackingGroupId)
 
@@ -229,7 +229,7 @@ export default class ManageTracker extends Component {
 
     getTrackingGroupTrackingItems = async(trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
         let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
         await fetch(url, {
             method: 'GET'
@@ -298,7 +298,9 @@ export default class ManageTracker extends Component {
                 // call create tracker item endpoint
                 let pageLocationSplitted = window.location.href.split('/')
                 let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-                let createTrackingItemURL = endpoints.createTrackingItem(trackingGroupId)
+                let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
+
+                let createTrackingItemURL = endpoints.createTrackingItem(tenantId)
                 let trackingItemRequestModel = {}
                 if(
                     this.checkIfValueIsNullOrEmpty(trackerItemMaxTypeValue) &&
@@ -330,8 +332,8 @@ export default class ManageTracker extends Component {
                         Type: Number(trackerItemPropertyType),
                         MandatoryComment: Boolean(trackerItemMandatoryCommentAvailable),
                         DefaultValue: trackerItemDecimalValue,
-                        MinValueType: null,
-                        MaxValueType: null
+                        MinValueType: 0,
+                        MaxValueType: 0
                       };
                 }
 
@@ -344,6 +346,7 @@ export default class ManageTracker extends Component {
                 })
                 .then((
                     async(res) => {
+                        console.log(res)
                         console.log('item successfully created')
                     }))
                 .catch((err) => {
