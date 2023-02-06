@@ -15,7 +15,7 @@ export default class TrackerContainerComponent extends Component {
                 </button>
                 
                 <button className='ManageButton'> 
-                    <a href={`https://localhost:44430/manageTracker/${this.props.trackerData?.id}`} className = 'ManageButtonText'>Manage</a>
+                    <a href={`https://localhost:44430/manageTracker/${this.props.trackerData.tenantId}/${this.props.trackerData?.id}`} className = 'ManageButtonText'>Manage</a>
                 </button>
             </div>
     </div>
