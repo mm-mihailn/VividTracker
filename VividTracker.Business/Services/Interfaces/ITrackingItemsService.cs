@@ -13,5 +13,6 @@
         public Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem);
         public Task<TrackingItem> UpdateTrackingGroupName(TrackingItem trackingItem);
         public Task<TrackingItem> GetTrackingItemById(int trackingItem);
+        Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int id);
     }
 }

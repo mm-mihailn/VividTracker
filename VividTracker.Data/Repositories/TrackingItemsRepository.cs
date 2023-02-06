@@ -24,5 +24,10 @@
         {
             return await Entities.Include(t => t.Tenant).FirstOrDefaultAsync(t => t.Id == id);
         }
+
+        public async Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int trackingGroupId)
+        {
+            return await Entities.Include(t => t.Tenant).Where(t => t.TrackingGroups.Any(t => t.Id == trackingGroupId)).ToListAsync();
+        }
     }
 }

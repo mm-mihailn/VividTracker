@@ -10,6 +10,7 @@
     public interface ITrackingItemsRepository:IRepository<TrackingItem>
     {
         Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId(int tenantId);
+        Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int tenantId);
         public Task<TrackingItem> GetTrackingItemById(int id);
     }
 }
