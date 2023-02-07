@@ -46,7 +46,7 @@ export class LoginMenu extends Component {
 
     authenticatedView(userName, profilePath, logoutPath) {
         let pageLocationSplitted = window.location.href.split('/')
-        const tenantId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        const tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
         return (<Fragment>
             <NavItem>
                 <NavLink tag={Link} className="text-dark" id="trackerBtn" to={`/trackersList/${Number(tenantId)}`}>Trackers</NavLink>
