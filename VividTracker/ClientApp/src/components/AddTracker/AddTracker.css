@@ -1,4 +1,6 @@
-﻿.trackerContainer {
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.trackerContainer {
     background-color: white;
     position: absolute;
     top: 5.2rem;
@@ -131,28 +133,23 @@
     margin-left: 70px;
     margin-top: 80px;
 }
-
-#submit {
-    border-radius: 20px;
-    font-style: normal;
+#cancelText {
+    color: #0084B4;
+    background-color: white;
+}
+.cancelButton {
+    margin-bottom: 30px;
+    margin-left: 380px;
+    margin-top: -35px;
+    color: #0084B4;
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
     display: flex;
     align-items: center;
     text-align: center;
-    margin-left: 350px;
-    border: none;
-    margin-top: -33px;
-    margin-left: 380px;
     text-decoration-line: underline;
-}
-#cancelText {
-    color: #0084B4;
-    background-color: white;
-}
-.closeButton:hover {
-    cursor: pointer;
+    height: 40px;
 }
 .useTrackerButton {
     color: #0084B4;
@@ -168,7 +165,6 @@
     margin-left: 2.5rem;
 }
 .pageText {
-    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -199,19 +195,6 @@
     margin-bottom: 30px;
 }
 
-#close {
-    margin-bottom: 30px;
-    color: #0084B4;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 27px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    text-decoration-line: underline;
-    height: 40px;
-}
-
 #label-text {
     margin-left: 10px;
     margin-right: 0px;
@@ -219,16 +202,4 @@
 
 .close {
     display: none;
-}
-.editTrackerWrapper{
-    position: absolute;
-    width: 60rem;
-    top: 5rem;
-    background-color: white;
-    padding-bottom: 10vh;
-    margin-bottom: 70px;
-    left:25%;
-    border-top-left-radius: 5%;
-    border-bottom-right-radius: 5%;
-    overflow: hidden;
 }
