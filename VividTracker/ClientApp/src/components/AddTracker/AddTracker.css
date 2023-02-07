@@ -1,4 +1,4 @@
-﻿.TrackerContainer {
+﻿.trackerContainer {
     background-color: white;
     position: absolute;
     top: 5.2rem;
@@ -20,13 +20,13 @@
     font-size: 24px !important;
     margin-top: 9px;
 }
-.TrackerIcon {
+.trackerIcon {
     margin-top: 6.3px !important;
     font-size: 2rem !important;
     margin-left: 52.3rem !important;
     color: #0080ae;
 }
-.TrackerIcon:hover{
+.trackerIcon:hover{
     cursor: pointer;
 }
 .trackerNameLabel {
@@ -87,20 +87,6 @@
     margin-left: -220px;
     background-color: white;
 }
-#addTrackerModal {
-    border: 0 none;
-    margin-top: 0;
-    position: absolute;
-    width: 500px;
-    height: 250px;
-    left: 300px;
-    top: 150px;
-    background: #FFFFFF;
-    border: 5px solid #0084B4;
-    border-radius: 30px 0px;
-    overflow-y: hidden;
-}
-
 #createTracker{
     color: #F28627;
     font-family: sans-serif;
@@ -231,16 +217,6 @@
     margin-right: 0px;
 }
 
-.modal-header {
-    border-bottom: 0 none;
-    background-color: #FFFFFF;
-}
-
-.modal-footer {
-    border-top: 0 none;
-    background-color: #FFFFFF;
-}
-
 .close {
     display: none;
 }
@@ -255,10 +231,4 @@
     border-top-left-radius: 5%;
     border-bottom-right-radius: 5%;
     overflow: hidden;
-
-
-}
-
-.editTrackerContainer{
-    width: 100%;
 }
