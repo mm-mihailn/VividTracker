@@ -90,7 +90,7 @@ export class AddTracker extends Component {
             <div className='TrackerWrapper d-flex justify-content-center align-items-center'>
                 <div className='TrackerContainer'>
                     <div className='trackerHeaderWrapper d-flex'>
-                        <h4 className='trackerName pageText'>New Trackers</h4>
+                        <h4 className='trackerName pageText'>New Tracker</h4>
                         <FontAwesomeIcon className='TrackerIcon' icon={faPenToSquare} />
                     </div>
                     <div className='trackerFormWrapper'>
