@@ -106,7 +106,7 @@ export default class ManageTracker extends Component {
     }
     getAllRecords = async () => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
         // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
         let url = endpoints.getAllRecords(trackingGroupId);
         await fetch(url)
@@ -121,9 +121,9 @@ export default class ManageTracker extends Component {
     }
     getAllTrackingItems = async () => {
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
-        let url = endpoints.getAllTrackingItems(trackingGroupId)
+        let url = endpoints.getAllTrackingItems(tenantId)
 
         await fetch(url, {
             method: 'GET',
@@ -223,7 +223,7 @@ export default class ManageTracker extends Component {
 
     getTrackingGroupTrackingItems = async (trackingGroupId) => {
         let pageLocationSplitted = window.location.href.split('/')
-        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
         await fetch(url, {
             method: 'GET'
@@ -270,7 +270,7 @@ export default class ManageTracker extends Component {
         let trackerItemMinTypeValue = this.state.minimalValue
 
 
-        if (this.checkIfValueIsNullOrEmpty(trackerItemName) &&
+        if(this.checkIfValueIsNullOrEmpty(trackerItemName) &&
             this.checkIfValueIsNullOrEmpty(trackerItemMinColorCode) &&
             this.checkIfValueIsNullOrEmpty(trackerItemMaxColorCode) &&
             this.checkIfValueIsNullOrEmpty(trackerItemIrrelevantColorCode) &&
@@ -291,7 +291,7 @@ export default class ManageTracker extends Component {
                 let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
                 let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
 
-                let createTrackingItemURL = endpoints.createTrackingItem(tenantId)
+                let createTrackingItemURL = endpoints.createTrackingItem(tenantId, trackingGroupId)
                 let trackingItemRequestModel = {}
                 if (
                     this.checkIfValueIsNullOrEmpty(trackerItemMaxTypeValue) &&
@@ -335,8 +335,21 @@ export default class ManageTracker extends Component {
                 })
                     .then((
                         async (res) => {
-                            console.log(res)
-                            console.log('item successfully created')
+                            
+                            this.setState({
+                                'createdItemName': '', 
+                                'createdItemMinColorCode': '',
+                                'createdItemMaxColorCode': '',
+                                'createdItemIrrelevantColorCode': '',
+                                'createdItemDefaultValue': '',
+                                'createdItemPropertyType': '',
+                                'createdItemIrrelevantAllowed': '',
+                                'createdItemMandatoryCommentAvailable': '',
+                                'createdItemTarget': '',
+                                'maximalValue': '',
+                                'minimalValue': ''})
+                                this.getTrackingGroupTrackingItems(trackingGroupId)
+                                this.getAllTrackingItems()
                         }))
                     .catch((err) => {
                         console.log(err)
@@ -390,6 +403,38 @@ export default class ManageTracker extends Component {
         else {
             this.setState({ 'isCreateTrackerItemSelected': true })
         }
+    }
+    createRecord = async() => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.createTrackingGroupRecord(trackingGroupId)
+
+        await fetch(url,
+            {
+                //TODO: Make the disabled option chooseable
+                method: 'POST',
+                body:
+                    JSON.stringify({ 
+                        "Name": this.state.newRecordName, 
+                        "Disabled": true
+                    }),
+                headers:
+                {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then((res) => {
+                this.getTrackingGroup(trackingGroupId)
+                this.getTrackingGroupRecords(trackingGroupId)
+                this.getAllRecords()
+                this.setState({'newRecordName': ''})
+
+            })
+            .catch((err) => {
+                // TODO: Do some action when an error occurs
+            })
+
+        
     }
     componentDidMount() {
         this.getTrackingGroupRecords()
@@ -477,7 +522,7 @@ export default class ManageTracker extends Component {
                                 </div>
                                 <div className='RecordButtonsManageTrackerPage'>
                                     <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
-                                    <button className='UpdateButtonManageTrackerPage' onClick={() => this.AddTracker()}>Add</button>
+                                    <button className='UpdateButtonManageTrackerPage' onClick={() => this.createRecord()}>Add</button>
                                 </div>
                                 <div className='AlreadyExistingRecordsWrapper'>
                                     <span className='AlreadyExistingRecordsHeader'>
@@ -541,6 +586,7 @@ export default class ManageTracker extends Component {
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Tracker item name'
+                                                    value = {this.state.createdItemName}
                                                     onChange={(e) => this.setState({ 'createdItemName': e.target.value })}
                                                 />
                                             </div>
@@ -551,6 +597,7 @@ export default class ManageTracker extends Component {
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Max color'
+                                                    value = {this.state.createdItemMaxColorCode}
                                                     onChange={(e) => this.setState({ 'createdItemMaxColorCode': e.target.value })}
                                                 />
 
@@ -558,6 +605,7 @@ export default class ManageTracker extends Component {
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Min color'
+                                                    value = {this.state.createdItemMinColorCode}
                                                     onChange={(e) => this.setState({ 'createdItemMinColorCode': e.target.value })}
 
                                                 />
@@ -566,6 +614,7 @@ export default class ManageTracker extends Component {
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Irrelevant color'
+                                                    value = {this.state.createdItemIrrelevantColorCode}
                                                     onChange={(e) => this.setState({ 'createdItemIrrelevantColorCode': e.target.value })}
 
                                                 />
@@ -610,6 +659,7 @@ export default class ManageTracker extends Component {
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Default value'
+                                                    value = {this.state.createdItemDefaultValue}
                                                     onChange={(e) => this.setState({ 'createdItemDefaultValue': e.target.value })}
                                                 />
                                             </div>
@@ -619,6 +669,7 @@ export default class ManageTracker extends Component {
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Item target value'
+                                                    value = {this.state.createdItemTarget}
                                                     onChange={(e) => this.setState({ 'createdItemTarget': e.target.value })}
                                                 />
                                             </div>
@@ -628,12 +679,14 @@ export default class ManageTracker extends Component {
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Minimal value'
+                                                    value = {this.state.minimalValue}
                                                     onChange={(e) => this.setState({ 'minimalValue': e.target.value })}
                                                 />
                                                 <input
                                                     className='form-control'
                                                     type='text'
                                                     placeholder='Maximal value'
+                                                    value = {this.state.maximalValue}
                                                     onChange={(e) => this.setState({ 'maximalValue': e.target.value })}
                                                 />
                                             </div>
