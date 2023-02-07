@@ -1,29 +1,37 @@
-﻿.addTrackerContainer {
-    position: absolute;
-    top: 4.8rem;
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.trackerContainer {
     background-color: white;
-    border-top-left-radius: 5%;
-    border-bottom-right-radius: 5%;
-    width: 60rem;
-    height: 799px;
-    display: none;
+    position: absolute;
+    top: 5.2rem;
+    border-radius: 30px 0px;
+    width: 1080px;
+    height: max-content;
+    padding-bottom: 10vh;
+    margin-bottom: 70px;
 }
 .trackerHeaderWrapper {
-    margin-top: 2.6875rem;
-    padding-top: 0.55rem;
-    font-weight: 700;
-    font-size: 24px;
     background-color: #D9D9D9;
     color: #0084B4;
+    margin-top: 44px;
+    font-weight: 700;
+    height: 50px;
 }
 .trackerName {
     margin-left: 30px;
+    font-size: 24px !important;
+    margin-top: 9px;
 }
-.editTrackerIcon {
-    margin-left: 680px;
-    font-weight: bolder;
+.trackerIcon {
+    margin-top: 6.3px !important;
+    font-size: 2rem !important;
+    margin-left: 52.3rem !important;
+    color: #0080ae;
 }
-.trackerNameLabel{
+.trackerIcon:hover{
+    cursor: pointer;
+}
+.trackerNameLabel {
     margin-top: 30px;
     margin-left: 30px;
     margin-right: 50px;
@@ -81,20 +89,6 @@
     margin-left: -220px;
     background-color: white;
 }
-#addTrackerModal {
-    border: 0 none;
-    margin-top: 0;
-    position: absolute;
-    width: 500px;
-    height: 250px;
-    left: 300px;
-    top: 150px;
-    background: #FFFFFF;
-    border: 5px solid #0084B4;
-    border-radius: 30px 0px;
-    overflow-y: hidden;
-}
-
 #createTracker{
     color: #F28627;
     font-family: sans-serif;
@@ -139,28 +133,23 @@
     margin-left: 70px;
     margin-top: 80px;
 }
-
-#submit {
-    border-radius: 20px;
-    font-style: normal;
+#cancelText {
+    color: #0084B4;
+    background-color: white;
+}
+.cancelButton {
+    margin-bottom: 30px;
+    margin-left: 380px;
+    margin-top: -35px;
+    color: #0084B4;
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
     display: flex;
     align-items: center;
     text-align: center;
-    margin-left: 350px;
-    border: none;
-    margin-top: -33px;
-    margin-left: 380px;
     text-decoration-line: underline;
-}
-#cancelText {
-    color: #0084B4;
-    background-color: white;
-}
-.closeButton:hover {
-    cursor: pointer;
+    height: 40px;
 }
 .useTrackerButton {
     color: #0084B4;
@@ -176,7 +165,6 @@
     margin-left: 2.5rem;
 }
 .pageText {
-    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -207,52 +195,11 @@
     margin-bottom: 30px;
 }
 
-#close {
-    margin-bottom: 30px;
-    color: #0084B4;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 27px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    text-decoration-line: underline;
-    height: 40px;
-}
-
 #label-text {
     margin-left: 10px;
     margin-right: 0px;
 }
 
-.modal-header {
-    border-bottom: 0 none;
-    background-color: #FFFFFF;
-}
-
-.modal-footer {
-    border-top: 0 none;
-    background-color: #FFFFFF;
-}
-
 .close {
     display: none;
-}
-.editTrackerWrapper{
-    position: absolute;
-    width: 60rem;
-    top: 5rem;
-    background-color: white;
-    padding-bottom: 10vh;
-    margin-bottom: 70px;
-    left:25%;
-    border-top-left-radius: 5%;
-    border-bottom-right-radius: 5%;
-    overflow: hidden;
-
-
-}
-
-.editTrackerContainer{
-    width: 100%;
 }
