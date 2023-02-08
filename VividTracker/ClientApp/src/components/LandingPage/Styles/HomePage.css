@@ -1,35 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
-.informationBoxes{
+
+.informationBoxes {
     background-color: #2696bf;
     position: absolute;
     margin-top: -7px;
-    height:65rem;
+    height: 65rem;
     overflow-y: visible;
-    overflow-x: hidden;
     width: 1080px;
 }
+
 @media screen and (min-height: 360px) and (max-height: 880px) {
-    .informationBoxes{
+    .informationBoxes {
         background-color: #2696bf;
-        height: 600px;
-        position: fixed;
+        height: max-content;
+        padding-bottom: 10vh;
         top: 90px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-}
-@media screen and (max-height: 667px) {
-    .informationBoxes{
-        background-color: #2696bf;
-        height: 500px;
-        position: fixed;
-        top: 90px;
-        overflow-y: scroll;
-        overflow-x: hidden;
     }
 }
 
-.descriptionText{
+@media screen and (max-height: 667px) {
+    .informationBoxes {
+        background-color: #2696bf;
+        height: max-content;
+        padding-bottom: 10vh;
+        top: 90px;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .right {
+        margin-top: 0px;
+        padding-left: 20px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.descriptionText {
     font-weight: 700;
     color: white;
     font-family: 'Open Sans', sans-serif;
@@ -37,84 +58,85 @@
     margin-right: 0px !important;
 }
 
-.descriptionText p{
+.descriptionText p {
     margin: 0;
 }
-.box
-{
+
+.box {
     margin-top: 50px;
     margin-left: 50px;
     margin-bottom: 50px;
     width: 491px;
 }
-.developers{
+
+.developers {
     border-style: solid;
     border-left: none;
     border-right: none;
     border-top: none;
     border-bottom: none;
-    margin-right:5%;  
+    margin-right: 5%;
 }
-.developers:not(:last-child)
-{
+
+.developers:not(:last-child) {
     margin-left: 30px;
     border-right: solid;
     border-width: 10px;
     color: white;
-
 }
 
-.developerCard{
+.developerCard {
     display: flex;
     margin: 20px;
     width: 358px;
     margin-bottom: 50px;
     background-color: white;
 }
-.right{
+
+.right {
     margin-top: 50px;
-    padding-left: 50px; 
+    padding-left: 50px;
     margin-right: 10px;
 }
-@media screen and (max-width: 968px) {
-    .right{
-        margin-top: 0px ;
-        padding-left: 20px; 
-    }
-}
+
 .right .developerCard {
     margin-left: 40px;
 }
-.left{
+
+.left {
     margin-right: 0 !important;
 }
-.left .developerCard{
+
+.left .developerCard {
     margin-top: 0;
 }
-.left .developerCard .first{
+
+.left .developerCard .first {
     margin-top: 0;
 }
-.developerCard .dev-info-row .devRole{
+
+.developerCard .dev-info-row .devRole {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
 
 
-.developerImage{
+.developerImage {
     width: 94px;
     height: 114px;
     margin: 10px;
 }
-.developerInformation{
 
+.developerInformation {
     margin-top: 2%;
 }
-.developerInformation p{
 
-    margin: 0%;
-    font-size: medium;
-}
-.dev-info-row{
+    .developerInformation p {
+        margin: 0%;
+        font-size: medium;
+    }
+
+.dev-info-row {
     font-size: small;
     color: #0084B4;
 }
