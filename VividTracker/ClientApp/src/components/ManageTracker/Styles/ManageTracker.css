@@ -275,7 +275,7 @@
     padding-right: 2rem;
 }
 .AlreadyExistingRecords{
-    height: 17.9vh;
+    height: 35vh;
     overflow-y: scroll;
     -ms-overflow-style: none;  
     scrollbar-width: none;  
