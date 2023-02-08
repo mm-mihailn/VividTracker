@@ -323,8 +323,8 @@ export default class ManageTracker extends Component {
                         Type: Number(trackerItemPropertyType),
                         MandatoryComment: Boolean(trackerItemMandatoryCommentAvailable),
                         DefaultValue: trackerItemDecimalValue,
-                        MinValueType: 0,
-                        MaxValueType: 0
+                        MinValueType: null,
+                        MaxValueType: null
                     };
                 }
 
