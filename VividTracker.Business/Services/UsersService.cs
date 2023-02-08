@@ -1,9 +1,11 @@
 ﻿namespace VividTracker.Business.Services
 {
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Text;
     using System.Threading.Tasks;
     using VividTracker.Business.Services.Interfaces;
@@ -13,14 +15,28 @@
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _userRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsersService(IUsersRepository userRepository)
+        public UsersService(IUsersRepository userRepository, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<IEnumerable<User>> GetUserAsync()
         {
             return await _userRepository.GetAllUsers();
+        }
+        public async Task<string> GetCurrentUserId()
+        {
+            if (_httpContextAccessor.HttpContext.User.Identity != null)
+            {
+                var claimsIdentity = (ClaimsIdentity)_httpContextAccessor.HttpContext.User.Identity;
+                var nameIdentifierClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                var userId = nameIdentifierClaim != null ? nameIdentifierClaim.Value : "";
+                return userId;
+            }
+            return null;
+           // return await _userRepository.GetAllUsers();
         }
 
         public  Task DeleteAsync(User user)

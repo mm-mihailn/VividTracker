@@ -16,5 +16,6 @@
         Task<User> AddUser(int tenantId,User user);
         User GetUserByEmail(string email);
         Task UnDeleteUser(User user,int tenantId);
+        Task<string> GetCurrentUserId();
     }
 }
