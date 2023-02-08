@@ -188,11 +188,21 @@
 .RecordsInteractionFieldWrapper{
     margin-top: 1rem;
 }
-
+.RecordsInteraction
+{
+    width:100%;
+}
 .RecordNameLabel{
     margin-top: auto;
     margin-left: 2.5rem;
     float: left;
+}
+.CreateRecordButtonWrapper{
+    margin-left: 2rem;
+}
+.AlreadyExistingRecordsButtonWrapper{
+    margin-left: auto;
+    margin-right: 2rem;
 }
 .RecordNameInputField {
     background-color: #F3F3F3;
@@ -225,7 +235,6 @@
     padding-left: 2rem;
     margin-top: 4rem;
     padding-right: 2rem;
-
     
 }
 .AlreadyExistingRecordsWrapper::-webkit-scrollbar{

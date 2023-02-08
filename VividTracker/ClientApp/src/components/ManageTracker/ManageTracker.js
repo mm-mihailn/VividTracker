@@ -74,7 +74,9 @@ export default class ManageTracker extends Component {
             createdItemDefaultValue: null,
             isCreateTrackerItemSelected: true,
             minimalValue: null,
-            maximalValue: null
+            maximalValue: null,
+            isCreateRecordSelected: true,
+            isAlreadyExistingRecordsSelected: false,
         }
     }
 
@@ -436,6 +438,22 @@ export default class ManageTracker extends Component {
 
         
     }
+    selectRecordsOption = () => 
+    {
+        if(this.state.isCreateRecordSelected == true)
+        {
+            this.setState({'isCreateRecordSelected': false})
+            this.setState({'isAlreadyExistingRecordsSelected': true})
+
+        }
+        else
+        {
+            this.setState({'isCreateRecordSelected': true})
+            this.setState({'isAlreadyExistingRecordsSelected': false})
+
+
+        }
+    }
     componentDidMount() {
         this.getTrackingGroupRecords()
         this.getAllRecords()
@@ -516,18 +534,29 @@ export default class ManageTracker extends Component {
                             }
 
                             <div className='RecordsInteraction'>
-                                <div className='RecordsInteractionFieldWrapper d-flex'>
-                                    <label className='RecordNameLabel pageText'>New Record: </label>
-                                    <input className='RecordNameInputField form-control' type='text' value={this.state.newRecordName} onChange={(e) => this.setState({ 'newRecordName': e.target.value })} />
+                            <div className='ItemsInteractionMenu d-flex'>
+                                    <div className={this.state.isCreateRecordSelected == true ? 
+                                        'CreateRecordButtonWrapper TrackerItemOptionSelected' :
+                                        'CreateRecordButtonWrapper'
+                                    } onClick={() => this.selectRecordsOption()}>
+                                        <span className='TrackerItemOption'>Create new record</span>
+                                    </div>
+                                    <div className={this.state.isAlreadyExistingRecordsSelected == true ?
+                                        'AlreadyExistingRecordsButtonWrapper TrackerItemOptionSelected' :
+                                        'AlreadyExistingRecordsButtonWrapper'
+                                    } onClick={() => this.selectRecordsOption()}>
+                                        <span className='TrackerItemOption'>Already existing records</span>
+                                    </div>
                                 </div>
-                                <div className='RecordButtonsManageTrackerPage'>
-                                    <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
-                                    <button className='UpdateButtonManageTrackerPage' onClick={() => this.createRecord()}>Add</button>
-                                </div>
-                                <div className='AlreadyExistingRecordsWrapper'>
-                                    <span className='AlreadyExistingRecordsHeader'>
-                                        Already Existing Records:
-                                    </span>
+                                    <div className={this.state.isCreateRecordSelected == true ? 'RecordsInteractionFieldWrapper d-flex' : 'RecordsInteractionFieldWrapper d-none'}>
+                                        <label className='RecordNameLabel pageText'>New Record: </label>
+                                        <input className='RecordNameInputField form-control' type='text' value={this.state.newRecordName} onChange={(e) => this.setState({ 'newRecordName': e.target.value })} />
+                                    </div>
+                                    <div className={this.state.isCreateRecordSelected == true ? 'RecordButtonsManageTrackerPage': 'd-none'}>
+                                        <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
+                                        <button className='UpdateButtonManageTrackerPage' onClick={() => this.createRecord()}>Add</button>
+                                    </div>
+                                <div className={this.state.isAlreadyExistingRecordsSelected == true ? 'AlreadyExistingRecordsWrapper' : 'd-none'}>
                                     <div className='AlreadyExistingRecords'>
                                         {this.state.allRecords.map((alreadyExistingRecord) => {
                                             return (
