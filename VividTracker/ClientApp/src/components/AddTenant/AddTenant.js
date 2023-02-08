@@ -39,6 +39,8 @@ export class AddTenant extends Component {
         else {
             fetch(endpoints.createTenant(), {
                 method: 'POST',
+                mode: 'no-cors',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },

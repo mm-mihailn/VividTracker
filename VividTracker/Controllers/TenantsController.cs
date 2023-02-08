@@ -13,6 +13,7 @@ namespace VividTracker.Controllers
     using System.Net;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
+    //[Authorize]
     [ApiController]
     public class TenantsController : ControllerBase
     {

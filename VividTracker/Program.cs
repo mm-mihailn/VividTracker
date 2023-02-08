@@ -50,6 +50,8 @@ builder.Services.AddScoped<ITrackingItemsService, TrackingItemsService>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -70,6 +72,12 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
+
+app.UseCors(x => x
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed(origin => true)                                                         //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins separated with comma
+                    .AllowCredentials());
 
 app.MapControllerRoute(
     name: "default",

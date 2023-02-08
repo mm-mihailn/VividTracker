@@ -13,19 +13,18 @@ export class AddTracker extends Component {
             trackerName: '',
             trackerRecord: '',
             errorMessage: '',
-            textColor: ''
+            textColor: '',
+            tenantId: ''
         }
         this.createTracker = this.createTracker.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    async createTracker(){
+    async createTracker(tenantId){
         var name = this.state.trackerName;
         var record = this.state.trackerRecord;
-        let tenantId = this.props.location.pathname.split('/')[2]
+        tenantId = this.props.location.pathname.split('/')[2]
         
-        // console.log(name,record,tenantId)
-
         const color = {
             error: "red",
             success: "green"
@@ -112,7 +111,7 @@ export class AddTracker extends Component {
                                 </div>
                                 <button className='saveButton' type="submit" method="post" onClick={(tenantId) => this.createTracker(tenantId)}>Save</button>
                                 <button className='cancelButton'>
-                                    <Link id="cancelText" onClick={() => this.clear()}>Cancel</Link>
+                                    <Link to={`/trackersList/${this.state.tenantId}`} id="cancelText" onClick={() => this.clear()}>Cancel</Link>
                                 </button>
                             </div>
                         </div>

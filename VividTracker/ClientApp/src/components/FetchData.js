@@ -1,63 +1,51 @@
 import React, { Component } from 'react';
 import authService from './api-authorization/AuthorizeService'
+import TenantContainerComponent from './TenantContainerComponent/TenantContainerComponent';
 
 export class FetchData extends Component {
-  static displayName = FetchData.name;
+    static displayName = FetchData.name;
 
-  constructor(props) {
-    super(props);
-    this.state = { forecasts: [], loading: true };
-  }
+    //constructor(props) {
+    //    super(props);
+    //      this.state = { tenants: [], loading: true };
+    //      this.state = { trackers: [], loading: true };
+    //}
 
-  componentDidMount() {
-    this.populateWeatherData();
-  }
+    //componentDidMount() {
+    //  this.authorizeEndpoints();
+    //}
 
-  static renderForecastsTable(forecasts) {
-    return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-          </tr>
-        </thead>
-        <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    );
-  }
+    //static renderTenants(tenants) {
+    //    return (
+    //        <div>
+    //            {tenants.map((tenant) => {
+    //                return (
+    //                    <TenantContainerComponent key={tenant.id} tenantData={tenant} />
+    //                )
+    //            })}
+    //        </div>
+    //    );
+    //}
 
-  render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+    //render() {
+    //    let contents = this.state.loading
+    //        ? <p><em>Loading...</em></p>
+    //        : FetchData.renderTenants(this.state.tenants);
 
-    return (
-      <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
-      </div>
-    );
-  }
+    //    return (
+    //        <div>
+    //            {contents}
+    //        </div>
+    //    );
+    //}
 
-  async populateWeatherData() {
-    const token = await authService.getAccessToken();
-    const response = await fetch('weatherforecast', {
-      headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
-    });
-    const data = await response.json();
-    this.setState({ forecasts: data, loading: false });
-  }
+    //async authorizeEndpoints() {
+    //    const token = await authService.getAccessToken();
+    //    const response = await fetch('vividtracker', {
+    //        headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+    //    });
+    //    const data = await response.json();
+    //    this.setState({ tenants: data, loading: false });
+    //    this.setState({ trackers: data, loading: false });
+    //}
 }

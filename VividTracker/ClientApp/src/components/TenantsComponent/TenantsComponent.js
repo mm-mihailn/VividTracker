@@ -8,25 +8,26 @@ import { endpoints } from '../../endpoints';
 
 export default class TenantsComponent extends Component {
 
-    constructor(props)
-    {
+    constructor(props) {
         super(props)
         this.state = { tenants: [] }
         this.loadTenants = this.loadTenants.bind(this);
     }
-    async componentDidMount()
-    {
+    async componentDidMount() {
         this.loadTenants();
     }
     async loadTenants() {
-        await fetch(endpoints.loadTenants())
+        await fetch(endpoints.loadTenants(), {
+                mode: 'no-cors',
+                credentials: 'include',
+        })      
         .then((res) => res.json())
         .then((res) => this.setState({ tenants: res }))
     }
-    render () {
+    render() {
         return (
-          <div className='tenantsListWrapper d-flex justify-content-center align-items-center'>
-            <h1>All Tenants </h1>
+            <div className='tenantsListWrapper d-flex justify-content-center align-items-center'>
+                <h1>All Tenants </h1>
                 <div className='tenantsContainer'>
                     <div className='tenantsContent'>
                         <div className='tenantsListHeaderWrapper d-flex'>
@@ -39,15 +40,15 @@ export default class TenantsComponent extends Component {
                         <div className='TenantsContainer'>
                             {this.state.tenants.map((tenant) => {
                                 return (
-                                    <TenantContainerComponent tenantData={tenant} key = {tenant.id}/>
+                                    <TenantContainerComponent tenantData={tenant} key={tenant.id} />
                                 )
                             })}
                         </div>
                     </div>
                 </div>
-          </div>
+            </div>
 
-           
+
         );
     }
 }
