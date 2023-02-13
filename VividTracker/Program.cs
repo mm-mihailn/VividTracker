@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using VividTracker.Business.Services.Interfaces;
 using VividTracker.Business.Services;
@@ -49,6 +47,9 @@ builder.Services.AddScoped<ITrackingItemsRepository, TrackingItemsRepository>();
 builder.Services.AddScoped<ITrackingItemsService, TrackingItemsService>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddRazorPages()
+                .AddMvcOptions(options => options.Filters.Add<AuthorizePageHandler>());
 
 var app = builder.Build();
 
