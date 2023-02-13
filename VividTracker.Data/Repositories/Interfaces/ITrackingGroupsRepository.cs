@@ -9,7 +9,7 @@ namespace VividTracker.Data.Repositories.Interfaces
 {
     public interface ITrackingGroupsRepository : IRepository<TrackingGroup>
     {
-        Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int tenantId);
+        Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int? tenantId);
         Task<TrackingGroup?> FindTrackingGroup(int id);
         Task<int> GetCountAsync();
         Task<IEnumerable<TrackingGroup>> GetAllTrackers();

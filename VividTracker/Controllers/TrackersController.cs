@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using VividTracker.Business.Services;
 using VividTracker.Business.Services.Interfaces;
 using VividTracker.Data.Models;
@@ -12,19 +15,32 @@ namespace VividTracker.Controllers
     public class TrackersController : ControllerBase
     {
         private readonly ITrackingGroupsService _trackingGroupsService;
+        private readonly IUsersService _usersService;
+        private readonly UserManager<User> _userManager;
 
         private readonly ITenantsService _tenantsService;
 
-        public TrackersController(ITrackingGroupsService trackingGroupsService,ITenantsService tenantsService)
+        public TrackersController(ITrackingGroupsService trackingGroupsService,ITenantsService tenantsService,
+            IUsersService usersService, UserManager<User> userManager)
         {
             _trackingGroupsService = trackingGroupsService;
             _tenantsService = tenantsService;
+            _usersService = usersService;
+            _userManager = userManager;
         }
 
         [HttpGet]
-        [Route("api/trackersList/{tenantId}")]
-        public async Task<IActionResult> GetTrackingGroupsByTenantId([FromRoute] int tenantId)
+        
+        [Route("api/trackersList")]
+        public async Task<IActionResult> GetTrackingGroupsByTenantId()
         {
+            var userId = _usersService.GetCurrentUserId().Result;
+            if(userId != null)
+            {
+                
+            }
+            var tenantId = _userManager.FindByIdAsync(userId).Result.TenantId;
+
             var trackingGroups = await _trackingGroupsService.GetTrackingGroupsByTenantId(tenantId);
 
             if (!trackingGroups.Any())

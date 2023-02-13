@@ -23,7 +23,7 @@ namespace VividTracker.Business.Services
             return _trackingGroupsRepository.FindTrackingGroup(id);
         }
 
-        public async Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int id)
+        public async Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int? id)
         {
             return await _trackingGroupsRepository.GetTrackingGroupsByTenantId(id);
         }

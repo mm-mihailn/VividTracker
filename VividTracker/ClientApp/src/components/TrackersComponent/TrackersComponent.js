@@ -5,6 +5,7 @@ import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import TrackerContainerComponent from './TrackerContainerComponent';
 import { endpoints } from '../../endpoints';
+import authService from '../api-authorization/AuthorizeService'
 
 export default class TrackersComponent extends Component {
     constructor(props) {
@@ -18,9 +19,12 @@ export default class TrackersComponent extends Component {
         this.loadTrackers();
     }
     async loadTrackers(tenantId) {
-        let splittedURL = window.location.pathname.split('/')
-        tenantId = splittedURL[splittedURL.length - 1]
-        await fetch(`https://localhost:7091/api/trackersList/${Number(tenantId)}`)
+        const token = await authService.getAccessToken();
+        //let splittedURL = window.location.pathname.split('/')
+        //tenantId = splittedURL[splittedURL.length - 1]
+        await fetch(`https://localhost:7091/api/trackersList`, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        })
             .then((res) => res.json())
             .then((res) => this.setState({ trackers: res }))
     }

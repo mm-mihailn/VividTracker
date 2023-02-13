@@ -9,7 +9,7 @@ namespace VividTracker.Business.Services.Interfaces
 {
     public interface ITrackingGroupsService
     {
-        Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int id);
+        Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int? id);
         Task<TrackingGroup?>GetTrackingGroupById(int id);
         Task<TrackingGroup> UpdateTrackingGroupName(TrackingGroup trackingGroup);
         Task<TrackingGroup> UpdateTrackingGroupLabel(TrackingGroup trackingGroup);

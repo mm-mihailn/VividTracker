@@ -15,7 +15,7 @@ namespace VividTracker.Data.Repositories
         public TrackingGroupsRepository(ApplicationDbContext context) : base(context)
         {
         }
-        public async Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int tenantId)
+        public async Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int? tenantId)
         {
             return await Entities.Include(t => t.Tenant).Where(t => t.TenantId == tenantId).ToListAsync();
         }
