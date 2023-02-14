@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import './AddTenant.css';
-import {endpoints} from "../../endpoints";
+import { endpoints } from "../../endpoints";
+import authService from '../api-authorization/AuthorizeService';
 
 export class AddTenant extends Component {
     constructor(props) {
@@ -13,10 +14,11 @@ export class AddTenant extends Component {
         this.createTenant = this.createTenant.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    createTenant = (event) => {
+    async createTenant(event) {
         event.preventDefault();
         console.log(this.state.value);
         var input = this.state.value;
+        const token = await authService.getAccessToken();
         const errors = {
             success: "Successfully added a new tenant.",
             minLength: "Name must be at least 3 characters.",
@@ -37,10 +39,11 @@ export class AddTenant extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            fetch(endpoints.createTenant(), {
+            await fetch(endpoints.createTenant(), {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ "name": input })
             })
@@ -57,6 +60,19 @@ export class AddTenant extends Component {
                 })
         }
     }
+
+    //async fetchTenants() {
+    //    const token = await authService.getAccessToken();
+    //    fetch(endpoints.createTenant(), {
+    //        method: 'POST',
+    //        headers: {
+    //            'Content-Type': 'application/json'
+    //        },
+    //        headers: !token ? {} : { 'Authorization': `Bearer ${token}` },
+    //        body: JSON.stringify({ "name": this.state.value })
+    //    })
+    //}
+
     handleChange(event) {
         this.setState({ value: event.target.value });
     }

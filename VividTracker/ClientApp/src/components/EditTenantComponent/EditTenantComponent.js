@@ -5,6 +5,7 @@ import './Styles/EditTenantStyles.css'
 import TenantTrackerComponent from '../TenantTrackerComponent/TenantTrackerComponent';
 import InviteUserModal from '../InviteUserModal/InviteUserModal';
 import { endpoints } from '../../endpoints';
+import authService from '../api-authorization/AuthorizeService';
 
 export default class EditTenantComponent extends Component {
     constructor()
@@ -19,17 +20,23 @@ export default class EditTenantComponent extends Component {
         
     } 
 
-    getTenantUsers = async(tenantId) => {
+    getTenantUsers = async (tenantId) => {
+        const token = await authService.getAccessToken();
         let splittedURL = window.location.pathname.split('/')
         tenantId = splittedURL[splittedURL.length - 1]
-        await fetch(endpoints.getTenantUsers(tenantId))
+        await fetch(endpoints.getTenantUsers(tenantId), {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        })
         .then(async (res) => this.setState({'trackers': await res.json()}))
     }
 
-    getTenantName = async(tenantId) => {
+    getTenantName = async (tenantId) => {
+        const token = await authService.getAccessToken();
         let splittedURL = window.location.pathname.split('/')
         tenantId = splittedURL[splittedURL.length - 1]
-        await fetch(endpoints.getTenantName(tenantId))
+        await fetch(endpoints.getTenantName(tenantId), {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        })
         .then(async (res) => 
             {
                 let tenantData = await res.json()
@@ -40,7 +47,8 @@ export default class EditTenantComponent extends Component {
         )
     }
 
-    updateTenantName = async(tenantId) => {
+    updateTenantName = async (tenantId) => {
+        const token = await authService.getAccessToken();
         let splittedURL = window.location.pathname.split('/')
         tenantId = splittedURL[splittedURL.length - 1]
         this.state.tenantData.name = this.state.currentTenantName
@@ -48,7 +56,8 @@ export default class EditTenantComponent extends Component {
         {
             method: 'PATCH',
             headers: {
-             'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
              },
             body: JSON.stringify(this.state.tenantData)
         })

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import './Styles/InviteUserModalStyles.css'
 import { endpoints } from '../../endpoints';
+import authService from '../api-authorization/AuthorizeService';
+
 export default class InviteUserModal extends Component {
 
   constructor()
@@ -23,16 +25,19 @@ export default class InviteUserModal extends Component {
 
   getCurrentTenantData = async(tenantId) =>
   {
+    const token = await authService.getAccessToken();
     let currentURL = window.location.href.split('/')
     tenantId = Number(currentURL[currentURL.length - 1])
-    await fetch(endpoints.getCurrentTenantData(tenantId)).then(async (res) => { 
-    let result = await res.json()
-    this.setState({'currentTenantUsers': result})
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-
+      await fetch(endpoints.getCurrentTenantData(tenantId), {
+          headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+      })
+        .then(async (res) => { 
+        let result = await res.json()
+        this.setState({'currentTenantUsers': result})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
   }
 
   inviteUser = async(event) =>
@@ -50,42 +55,45 @@ export default class InviteUserModal extends Component {
           }
           else
           {
+            const token = await authService.getAccessToken();
             let currentURL = window.location.href.split('/')
             let tenantId = Number(currentURL[currentURL.length - 1])
             let result = await fetch(endpoints.inviteUser(tenantId), {
-              
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                },
-            body: JSON.stringify({email:this.state.email})
-            })
-            .then((res) => {
-              console.log(res)
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                    },
+                body: JSON.stringify({email:this.state.email})
+                })
+                    .then((res) => {
+                      console.log(res)
+                    })
+                    .catch((err) => {
+                      console.log(err)
+                    })
           }
         })
       }
       else
       {
+            const token = await authService.getAccessToken();
             let currentURL = window.location.href.split('/')
             let tenantId = Number(currentURL[currentURL.length - 1])
             let result = await fetch(endpoints.inviteUser(tenantId), {
               method: 'POST',
               headers: {
-                'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
                 },
                body: JSON.stringify({email:this.state.email})
-            })
-            .then((res) => {
-              console.log(res)
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+                })
+                    .then((res) => {
+                      console.log(res)
+                    })
+                    .catch((err) => {
+                      console.log(err)
+                    })
       }
       window.location.reload()
     }
