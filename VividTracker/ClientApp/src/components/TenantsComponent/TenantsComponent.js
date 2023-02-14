@@ -4,6 +4,7 @@ import { faRectangleList } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AddTenant } from "../AddTenant/AddTenant.js"
 import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
+import authService from '../api-authorization/AuthorizeService';
 import { endpoints } from '../../endpoints';
 
 export default class TenantsComponent extends Component {
@@ -19,9 +20,12 @@ export default class TenantsComponent extends Component {
         this.loadTenants();
     }
     async loadTenants() {
-        await fetch(endpoints.loadTenants())
-        .then((res) => res.json())
-        .then((res) => this.setState({ tenants: res }))
+        const token = await authService.getAccessToken();
+        await fetch(endpoints.loadTenants(), {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        })
+            .then((res) => res.json())
+            .then((res) => this.setState({ tenants: res }))
     }
     render () {
         return (

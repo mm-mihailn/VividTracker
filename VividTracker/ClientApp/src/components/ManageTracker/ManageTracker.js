@@ -4,6 +4,7 @@ import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { endpoints } from '../../endpoints';
+import authService from '../api-authorization/AuthorizeService';
 export default class ManageTracker extends Component {
     constructor() {
         super()
@@ -93,10 +94,13 @@ export default class ManageTracker extends Component {
         }
     }
     getTrackingGroupRecords = async (trackingGroupId) => {
+        const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupRecords(trackingGroupId)
-        await fetch(url)
+        await fetch(url, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            })
             .then((
                 async (res) => {
                     let result = await res.json()
@@ -107,11 +111,14 @@ export default class ManageTracker extends Component {
             })
     }
     getAllRecords = async () => {
+        const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
         // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
         let url = endpoints.getAllRecords(trackingGroupId);
-        await fetch(url)
+        await fetch(url, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            })
             .then((
                 async (res) => {
                     let result = await res.json()
@@ -122,6 +129,7 @@ export default class ManageTracker extends Component {
             })
     }
     getAllTrackingItems = async () => {
+        const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
         // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
@@ -130,7 +138,8 @@ export default class ManageTracker extends Component {
         await fetch(url, {
             method: 'GET',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
         })
             .then((
@@ -143,11 +152,14 @@ export default class ManageTracker extends Component {
             })
     }
     getTrackingGroup = async (trackingGroupId) => {
+        const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroup(trackingGroupId)
 
-        await fetch(url)
+        await fetch(url, {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            })
             .then((
                 async (res) => {
                     let result = await res.json()
@@ -170,6 +182,7 @@ export default class ManageTracker extends Component {
     updateTrackerName = async (trackingGroupId) => {
 
         if (this.checkIfItemNameIsValid(this.state.newTrackerName)) {
+            const token = await authService.getAccessToken();
             let url = endpoints.updateTrackerName(trackingGroupId)
             await fetch(url,
                 {
@@ -179,6 +192,7 @@ export default class ManageTracker extends Component {
                     headers:
                     {
                         'Content-type': 'application/json; charset=UTF-8',
+                        'Authorization': `Bearer ${token}`
                     },
                 })
                 .then((res) => {
@@ -198,6 +212,7 @@ export default class ManageTracker extends Component {
 
     updateTrackerLabel = async (trackingGroupId) => {
         if (this.checkIfItemNameIsValid(this.state.newTrackerName)) {
+            const token = await authService.getAccessToken();
             let url = endpoints.updateTrackerLabel(trackingGroupId)
             await fetch(url,
                 {
@@ -207,6 +222,7 @@ export default class ManageTracker extends Component {
                     headers:
                     {
                         'Content-type': 'application/json; charset=UTF-8',
+                        'Authorization': `Bearer ${token}`
                     },
                 })
                 .then((res) => {
@@ -224,11 +240,13 @@ export default class ManageTracker extends Component {
     }
 
     getTrackingGroupTrackingItems = async (trackingGroupId) => {
+        const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroupTrackingItems(trackingGroupId)
         await fetch(url, {
-            method: 'GET'
+            method: 'GET',
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         })
             .then((
                 async (res) => {
@@ -242,10 +260,13 @@ export default class ManageTracker extends Component {
 
     resetName = async (trackingGroupId) => {
         // currentTrackerName
+        const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.getTrackingGroup(trackingGroupId)
-        let result = await fetch(url)
+        let result = await fetch(url, {
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            })
             .then((
                 async (res) => {
                     let result = await res.json()
@@ -259,6 +280,7 @@ export default class ManageTracker extends Component {
     }
 
     createTrackerItem = async () => {
+        const token = await authService.getAccessToken();
         let trackerItemName = this.state.createdItemName
         let trackerItemMinColorCode = this.state.createdItemMinColorCode
         let trackerItemMaxColorCode = this.state.createdItemMaxColorCode
@@ -331,7 +353,8 @@ export default class ManageTracker extends Component {
                 await fetch(createTrackingItemURL, {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(trackingItemRequestModel)
                 })
@@ -406,7 +429,8 @@ export default class ManageTracker extends Component {
             this.setState({ 'isCreateTrackerItemSelected': true })
         }
     }
-    createRecord = async() => {
+    createRecord = async () => {
+        const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.createTrackingGroupRecord(trackingGroupId)
@@ -423,6 +447,7 @@ export default class ManageTracker extends Component {
                 headers:
                 {
                     'Content-type': 'application/json; charset=UTF-8',
+                    'Authorization': `Bearer ${token}`
                 },
             })
             .then((res) => {

@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { AddTracker } from "../AddTracker/AddTracker"
 import TrackerContainerComponent from '../TrackerContainer/TrackerContainer';
 import { endpoints } from '../../endpoints';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import authService from '../api-authorization/AuthorizeService';
 
 export default class TenantTrackerItemsList extends Component {
   constructor(props)
@@ -18,11 +19,14 @@ export default class TenantTrackerItemsList extends Component {
   {
       this.loadTrackers();
   }
-  async loadTrackers(tenantId) {
+    async loadTrackers(tenantId) {
+        const token = await authService.getAccessToken();
         let splittedURL = window.location.pathname.split('/')
         tenantId = splittedURL[splittedURL.length - 1]
         this.setState({'tenantID': tenantId})
-        await fetch(endpoints.loadTrackers(tenantId))
+          await fetch(endpoints.loadTrackers(tenantId), {
+              headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+          })
         .then(async (res) => 
             {
                 let tenantTrackers = await res.json()

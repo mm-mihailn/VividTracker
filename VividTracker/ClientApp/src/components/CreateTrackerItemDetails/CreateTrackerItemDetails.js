@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './Styles/CreateTrackerItemDetails.css'
 import { Link } from "react-router-dom";
 import { endpoints } from '../../endpoints';
+import authService from '../api-authorization/AuthorizeService';
 export default class CreateTrackerItemDetails extends Component {
 
     constructor()
@@ -23,15 +24,20 @@ export default class CreateTrackerItemDetails extends Component {
 
 
   createTrackingItem = async (tenantId) => {
+    const token = await authService.getAccessToken();
     let pageLocationSplitted = window.location.href.split('/')
     tenantId = pageLocationSplitted[pageLocationSplitted.length - 1]
     let url = endpoints.createTrackingItem(tenantId)
     await fetch(url, {
         method: 'POST',
-        body: JSON.stringify({"Name": this.state.trackingItemName, Type: this.state.trackingItemType}),
+        body: JSON.stringify({
+            "Name": this.state.trackingItemName,
+            Type: this.state.trackingItemType
+        }),
         headers: 
         {
             'Content-type': 'application/json; charset=UTF-8',
+            'Authorization': `Bearer ${token}`
         },
     })
   }

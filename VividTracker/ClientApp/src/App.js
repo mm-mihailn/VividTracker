@@ -29,7 +29,7 @@ export default class App extends Component {
         <AuthorizeRoute path='/manageTracker/:trackerID' component={ManageTracker} />
         <AuthorizeRoute path='/manageTrackerItemDetails/:trackerItemID' component={ManageTrackerItemDetails} />
         <AuthorizeRoute path='/createTrackerItemDetail/:trackerID' component={CreateTrackerItemDetails} />
-        <AuthorizeRoute path='/trackersList/:trackerID' component={TrackersComponent} />
+        <AuthorizeRoute path='/trackersList' component={TrackersComponent} />
         <AuthorizeRoute path='/tenants' component={TenantsComponent} />
         <AuthorizeRoute path='/editTenant/:id' component={EditTenantComponent} />
         <AuthorizeRoute path='/createTrackingGroup' component={AddTracker} />
