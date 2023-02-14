@@ -3,7 +3,8 @@ import { faPenToSquare, faRectangleList } from "@fortawesome/free-regular-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './AddTracker.css';
 import { endpoints } from "../../endpoints";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import authService from '../api-authorization/AuthorizeService';
 
 export class AddTracker extends Component {
     
@@ -45,11 +46,11 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
+            const token = await authService.getAccessToken();
             await fetch(endpoints.createTracker(tenantId), {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     "Name": name,
                     "Label": record,

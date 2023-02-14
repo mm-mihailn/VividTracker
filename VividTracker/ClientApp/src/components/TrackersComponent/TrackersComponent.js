@@ -18,12 +18,11 @@ export default class TrackersComponent extends Component {
     async componentDidMount() {
         this.loadTrackers();
     }
-    async loadTrackers(tenantId) {
+    async loadTrackers() {
         const token = await authService.getAccessToken();
-        //let splittedURL = window.location.pathname.split('/')
-        //tenantId = splittedURL[splittedURL.length - 1]
         await fetch(`https://localhost:7091/api/trackersList`, {
-            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` },
+            headers: { 'Content-Type': 'application/json' },
         })
             .then((res) => res.json())
             .then((res) => this.setState({ trackers: res }))
