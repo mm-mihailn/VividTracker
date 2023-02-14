@@ -12,6 +12,7 @@ using VividTracker.ViewModels;
 namespace VividTracker.Controllers
 {
     [ApiController]
+    [Authorize]
     public class TrackersController : ControllerBase
     {
         private readonly ITrackingGroupsService _trackingGroupsService;

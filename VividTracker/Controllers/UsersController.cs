@@ -1,5 +1,6 @@
 ﻿namespace VividTracker.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@
     using static Duende.IdentityServer.Models.IdentityResources;
 
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUsersService _usersService;

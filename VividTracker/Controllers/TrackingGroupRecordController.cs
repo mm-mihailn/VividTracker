@@ -1,5 +1,6 @@
 ﻿namespace VividTracker.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using VividTracker.Business.Services.Interfaces;
@@ -7,6 +8,7 @@
     using VividTracker.Models;
 
     [ApiController]
+    [Authorize]
     public class TrackingGroupRecordController : ControllerBase
     {
         private readonly ITrackingGroupRecordsService _trackingGroupRecordsService;
