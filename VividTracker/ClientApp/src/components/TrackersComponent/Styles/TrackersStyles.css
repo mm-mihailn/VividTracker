@@ -12,9 +12,11 @@
     top: 5.2rem;
     border-radius: 30px 0px;
     width: 1080px;
-    height: -webkit-fill-available;
+    height: max-content;
+    min-height: -webkit-fill-available;
     padding-bottom: 10vh;
     margin-bottom: 70px;
+    
 }
 
 ::-webkit-scrollbar {

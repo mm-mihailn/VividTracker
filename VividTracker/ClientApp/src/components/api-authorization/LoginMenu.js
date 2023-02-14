@@ -49,7 +49,7 @@ export class LoginMenu extends Component {
         const tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
         return (<Fragment>
             <NavItem>
-                <NavLink tag={Link} className="text-dark" id="trackerBtn" to={`/trackersList/${Number(tenantId)}`}>Trackers</NavLink>
+                <NavLink tag={Link} className="text-dark" id="trackerBtn" to={`/trackersList`}>Trackers</NavLink>
             </NavItem>
             <NavItem>
                 <NavLink tag={Link} className="text-dark" id="tenantBtn" to={'/tenants'}>Tenants</NavLink>

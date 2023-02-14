@@ -46,7 +46,7 @@ export default class TrackersComponent extends Component {
                             this.state.trackers.length >= 1 ?
                             this.state.trackers.map((tracker) => {
                                 return (
-                                    <TrackerContainerComponent trackerData={tracker}/>
+                                    <TrackerContainerComponent trackerData={tracker} key={tracker.id}/>
                             )
                          })
                                 :
