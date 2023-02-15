@@ -78,6 +78,7 @@ export default class ManageTracker extends Component {
             maximalValue: null,
             isCreateRecordSelected: true,
             isAlreadyExistingRecordsSelected: false,
+            itemToBeAdded: null
         }
     }
 
@@ -429,6 +430,75 @@ export default class ManageTracker extends Component {
             this.setState({ 'isCreateTrackerItemSelected': true })
         }
     }
+
+    getTrackingItemById = async(trackerItemID) => {
+        const token = await authService.getAccessToken();
+        let url = endpoints.getTrackingItemById(trackerItemID)
+
+        await fetch(url,  
+            {
+                method: 'GET',
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            })
+            .then(async (res) => {
+                let incomingData = await res.json()
+                let trackingItemRequestModel = {}
+                let trackingItemRequestModelNeededKeys = 
+                [
+                    'name', 
+                    'maxValueColor', 
+                    'minValueColor',
+                    'type', 
+                    'target', 
+                    'defaultValue', 
+                    'irrelevantColor', 
+                    'mandatoryComment', 
+                    'irrelevantAllowed'
+                ]
+                for(let key of trackingItemRequestModelNeededKeys)
+                {
+                    trackingItemRequestModel[key] = incomingData[key]
+                }
+                // check if this tracker item already exists in the given tracking group!
+                this.addTrackerItem(trackingItemRequestModel)
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+    
+    addTrackerItem = async(trackingItemRequestModel) => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        let createTrackingItemURL = endpoints.createTrackingItem(tenantId, trackingGroupId)
+        const token = await authService.getAccessToken();
+
+        await fetch(createTrackingItemURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(trackingItemRequestModel)
+        })
+        .then((res) => {
+            this.getTrackingGroupTrackingItems(trackingGroupId)
+        })
+        .catch((err) => {
+        })
+    }
+    
+    handleAddTrackerItem = async(trackerItemID) => {
+        // 1.getTrackingItemByID
+        let targetResult = await this.getTrackingItemById(trackerItemID)
+
+        // 2.addTrackingItemToTrackingGroup
+        // 3.getTrackingGroupTrackingItems
+    }
+
+    
     createRecord = async () => {
         const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
@@ -757,7 +827,7 @@ export default class ManageTracker extends Component {
                                                 return (
                                                     <div className='AlreadyExistingRecord' key={alreadyExistingItem.id}>
                                                         <p className='AlreadyExistingRecordName'>{alreadyExistingItem.name}</p>
-                                                        <span className='AddTrackingButton'>Add</span>
+                                                        <span className='AddTrackingButton' onClick={() => this.handleAddTrackerItem(alreadyExistingItem.id)}>Add</span>
                                                     </div>
                                                 )
                                             })}
