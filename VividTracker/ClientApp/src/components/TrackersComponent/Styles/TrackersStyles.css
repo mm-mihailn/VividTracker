@@ -1,22 +1,13 @@
 .trackersContainer {
-    /*   background-color: white;
-    position: absolute;
-    top: 5.2rem;
-    border-radius: 30px 0px;
-    width: 1080px;
-    height: -webkit-fill-available;
-    padding-bottom: 10vh;
-    margin-bottom: 70px;*/
     background-color: white;
     position: absolute;
     top: 5.2rem;
     border-radius: 30px 0px;
     width: 1080px;
     height: max-content;
-    min-height: -webkit-fill-available;
     padding-bottom: 10vh;
     margin-bottom: 70px;
-    
+    /*min-height: -webkit-fill-available;*/
 }
 
 ::-webkit-scrollbar {

@@ -21,6 +21,7 @@ export default class TrackersComponent extends Component {
     async loadTrackers() {
         const token = await authService.getAccessToken();
         await fetch(endpoints.loadTrackers(), {
+            mode: 'no-cors',
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         })
             .then((res) => res.json())
