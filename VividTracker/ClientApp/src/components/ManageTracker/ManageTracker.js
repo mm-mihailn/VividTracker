@@ -485,6 +485,7 @@ export default class ManageTracker extends Component {
         })
         .then((res) => {
             this.getTrackingGroupTrackingItems(trackingGroupId)
+            this.getAllTrackingItems()
         })
         .catch((err) => {
         })
@@ -494,6 +495,36 @@ export default class ManageTracker extends Component {
         await this.getTrackingItemById(trackerItemID)
     }
 
+    handleAddRecord = async(recordID) =>
+    {
+        let targetRecord = this.state.allRecords.filter((record) => record.id == recordID)[0]
+        await this.addRecord(targetRecord)
+    }
+
+    addRecord = async(targetRedord) => {
+        const token = await authService.getAccessToken();
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.createTrackingGroupRecord(trackingGroupId)
+        await fetch(url,
+            {
+                method: 'POST',
+                body:
+                    JSON.stringify({ 
+                        "Name": targetRedord.name, 
+                        "Disabled": true
+                    }),
+                headers:
+                {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            .then((res) => {
+                this.getTrackingGroupRecords()
+                this.getAllRecords()
+            })
+    }
     
     createRecord = async () => {
         const token = await authService.getAccessToken();
@@ -653,7 +684,7 @@ export default class ManageTracker extends Component {
                                             return (
                                                 <div className='AlreadyExistingRecord' key={alreadyExistingRecord.id}>
                                                     <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
-                                                    <span className='AddTrackingButton'>Add</span>
+                                                    <span className='AddTrackingButton' onClick={() => this.handleAddRecord(alreadyExistingRecord.id)}>Add</span>
                                                 </div>
                                             )
                                         })}
