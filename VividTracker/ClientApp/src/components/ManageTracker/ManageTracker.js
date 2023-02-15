@@ -58,6 +58,7 @@ export default class ManageTracker extends Component {
             currentTrackingGroup: [],
             currentTrackerName: '',
             newTrackerName: '',
+            newLabelName: '',
             currentTrackerItems: [],
             PropertyTypes: {
                 'Bool': 1,
@@ -78,6 +79,7 @@ export default class ManageTracker extends Component {
             maximalValue: null,
             isCreateRecordSelected: true,
             isAlreadyExistingRecordsSelected: false,
+            itemToBeAdded: null
         }
     }
 
@@ -167,6 +169,7 @@ export default class ManageTracker extends Component {
                     this.setState({ 'currentTrackerName': result.name })
                     this.setState({ 'currentRecordName': result.label })
                     this.setState({ 'newTrackerName': result.name })
+                    this.setState({ 'newLabelName': result.label })
                 }))
             .catch((err) => {
                 // TODO: Do some action when an error occurs
@@ -206,19 +209,19 @@ export default class ManageTracker extends Component {
         }
         else {
             //TODO: Tell the user the new tracker name is invalid
-            console.log('invalid tracker name error')
+            console.log('An error occured while attempting to update the tracker name: The length of the tracker name should be between 0 and 50 (inclusive), and it should not be the same as the old one.')
         }
     }
 
     updateTrackerLabel = async (trackingGroupId) => {
-        if (this.checkIfItemNameIsValid(this.state.newTrackerName)) {
+        if (this.checkIfRecordNameIsValid(this.state.newLabelName)) {
             const token = await authService.getAccessToken();
             let url = endpoints.updateTrackerLabel(trackingGroupId)
             await fetch(url,
                 {
                     method: 'PATCH',
                     body:
-                        JSON.stringify({ "Label": this.state.currentRecordName }),
+                        JSON.stringify({ "Label": this.state.newLabelName }),
                     headers:
                     {
                         'Content-type': 'application/json; charset=UTF-8',
@@ -236,6 +239,7 @@ export default class ManageTracker extends Component {
         }
         else {
             //TODO: Tell the user the new tracker name is invalid
+            console.log('An error occured while attempting to update the tracker label: The length of the tracker label should be between 0 and 50 (inclusive), and it should not be the same as the old one.')
         }
     }
 
@@ -403,16 +407,24 @@ export default class ManageTracker extends Component {
             return true
         }
     }
-    checkIfItemNameIsValid(ItemName) {
+    checkIfItemNameIsValid(itemName) {
 
-        if (ItemName.length > 0 && ItemName.length <= 255) {
+        if (itemName.length > 0 && itemName.length <= 255 && itemName != this.state.currentTrackerName) {
             return true
         }
         else {
             return false
         }
     }
-
+    checkIfRecordNameIsValid(recordName)
+    {
+        if (recordName.length > 0 && recordName.length <= 50 && recordName != this.state.currentRecordName) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     checkIfValueIsNullOrEmpty(value) {
         if (value == null || !value) {
             return false
@@ -429,6 +441,102 @@ export default class ManageTracker extends Component {
             this.setState({ 'isCreateTrackerItemSelected': true })
         }
     }
+
+    getTrackingItemById = async(trackerItemID) => {
+        const token = await authService.getAccessToken();
+        let url = endpoints.getTrackingItemById(trackerItemID)
+
+        await fetch(url,  
+            {
+                method: 'GET',
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            })
+            .then(async (res) => {
+                let incomingData = await res.json()
+                let trackingItemRequestModel = {}
+                let trackingItemRequestModelNeededKeys = 
+                [
+                    'name', 
+                    'maxValueColor', 
+                    'minValueColor',
+                    'type', 
+                    'target', 
+                    'defaultValue', 
+                    'irrelevantColor', 
+                    'mandatoryComment', 
+                    'irrelevantAllowed'
+                ]
+                for(let key of trackingItemRequestModelNeededKeys)
+                {
+                    trackingItemRequestModel[key] = incomingData[key]
+                }
+                // check if this tracker item already exists in the given tracking group!
+                this.addTrackerItem(trackingItemRequestModel)
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+    
+    addTrackerItem = async(trackingItemRequestModel) => {
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        let createTrackingItemURL = endpoints.createTrackingItem(tenantId, trackingGroupId)
+        const token = await authService.getAccessToken();
+
+        await fetch(createTrackingItemURL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(trackingItemRequestModel)
+        })
+        .then((res) => {
+            this.getTrackingGroupTrackingItems(trackingGroupId)
+            this.getAllTrackingItems()
+        })
+        .catch((err) => {
+        })
+    }
+    
+    handleAddTrackerItem = async(trackerItemID) => {
+        await this.getTrackingItemById(trackerItemID)
+    }
+
+    handleAddRecord = async(recordID) =>
+    {
+        let targetRecord = this.state.allRecords.filter((record) => record.id == recordID)[0]
+        await this.addRecord(targetRecord)
+    }
+
+    addRecord = async(targetRedord) => {
+        const token = await authService.getAccessToken();
+        let pageLocationSplitted = window.location.href.split('/')
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
+        let url = endpoints.createTrackingGroupRecord(trackingGroupId)
+        await fetch(url,
+            {
+                method: 'POST',
+                body:
+                    JSON.stringify({ 
+                        "Name": targetRedord.name, 
+                        "Disabled": true
+                    }),
+                headers:
+                {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Authorization': `Bearer ${token}`
+                },
+            })
+            .then((res) => {
+                this.getTrackingGroupRecords()
+                this.getAllRecords()
+            })
+    }
+    
     createRecord = async () => {
         const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
@@ -511,7 +619,7 @@ export default class ManageTracker extends Component {
                                 </div>
                                 <div className='RecordNameFieldWrapper'>
                                     <label className='TrackerRecordLabel pageText'>Record Name: </label>
-                                    <input className='TrackerRecordInputField form-control' type='text' value={this.state.currentRecordName} onChange={(e) => this.setState({ 'currentRecordName': e.target.value })} />
+                                    <input className='TrackerRecordInputField form-control' type='text' value={this.state.newLabelName} onChange={(e) => this.setState({ 'newLabelName': e.target.value })} />
                                 </div>
                             </div>
                             <div className='TrackerButtons'>
@@ -575,7 +683,7 @@ export default class ManageTracker extends Component {
                                 </div>
                                     <div className={this.state.isCreateRecordSelected == true ? 'RecordsInteractionFieldWrapper d-flex' : 'RecordsInteractionFieldWrapper d-none'}>
                                         <label className='RecordNameLabel pageText'>New Record: </label>
-                                        <input className='RecordNameInputField form-control' type='text' value={this.state.newRecordName} onChange={(e) => this.setState({ 'newRecordName': e.target.value })} />
+                                        <input className='RecordNameInputField form-control' type='text' maxLength={50} value={this.state.newRecordName} onChange={(e) => this.setState({ 'newRecordName': e.target.value })} />
                                     </div>
                                     <div className={this.state.isCreateRecordSelected == true ? 'RecordButtonsManageTrackerPage': 'd-none'}>
                                         <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
@@ -587,7 +695,7 @@ export default class ManageTracker extends Component {
                                             return (
                                                 <div className='AlreadyExistingRecord' key={alreadyExistingRecord.id}>
                                                     <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
-                                                    <span className='AddTrackingButton'>Add</span>
+                                                    <span className='AddTrackingButton' onClick={() => this.handleAddRecord(alreadyExistingRecord.id)}>Add</span>
                                                 </div>
                                             )
                                         })}
@@ -757,7 +865,7 @@ export default class ManageTracker extends Component {
                                                 return (
                                                     <div className='AlreadyExistingRecord' key={alreadyExistingItem.id}>
                                                         <p className='AlreadyExistingRecordName'>{alreadyExistingItem.name}</p>
-                                                        <span className='AddTrackingButton'>Add</span>
+                                                        <span className='AddTrackingButton' onClick={() => this.handleAddTrackerItem(alreadyExistingItem.id)}>Add</span>
                                                     </div>
                                                 )
                                             })}
