@@ -58,6 +58,7 @@ export default class ManageTracker extends Component {
             currentTrackingGroup: [],
             currentTrackerName: '',
             newTrackerName: '',
+            newLabelName: '',
             currentTrackerItems: [],
             PropertyTypes: {
                 'Bool': 1,
@@ -168,6 +169,7 @@ export default class ManageTracker extends Component {
                     this.setState({ 'currentTrackerName': result.name })
                     this.setState({ 'currentRecordName': result.label })
                     this.setState({ 'newTrackerName': result.name })
+                    this.setState({ 'newLabelName': result.label })
                 }))
             .catch((err) => {
                 // TODO: Do some action when an error occurs
@@ -207,19 +209,19 @@ export default class ManageTracker extends Component {
         }
         else {
             //TODO: Tell the user the new tracker name is invalid
-            console.log('invalid tracker name error')
+            console.log('An error occured while attempting to update the tracker name: The length of the tracker name should be between 0 and 50 (inclusive), and it should not be the same as the old one.')
         }
     }
 
     updateTrackerLabel = async (trackingGroupId) => {
-        if (this.checkIfItemNameIsValid(this.state.newTrackerName)) {
+        if (this.checkIfRecordNameIsValid(this.state.newLabelName)) {
             const token = await authService.getAccessToken();
             let url = endpoints.updateTrackerLabel(trackingGroupId)
             await fetch(url,
                 {
                     method: 'PATCH',
                     body:
-                        JSON.stringify({ "Label": this.state.currentRecordName }),
+                        JSON.stringify({ "Label": this.state.newLabelName }),
                     headers:
                     {
                         'Content-type': 'application/json; charset=UTF-8',
@@ -237,6 +239,7 @@ export default class ManageTracker extends Component {
         }
         else {
             //TODO: Tell the user the new tracker name is invalid
+            console.log('An error occured while attempting to update the tracker label: The length of the tracker label should be between 0 and 50 (inclusive), and it should not be the same as the old one.')
         }
     }
 
@@ -404,16 +407,24 @@ export default class ManageTracker extends Component {
             return true
         }
     }
-    checkIfItemNameIsValid(ItemName) {
+    checkIfItemNameIsValid(itemName) {
 
-        if (ItemName.length > 0 && ItemName.length <= 255) {
+        if (itemName.length > 0 && itemName.length <= 255 && itemName != this.state.currentTrackerName) {
             return true
         }
         else {
             return false
         }
     }
-
+    checkIfRecordNameIsValid(recordName)
+    {
+        if (recordName.length > 0 && recordName.length <= 50 && recordName != this.state.currentRecordName) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     checkIfValueIsNullOrEmpty(value) {
         if (value == null || !value) {
             return false
@@ -608,7 +619,7 @@ export default class ManageTracker extends Component {
                                 </div>
                                 <div className='RecordNameFieldWrapper'>
                                     <label className='TrackerRecordLabel pageText'>Record Name: </label>
-                                    <input className='TrackerRecordInputField form-control' type='text' value={this.state.currentRecordName} onChange={(e) => this.setState({ 'currentRecordName': e.target.value })} />
+                                    <input className='TrackerRecordInputField form-control' type='text' value={this.state.newLabelName} onChange={(e) => this.setState({ 'newLabelName': e.target.value })} />
                                 </div>
                             </div>
                             <div className='TrackerButtons'>
