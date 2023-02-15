@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { endpoints } from '../../endpoints'
 import './Styles/TenantTrackerStyles.css'
+import authService from '../api-authorization/AuthorizeService';
 
 export default class TenantTrackerComponent extends Component {
     removeUser = async (userId) => {
+        const token = await authService.getAccessToken();
         await fetch(endpoints.removeUser(userId), {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         })
         .then((res) => {
             console.log(res)

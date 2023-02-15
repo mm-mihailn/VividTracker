@@ -14,6 +14,7 @@ namespace VividTracker.Controllers
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     [ApiController]
+    [Authorize]
     public class TenantsController : ControllerBase
     {
         private readonly ITenantsService _tenantsService;

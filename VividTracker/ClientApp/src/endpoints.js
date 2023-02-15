@@ -10,7 +10,7 @@ export const endpoints = {
     inviteUser: (tenantId) => `${apiBaseUrl}/api/create/${tenantId}`,
     removeUser: (userId) => `${apiBaseUrl}/api/delete/${userId}`,
 
-    loadTrackers: (tenantId) => `${apiBaseUrl}/api/trackersList/${Number(tenantId)}`,
+    loadTrackers: (tenantId) => `${apiBaseUrl}/api/trackersList`,
     createTracker: (tenantId) => `${apiBaseUrl}/api/trackingGroup/create/${tenantId}`,
     createTrackingItem: (tenantId, trackingGroupId) => `${apiBaseUrl}/api/trackingItems/create/${tenantId}/${trackingGroupId}`,
     createTrackingGroupRecord: (trackingGroupId) => `${apiBaseUrl}/api/create/trackingGroupsRecords/${trackingGroupId}`,
