@@ -36,10 +36,6 @@ namespace VividTracker.Controllers
         public async Task<IActionResult> GetTrackingGroupsByTenantId()
         {
             var userId = _usersService.GetCurrentUserId().Result;
-            if(userId != null)
-            {
-                
-            }
             var tenantId = _userManager.FindByIdAsync(userId).Result.TenantId;
 
             var trackingGroups = await _trackingGroupsService.GetTrackingGroupsByTenantId(tenantId);
