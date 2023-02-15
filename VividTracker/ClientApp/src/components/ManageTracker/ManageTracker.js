@@ -491,11 +491,7 @@ export default class ManageTracker extends Component {
     }
     
     handleAddTrackerItem = async(trackerItemID) => {
-        // 1.getTrackingItemByID
-        let targetResult = await this.getTrackingItemById(trackerItemID)
-
-        // 2.addTrackingItemToTrackingGroup
-        // 3.getTrackingGroupTrackingItems
+        await this.getTrackingItemById(trackerItemID)
     }
 
     
@@ -645,7 +641,7 @@ export default class ManageTracker extends Component {
                                 </div>
                                     <div className={this.state.isCreateRecordSelected == true ? 'RecordsInteractionFieldWrapper d-flex' : 'RecordsInteractionFieldWrapper d-none'}>
                                         <label className='RecordNameLabel pageText'>New Record: </label>
-                                        <input className='RecordNameInputField form-control' type='text' value={this.state.newRecordName} onChange={(e) => this.setState({ 'newRecordName': e.target.value })} />
+                                        <input className='RecordNameInputField form-control' type='text' maxLength={50} value={this.state.newRecordName} onChange={(e) => this.setState({ 'newRecordName': e.target.value })} />
                                     </div>
                                     <div className={this.state.isCreateRecordSelected == true ? 'RecordButtonsManageTrackerPage': 'd-none'}>
                                         <span className='CancelButtonManageTrackerPage'><strong>Cancel</strong></span>
