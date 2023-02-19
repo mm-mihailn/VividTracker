@@ -147,7 +147,14 @@ export default class ManageTracker extends Component {
             .then((
                 async (res) => {
                     let result = await res.json()
-                    this.setState({ 'allItems': result })
+                    let filteredTrackerItemList = []
+                    result.map((item) => {
+                        if((filteredTrackerItemList.findIndex((targetItem) => targetItem.name == item.name)) == -1)
+                        {
+                            filteredTrackerItemList.push(item)
+                        }
+                    })
+                    this.setState({ 'allItems': filteredTrackerItemList })
                 }))
             .catch((err) => {
                 // TODO: Do some action when an error occurs
