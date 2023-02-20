@@ -74,11 +74,12 @@ namespace VividTracker.Controllers
             return BadRequest("Error!");
         }
         [HttpPost]
-        [Route("api/trackingGroup/create/{tenandId}")]
-        public async Task<IActionResult> CreateTrackingGroup([FromRoute] int tenandId, [FromBody] TrackingGroupRequestModel trackingGroupRequestModel)
+        [Route("api/trackingGroup/create")]
+        public async Task<IActionResult> CreateTrackingGroup([FromBody] TrackingGroupRequestModel trackingGroupRequestModel)
         {
-            var tenant = await _tenantsService.GetTenantByIdAsync(tenandId);
-           
+            var userId =  _usersService.GetCurrentUserId().Result;
+            var tenantId = await _usersService.GetTenantIdByUserId(userId);
+            var tenant = await _tenantsService.GetTenantByIdAsync(tenantId.Value);
             var tracker = trackingGroupRequestModel.ToCreateTrackingGroup(tenant);
             var result = await _trackingGroupsService.CreateTrackingGroup(tracker);
 
