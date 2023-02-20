@@ -14,6 +14,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowCredentialsPolicy",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7091")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .WithMethods("PUT", "DELETE", "GET", "PATCH", "POST")
+                                    .AllowCredentials();
+        });
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -77,8 +91,7 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html"); ;
-app.UseCors(c => c
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
+
+app.UseCors("AllowCredentialsPolicy");
+
 app.Run();
