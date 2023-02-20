@@ -14,7 +14,6 @@ namespace VividTracker.Controllers
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.AspNetCore.Cors;
 
-    [EnableCors ("AllowCredentialsPolicy")]
     [ApiController]
     [Authorize]
     public class TenantsController : ControllerBase

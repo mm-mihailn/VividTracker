@@ -14,7 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-//var allowSpecificOrigins = "_allowSpecificOrigins";
 
 builder.Services.AddCors(options =>
 {
@@ -98,6 +97,6 @@ app.UseCors(c => c
                .AllowAnyHeader());
 app.UseCors();
 
-app.UseCors("Policy");
+app.UseCors("AllowCredentialsPolicy");
 
 app.Run();
