@@ -12,6 +12,7 @@ namespace VividTracker.Controllers
     using System.Drawing.Text;
     using System.Net;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.AspNetCore.Cors;
 
     [ApiController]
     [Authorize]
