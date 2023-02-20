@@ -29,5 +29,9 @@
         {
             return await Entities.Include(t => t.Tenant).Where(t => t.TrackingGroups.Any(t => t.Id == trackingGroupId)).ToListAsync();
         }
+        public async Task<TrackingItem> FindByNameAsync(string name)
+        {
+            return await Entities.Include(t => t.Tenant).FirstOrDefaultAsync(t => t.Name.ToUpper()==name.ToUpper());
+        }
     }
 }
