@@ -45,7 +45,7 @@
 
             trackingItem.TrackingGroups.Add(trackingGroup);
 
-            var result = await _trackingItemsService.AddTrackingItem(trackingItem);
+            var result = await _trackingItemsService.AddTrackingItem(trackingItem,trackingGroupId);
 
             if (result != null)
             {

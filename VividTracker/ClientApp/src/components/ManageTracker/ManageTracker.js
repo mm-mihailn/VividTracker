@@ -471,7 +471,7 @@ export default class ManageTracker extends Component {
                     'defaultValue', 
                     'irrelevantColor', 
                     'mandatoryComment', 
-                    'irrelevantAllowed'
+                    'irrelevantAllowed',
                 ]
                 for(let key of trackingItemRequestModelNeededKeys)
                 {
@@ -510,7 +510,7 @@ export default class ManageTracker extends Component {
     }
     
     handleAddTrackerItem = async(trackerItemID) => {
-        await this.getTrackingItemById(trackerItemID)
+         await this.getTrackingItemById(trackerItemID)
     }
 
     handleAddRecord = async(recordID) =>

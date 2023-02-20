@@ -24,12 +24,13 @@
         {
             return await _trackingItemsRepository.GetTrackingItemsByTenantId(id);
         }
-        public async Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem)
+       public async Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem,int trackingGroupId)
         {
-            var currentTrackingItem = await _trackingItemsRepository.GetTrackingItemById(trackingItem.Id);
-            var isNameExist = await _trackingItemsRepository.FindByNameAsync(trackingItem.Name);
 
-            if (isNameExist !=null || currentTrackingItem!=null)
+            var trackers = await GetTrackingItemsByTrackingGroupId(trackingGroupId);
+            var isExist = trackers.FirstOrDefault(t => t.Name.ToUpper() == trackingItem.Name.ToUpper());
+
+            if (isExist!=null)
             {
                 return null;
             }
