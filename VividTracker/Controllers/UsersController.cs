@@ -7,7 +7,6 @@
     using Microsoft.AspNetCore.WebUtilities;
     using System.Text;
     using System.Text.Encodings.Web;
-    using VividTracker.Business.Services;
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
     using VividTracker.Data.Repositories.Interfaces;
@@ -104,13 +103,6 @@
                 return Ok(user);
             }
             
-        }
-
-        [HttpGet]
-        [Route("api/user/tenantId/{userId}")]
-        public async Task<int?> GetTenantIdByUserId([FromRoute] string userId)
-        {
-            return await _usersService.GetTenantIdByUserId(userId);
         }
     }   
 }

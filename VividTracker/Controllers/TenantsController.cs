@@ -66,6 +66,7 @@ namespace VividTracker.Controllers
         }
         [HttpPost]
         [Route("api/create")]
+
         public async Task<IActionResult> CreateTenant([FromBody] Tenant createTenant)
         {
             var tenant = await _tenantsService.GetTenantByNameAsync(createTenant.Name);
