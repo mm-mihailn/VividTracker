@@ -115,7 +115,7 @@ export default class ManageTracker extends Component {
     getAllRecords = async () => {
         const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
-        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 2]
+        let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         // TODO: Make this get ALL THE TRACKING RECORDS FROM THE DATABASE
         let url = endpoints.getAllRecords(trackingGroupId);
         await fetch(url, {
@@ -544,37 +544,68 @@ export default class ManageTracker extends Component {
             })
     }
     
-    createRecord = async () => {
+    createRecord = async (existingRecordName) => {
         const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         let trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
         let url = endpoints.createTrackingGroupRecord(trackingGroupId)
 
-        await fetch(url,
-            {
-                //TODO: Make the disabled option chooseable
-                method: 'POST',
-                body:
-                    JSON.stringify({ 
-                        "Name": this.state.newRecordName, 
-                        "Disabled": true
-                    }),
-                headers:
+        if(existingRecordName)
+        {
+            await fetch(url,
                 {
-                    'Content-type': 'application/json; charset=UTF-8',
-                    'Authorization': `Bearer ${token}`
-                },
-            })
-            .then((res) => {
-                this.getTrackingGroup(trackingGroupId)
-                this.getTrackingGroupRecords(trackingGroupId)
-                this.getAllRecords()
-                this.setState({'newRecordName': ''})
-
-            })
-            .catch((err) => {
-                // TODO: Do some action when an error occurs
-            })
+                    //TODO: Make the disabled option chooseable
+                    method: 'POST',
+                    body:
+                        JSON.stringify({ 
+                            "Name": existingRecordName, 
+                            "Disabled": true
+                        }),
+                    headers:
+                    {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        'Authorization': `Bearer ${token}`
+                    },
+                })
+                .then((res) => {
+                    this.getTrackingGroup(trackingGroupId)
+                    this.getTrackingGroupRecords(trackingGroupId)
+                    this.getAllRecords()
+                    this.setState({'newRecordName': ''})
+    
+                })
+                .catch((err) => {
+                    // TODO: Do some action when an error occurs
+                })
+        }
+        else
+        {
+            await fetch(url,
+                {
+                    //TODO: Make the disabled option chooseable
+                    method: 'POST',
+                    body:
+                        JSON.stringify({ 
+                            "Name": this.state.newRecordName, 
+                            "Disabled": true
+                        }),
+                    headers:
+                    {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        'Authorization': `Bearer ${token}`
+                    },
+                })
+                .then((res) => {
+                    this.getTrackingGroup(trackingGroupId)
+                    this.getTrackingGroupRecords(trackingGroupId)
+                    this.getAllRecords()
+                    this.setState({'newRecordName': ''})
+    
+                })
+                .catch((err) => {
+                    // TODO: Do some action when an error occurs
+                })
+        }
 
         
     }
@@ -701,8 +732,8 @@ export default class ManageTracker extends Component {
                                         {this.state.allRecords.map((alreadyExistingRecord) => {
                                             return (
                                                 <div className='AlreadyExistingRecord' key={alreadyExistingRecord.id}>
-                                                    <p className='AlreadyExistingRecordName'>{alreadyExistingRecord.name}</p>
-                                                    <span className='AddTrackingButton' onClick={() => this.handleAddRecord(alreadyExistingRecord.id)}>Add</span>
+                                                    <p className='AlreadyExistingRecordName'>{alreadyExistingRecord}</p>
+                                                    <span className='AddTrackingButton' onClick={() => this.createRecord(alreadyExistingRecord)}>Add</span>
                                                 </div>
                                             )
                                         })}
