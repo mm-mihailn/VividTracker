@@ -12,5 +12,6 @@
         Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId(int tenantId);
         Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int trackingGroupId);
         Task<TrackingItem> GetTrackingItemById(int id);
+        Task<TrackingItem> FindByNameAsync(string name);
     }
 }

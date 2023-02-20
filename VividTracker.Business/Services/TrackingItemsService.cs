@@ -1,5 +1,6 @@
 ﻿namespace VividTracker.Business.Services
 {
+    using Duende.IdentityServer.Endpoints.Results;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -25,6 +26,13 @@
         }
         public async Task<TrackingItem> AddTrackingItem(TrackingItem trackingItem)
         {
+            var currentTrackingItem = await _trackingItemsRepository.GetTrackingItemById(trackingItem.Id);
+            var isNameExist = await _trackingItemsRepository.FindByNameAsync(trackingItem.Name);
+
+            if (isNameExist !=null || currentTrackingItem!=null)
+            {
+                return null;
+            }
            return await _trackingItemsRepository.AddAsync(trackingItem);
         }
         public async Task<TrackingItem> UpdateTrackingGroupName(TrackingItem trackingItem)

@@ -33,10 +33,12 @@
         }
 
         [HttpGet]
-        [Route("api/trackingGroupsRecords")]
-        public async Task<IEnumerable<TrackingGroupRecord>> GetAllTrackingGroupsRecords()
+        [Route("api/trackingGroupsRecords/{trackingGroupId}")]
+        public async Task<IEnumerable<string>> GetAllTrackingGroupsRecords([FromRoute] int trackingGroupId)
         {
-            return await _trackingGroupRecordsService.GetAllTrackingGroupsRecordsAsync();
+            var trackingGroup = await _trackingGroupsService.GetTrackerByIdAsync(trackingGroupId);
+
+            return await _trackingGroupRecordsService.GetAllTrackingGroupsRecordsAsync(trackingGroup.TenantId);
         }
         [HttpPost]
         [Route("api/create/trackingGroupsRecords/{trackingGroupId}")]
