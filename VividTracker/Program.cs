@@ -14,6 +14,34 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//var allowSpecificOrigins = "_allowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "Policy",
+                      policy =>
+                      {
+                          policy.WithOrigins("https://localhost:7091")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod()
+                                                  .WithMethods("PUT", "DELETE", "GET");
+                      });
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowCredentialsPolicy",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7091",
+                               "https://localhost:44430")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .WithMethods("PUT", "DELETE", "GET")
+                                    .AllowCredentials();
+        });
+});
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -81,4 +109,8 @@ app.UseCors(c => c
                .AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader());
+app.UseCors();
+
+app.UseCors("Policy");
+
 app.Run();
