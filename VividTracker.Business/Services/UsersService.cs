@@ -83,5 +83,11 @@
             user.TenantId = tenantId;
             await _userRepository.UpdateAsync(user);
         }
+
+        public async Task<int?> GetTenantIdByUserId(string userId)
+        {
+            var result =  await _userRepository.FindAsync(userId);
+            return result?.TenantId;
+        }
     }
 }
