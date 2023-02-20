@@ -18,18 +18,6 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "Policy",
-                      policy =>
-                      {
-                          policy.WithOrigins("https://localhost:7091")
-                                                  .AllowAnyHeader()
-                                                  .AllowAnyMethod()
-                                                  .WithMethods("PUT", "DELETE", "GET");
-                      });
-});
-
-builder.Services.AddCors(options =>
-{
     options.AddPolicy("AllowCredentialsPolicy",
         policy =>
         {
