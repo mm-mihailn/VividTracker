@@ -23,7 +23,7 @@ builder.Services.AddCors(options =>
             policy.WithOrigins("https://localhost:7091")
                                     .AllowAnyHeader()
                                     .AllowAnyMethod()
-                                    .WithMethods("PUT", "DELETE", "GET")
+                                    .WithMethods("PUT", "DELETE", "GET", "PATCH", "POST")
                                     .AllowCredentials();
         });
 });
@@ -91,11 +91,6 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html"); ;
-app.UseCors(c => c
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
-app.UseCors();
 
 app.UseCors("AllowCredentialsPolicy");
 

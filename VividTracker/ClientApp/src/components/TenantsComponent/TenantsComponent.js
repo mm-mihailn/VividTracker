@@ -22,8 +22,7 @@ export default class TenantsComponent extends Component {
     async loadTenants() {
         const token = await authService.getAccessToken();
         await fetch(endpoints.loadTenants(), {
-            headers: !token ? {} : { 'Authorization': `Bearer ${token}` },
-            credentials: 'include'
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         })
             .then((res) => res.json())
             .then((res) => this.setState({ tenants: res }))
