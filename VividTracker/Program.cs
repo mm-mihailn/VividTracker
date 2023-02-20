@@ -33,8 +33,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowCredentialsPolicy",
         policy =>
         {
-            policy.WithOrigins("https://localhost:7091",
-                               "https://localhost:44430")
+            policy.WithOrigins("https://localhost:7091")
                                     .AllowAnyHeader()
                                     .AllowAnyMethod()
                                     .WithMethods("PUT", "DELETE", "GET")
