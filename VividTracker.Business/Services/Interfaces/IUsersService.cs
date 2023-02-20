@@ -17,5 +17,6 @@
         User GetUserByEmail(string email);
         Task UnDeleteUser(User user,int tenantId);
         Task<string> GetCurrentUserId();
+        Task<int?> GetTenantIdByUserId (string userId);
     }
 }
