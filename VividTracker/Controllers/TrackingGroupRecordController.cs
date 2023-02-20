@@ -33,7 +33,7 @@
         }
 
         [HttpGet]
-        [Route("api/trackingGroupsRecords/{trackingGroupId}")]
+        [Route("api/trackingGroupsRecordsUnique/{trackingGroupId}")]
         public async Task<IEnumerable<string>> GetAllTrackingGroupsRecords([FromRoute] int trackingGroupId)
         {
             var trackingGroup = await _trackingGroupsService.GetTrackerByIdAsync(trackingGroupId);
