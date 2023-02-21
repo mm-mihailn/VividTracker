@@ -17,21 +17,21 @@ namespace VividTracker.Data.Repositories
         }
         public async Task<IEnumerable<TrackingGroup>> GetTrackingGroupsByTenantId(int? tenantId)
         {
-            return await Entities.Include(t => t.Tenant).Where(t => t.TenantId == tenantId).ToListAsync();
+            return await Entities.AsNoTracking().Include(t => t.Tenant).Where(t => t.TenantId == tenantId).ToListAsync();
         }
 
         public async Task<TrackingGroup?> FindTrackingGroup(int id)
         {
-            return await Entities.Include(t=>t.Tenant).FirstOrDefaultAsync(t => t.Id==id);
+            return await Entities.AsNoTracking().Include(t=>t.Tenant).FirstOrDefaultAsync(t => t.Id==id);
         }
 
-        public async Task<IEnumerable<TrackingGroup>> GetAllTrackers() => await Entities.ToListAsync();
+        public async Task<IEnumerable<TrackingGroup>> GetAllTrackers() => await Entities.AsNoTracking().ToListAsync();
 
-        public async Task<int> GetCountAsync() => await Entities.CountAsync();
+        public async Task<int> GetCountAsync() => await Entities.AsNoTracking().CountAsync();
 
         public async Task<TrackingGroup?> GetTrackerByName(string name)
         {
-            return await Entities.FirstOrDefaultAsync(t => t.Name == name);
+            return await Entities.AsNoTracking().FirstOrDefaultAsync(t => t.Name == name);
         }
     }
 }
