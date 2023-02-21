@@ -17,6 +17,19 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddCors(options =>
 {
+    options.AddPolicy("AllowCredentialsPolicy",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7091")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .WithMethods("PUT", "DELETE", "GET", "PATCH", "POST")
+                                    .AllowCredentials();
+        });
+});
+
+builder.Services.AddCors(options =>
+{
     options.AddDefaultPolicy(builder =>
     {
         builder.AllowAnyOrigin()
@@ -78,6 +91,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyHeader()
+           .AllowAnyMethod();
+});
 app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
@@ -88,8 +108,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html"); ;
-app.UseCors(c => c
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
+
 app.Run();
