@@ -47,7 +47,7 @@ export class AddTracker extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            await fetch(endpoints.createTracker(tenantId), {
+            await fetch(endpoints.createTracker(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -11,7 +11,7 @@ export const endpoints = {
     removeUser: (userId) => `${apiBaseUrl}/api/delete/${userId}`,
 
     loadTrackers: () => `${apiBaseUrl}/api/trackersList`,
-    createTracker: (tenantId) => `${apiBaseUrl}/api/trackingGroup/create/${tenantId}`,
+    createTracker: () => `${apiBaseUrl}/api/trackingGroup/create`,
     createTrackingItem: (tenantId, trackingGroupId) => `${apiBaseUrl}/api/trackingItems/create/${tenantId}/${trackingGroupId}`,
     createTrackingGroupRecord: (trackingGroupId) => `${apiBaseUrl}/api/create/trackingGroupsRecords/${trackingGroupId}`,
     getTrackingGroupRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupRecords/${trackingGroupId}`,
@@ -23,6 +23,6 @@ export const endpoints = {
     getTrackingItemById: (trackingItemId) => `${apiBaseUrl}/api/getTrackingItem/${trackingItemId}`,
     resetName: (trackingGroupId) => `${apiBaseUrl}/api/reset/tracker/${trackingGroupId}`,
     editTracker: (trackerId) => `${apiBaseUrl}/api/editTracker/${trackerId}`,
-    getAllRecords: () => `${apiBaseUrl}/api/trackingGroupsRecords`,
+    getAllRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupsRecordsUnique/${trackingGroupId}`,
     getAllTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/trackingItems/${trackingGroupId}`,
 }
