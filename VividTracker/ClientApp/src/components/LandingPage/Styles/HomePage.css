@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
+.body {
+    background-color: #2696bf !important;
+}
 .informationBoxes {
-    background-color: #2696bf;
-    position: absolute;
-    margin-top: -7px;
+    background-color: #2696bf !important;
+    margin-top: 83px;
     height: 65rem;
     overflow-y: visible;
     width: 1080px;
@@ -28,6 +30,13 @@
 }
 
 @media screen and (max-width: 968px) {
+    .right {
+        margin-top: 0px;
+        padding-left: 20px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
     .right {
         margin-top: 0px;
         padding-left: 20px;
