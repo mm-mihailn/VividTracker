@@ -134,7 +134,6 @@ export default class ManageTracker extends Component {
         const token = await authService.getAccessToken();
         let pageLocationSplitted = window.location.href.split('/')
         let tenantId = pageLocationSplitted[pageLocationSplitted.length - 2]
-        // TODO: Make this get ALL THE TRACKING ITEMS FROM THE DATABASE
         let url = endpoints.getAllTrackingItems(tenantId)
 
         await fetch(url, {
@@ -148,8 +147,10 @@ export default class ManageTracker extends Component {
                 async (res) => {
                     let result = await res.json()
                     let filteredTrackerItemList = []
+                    console.log(this.state.currentTrackerItems.map((targetItem) => {console.log(targetItem.name)}))
                     result.map((item) => {
-                        if((filteredTrackerItemList.findIndex((targetItem) => targetItem.name == item.name)) == -1)
+                        if((filteredTrackerItemList.findIndex((targetItem) => targetItem.name == item.name)) == -1 &&
+                        (this.state.currentTrackerItems.findIndex((targetItem) => targetItem.name == item.name)) == -1)
                         {
                             filteredTrackerItemList.push(item)
                         }
@@ -262,7 +263,9 @@ export default class ManageTracker extends Component {
             .then((
                 async (res) => {
                     let result = await res.json()
-                    this.setState({ 'currentTrackerItems': result })
+                    this.setState({ 'currentTrackerItems': result }, () => {
+                        this.getAllTrackingItems()
+                    })
                 }))
             .catch((err) => {
                 // TODO: Do some action when an error occurs
@@ -629,9 +632,8 @@ export default class ManageTracker extends Component {
     componentDidMount() {
         this.getTrackingGroupRecords()
         this.getAllRecords()
-        this.getAllTrackingItems()
-        this.getTrackingGroup()
         this.getTrackingGroupTrackingItems()
+        this.getTrackingGroup()
     }
     render() {
         return (
