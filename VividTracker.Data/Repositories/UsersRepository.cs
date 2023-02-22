@@ -19,7 +19,7 @@
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            var users = await Entities.AsNoTracking().Where(u=>u.IsDeleted==false).ToListAsync();
+            var users = await Entities.Where(u=>u.IsDeleted==false).ToListAsync();
             return users;
         }
         public override Task DeleteAsync(User entity)
@@ -30,11 +30,11 @@
 
         public async Task<IEnumerable<User>> GetUsersByTenantId(int id)
         {
-            return await Entities.AsNoTracking().Where(u => u.TenantId == id && u.IsDeleted==false).ToListAsync();
+            return await Entities.Where(u => u.TenantId == id && u.IsDeleted==false).ToListAsync();
         }
         public User GetUserByEmail(string email)
         {
-            return Entities.AsNoTracking().FirstOrDefault(u => u.Email == email);
+            return Entities.FirstOrDefault(u => u.Email == email);
         }
     }
 }
