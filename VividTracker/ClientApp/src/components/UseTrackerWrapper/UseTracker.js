@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import './UseTrackerWrapperStyles/UseTrackerComponent.css'
+import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default class UseTracker extends Component {
     constructor()
     {
@@ -19,14 +22,22 @@ export default class UseTracker extends Component {
             items: [
                 {'name': 'Confluence space'},
                 {'name': 'Code Reviews Process'},
-                {'name': 'Unit Tests Code Coverage'},
-
+                {'name': 'Unit Tests Code Coverage'}
             ]
         }
+        
+    }
+    scrollElements = () => {
+        let firstColumn = this.state.items[0]
+        this.setState({'items': this.state.items.filter((item) => item != firstColumn)})
+        this.setState((prevState) => ({
+            items: [...prevState.items, firstColumn]
+        }))
     }
   render() {
     return (
         <div className='UseTrackerComponentWrapper'>
+            <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
             <div className='row menuWrapper'>
                 <div className='TrackingRecordsColumn'>
                     <div className='TrackingRecordsColumnHeader'>
