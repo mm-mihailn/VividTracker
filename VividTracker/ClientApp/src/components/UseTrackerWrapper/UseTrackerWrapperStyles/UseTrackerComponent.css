@@ -1,0 +1,84 @@
+
+.menuWrapper{
+    display: flex;
+}
+.TrackingRecordsColumnHeader{
+    color: white;
+    margin-left: 0.375rem;
+}
+.TrackingRecordsColumn{
+    background-color: #0084B4;
+    width: 224px !important;
+    height: 80px;
+    left: 243px;
+    top: 247px;
+    margin-left: 2.6rem;
+}
+.TrackingRecordsHeader{
+    width: 204px;
+    height: 80px;
+    left: 249px;
+    top: 247px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.TrackingRecord{
+    width: 224px;
+    height: 32px;
+    left: 249px;
+    top: 348px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    /* display: flex; */
+    align-items: center;
+    margin-left: 1.813rem;
+    background-color: #D9D9D9;
+    margin-top: 0.125rem;
+}
+
+.TrackingRecordName{
+    padding-top: 0.4rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+.TrackingChildRecordName
+{
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+}
+.SeperationLine{
+    border-bottom-style: solid;
+    border-color: #D9D9D9;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+    margin-left: 1.813rem;
+    margin-right: 1.4rem;
+    border-width: 4px;
+}
+
+.TrackingItemsColumn{
+    background-color: #0084B4;
+    width:fit-content !important; 
+    margin-left: 1.813rem;
+    display: inline-block;
+}
+.TrackingItemsColumnHeader{
+    word-wrap: break-word;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+.TrackingItemsHeader{
+    color: white;    
+}

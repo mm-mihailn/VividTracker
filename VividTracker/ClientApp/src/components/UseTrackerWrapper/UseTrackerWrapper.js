@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './UseTrackerWrapperStyles/UseTrackerWrapper.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTable, faCirclePlay, faFilter } from '@fortawesome/free-solid-svg-icons';
+import UseTracker from './UseTracker';
 export default class UseTrackerWrapper extends Component {
   render() {
     return (
@@ -18,6 +19,8 @@ export default class UseTrackerWrapper extends Component {
                 <FontAwesomeIcon className='usedTrackerFilterIcon usedTrackerMenuIcon' icon={faFilter}/>
             </div>
         </div>
+        <UseTracker/>
+
       </div>
     )
   }
