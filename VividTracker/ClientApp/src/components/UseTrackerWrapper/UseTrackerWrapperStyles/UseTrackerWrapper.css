@@ -1,0 +1,50 @@
+.useTrackerWrapper{
+    background-color: white;
+    position: absolute;
+    top: 5.2rem;
+    left: 12%;
+    border-radius: 30px 0px;
+    width: 1080px;
+    height: max-content;
+    min-height: -webkit-fill-available;
+    padding-bottom: 10vh;
+    margin-bottom: 4.375rem;
+}
+.usedTrackerHeaderWrapper{
+    color: #0084B4;
+    background-color: #D9D9D9;
+    height: 3.125rem;
+    margin-top: 2.688rem;
+    display: flex;
+}
+.usedTrackerHeader{
+    color: #0084B4;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 2.063rem;
+    padding-left: 2.5rem;
+    padding-top: 0.438rem;
+}
+.usedTrackerTableIcon{
+    font-size: xx-large;
+    padding-top: 0.438rem;
+    margin-left: auto;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+.usedTrackerMenuButtons{
+    display: flex;
+}
+.usedTrackerMenuIcons{
+    color: #D9D9D9;    
+    font-size: x-large;
+    margin-left: auto;
+    padding-right: 2.5rem;
+    padding-top: 0.875rem;
+}
+.usedTrackerMenuIcon{
+    margin-left: 1.25rem;
+    cursor: pointer;
+}
