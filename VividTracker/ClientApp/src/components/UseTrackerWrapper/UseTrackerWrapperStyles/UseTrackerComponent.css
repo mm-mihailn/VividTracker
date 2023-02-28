@@ -9,7 +9,6 @@
 .TrackingRecordsColumn{
     background-color: #0084B4;
     width: 224px !important;
-    height: 80px;
     left: 243px;
     top: 247px;
     margin-left: 2.6rem;
@@ -102,6 +101,9 @@
 }
 .TrackingItemsColumn:nth-child(n+6) {
     display: none;
+}
+.TrackingItemsColumn:nth-child(n+5){
+    width: 240px !important;
 }
 .TrackingItemsHeader{
     color: white;    

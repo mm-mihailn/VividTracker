@@ -24,6 +24,7 @@ export default class UseTracker extends Component {
                 {'name': 'Code Reviews Process'},
                 {'name': 'Unit Tests Code Coverage'},
                 {'name': 'Level'},
+                {'name': 'Level'},
 
             ]
         }
@@ -41,59 +42,57 @@ export default class UseTracker extends Component {
     }
   render() {
     return (
-        <div className='UseTrackerComponentWrapper'>
-            {this.state.items.length > 4 ?
-                <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
-                :
-                ""
-            }
-            <div className='row menuWrapper'>
-                <div className='TrackingRecordsColumn'>
-                    <div className='TrackingRecordsColumnHeader'>
-                        <p className='TrackingRecordsHeader'>Projects</p>
+            <div className='UseTrackerComponentWrapper'>
+                {this.state.items.length > 4 ?
+                    <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
+                    :
+                    ""
+                }
+                <div className='row menuWrapper'>
+                    <div className='TrackingRecordsColumn'>
+                        <div className='TrackingRecordsColumnHeader'>
+                            <p className='TrackingRecordsHeader'>Projects</p>
+                        </div>
                     </div>
+                    {this.state.items.map((item) => {
+                        //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
+                        return(
+                            <div className='TrackingItemsColumn col-2'>
+                                <div className='TrackingItemsColumnHeader'>
+                                    <p className='TrackingItemsHeader'>{item.name}</p>
+                                </div>
+                            </div>
+                        )
+
+                    })}
                 </div>
-                {this.state.items.map((item) => {
-                    //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
-                    return(
-                        <div className='TrackingItemsColumn col-2'>
-                            <div className='TrackingItemsColumnHeader'>
-                                <p className='TrackingItemsHeader'>{item.name}</p>
-                            </div>
-                        </div>
-                    )
 
-                })}
+                <div className='SeperationLine'></div>
+                    <div className='TrackingRecords'>
+                        {this.state.records.map((record) => {
+                            return (
+                                <div>
+                                    <div className='TrackingRecord'>
+                                        <p className='TrackingRecordName'>{record.name}</p>
+                                    </div>
+                                    <div>
+                                        {record.children ? 
+                                            record.children.map((child) => {
+                                                return (
+                                                    <div className='TrackingRecordChild'>
+                                                        <p className='TrackingRecordName'>{child.name}</p>
+                                                    </div>
+                                                )
+                                            })
+                                        : 
+                                            ""
+                                        }
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
             </div>
-
-            <div className='SeperationLine'></div>
-            <div className='TrackingRecords'>
-                {this.state.records.map((record) => {
-                    return (
-                        <div>
-                            <div className='TrackingRecord'>
-                                <p className='TrackingRecordName'>{record.name}</p>
-                            </div>
-                            <div>
-                                {record.children ? 
-                                    record.children.map((child) => {
-                                        return (
-                                            <div className='TrackingRecordChild'>
-                                                <p className='TrackingRecordName'>{child.name}</p>
-                                            </div>
-                                        )
-                                    })
-                                : 
-                                    ""
-                                }
-                            </div>
-                        </div>
-                        
-                        
-                    )
-                })}
-            </div>
-        </div>
     )
   }
 }
