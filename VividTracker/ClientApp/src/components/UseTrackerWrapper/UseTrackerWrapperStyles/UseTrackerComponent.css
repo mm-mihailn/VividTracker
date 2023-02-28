@@ -88,18 +88,25 @@
     background-color: #0084B4;
     width:fit-content !important; 
     margin-left: 1.813rem;
-    display: inline-block;
+    width: 150px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 .TrackingItemsColumnHeader{
-    word-wrap: break-word;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 27px;
 }
+.TrackingItemsColumn:nth-child(n+6) {
+    display: none;
+}
 .TrackingItemsHeader{
     color: white;    
+    display: flex;
+    align-items: flex-end;
 }
 .scrollElementsButton{
     background-color: white;

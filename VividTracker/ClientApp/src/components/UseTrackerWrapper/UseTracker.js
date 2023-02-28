@@ -22,7 +22,9 @@ export default class UseTracker extends Component {
             items: [
                 {'name': 'Confluence space'},
                 {'name': 'Code Reviews Process'},
-                {'name': 'Unit Tests Code Coverage'}
+                {'name': 'Unit Tests Code Coverage'},
+                {'name': 'Level'},
+
             ]
         }
         
@@ -40,7 +42,11 @@ export default class UseTracker extends Component {
   render() {
     return (
         <div className='UseTrackerComponentWrapper'>
-            <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
+            {this.state.items.length > 4 ?
+                <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
+                :
+                ""
+            }
             <div className='row menuWrapper'>
                 <div className='TrackingRecordsColumn'>
                     <div className='TrackingRecordsColumnHeader'>
@@ -50,7 +56,7 @@ export default class UseTracker extends Component {
                 {this.state.items.map((item) => {
                     //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
                     return(
-                        <div className='TrackingItemsColumn'>
+                        <div className='TrackingItemsColumn col-2'>
                             <div className='TrackingItemsColumnHeader'>
                                 <p className='TrackingItemsHeader'>{item.name}</p>
                             </div>
