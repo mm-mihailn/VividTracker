@@ -62,7 +62,8 @@ import { faComments } from "@fortawesome/free-regular-svg-icons";
 import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
 import authService from '../api-authorization/AuthorizeService';
 import { endpoints } from '../../endpoints';
-import { useState } from "react";
+import { faFontAwesomeFlag, faIcons } from '@fortawesome/free-solid-svg-icons';
+import TrackersSlider from '../TrackersSlider/TrackersSlider';
 
 export class Panel extends Component {
 
@@ -80,7 +81,8 @@ export class Panel extends Component {
             //]
             name: 'Milen',
             date: 'Feb 28',
-            comment: 'my comment'
+            comment: ''
+           
         }
         this.loadTenants = this.loadTenants.bind(this);
     }
@@ -97,15 +99,18 @@ export class Panel extends Component {
     }
 
     addComment() {
-        var input = this.state.value;
-        const newNode = document.createElement("li");
-        // Create a text node:
+        var input = this.state.comment;
+        //var date = this.state.date;
+        //var name = this.state.name;
+        const newNode = document.createElement("p");
+        newNode.classList.add("commentsStyle");
         const textNode = document.createTextNode(input);
-        // Append text node to "li" element:
+        //const textNode1 = document.createTextNode(date);
+        //const textNode2 = document.createTextNode(name);
         newNode.appendChild(textNode);
-
-        // Insert before existing child:
-        const list = document.getElementById("commentsList");
+        //newNode.appendChild(textNode1);
+        //newNode.appendChild(textNode2);
+        const list = document.getElementsByClassName("commentsContainer")[0];
         list.insertBefore(newNode, list.children[0]);
     }
 
@@ -113,6 +118,7 @@ export class Panel extends Component {
         return (
             <div className='panelListWrapper d-flex justify-content-center align-items-center'>
                 <div className='panelContainer'>
+                    <TrackersSlider />
                     <div className='panelContent'>
                         <div className='panelListHeaderWrapper d-flex'>
                             <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
@@ -120,19 +126,16 @@ export class Panel extends Component {
                         </div>
                         <div className='CreateNewTenantButtonWrapper'>
                             <input type="text" id="input-comment" className="form-control"
-                                onChange={(e) => this.setState({ 'value': e.target.value })}
+                                onChange={(e) => this.setState({ 'comment': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                             />
                             <button type="submit" id="submitPanel" onClick={() => this.addComment()} >Add</button>
                         </div>
                         <div className='commentsContainer'>
-                            <p>{this.state.name}</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         );
     }
 }
