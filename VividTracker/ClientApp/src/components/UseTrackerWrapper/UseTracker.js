@@ -54,17 +54,17 @@ export default class UseTracker extends Component {
                             <p className='TrackingRecordsHeader'>Projects</p>
                         </div>
                     </div>
-                    {this.state.items.map((item) => {
-                        //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
-                        return(
-                            <div className='TrackingItemsColumn col-2'>
-                                <div className='TrackingItemsColumnHeader'>
-                                    <p className='TrackingItemsHeader'>{item.name}</p>
+                        {this.state.items.map((item) => {
+                            //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
+                            return(
+                                <div className='TrackingItemsColumn col-2'>
+                                    <div className='TrackingItemsColumnHeader'>
+                                        <p className='TrackingItemsHeader'>{item.name}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
+                            )
 
-                    })}
+                        })}
                 </div>
 
                 <div className='SeperationLine'></div>

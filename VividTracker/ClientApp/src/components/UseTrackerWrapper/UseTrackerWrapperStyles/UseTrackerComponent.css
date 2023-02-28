@@ -86,7 +86,7 @@
 .TrackingItemsColumn{
     background-color: #0084B4;
     width:fit-content !important; 
-    margin-left: 1.813rem;
+    margin-left: 0.25rem;
     width: 150px !important;
     display: flex;
     flex-direction: column;
@@ -99,11 +99,18 @@
     font-size: 20px;
     line-height: 27px;
 }
-.TrackingItemsColumn:nth-child(n+6) {
+
+.TrackingItemsColumn:nth-child(n+7) {
     display: none;
 }
-.TrackingItemsColumn:nth-child(n+5){
-    width: 240px !important;
+.TrackingItemsColumn:nth-child(n+6){
+    width: 160px !important;
+}
+.ItemColumnsWrapper {
+    display: flex;
+}
+.menuWrapper:nth-child(2) :nth-child(2){
+    margin-left: 1.813rem !important;
 }
 .TrackingItemsHeader{
     color: white;    
@@ -115,8 +122,8 @@
     color: #0084B4;
     cursor: pointer;
     position: absolute;
-    left: 260px;
-    top: 220px;
+    left: 258px;
+    top: 235px;
     width: 20px;
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 100%;
