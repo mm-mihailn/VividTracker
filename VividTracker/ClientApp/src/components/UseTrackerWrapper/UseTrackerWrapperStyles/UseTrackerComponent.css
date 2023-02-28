@@ -128,3 +128,52 @@
     box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 100%;
 }
+
+.TrackerItemValues{
+    background-color: #D9D9D9;
+    width: 150px;
+
+}
+
+.TrackerItemValueRecord{
+    /* box-sizing: border-box; */
+}
+.TrackingRecordsWrapper{
+    display: flex;
+}
+.TrackingItemValueWrapper{
+    margin-left: 1.813rem !important;
+    background-color: #D9D9D9;
+    width: 72%;
+}
+.TrackingItemValueColumn{
+    width: 150px !important;
+}
+.TrackingItemValue{
+    margin-top: 4%;
+    display: flex;
+
+}
+.TrackingItemValueText{
+    padding-left: 60%;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+.square{
+    height: 20px;
+    width: 20px;
+    background-color: #51FF4E;
+    border-radius: 3px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.square-red{
+    height: 20px;
+    width: 20px;
+    background-color: #F03C31;
+    border-radius: 3px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}

@@ -20,9 +20,21 @@ export default class UseTracker extends Component {
                 {'name': 'Twin City Services Corp...'}
             ],
             items: [
-                {'name': 'Confluence space'},
-                {'name': 'Code Reviews Process'},
-                {'name': 'Unit Tests Code Coverage'},
+                {'name': 'Confluence space', 
+                'itemValues': [
+                        {'value': 'Yes'}, 
+                        {'value': 'No'}, 
+                    ]},
+                {'name': 'Code Reviews Process',
+                'itemValues': [
+                    {'value': 'No'}, 
+                    {'value': 'No'}, 
+                ]},
+                {'name': 'Unit Tests Code Coverage',
+                'itemValues': [
+                    {'value': '70%'}, 
+                    {'value': ''}, 
+                ]},
                 {'name': 'Level'},
                 {'name': 'Level'},
 
@@ -33,8 +45,7 @@ export default class UseTracker extends Component {
     scrollElements = () => {
         let firstColumn = this.state.items[0]
         this.setState({'items': this.state.items.filter((item) => item != firstColumn)})
-        // TODO: Make the first column invisible by assigning class to it
-        // -- if it reaches the index of the third element in the state array then make it visible.
+        // TODO: put smooth transition animation
 
         this.setState((prevState) => ({
             items: [...prevState.items, firstColumn]
@@ -57,41 +68,71 @@ export default class UseTracker extends Component {
                         {this.state.items.map((item) => {
                             //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
                             return(
-                                <div className='TrackingItemsColumn col-2'>
-                                    <div className='TrackingItemsColumnHeader'>
-                                        <p className='TrackingItemsHeader'>{item.name}</p>
+                                    <div className='TrackingItemsColumn col-2'>
+                                        <div className='TrackingItemsColumnHeader'>
+                                            <p className='TrackingItemsHeader'>{item.name}</p>
+                                        </div>
                                     </div>
-                                </div>
                             )
 
                         })}
                 </div>
-
-                <div className='SeperationLine'></div>
+                
+                <div className='SeperationLine'>
+                </div>
+                <div className='TrackingRecordsWrapper'>
                     <div className='TrackingRecords'>
-                        {this.state.records.map((record) => {
-                            return (
-                                <div>
-                                    <div className='TrackingRecord'>
-                                        <p className='TrackingRecordName'>{record.name}</p>
-                                    </div>
+                            {this.state.records.map((record) => {
+                                return (
                                     <div>
-                                        {record.children ? 
-                                            record.children.map((child) => {
-                                                return (
-                                                    <div className='TrackingRecordChild'>
-                                                        <p className='TrackingRecordName'>{child.name}</p>
-                                                    </div>
-                                                )
-                                            })
-                                        : 
-                                            ""
-                                        }
+                                        <div className='TrackingRecord'>
+                                            <p className='TrackingRecordName'>{record.name}</p>
+                                        </div>
+                                        <div>
+                                            {record.children ? 
+                                                record.children.map((child) => {
+                                                    return (
+                                                        <div className='TrackingRecordChild'>
+                                                            <p className='TrackingRecordName'>{child.name}</p>
+                                                        </div>
+                                                    )
+                                                })
+                                            : 
+                                                ""
+                                            }
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })}
                     </div>
+                    <div className='row TrackingItemValueWrapper'>
+                        
+                    {this.state.items.map((targetTrackingItem) => (
+                        <div className='col-2 TrackingItemValueColumn'>
+                            {targetTrackingItem.itemValues 
+                            ? 
+                                targetTrackingItem.itemValues.map((trackingItemValue) => (
+                                    <div className='TrackingItemValue'>
+                                        <p className='square'></p>
+                                        <p className='TrackingItemValueText'>
+                                        {trackingItemValue.value != '' ? trackingItemValue.value : '-'}
+                                        </p>
+                                    </div>
+                                ))
+                            : 
+                            <div className='TrackingItemValue'>
+                                <p className='square-red'></p>
+                                <p className='TrackingItemValueText'>
+                                -
+                                </p>
+                            </div>
+                            }
+                        </div>
+                        ))}
+                    </div>
+
+                   
+                </div>
             </div>
     )
   }
