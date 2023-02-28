@@ -16,6 +16,7 @@ import TenantTrackerItemsList from './components/TenantTrackerItemsList/TenantTr
 import ManageTracker from './components/ManageTracker/ManageTracker';
 import ManageTrackerItemDetails from './components/ManageTrackerItemDetails/ManageTrackerItemDetails';
 import CreateTrackerItemDetails from './components/CreateTrackerItemDetails/CreateTrackerItemDetails';
+import { Panel } from './components/Panel/Panel';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -25,6 +26,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={LandingPage} />
         <Route path='/counter' component={Counter} />
+        <Route path='/panel' component={Panel} />
         <AuthorizeRoute path='/tenantTrackers/:tenantID' component={TenantTrackerItemsList} />
         <AuthorizeRoute path='/manageTracker/:trackerID' component={ManageTracker} />
         <AuthorizeRoute path='/manageTrackerItemDetails/:trackerItemID' component={ManageTrackerItemDetails} />
