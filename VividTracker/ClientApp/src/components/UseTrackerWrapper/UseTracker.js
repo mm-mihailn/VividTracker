@@ -30,6 +30,9 @@ export default class UseTracker extends Component {
     scrollElements = () => {
         let firstColumn = this.state.items[0]
         this.setState({'items': this.state.items.filter((item) => item != firstColumn)})
+        // TODO: Make the first column invisible by assigning class to it
+        // -- if it reaches the index of the third element in the state array then make it visible.
+
         this.setState((prevState) => ({
             items: [...prevState.items, firstColumn]
         }))
@@ -61,9 +64,26 @@ export default class UseTracker extends Component {
             <div className='TrackingRecords'>
                 {this.state.records.map((record) => {
                     return (
-                        <div className='TrackingRecord'>
-                            <p className='TrackingRecordName'>{record.name}</p>
+                        <div>
+                            <div className='TrackingRecord'>
+                                <p className='TrackingRecordName'>{record.name}</p>
+                            </div>
+                            <div>
+                                {record.children ? 
+                                    record.children.map((child) => {
+                                        return (
+                                            <div className='TrackingRecordChild'>
+                                                <p className='TrackingRecordName'>{child.name}</p>
+                                            </div>
+                                        )
+                                    })
+                                : 
+                                    ""
+                                }
+                            </div>
                         </div>
+                        
+                        
                     )
                 })}
             </div>
