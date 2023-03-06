@@ -36,7 +36,7 @@ export default class UseTracker extends Component {
                     {'value': ''}, 
                 ]},
                 {'name': 'Level'},
-                {'name': 'Level'},
+                {'name': '10X Level'},
 
             ]
         }
