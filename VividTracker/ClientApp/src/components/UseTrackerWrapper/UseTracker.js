@@ -54,6 +54,7 @@ export default class UseTracker extends Component {
   render() {
     return (
             <div className='UseTrackerComponentWrapper'>
+                <div className='blueSeperationLine'></div>
                 {this.state.items.length > 4 ?
                     <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
                     :
