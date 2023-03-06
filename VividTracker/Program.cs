@@ -60,6 +60,9 @@ builder.Services.AddScoped<ITenantsService, TenantsService>();
 builder.Services.AddScoped<ITrackingGroupsRepository, TrackingGroupsRepository>();
 builder.Services.AddScoped<ITrackingGroupsService, TrackingGroupsService>();
 
+builder.Services.AddScoped<ITrackingItemValueActivityRepository, TrackingItemValueActivityRepository>();
+builder.Services.AddScoped<ITrackingItemValueActivityService, TrackingItemValueActivityService>();
+
 builder.Services.AddScoped<ITrackingGroupRecordsRepository, TrackingGroupRecordsRepository>();
 builder.Services.AddScoped<ITrackingGroupRecordsService, TrackingGroupRecordService>();
 
