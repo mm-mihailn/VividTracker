@@ -76,8 +76,7 @@ export default class UseTracker extends Component {
                             )
 
                         })}
-                </div>
-                
+                </div>          
                 <div className='SeperationLine'>
                 </div>
                 <div className='TrackingRecordsWrapper'>
@@ -132,6 +131,8 @@ export default class UseTracker extends Component {
                     </div>
 
                    
+                </div>
+                <div className='SeperationLine bottomLine'>
                 </div>
             </div>
     )
