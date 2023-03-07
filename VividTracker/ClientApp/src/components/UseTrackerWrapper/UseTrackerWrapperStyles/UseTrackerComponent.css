@@ -1,0 +1,204 @@
+
+.menuWrapper{
+    display: flex;
+}
+.TrackingRecordsColumnHeader{
+    color: white;
+    margin-left: 0.375rem;
+}
+.TrackingRecordsColumn{
+    background-color: #0084B4;
+    width: 224px !important;
+    left: 243px;
+    top: 247px;
+    margin-left: 2.6rem;
+}
+.TrackingRecordsHeader{
+    width: 204px;
+    height: 80px;
+    left: 249px;
+    top: 247px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.TrackingRecord{
+    width: 224px;
+    height: 32px;
+    left: 249px;
+    top: 348px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    /* display: flex; */
+    align-items: center;
+    margin-left: 1.813rem;
+    background-color: #D9D9D9;
+    margin-top: 0.125rem;
+}
+
+.TrackingRecordChild{
+    width: 214px;
+    height: 32px;
+    left: 249px;
+    top: 348px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    /* display: flex; */
+    align-items: center;
+    margin-left: 2.438rem;
+    border-left-style: solid;
+    border-width: 1px;
+    background-color: #D9D9D9;
+    margin-top: 0.125rem;
+    
+}
+
+.TrackingRecordName{
+    padding-top: 0.4rem;
+    margin-left: 0.5rem;
+}
+.TrackingChildRecordName
+{
+    margin-top: 2rem;
+    margin-left: 0.5rem;
+}
+.SeperationLine{
+    border-bottom-style: solid;
+    border-color: #D9D9D9;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+    margin-left: 1.813rem;
+    margin-right: 1.4rem;
+    border-width: 4px;
+    width: 97.5%;
+}
+.bottomLine{
+    margin-top: 2rem;
+}
+
+.TrackingItemsColumn{
+    background-color: #0084B4;
+    width:fit-content !important; 
+    margin-left: 0.25rem;
+    width: 150px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.TrackingItemsColumn:nth-child(2){
+    margin-left: 2rem !important;
+}
+.UseTrackerComponentWrapper{
+    border-right-style: solid;
+    border-right-color: #D9D9D9;
+    border-width: 4px;
+    margin-right: 0.5rem;
+    height: 64vh;
+}
+.TrackingItemsColumnHeader{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.TrackingItemsColumn:nth-child(n+7) {
+    display: none;
+}
+.TrackingItemsColumn:nth-child(n+6){
+    width: 160px !important;
+}
+.ItemColumnsWrapper {
+    display: flex;
+}
+.menuWrapper:nth-child(2) :nth-child(2){
+    margin-left: 1.813rem !important;
+}
+.TrackingItemsHeader{
+    color: white;    
+    display: flex;
+    align-items: flex-end;
+}
+.scrollElementsButton{
+    background-color: white;
+    color: #0084B4;
+    cursor: pointer;
+    position: absolute;
+    left: 258px;
+    top: 235px;
+    width: 20px;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 100%;
+}
+
+.TrackerItemValues{
+    background-color: #D9D9D9;
+    width: 150px;
+}
+
+.blueSeperationLine{
+    border-style: solid;
+    border-width: 2px;
+    border-color: #0084B4;
+    position: absolute;
+    left: 24.7%;
+    height: 64vh;
+}
+.TrackingRecordsWrapper{
+    display: flex;
+}
+.TrackingItemValueWrapper{
+    margin-left: 1.2rem !important;
+}
+.TrackingItemValueColumn{
+    width: 150px !important;
+    margin-left: 0.15rem;
+}
+.TrackingItemValue{
+    margin-top: 0.125rem;
+    background-color: #D9D9D9;
+    display: flex;
+    width: 118%;
+}
+
+.TrackingItemValueText{
+    margin-top: 0.375rem;
+    margin-bottom: 0.375rem;
+    margin-left: 6rem;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+.EmptyTrackingItemValueText
+{
+    margin-left: 7rem;
+}
+
+.square{
+    margin-top: 0.375rem;
+    margin-bottom: 0.375rem;
+    margin-left: 0.5rem;
+    height: 20px;
+    width: 20px;
+    background-color: #51FF4E;
+    border-radius: 3px;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.square-red{
+    background-color: #F03C31;
+}
