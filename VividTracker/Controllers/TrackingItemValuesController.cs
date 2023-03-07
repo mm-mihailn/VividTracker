@@ -44,10 +44,10 @@ namespace VividTracker.Controllers
         }
 
         [HttpPost]
-        [Route("api/update/{tenantId}/{trackingItemId}")]
-        public async Task<IActionResult> AddItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId, [FromBody] TrackingItemValue trackingItemValueModel)
+        [Route("api/TrackingItemValues/update/{trackingItemId}/{trackingGroupRecordId}")]
+        public async Task<IActionResult> AddItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId, [FromBody] TrackingItemValuesModel trackingItemValueModel)
         {
-            var result = await _trackingItemValuesService.AddItemValueAsync(trackingItemValueModel);
+            var result = await _trackingItemValuesService.AddItemValueAsync(trackingItemValueModel.ToAddValue(trackingItemId, trackingGroupRecordId));
             return Ok(result);
         }
     }

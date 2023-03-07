@@ -17,11 +17,11 @@ namespace VividTracker.Data.Repositories
         }
         public async Task<TrackingItemValue?> GetValueByCoordinatesAsync(int trackingGroupRecordId, int trackingItemId)
         {
-            return Entities.Include(t => t.TrackingItem).Where(t => t.TrackingGroupRecordId == trackingGroupRecordId && t.TrackingItemId == trackingItemId).LastOrDefault();
+            return Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup).Where(t => t.TrackingGroupRecordId == trackingGroupRecordId && t.TrackingItemId == trackingItemId).OrderBy(t => t.Id).LastOrDefault();
         }
         public async Task<IEnumerable< TrackingItemValue>> GetItemValuesAsync(int trackingItemId)
         {
-            return Entities.Where(t => t.TrackingItemId == trackingItemId);
+            return Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup).Where(t => t.TrackingItemId == trackingItemId);
         }
     }
 }
