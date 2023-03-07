@@ -18,20 +18,21 @@
 
         public async Task<IEnumerable<TrackingItem>> GetTrackingItemsByTenantId(int tenantId)
         {
-            return await Entities.AsNoTracking().Include(t => t.Tenant).Where(t => t.TenantId == tenantId).ToListAsync();
+            return await Entities
+                .Include(t => t.Tenant).Where(t => t.TenantId == tenantId).ToListAsync();
         }
         public async Task<TrackingItem> GetTrackingItemById(int id)
         {
-            return await Entities.AsNoTracking().Include(t => t.Tenant).FirstOrDefaultAsync(t => t.Id == id);
+            return await Entities.Include(t => t.Tenant).FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int trackingGroupId)
         {
-            return await Entities.AsNoTracking().Include(t => t.Tenant).Where(t => t.TrackingGroups.Any(t => t.Id == trackingGroupId)).ToListAsync();
+            return await Entities.Include(t => t.Tenant).Where(t => t.TrackingGroups.Any(t => t.Id == trackingGroupId)).ToListAsync();
         }
         public async Task<TrackingItem> FindByNameAsync(string name)
         {
-            return await Entities.AsNoTracking().Include(t => t.Tenant).FirstOrDefaultAsync(t => t.Name.ToUpper()==name.ToUpper());
+            return await Entities.Include(t => t.Tenant).FirstOrDefaultAsync(t => t.Name.ToUpper()==name.ToUpper());
         }
     }
 }

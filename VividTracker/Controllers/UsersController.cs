@@ -14,7 +14,7 @@
     using static Duende.IdentityServer.Models.IdentityResources;
 
     [ApiController]
-    [Authorize]
+    
     public class UserController : ControllerBase
     {
         private readonly IUsersService _usersService;
