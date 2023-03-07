@@ -72,6 +72,9 @@ builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<ITrackingItemsRepository, TrackingItemsRepository>();
 builder.Services.AddScoped<ITrackingItemsService, TrackingItemsService>();
 
+builder.Services.AddScoped<ITrackingItemValuesRepository, TrackingItemValuesRepository>();
+builder.Services.AddScoped<ITrackingItemValuesService, TrackingItemValuesService>();
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();

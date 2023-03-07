@@ -11,6 +11,13 @@
             Value = value;
             TimeStamp = timeStamp;
         }
+        public TrackingItemValue(decimal value, int trackingGroupRecordId, int trackingItemId,  DateTime timeStamp) : this()
+        {
+            Value = value;
+            TrackingGroupRecordId = trackingGroupRecordId;
+            TrackingItemId = trackingItemId;
+            TimeStamp = timeStamp;
+        }
         public int Id { get; set; }
         public decimal Value { get; set; }
         public int TrackingItemId { get; set; }
