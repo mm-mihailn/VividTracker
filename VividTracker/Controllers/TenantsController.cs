@@ -15,6 +15,7 @@ namespace VividTracker.Controllers
     using Microsoft.AspNetCore.Cors;
 
     [ApiController]
+    [Authorize]
     public class TenantsController : ControllerBase
     {
         private readonly ITenantsService _tenantsService;
