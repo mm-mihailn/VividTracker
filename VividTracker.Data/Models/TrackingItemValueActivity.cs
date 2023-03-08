@@ -6,11 +6,12 @@
         {
             UserId = Guid.Empty.ToString();
         }
-        public TrackingItemValueActivity(string userId, string? comment, decimal? oldValue, DateTime timeStamp) : this()
+        public TrackingItemValueActivity(string userId, string? comment, decimal? oldValue, int trackingItemValueId, DateTime timeStamp) : this()
         {
             UserId = userId;
             Comment = comment;
             OldValue = oldValue;
+            TrackingItemValueId = trackingItemValueId;
             TimeStamp = timeStamp;
         }
         public int Id { get; set; }
