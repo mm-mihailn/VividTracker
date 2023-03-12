@@ -1,5 +1,6 @@
 ﻿namespace VividTracker.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using VividTracker.Business.Services;
@@ -7,6 +8,7 @@
     using VividTracker.Models;
 
     [ApiController]
+    [Authorize]
     public class TrackingItemValueActivityController : ControllerBase
     {
         private readonly ITrackingItemValueActivityService _trackingItemValueActivityService;

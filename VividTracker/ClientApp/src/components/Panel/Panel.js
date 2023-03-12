@@ -1,11 +1,7 @@
 ﻿import React, { Component } from 'react'
 import './Panel.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-regular-svg-icons";
-import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
 import authService from '../api-authorization/AuthorizeService';
 import { endpoints } from '../../endpoints';
-import { faFontAwesomeFlag, faIcons } from '@fortawesome/free-solid-svg-icons';
 import TrackersSlider from '../TrackersSlider/TrackersSlider';
 import { AddComment } from '../AddComment/AddComment';
 

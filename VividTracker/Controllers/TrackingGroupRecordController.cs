@@ -8,7 +8,7 @@
     using VividTracker.Models;
 
     [ApiController]
-   
+    [Authorize]
     public class TrackingGroupRecordController : ControllerBase
     {
         private readonly ITrackingGroupRecordsService _trackingGroupRecordsService;

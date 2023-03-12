@@ -1,8 +1,11 @@
-﻿import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+﻿import React, { Component } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import './PanelComponent.css';
 import { AddComment } from "../AddComment/AddComment";
 import { endpoints } from "../../endpoints";
 import PanelContainer from "../PanelContainer/PanelContainer";
+import authService from '../api-authorization/AuthorizeService';
+import TrackersSlider from '../TrackersSlider/TrackersSlider';
 
 export default class PanelComponent extends Component {
 
