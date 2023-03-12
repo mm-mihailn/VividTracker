@@ -17,7 +17,6 @@ import ManageTracker from './components/ManageTracker/ManageTracker';
 import ManageTrackerItemDetails from './components/ManageTrackerItemDetails/ManageTrackerItemDetails';
 import CreateTrackerItemDetails from './components/CreateTrackerItemDetails/CreateTrackerItemDetails';
 import UseTrackerWrapper from './components/UseTrackerWrapper/UseTrackerWrapper';
-import PanelComponent from './components/PanelComponent/PanelComponent';
 import { Panel } from './components/Panel/Panel';
 
 export default class App extends Component {
