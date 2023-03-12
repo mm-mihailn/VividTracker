@@ -1,7 +1,8 @@
 ﻿import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import TenantContainerComponent from '../TenantContainerComponent/TenantContainerComponent';
-import { endpoints } from '../../endpoints';
 import './PanelComponent.css';
+import { AddComment } from "../AddComment/AddComment";
+import { endpoints } from "../../endpoints";
+import PanelContainer from "../PanelContainer/PanelContainer";
 
 export default class PanelComponent extends Component {
 
@@ -9,22 +10,16 @@ export default class PanelComponent extends Component {
         super(props)
         this.state = {
             comments: [],
-            user: [
-                {
-                    'name': 'Milen',
-                    'date': 'Feb 28',
-                    'comment': 'my comment'
-                }
-            ]
         }
         this.loadComments = this.loadComments.bind(this);
     }
     async componentDidMount() {
         this.loadComments();
     }
-    async loadComments() {
+    async loadComments(trackingItemValueId) {
         const token = await authService.getAccessToken();
-        await fetch(endpoints.loadComments(), {
+        trackingItemValueId = 1;
+        await fetch(endpoints.loadComments(trackingItemValueId), {
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         })
             .then((res) => res.json())
@@ -32,29 +27,26 @@ export default class PanelComponent extends Component {
     }
     render() {
         return (
-            <div className='commentsListWrapper d-flex justify-content-center align-items-center'>
-                <h1>All Tenants </h1>
-                <div className='commentsContainer'>
-                    <div className='commentsContent'>
-                        <div className='commentsListHeaderWrapper d-flex'>
-                            <h4 className='commentsListHeader'>Tenants List</h4>
-                            <FontAwesomeIcon className='commentsListEditButton' icon={faRectangleList} />
+            <div className='panelListWrapper d-flex justify-content-center align-items-center'>
+                <div className='panelContainer'>
+                    <TrackersSlider />
+                    <div className='panelContent'>
+                        <div className='panelListHeaderWrapper d-flex'>
+                            <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
+                            <h4 className='panel-item'>Code Reviews Process</h4>
                         </div>
-                        <div className='createNewCommentButtonWrapper'>
-                            <AddTenant onTenantAdded={this.loadTenants} />
-                        </div>
+                        <AddComment onCommentAdded={this.loadComments} />
                         <div className='commentsContainer'>
-                            {this.state.comments.map((comment) => {
+                            {this.state.comments.map((trackingItemValueActivityData) => {
                                 return (
-                                    <TenantContainerComponent commentData={comment} key={comment.id} />
+                                    <PanelContainer trackingItemValueActivityData={trackingItemValueActivityData}
+                                        key={trackingItemValueActivityData.id} />
                                 )
                             })}
                         </div>
                     </div>
                 </div>
             </div>
-
-
         );
     }
 }

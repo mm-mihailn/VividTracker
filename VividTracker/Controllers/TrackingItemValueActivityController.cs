@@ -33,7 +33,7 @@
         }
 
         [HttpPost]
-        [Route("api/create/comments/{trackingItemId}")]
+        [Route("api/create/comment/{trackingItemId}")]
         public async Task<IActionResult> CreateComment([FromRoute] int trackingItemId,TrackingItemValueActivityModel trackingItemValueActivityModel)
         {
             var comment = trackingItemValueActivityModel.ToCreateComment(trackingItemId);
@@ -45,7 +45,7 @@
                 {
                     await _trackingItemValueActivityService.AddComment(comment);
 
-                    return Ok("Added Succesfully");
+                    return Ok("Added Successfully");
                 }
                 else
                 {

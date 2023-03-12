@@ -60,19 +60,6 @@ export class AddTenant extends Component {
                 })
         }
     }
-
-    //async fetchTenants() {
-    //    const token = await authService.getAccessToken();
-    //    fetch(endpoints.createTenant(), {
-    //        method: 'POST',
-    //        headers: {
-    //            'Content-Type': 'application/json'
-    //        },
-    //        headers: !token ? {} : { 'Authorization': `Bearer ${token}` },
-    //        body: JSON.stringify({ "name": this.state.value })
-    //    })
-    //}
-
     handleChange(event) {
         this.setState({ value: event.target.value });
     }

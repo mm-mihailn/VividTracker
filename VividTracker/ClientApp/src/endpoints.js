@@ -18,11 +18,13 @@ export const endpoints = {
     getTrackingGroup: (trackingGroupId) => `${apiBaseUrl}/api/trackers/${trackingGroupId}`,
     updateTrackerName: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroup/edit/${trackingGroupId}`,
     updateTrackerLabel: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroup/edit/label/${trackingGroupId}`,
-    // getTrackingGroupTrackingItems: (trackingGroupId) => ${apiBaseUrl}/api/trackingGroup/${trackingGroupId}/trackingItems,
     getTrackingGroupTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/getTrackingItemByTrackingGroupId/${trackingGroupId}`,
     getTrackingItemById: (trackingItemId) => `${apiBaseUrl}/api/getTrackingItem/${trackingItemId}`,
     resetName: (trackingGroupId) => `${apiBaseUrl}/api/reset/tracker/${trackingGroupId}`,
     editTracker: (trackerId) => `${apiBaseUrl}/api/editTracker/${trackerId}`,
     getAllRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupsRecordsUnique/${trackingGroupId}`,
     getAllTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/trackingItems/${trackingGroupId}`,
+
+    createComment: (trackingItemId) => `${apiBaseUrl}/api/create/comment/${trackingItemId}`,
+    loadComments: (trackingItemValueId) => `${apiBaseUrl}/api/comments/${trackingItemValueId}`,
 }
