@@ -36,17 +36,5 @@
         {
             return Entities.FirstOrDefault(u => u.Email == email);
         }
-
-        public async  Task<string> GetNameByUserId(string userId)
-        {
-            var user =  await Entities.Where(u => u.Id == userId).ToListAsync();
-
-            foreach (var item in user)
-            {
-                return item.UserName;
-            }
-
-            return null;
-        }
     }
 }

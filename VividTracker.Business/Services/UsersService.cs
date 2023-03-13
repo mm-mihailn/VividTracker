@@ -90,7 +90,15 @@
             return result?.TenantId;
         }
 
-        public async Task<string> GetNameByUserId(string userId) => await _userRepository.GetNameByUserId(userId);
+        public async Task<User?> GetNameByUserId(string? userId)
+        {
+            if (userId != null)
+            {
+                return await _userRepository.FindAsync(userId);
+            }
+
+            return null;
+        }
 
     }
 }
