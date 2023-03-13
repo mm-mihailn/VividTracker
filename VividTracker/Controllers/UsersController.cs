@@ -114,16 +114,16 @@
 
         [HttpGet]
         [Route("api/user/getName/{userId}")]
-        public async Task<IActionResult> GetUserDataByUserId([FromRoute] string userId)
+        public async Task<IActionResult> GetUserDataByUserId([FromRoute] string? userId)
         {
-            var userInfo =  await _usersService.GetNameByUserId(userId);
-
-            if (userInfo == null)
+            if (userId == null)
             {
-                return BadRequest("UserId is invalid!");
+                return BadRequest("UserId must be not null!");
             }
 
-            return Ok(userInfo);
+            var userInfo = await _usersService.GetUserDataByUserId(userId);
+
+            return  userInfo == null ? BadRequest("User not found!") : Ok(userInfo);
         }
     }   
 }

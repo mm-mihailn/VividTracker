@@ -57,13 +57,19 @@ namespace VividTracker.Controllers
             var trackingGroupRecords = await _trackingGroupRecordsService.GetTrackingGroupRecordById(trackingGroupRecordId);
             var trackingGroup = await _trackingGroupsService.GetTrackerByIdAsync(trackingGroupId);
 
+            if (trackingItem == null || trackingGroupRecords == null || trackingGroup == null)
+            {
+                return BadRequest("Entity not found!");
+            }
+
             var trackingItemModel = trackingItemValueModel.ToAddValue(trackingItemId, trackingGroupRecordId,
                 trackingItem, trackingGroupRecords);
 
             trackingItemModel.TrackingGroupRecord.TrackingGroup = trackingGroup;
 
-            await _trackingItemValuesService.AddItemValueAsync(trackingItemModel);
-            return Ok(trackingItemModel);
+            var result =  await _trackingItemValuesService.AddItemValueAsync(trackingItemModel);
+
+            return result == null ? BadRequest("Data is not valid!") : Ok(result);
         }
     }
 }
