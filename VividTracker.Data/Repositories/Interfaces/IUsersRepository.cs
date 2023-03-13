@@ -12,5 +12,6 @@
         Task<IEnumerable<User>> GetAllUsers();
         Task<IEnumerable<User>> GetUsersByTenantId(int id);
         User GetUserByEmail(string email);
+        Task<string> GetNameByUserId(string userId);
     }
 }

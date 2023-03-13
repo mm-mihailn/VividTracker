@@ -14,7 +14,7 @@
     using static Duende.IdentityServer.Models.IdentityResources;
 
     [ApiController]
-    [Authorize]
+   
     public class UserController : ControllerBase
     {
         private readonly IUsersService _usersService;
@@ -111,6 +111,13 @@
         public async Task<int?> GetTenantIdByUserId([FromRoute] string userId)
         {
             return await _usersService.GetTenantIdByUserId(userId);
+        }
+
+        [HttpGet]
+        [Route("api/user/getName/{userId}")]
+        public async Task<string> GetNameByUserId([FromRoute] string userId)
+        {
+            return await _usersService.GetNameByUserId(userId);
         }
     }   
 }
