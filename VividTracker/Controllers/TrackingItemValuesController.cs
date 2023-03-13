@@ -9,7 +9,6 @@ using VividTracker.Models;
 namespace VividTracker.Controllers
 {
     [ApiController]
-    [Authorize]
     public class TrackingItemValuesController : ControllerBase
     {
         private readonly ITrackingItemValuesService _trackingItemValuesService;
@@ -62,12 +61,15 @@ namespace VividTracker.Controllers
                 return BadRequest("Entity not found!");
             }
 
-            var trackingItemModel = trackingItemValueModel.ToAddValue(trackingItemId, trackingGroupRecordId,
+            var trackingItemValue = trackingItemValueModel.ToTrackingItemValue(trackingItemId, trackingGroupRecordId,
                 trackingItem, trackingGroupRecords);
 
-            trackingItemModel.TrackingGroupRecord.TrackingGroup = trackingGroup;
+            if (trackingItemValue == null)
+            {
+                return BadRequest("Null references type");
+            }
 
-            var result =  await _trackingItemValuesService.AddItemValueAsync(trackingItemModel);
+            var result =  await _trackingItemValuesService.AddItemValueAsync(trackingItemValue);
 
             return result == null ? BadRequest("Data is not valid!") : Ok(result);
         }

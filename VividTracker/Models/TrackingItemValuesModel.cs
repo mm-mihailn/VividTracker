@@ -7,9 +7,9 @@
         public decimal Value { get; set; }
         public DateTime TimeStamp { get; set; } = DateTime.Now;
 
-        public TrackingItemValue ToAddValue(int trackingItemId, int trackingGroupRecordId,TrackingItem trackingItem,TrackingGroupRecord trackingGroupRecord)
+        public TrackingItemValue ToTrackingItemValue(int trackingItemId, int trackingGroupRecordId,TrackingItem trackingItem,TrackingGroupRecord trackingGroupRecord)
         {
-            return new TrackingItemValue()
+            var trackingItemValue =  new TrackingItemValue()
             {
                 Value = Value,
                 TrackingItemId = trackingItemId,
@@ -18,6 +18,8 @@
                 TrackingItem = trackingItem,
                 TrackingGroupRecord = trackingGroupRecord
             };
+
+            return trackingItemValue;
         }
     }
 }
