@@ -9,6 +9,7 @@ using VividTracker.Models;
 namespace VividTracker.Controllers
 {
     [ApiController]
+    [Authorize]
     public class TrackingItemValuesController : ControllerBase
     {
         private readonly ITrackingItemValuesService _trackingItemValuesService;
@@ -72,6 +73,20 @@ namespace VividTracker.Controllers
             var result =  await _trackingItemValuesService.AddItemValueAsync(trackingItemValue);
 
             return result == null ? BadRequest("Data is not valid!") : Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/trackingItemValue/trackingItem/{trackingGroupId}")]
+
+        public async Task<IActionResult> GetTrackingItemByTrackingGroupId([FromRoute] int trackingGroupId)
+        {
+            var result =  await _trackingItemValuesService.GetAllValuesByTrackingGroupId(trackingGroupId);
+
+            if (result == null)
+            {
+                return BadRequest("Not found!");
+            }
+            return Ok(result);
         }
     }
 }
