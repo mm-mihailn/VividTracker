@@ -1,42 +1,42 @@
 ﻿import React, { Component } from 'react';
 import { Slider } from 'devextreme-react/slider';
 import { NumberBox } from 'devextreme-react/number-box';
-import './TrackersSlider.css';
+import './Styles/NumbersSlider.css';
 
-export default class TrackersSlider extends Component {
+export default class NumbersSlider extends Component {
     constructor(props) {
         super(props);
-        this.state = { sliderValue: 0 };
+        this.state = { sliderValue: 1 };
         this.setSliderValue = this.setSliderValue.bind(this);
     }
 
     render() {
         return (
-            <div className="form">
+            <div className="numbersForm">
                 <div className="dx-fieldset">
-                    <div className="percentageTxt">
-                        <span id="percentageTxt-min">0%</span>
-                        <span id="percentageTxt-max">100%</span>
+                    <div className="numberTxt">
+                        <span id="numberTxt-min">1</span>
+                        <span id="numberTxt-max">5</span>
                     </div>
                     <div className="dx-field">
-                        
+
                         <div className="dx-field-value">
-                            <Slider min={0}
-                                max={100}
+                            <Slider min={1}
+                                max={5}
                                 value={this.state.sliderValue}
                                 onValueChanged={this.setSliderValue} />
                         </div>
                     </div>
                     <div className="dx-field">
                         <div className="dx-field-value">
-                            <NumberBox min={0}
-                                max={100}
+                            <NumberBox min={1}
+                                max={5}
                                 value={this.state.sliderValue}
                                 showSpinButtons={true}
                                 onValueChanged={this.setSliderValue} />
                         </div>
                     </div>
-                    <div className="percentageBtn">
+                    <div className="numberBtn">
                         <button className="saveBtn">Save</button>
                     </div>
                 </div>
@@ -50,7 +50,5 @@ export default class TrackersSlider extends Component {
 }
 
 function format(value) {
-    return `${value}%`;
+    return `${value}`;
 }
-
-//export default TrackersSlider;

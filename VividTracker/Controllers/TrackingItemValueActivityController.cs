@@ -13,7 +13,7 @@
     {
         private readonly ITrackingItemValueActivityService _trackingItemValueActivityService;
         private readonly IUsersService _usersService;
-        public TrackingItemValueActivityController(ITrackingItemValueActivityService trackingItemValueActivityService,IUsersService usersService)
+        public TrackingItemValueActivityController(ITrackingItemValueActivityService trackingItemValueActivityService, IUsersService usersService)
         {
             _trackingItemValueActivityService = trackingItemValueActivityService;
             _usersService = usersService;
@@ -26,17 +26,17 @@
         {
             var comments = await _trackingItemValueActivityService.GetCommentsByTrackingItemId(trackingItemValueId);
 
-            if(comments == null)
+            if (comments == null)
             {
                 return BadRequest("No comments!");
             }
             return Ok(comments);
-           
+
         }
 
         [HttpPost]
-        [Route("api/create/comment/{trackingItemId}")]
-        public async Task<IActionResult> CreateComment([FromRoute] int trackingItemId,TrackingItemValueActivityModel trackingItemValueActivityModel)
+        [Route("api/create/comments/{trackingItemId}")]
+        public async Task<IActionResult> CreateComment([FromRoute] int trackingItemId, TrackingItemValueActivityModel trackingItemValueActivityModel)
         {
             var comment = trackingItemValueActivityModel.ToCreateComment(trackingItemId);
             var isExist = await _usersService.GetUserByIdAsync(comment.UserId);

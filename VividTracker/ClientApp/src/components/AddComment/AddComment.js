@@ -10,20 +10,21 @@ export class AddComment extends Component {
             comment: '',
             errorMessage: '',
             textColor: '',
+            commentData: undefined,
         }
         this.createComment = this.createComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    async createComment(event) {
+    async createComment(trackingItemValueId) {
         console.log(this.state.comment);
-        event.preventDefault();
         var input = this.state.comment;
-        var trackingItemValueId = 1;
+        trackingItemValueId = 1;
         const currentDate = new Date();
         const token = await authService.getAccessToken();
         const errors = {
             minLength: "You cannot submit an empty field.",
             maxLength: "Comment is too long",
+            success: "Successfuly added a new comment"
         }
         const color = {
             error: "red",
@@ -49,16 +50,15 @@ export class AddComment extends Component {
                     "comment": input,
                     "timeStamp": currentDate.toISOString(),
                     "trackingItemValueId": trackingItemValueId,
-                    "userId": "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3"
                 })
             })
                 .then((response) => {
-                    if (response.status == 400) {
+                    if (response.status != 200) {
                         this.setState({ textColor: color.error });
                     }
                     else {
                         this.setState({ textColor: color.success });
-                        this.props.onCommentAdded(this.props.comment);
+                        this.setState({ errorMessage: errors.success });
                     }
                 })
         }

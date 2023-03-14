@@ -7,7 +7,7 @@ export default class PanelContainer extends Component {
 
     render() {
         return (
-            <div className='panelContainer d-flex' key={this.props.trackingItemValueActivityData.id}>
+            <div className='panelContainerIndividual d-flex' key={this.props.trackingItemValueActivityData.id}>
                 <div className='recordNameWrapper'>
                     <span className='recordName pageText'> {this.props.recordData.name} </span>
                 </div>

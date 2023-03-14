@@ -1,36 +1,46 @@
-﻿.percentageTxt{
-    margin-top: -15%;
+﻿.numberTxt {
+    margin-top: 3%;
 }
-#percentageTxt-min{
+
+#numberTxt-min {
     color: white;
     margin-left: 40%;
 }
-#percentageTxt-max {
+
+#numberTxt-max {
     color: white;
-    margin-left: 45%;
+    margin-left: 55%;
 }
+
 .dx-slider-handle {
     background-color: #F28627;
 }
+
 .dx-slider {
     width: 220px;
     color: #F28627;
 }
-.dx-texteditor-input{
+
+.dx-texteditor-input {
     width: max-content;
 }
+
 .dx-numberbox-spin-up-icon {
     background-color: #F28627;
 }
+
 .dx-numberbox-spin-down-icon {
     background-color: #F28627;
 }
-.dx-fieldset{
+
+.dx-fieldset {
     margin-left: -65%;
 }
-.percentageBtn {
+
+.numberBtn {
     margin-left: 55%;
 }
+
 .saveBtn {
     background-color: #0084B4;
     color: white;
@@ -41,6 +51,7 @@
     width: 7.85rem;
     height: 2.25rem;
 }
+
 .saveBtn:hover {
     text-decoration-line: underline;
 }
