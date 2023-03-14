@@ -112,5 +112,19 @@
         {
             return await _usersService.GetTenantIdByUserId(userId);
         }
+
+        [HttpGet]
+        [Route("api/user/getName/{userId}")]
+        public async Task<IActionResult> GetUserDataByUserId([FromRoute] string? userId)
+        {
+            if (userId == null)
+            {
+                return BadRequest("UserId must be not null!");
+            }
+
+            var userInfo = await _usersService.GetUserDataByUserId(userId);
+
+            return  userInfo == null ? BadRequest("User not found!") : Ok(userInfo);
+        }
     }   
 }

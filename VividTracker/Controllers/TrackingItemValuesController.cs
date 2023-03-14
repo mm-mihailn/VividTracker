@@ -9,13 +9,18 @@ using VividTracker.Models;
 namespace VividTracker.Controllers
 {
     [ApiController]
-
     public class TrackingItemValuesController : ControllerBase
     {
         private readonly ITrackingItemValuesService _trackingItemValuesService;
-        public TrackingItemValuesController(ITrackingItemValuesService trackingItemValuesService)
+        private readonly ITrackingItemsService _trackingItemsService; 
+        private readonly ITrackingGroupRecordsService _trackingGroupRecordsService;
+        private readonly ITrackingGroupsService _trackingGroupsService;
+        public TrackingItemValuesController(ITrackingItemValuesService trackingItemValuesService, ITrackingItemsService trackingItemsService, ITrackingGroupRecordsService trackingGroupsService, ITrackingGroupsService trackingGroupService)
         {
             _trackingItemValuesService=trackingItemValuesService;
+            _trackingItemsService = trackingItemsService;
+            _trackingGroupRecordsService = trackingGroupsService;
+            _trackingGroupsService = trackingGroupService;
         }
 
         [HttpGet]
@@ -44,11 +49,29 @@ namespace VividTracker.Controllers
         }
 
         [HttpPost]
-        [Route("api/TrackingItemValues/update/{trackingItemId}/{trackingGroupRecordId}")]
-        public async Task<IActionResult> AddItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId, [FromBody] TrackingItemValuesModel trackingItemValueModel)
+        [Route("api/TrackingItemValues/update/{trackingGroupId}/{trackingItemId}/{trackingGroupRecordId}")]
+        public async Task<IActionResult> AddItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId,[FromRoute] int trackingGroupId, [FromBody] TrackingItemValuesModel trackingItemValueModel)
         {
-            var result = await _trackingItemValuesService.AddItemValueAsync(trackingItemValueModel.ToAddValue(trackingItemId, trackingGroupRecordId));
-            return Ok(result);
+            var trackingItem = await _trackingItemsService.GetTrackingItemById(trackingItemId);
+            var trackingGroupRecords = await _trackingGroupRecordsService.GetTrackingGroupRecordById(trackingGroupRecordId);
+            var trackingGroup = await _trackingGroupsService.GetTrackerByIdAsync(trackingGroupId);
+
+            if (trackingItem == null || trackingGroupRecords == null || trackingGroup == null)
+            {
+                return BadRequest("Entity not found!");
+            }
+
+            var trackingItemValue = trackingItemValueModel.ToTrackingItemValue(trackingItemId, trackingGroupRecordId,
+                trackingItem, trackingGroupRecords);
+
+            if (trackingItemValue == null)
+            {
+                return BadRequest("Null references type");
+            }
+
+            var result =  await _trackingItemValuesService.AddItemValueAsync(trackingItemValue);
+
+            return result == null ? BadRequest("Data is not valid!") : Ok(result);
         }
     }
 }
