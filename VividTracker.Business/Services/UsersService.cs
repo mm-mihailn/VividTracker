@@ -89,5 +89,13 @@
             var result =  await _userRepository.FindAsync(userId);
             return result?.TenantId;
         }
+
+        public async Task<User?> GetUserDataByUserId(string userId)
+        {
+            var userInfo =  await _userRepository.FindAsync(userId);
+
+            return  userInfo == null ? null : userInfo;
+        }
+
     }
 }
