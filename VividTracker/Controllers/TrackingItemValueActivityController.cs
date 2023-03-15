@@ -35,10 +35,10 @@ namespace VividTracker.Controllers
         }
 
         [HttpPost]
-        [Route("api/create/comments/{trackingItemId}")]
-        public async Task<IActionResult> CreateComment([FromRoute] int trackingItemId,TrackingItemValueActivityModel trackingItemValueActivityModel)
+        [Route("api/create/comments/{trackingItemValueId}")]
+        public async Task<IActionResult> CreateComment([FromRoute] int trackingItemValueId, TrackingItemValueActivityModel trackingItemValueActivityModel)
         {
-            var comment = trackingItemValueActivityModel.ToCreateComment(trackingItemId);
+            var comment = trackingItemValueActivityModel.ToCreateComment(trackingItemValueId);
             var isExist = await _usersService.GetUserByIdAsync(comment.UserId);
 
             if (isExist != null)
