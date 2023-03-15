@@ -9,7 +9,6 @@ namespace VividTracker.Controllers
     using VividTracker.Models;
 
     [ApiController]
-    [Authorize]
     public class TrackingItemValueActivityController : ControllerBase
     {
         private readonly ITrackingItemValueActivityService _trackingItemValueActivityService;
