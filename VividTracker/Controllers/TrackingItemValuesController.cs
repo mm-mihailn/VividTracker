@@ -24,31 +24,6 @@ namespace VividTracker.Controllers
             _trackingGroupsService = trackingGroupService;
         }
 
-        [HttpGet]
-        [Route("api/TrackingItemValues/{trackingItemId}")]
-        public async Task<IActionResult> GetTrackingItemValues([FromRoute] int trackingItemId)
-        {
-            var trackingItemValues = await _trackingItemValuesService.GetItemValuesAsync(trackingItemId);
-
-            if (!trackingItemValues.Any())
-            {
-                return BadRequest("tracking items Values do not exist!");
-            }
-            return Ok(trackingItemValues);
-        }
-        [HttpGet]
-        [Route("api/TrackingItemValues/{trackingItemId}/{trackingGroupRecordId}")]
-        public async Task<IActionResult> GetItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId)
-        {
-            var trackingItemValue = await _trackingItemValuesService.GetValueByCoordinatesAsync(trackingGroupRecordId, trackingItemId);
-
-            if (trackingItemValue==null)
-            {
-                return BadRequest("tracking item Value do not exist!");
-            }
-            return Ok(trackingItemValue);
-        }
-
         [HttpPost]
         [Route("api/TrackingItemValues/update/{trackingGroupId}/{trackingItemId}/{trackingGroupRecordId}")]
         public async Task<IActionResult> AddItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId,[FromRoute] int trackingGroupId, [FromBody] TrackingItemValuesModel trackingItemValueModel)
