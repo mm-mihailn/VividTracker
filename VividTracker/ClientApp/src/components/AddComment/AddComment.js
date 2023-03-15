@@ -8,23 +8,29 @@ export class AddComment extends Component {
         super(props);
         this.state = {
             comment: '',
+            userId: '',
+            timeStamp: '',
+            trackingItemValueId: '',
+            trackingItemId: '',
+            trackingGroupRecordId: '',
             errorMessage: '',
             textColor: '',
-            commentData: undefined,
         }
         this.createComment = this.createComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    async createComment(trackingItemValueId) {
+    
+    async createComment() {
         console.log(this.state.comment);
         var input = this.state.comment;
-        trackingItemValueId = 1;
         const currentDate = new Date();
+        var trackingItemValueId = 2;
         const token = await authService.getAccessToken();
         const errors = {
             minLength: "You cannot submit an empty field.",
             maxLength: "Comment is too long",
-            success: "Successfuly added a new comment"
+            success: "Successfuly added a new comment",
+            invalid: "Invalid input"
         }
         const color = {
             error: "red",
@@ -40,21 +46,26 @@ export class AddComment extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            await fetch(endpoints.createComment(trackingItemValueId), {
+            var url = endpoints.createComment(trackingItemValueId);
+            await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    "comment": input,
-                    "timeStamp": currentDate.toISOString(),
-                    "trackingItemValueId": trackingItemValueId,
+
+                    "Comment": input,
+                    //"TimeStamp": currentDate.toISOString(),
+                    "UserId": "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3"
                 })
             })
                 .then((response) => {
+                   
+                    //console.log(formattedDate);
                     if (response.status != 200) {
                         this.setState({ textColor: color.error });
+                        this.setState({ errorMessage: errors.invalid });
                     }
                     else {
                         this.setState({ textColor: color.success });
@@ -79,7 +90,7 @@ export class AddComment extends Component {
                             className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                         />
                         <button type="submit" id="submitPanel"
-                            onClick={() => this.createComment()}>Add
+                            onClick={(trackingItemValueId) => this.createComment(trackingItemValueId)}>Add
                         </button>
                         <div id="errorComment">
                             <p>{this.state.errorMessage}</p>

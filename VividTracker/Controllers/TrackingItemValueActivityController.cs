@@ -2,7 +2,6 @@
 
 namespace VividTracker.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using VividTracker.Business.Services;

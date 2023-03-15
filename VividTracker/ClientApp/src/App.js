@@ -37,7 +37,7 @@ export default class App extends Component {
                 <AuthorizeRoute path='/createTrackingGroup' component={AddTracker} />
                 <AuthorizeRoute path='/trackersList' component={TrackersComponent} />
                 <AuthorizeRoute path='/fetch-data' component={FetchData} />
-                <AuthorizeRoute path='/panel/:trackerID' component={PanelComponent} />
+                <AuthorizeRoute path='/panel' component={PanelComponent} />
                 <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
             </Layout>
         );

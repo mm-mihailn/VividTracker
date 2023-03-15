@@ -14,9 +14,7 @@ export default class PanelComponent extends Component {
         super(props)
         this.state = {
             comments: [],
-            timeStampData: '',
-            currentTrackingGroup: [],
-            currentTrackerName: '',
+            userName: '',       
         }
         this.loadComments = this.loadComments.bind(this);
     }
@@ -24,29 +22,27 @@ export default class PanelComponent extends Component {
         this.loadComments();
     }
 
-    getTrackingGroup = async (trackingGroupId) => {
+    getUserName = async (userId) => {
+        userId = "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3";
         const token = await authService.getAccessToken();
-        let pageLocationSplitted = window.location.href.split('/')
-        trackingGroupId = pageLocationSplitted[pageLocationSplitted.length - 1]
-        let url = endpoints.getTrackingGroup(trackingGroupId)
-
+        let url = endpoints.getUserName(userId);
         await fetch(url, {
-            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
         })
-            .then((
-                async (res) => {
-                    let result = await res.json()
-                    this.setState({ 'currentTrackingGroup': result })
-                    this.setState({ 'currentTrackerName': result.name })
-                }))
-            .catch((err) => {
-                console.log(err);
-            })
+            .then(async (res) => {
+                let userData = await res.json()
+                this.setState({ 'userData': userData })
+                this.setState({ 'userName': userData.userName })
+            }
+            )
     }
 
     async loadComments(trackingItemValueId) {
         const token = await authService.getAccessToken();
-        trackingItemValueId = 1;
+        trackingItemValueId = 2;
         await fetch(endpoints.loadComments(trackingItemValueId), {
             headers: {
                 'Content-Type': 'application/json',
@@ -56,8 +52,6 @@ export default class PanelComponent extends Component {
             .then(async (res) => {
                 let commentData = await res.json()
                 this.setState({ 'commentData': commentData })
-                this.setState({ 'currentUserId': commentData.userId })
-                //this.setState({ 'userName': commentData.userName })
             }
             )
             //.then((res) => res.json())
