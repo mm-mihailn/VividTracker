@@ -26,5 +26,10 @@ namespace VividTracker.Business.Services
         public Task<TrackingItemValue> GetValueByCoordinatesAsync(int trackingGroupRecordId, int trackingItemId) => _trackingItemValuesRepository.GetValueByCoordinatesAsync(trackingGroupRecordId, trackingItemId);
         public Task<IEnumerable<TrackingItemValue>> GetItemValuesAsync(int trackingItemId) => _trackingItemValuesRepository.GetItemValuesAsync(trackingItemId);
         public async Task<TrackingItemValue> AddItemValueAsync(TrackingItemValue itemValue) => await _trackingItemValuesRepository.AddAsync(itemValue);
+
+        public async Task<IEnumerable<TrackingItemValue>> GetAllValuesByTrackingGroupId(int trackingGroupId)
+        {
+            return await _trackingItemValuesRepository.GetAllValuesByTrackingGroupId(trackingGroupId);
+        }
     }
 }

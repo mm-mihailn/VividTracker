@@ -6,7 +6,7 @@
     public class TrackingItemValueActivityModel
     {
         public string Comment { get; set; } = null!;
-        public DateTime TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; } = DateTime.Now;
         public string UserId { get; set; } = null!;
 
         public TrackingItemValueActivity ToCreateComment(int trackingItemValueId)

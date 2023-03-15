@@ -9,6 +9,7 @@ using VividTracker.Models;
 namespace VividTracker.Controllers
 {
     [ApiController]
+    [Authorize]
     public class TrackingItemValuesController : ControllerBase
     {
         private readonly ITrackingItemValuesService _trackingItemValuesService;
@@ -21,31 +22,6 @@ namespace VividTracker.Controllers
             _trackingItemsService = trackingItemsService;
             _trackingGroupRecordsService = trackingGroupsService;
             _trackingGroupsService = trackingGroupService;
-        }
-
-        [HttpGet]
-        [Route("api/TrackingItemValues/{trackingItemId}")]
-        public async Task<IActionResult> GetTrackingItemValues([FromRoute] int trackingItemId)
-        {
-            var trackingItemValues = await _trackingItemValuesService.GetItemValuesAsync(trackingItemId);
-
-            if (!trackingItemValues.Any())
-            {
-                return BadRequest("tracking items Values do not exist!");
-            }
-            return Ok(trackingItemValues);
-        }
-        [HttpGet]
-        [Route("api/TrackingItemValues/{trackingItemId}/{trackingGroupRecordId}")]
-        public async Task<IActionResult> GetItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId)
-        {
-            var trackingItemValue = await _trackingItemValuesService.GetValueByCoordinatesAsync(trackingGroupRecordId, trackingItemId);
-
-            if (trackingItemValue==null)
-            {
-                return BadRequest("tracking item Value do not exist!");
-            }
-            return Ok(trackingItemValue);
         }
 
         [HttpPost]
@@ -72,6 +48,20 @@ namespace VividTracker.Controllers
             var result =  await _trackingItemValuesService.AddItemValueAsync(trackingItemValue);
 
             return result == null ? BadRequest("Data is not valid!") : Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/trackingItemValue/trackingItem/{trackingGroupId}")]
+
+        public async Task<IActionResult> GetTrackingItemByTrackingGroupId([FromRoute] int trackingGroupId)
+        {
+            var result =  await _trackingItemValuesService.GetAllValuesByTrackingGroupId(trackingGroupId);
+
+            if (result == null)
+            {
+                return BadRequest("Not found!");
+            }
+            return Ok(result);
         }
     }
 }

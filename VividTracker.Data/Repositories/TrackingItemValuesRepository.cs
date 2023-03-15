@@ -15,13 +15,24 @@ namespace VividTracker.Data.Repositories
         public TrackingItemValuesRepository(ApplicationDbContext context) : base(context)
         {
         }
+
         public async Task<TrackingItemValue?> GetValueByCoordinatesAsync(int trackingGroupRecordId, int trackingItemId)
         {
-            return Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup).Where(t => t.TrackingGroupRecordId == trackingGroupRecordId && t.TrackingItemId == trackingItemId).OrderBy(t => t.Id).LastOrDefault();
+            return Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup)
+                .Where(t => t.TrackingGroupRecordId == trackingGroupRecordId && t.TrackingItemId == trackingItemId)
+                .OrderBy(t => t.Id).LastOrDefault();
         }
-        public async Task<IEnumerable< TrackingItemValue>> GetItemValuesAsync(int trackingItemId)
+
+        public async Task<IEnumerable<TrackingItemValue>> GetItemValuesAsync(int trackingItemId)
         {
-            return Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup).Where(t => t.TrackingItemId == trackingItemId);
+            return Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup)
+                .Where(t => t.TrackingItemId == trackingItemId);
+        }
+
+        public async Task<IEnumerable<TrackingItemValue>> GetAllValuesByTrackingGroupId(int trackingGroupId)
+        {
+            return await Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup).Where(i =>
+                i.TrackingGroupRecord.TrackingGroupId == trackingGroupId).ToListAsync();
         }
     }
 }
