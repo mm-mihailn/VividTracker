@@ -25,4 +25,5 @@ export const endpoints = {
     editTracker: (trackerId) => `${apiBaseUrl}/api/editTracker/${trackerId}`,
     getAllRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupsRecordsUnique/${trackingGroupId}`,
     getAllTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/trackingItems/${trackingGroupId}`,
+    getTrackingItemsDataByTrackingGroupId: (trackingGroupId)  => `${apiBaseUrl}/api/trackingItemValue/trackingItem/${trackingGroupId}`
 }

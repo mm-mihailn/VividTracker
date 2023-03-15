@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './UseTrackerWrapperStyles/UseTrackerComponent.css'
 import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { endpoints } from '../../endpoints';
+import authService from '../api-authorization/AuthorizeService';
 
 export default class UseTracker extends Component {
     constructor()
@@ -38,7 +40,9 @@ export default class UseTracker extends Component {
                 {'name': 'Level'},
                 {'name': '10X Level'},
 
-            ]
+            ],
+
+            trackingItemsData: []
         }
         
     }
@@ -50,6 +54,28 @@ export default class UseTracker extends Component {
         this.setState((prevState) => ({
             items: [...prevState.items, firstColumn]
         }))
+    }
+
+    getTrackingItemsData = async () => {
+        const token = await authService.getAccessToken();
+        let LocationSplitted = window.location.href.split('/')
+        let TrackingGroupID = LocationSplitted[LocationSplitted.length - 1]
+        let url = endpoints.getTrackingItemsDataByTrackingGroupId(TrackingGroupID)
+        await fetch(url, {
+            method: 'GET',
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        })
+        .then(async (res) => {
+            let trackingItemsData = await res.json()
+            this.setState({'trackingItemsData': trackingItemsData})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+    componentDidMount()
+    {
+        this.getTrackingItemsData()
     }
   render() {
     return (
