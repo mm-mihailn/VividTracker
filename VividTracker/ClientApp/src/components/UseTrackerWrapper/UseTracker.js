@@ -42,18 +42,19 @@ export default class UseTracker extends Component {
 
             ],
 
-            trackingItemsData: []
+            trackingItemsData: [],
+            trackingRecordsData: []
         }
         
     }
     scrollElements = () => {
-        let firstColumn = this.state.items[0]
-        this.setState({'items': this.state.items.filter((item) => item != firstColumn)})
-        // TODO: put smooth transition animation
+        let firstColumn = this.state.trackingItemsData[0]
+        this.setState({'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn)}, () => {
+            this.setState((prevState) => ({
+                trackingItemsData: [...prevState.trackingItemsData, firstColumn]
+            }))
+        })
 
-        this.setState((prevState) => ({
-            items: [...prevState.items, firstColumn]
-        }))
     }
 
     getTrackingItemsData = async () => {
@@ -67,7 +68,18 @@ export default class UseTracker extends Component {
         })
         .then(async (res) => {
             let trackingItemsData = await res.json()
-            this.setState({'trackingItemsData': trackingItemsData})
+            this.setState({'trackingItemsData': trackingItemsData}, () => {
+                trackingItemsData.some((dataObject) => {
+                    this.setState((prevState) => ({
+                        trackingItemsData: [...prevState.trackingItemsData, dataObject.trackingItem]
+                    }))
+                    this.setState((prevState) => ({
+                        'trackingRecordsData': [...prevState.trackingRecordsData, dataObject.trackingGroupRecord]
+                    }))
+
+                })
+
+            })
         })
         .catch((err) => {
             console.log(err)
@@ -81,7 +93,7 @@ export default class UseTracker extends Component {
     return (
             <div className='UseTrackerComponentWrapper'>
                 <div className='blueSeperationLine'></div>
-                {this.state.items.length > 4 ?
+                {this.state.trackingItemsData.length > 5 ?
                     <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
                     :
                     ""
@@ -92,7 +104,18 @@ export default class UseTracker extends Component {
                             <p className='TrackingRecordsHeader'>Projects</p>
                         </div>
                     </div>
-                        {this.state.items.map((item) => {
+                    {this.state.trackingItemsData.map((trackingItem) => {
+                        return(
+                            trackingItem.name ? 
+                            <div className='TrackingItemsColumn col-2'>
+                                <div className='TrackingItemsColumnHeader'>
+                                    <p className='TrackingItemsHeader'>{trackingItem.name}</p>
+                                </div>
+                            </div>
+                            : ""
+                    )
+                    })}
+                        {/* {this.state.items.map((item) => {
                             //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
                             return(
                                     <div className='TrackingItemsColumn col-2'>
@@ -102,20 +125,20 @@ export default class UseTracker extends Component {
                                     </div>
                             )
 
-                        })}
+                        })} */}
                 </div>          
                 <div className='SeperationLine'>
                 </div>
                 <div className='TrackingRecordsWrapper'>
                     <div className='TrackingRecords'>
-                            {this.state.records.map((record) => {
+                            {this.state.trackingRecordsData.map((record) => {
                                 return (
                                     <div>
                                         <div className='TrackingRecord'>
                                             <p className='TrackingRecordName'>{record.name}</p>
                                         </div>
                                         <div>
-                                            {record.children ? 
+                                            {/* {record.children ? 
                                                 record.children.map((child) => {
                                                     return (
                                                         <div className='TrackingRecordChild'>
@@ -125,7 +148,7 @@ export default class UseTracker extends Component {
                                                 })
                                             : 
                                                 ""
-                                            }
+                                            } */}
                                         </div>
                                     </div>
                                 )
@@ -133,18 +156,16 @@ export default class UseTracker extends Component {
                     </div>
                     <div className='row TrackingItemValueWrapper'>
                         
-                    {this.state.items.map((targetTrackingItem) => (
+                    {this.state.trackingItemsData.map((targetTrackingItem) => (
                         <div className='col-2 TrackingItemValueColumn'>
-                            {targetTrackingItem.itemValues 
+                            {targetTrackingItem.value 
                             ? 
-                                targetTrackingItem.itemValues.map((trackingItemValue) => (
                                     <div className='TrackingItemValue'>
                                         <p className='square'></p>
-                                        <p className={trackingItemValue.value != '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
-                                            {trackingItemValue.value != '' ? trackingItemValue.value : '-'}
+                                        <p className={targetTrackingItem.value != '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
+                                            {targetTrackingItem.value != '' ? targetTrackingItem.value : '-'}
                                         </p>
                                     </div>
-                                ))
                             : 
                             <div className='TrackingItemValue'>
                                 <p className='square square-red'></p>
@@ -156,8 +177,6 @@ export default class UseTracker extends Component {
                         </div>
                         ))}
                     </div>
-
-                   
                 </div>
                 <div className='SeperationLine bottomLine'>
                 </div>
