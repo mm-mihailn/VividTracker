@@ -25,7 +25,7 @@ export const endpoints = {
     getAllRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupsRecordsUnique/${trackingGroupId}`,
     getAllTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/trackingItems/${trackingGroupId}`,
 
-    createComment: (trackingItemValueId) => `${apiBaseUrl}/api/create/comments/${trackingItemValueId}`,
+    createComment: (trackingItemId) => `${apiBaseUrl}/api/create/comments/${trackingItemId}`,
     loadComments: (trackingItemValueId) => `${apiBaseUrl}/api/comments/${trackingItemValueId}`,
 
     getUserName: (userId) => `${apiBaseUrl}/user/getName/${userId}`,

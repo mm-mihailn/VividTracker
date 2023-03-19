@@ -49,13 +49,8 @@ export default class PanelComponent extends Component {
                 'Authorization': `Bearer ${token}`
             },
         })
-            .then(async (res) => {
-                let commentData = await res.json()
-                this.setState({ 'commentData': commentData })
-            }
-            )
-            //.then((res) => res.json())
-            //.then((res) => this.setState({ comments: res }))
+            .then((res) => res.json())
+            .then((res) => this.setState({ comments: res }))
     }
     render() {
         return (
@@ -68,7 +63,9 @@ export default class PanelComponent extends Component {
                             <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
                             <h4 className='panel-item'>Code Reviews Process</h4>
                         </div>
-                        <AddComment onCommentAdded={this.loadComments} />
+                        <div className='createNewCommentButtonWrapper'>
+                            <AddComment onCommentAdded={this.loadComments} />
+                        </div>
                         <div className='commentsContainer'>
                             {this.state.comments.map((trackingItemValueActivityData) => {
                                 return (

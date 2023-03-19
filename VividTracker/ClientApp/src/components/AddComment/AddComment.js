@@ -23,8 +23,7 @@ export class AddComment extends Component {
     async createComment() {
         console.log(this.state.comment);
         var input = this.state.comment;
-        const currentDate = new Date();
-        var trackingItemValueId = 2;
+        var trackingItemId = 2;
         const token = await authService.getAccessToken();
         const errors = {
             minLength: "You cannot submit an empty field.",
@@ -46,7 +45,7 @@ export class AddComment extends Component {
             this.setState({ textColor: color.error });
         }
         else {
-            var url = endpoints.createComment(trackingItemValueId);
+            var url = endpoints.createComment(trackingItemId);
             await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -56,13 +55,10 @@ export class AddComment extends Component {
                 body: JSON.stringify({
 
                     "Comment": input,
-                    //"TimeStamp": currentDate.toISOString(),
                     "UserId": "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3"
                 })
             })
                 .then((response) => {
-                   
-                    //console.log(formattedDate);
                     if (response.status != 200) {
                         this.setState({ textColor: color.error });
                         this.setState({ errorMessage: errors.invalid });
@@ -70,6 +66,7 @@ export class AddComment extends Component {
                     else {
                         this.setState({ textColor: color.success });
                         this.setState({ errorMessage: errors.success });
+                        this.props.onCommentAdded(this.props.value);
                     }
                 })
         }
@@ -90,7 +87,7 @@ export class AddComment extends Component {
                             className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                         />
                         <button type="submit" id="submitPanel"
-                            onClick={(trackingItemValueId) => this.createComment(trackingItemValueId)}>Add
+                            onClick={(trackingItemId) => this.createComment(trackingItemId)}>Add
                         </button>
                         <div id="errorComment">
                             <p>{this.state.errorMessage}</p>

@@ -8,20 +8,22 @@ export default class PanelContainer extends Component {
     render() {
         return (
             <div className='panelContainerIndividual d-flex' key={this.props.trackingItemValueActivityData.id}>
-                <div className='recordNameWrapper'>
-                    <span className='recordName pageText'> {this.props.recordData.name} </span>
-                </div>
-                <div className='panelNameWrapper'>
-                    <span className='panelName pageText'> {this.props.trackingItemValueActivityData.comment}
-                    </span>
-                </div>
+                {/*<div className='recordNameWrapper'>*/}
+                {/*    <span className='recordName pageText'> {this.props.trackingItemValueActivityData.userName} </span>*/}
+                {/*</div>*/}
                 <div className='panelContentContainer'>
+                    
+                    <div className='panelCommentWrapper'>
+                        <span className='panelComment pageText'> {this.props.trackingItemValueActivityData.comment}
+                        </span>
+                    </div>
                     <div className='managePanelIconWrapper ml-auto'>
                         <FontAwesomeIcon className='commentsIcon' icon={faComments} />
                     </div>
                     <div className='dateWrapper ml-auto'>
                         <span className='dateText pageText'>
-                            {this.props.trackingItemValueActivityData.timeStamp} </span>
+                            {this.props.trackingItemValueActivityData.timeStamp}
+                        </span>
                     </div>
                 </div>
             </div>

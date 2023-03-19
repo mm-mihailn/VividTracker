@@ -6,15 +6,36 @@
     line-height: 27px;
 }
 .panelContainerIndividual {
-    background-color: #F3F3F3;
+    background-color: #D9D9D9;
+    width: 229px;
     font-weight: 400;
     font-size: 20px;
     line-height: 27.24px;
-    margin-left: 2rem;
     margin-right: 2rem;
-    margin-top: 1rem;
+    margin-top: 1px;
+    height: max-content;
 }
-.container-icon {
-    margin-top: -2.5%;
+.commentsIcon{
+    color: #0084B4;
+    height: 10px;
+}
+.managePanelIconWrapper{
+    margin-top: -33px;
+}
+.panelComment {
+    color: black;
+    font-size: 10px;
+    margin-left: 20px;
+}
+.panelCommentWrapper {
+    margin-top: -5px;
+}
+.dateText {
+    color: black;
+    font-size: 10px;
+    margin-top: -15px;
+}
+.dateWrapper {
+    margin-top: -15px;
 }
 

@@ -1,5 +1,6 @@
 ﻿.percentagesForm {
     margin-bottom: 15%;
+    margin-top: -20%;
 }
 
 .percentageTxt {
@@ -39,6 +40,7 @@
 
 .dx-fieldset {
     margin-left: -65%;
+    margin-top: -15%;
 }
 
 .percentageBtn {
