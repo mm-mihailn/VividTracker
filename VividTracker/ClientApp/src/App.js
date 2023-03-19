@@ -17,6 +17,7 @@ import ManageTracker from './components/ManageTracker/ManageTracker';
 import ManageTrackerItemDetails from './components/ManageTrackerItemDetails/ManageTrackerItemDetails';
 import CreateTrackerItemDetails from './components/CreateTrackerItemDetails/CreateTrackerItemDetails';
 import UseTrackerWrapper from './components/UseTrackerWrapper/UseTrackerWrapper';
+import PanelComponent from './components/PanelComponent/PanelComponent';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -36,6 +37,7 @@ export default class App extends Component {
         <AuthorizeRoute path='/createTrackingGroup' component={AddTracker} />
         <AuthorizeRoute path='/trackersList' component={TrackersComponent} />
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
+        <AuthorizeRoute path='/panel' component={PanelComponent} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );

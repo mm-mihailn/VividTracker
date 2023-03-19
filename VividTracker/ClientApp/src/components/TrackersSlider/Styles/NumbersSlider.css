@@ -1,0 +1,57 @@
+﻿﻿.numberTxt {
+    margin-top: 3%;
+}
+
+#numberTxt-min {
+    color: white;
+    margin-left: 40%;
+}
+
+#numberTxt-max {
+    color: white;
+    margin-left: 55%;
+}
+
+.dx-slider-handle {
+    background-color: #F28627;
+}
+
+.dx-slider {
+    width: 220px;
+    color: #F28627;
+}
+
+.dx-texteditor-input {
+    width: max-content;
+}
+
+.dx-numberbox-spin-up-icon {
+    background-color: #F28627;
+}
+
+.dx-numberbox-spin-down-icon {
+    background-color: #F28627;
+}
+
+.dx-fieldset {
+    margin-left: -65%;
+}
+
+.numberBtn {
+    margin-left: 55%;
+}
+
+.saveBtn {
+    background-color: #0084B4;
+    color: white;
+    border-style: none;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 20px;
+    width: 7.85rem;
+    height: 2.25rem;
+}
+
+.saveBtn:hover {
+    text-decoration-line: underline;
+}

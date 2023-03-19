@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "devextreme": "22.2.4",
+    "devextreme-react": "22.2.4"
+  }
+}

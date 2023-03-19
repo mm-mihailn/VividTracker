@@ -1,0 +1,21 @@
+﻿.pageText {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.panelContainerIndividual {
+    background-color: #F3F3F3;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27.24px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+.container-icon {
+    margin-top: -2.5%;
+}
