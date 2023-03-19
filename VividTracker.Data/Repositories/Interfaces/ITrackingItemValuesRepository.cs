@@ -11,5 +11,7 @@ namespace VividTracker.Data.Repositories.Interfaces
     {
         Task<TrackingItemValue> GetValueByCoordinatesAsync(int trackingGroupRecordId, int trackingItemId);
         Task<IEnumerable<TrackingItemValue>> GetItemValuesAsync(int trackingItemId);
+        Task<IEnumerable<TrackingItemValue>> GetAllValuesByTrackingGroupId(int trackingGroupId);
+
     }
 }

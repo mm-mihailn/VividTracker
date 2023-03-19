@@ -13,5 +13,6 @@ namespace VividTracker.Business.Services.Interfaces
         Task<TrackingItemValue> GetValueByCoordinatesAsync(int trackingGroupRecordId, int trackingItemId);
         Task<IEnumerable<TrackingItemValue>> GetItemValuesAsync(int trackingItemId);
         Task<TrackingItemValue> AddItemValueAsync(TrackingItemValue itemValue);
+        Task<IEnumerable<TrackingItemValue>> GetAllValuesByTrackingGroupId(int trackingGroupId);
     }
 }
