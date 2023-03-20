@@ -132,7 +132,7 @@ export default class UseTracker extends Component {
                             trackingItem.name ? 
                             <div className='TrackingItemsColumn col-2'>
                                 <div className='TrackingItemsColumnHeader'>
-                                    <p className='TrackingItemsHeader'>{trackingItem.name} id: {trackingItem.id}</p>
+                                    <p className='TrackingItemsHeader'>{trackingItem.name}</p>
                                 </div>
                             </div>
                             : ""
@@ -147,7 +147,7 @@ export default class UseTracker extends Component {
                                 return (
                                     <div>
                                         <div className='TrackingRecord'>
-                                            <p className='TrackingRecordName'>{record.name} id:{record.id} </p>
+                                            <p className='TrackingRecordName'>{record.name} </p>
                                         </div>
                                         <div>
                                         </div>
