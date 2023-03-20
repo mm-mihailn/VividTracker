@@ -71,15 +71,35 @@ export default class UseTracker extends Component {
             this.setState({'trackingItemsData': trackingItemsData}, () => {
                 trackingItemsData.some((dataObject) => {
                     this.setState((prevState) => ({
-                        trackingItemsData: [...prevState.trackingItemsData, dataObject.trackingItem]
-                    }))
+                        'trackingItemsData': [...prevState.trackingItemsData, dataObject.trackingItem]
+                        }))
                     this.setState((prevState) => ({
                         'trackingRecordsData': [...prevState.trackingRecordsData, dataObject.trackingGroupRecord]
                     }))
-
+                })
+            })
+            let uniqueTrackingItemsData = this.state.trackingItemsData.filter((curr, idx) => 
+                {
+                    if(idx > 0)
+                    {
+                        return curr.id != this.state.trackingItemsData[idx-1].id
+                    }
+                    else
+                    {
+                        return curr
+                    }
                 })
 
-            })
+                let uniqueTrackingRecordsData = this.state.trackingRecordsData.filter((curr, idx) => 
+                {
+                    if(idx > 0)
+                    {
+                        return curr.id != this.state.trackingRecordsData[idx-1].id
+                    }
+                   
+                })                
+            this.setState({'trackingItemsData': uniqueTrackingItemsData})
+            this.setState({'trackingRecordsData': uniqueTrackingRecordsData})
         })
         .catch((err) => {
             console.log(err)
@@ -88,6 +108,8 @@ export default class UseTracker extends Component {
     componentDidMount()
     {
         this.getTrackingItemsData()
+       
+
     }
   render() {
     return (
@@ -105,27 +127,17 @@ export default class UseTracker extends Component {
                         </div>
                     </div>
                     {this.state.trackingItemsData.map((trackingItem) => {
+                        
                         return(
                             trackingItem.name ? 
                             <div className='TrackingItemsColumn col-2'>
                                 <div className='TrackingItemsColumnHeader'>
-                                    <p className='TrackingItemsHeader'>{trackingItem.name}</p>
+                                    <p className='TrackingItemsHeader'>{trackingItem.name} id: {trackingItem.id}</p>
                                 </div>
                             </div>
                             : ""
                     )
                     })}
-                        {/* {this.state.items.map((item) => {
-                            //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
-                            return(
-                                    <div className='TrackingItemsColumn col-2'>
-                                        <div className='TrackingItemsColumnHeader'>
-                                            <p className='TrackingItemsHeader'>{item.name}</p>
-                                        </div>
-                                    </div>
-                            )
-
-                        })} */}
                 </div>          
                 <div className='SeperationLine'>
                 </div>
@@ -135,52 +147,61 @@ export default class UseTracker extends Component {
                                 return (
                                     <div>
                                         <div className='TrackingRecord'>
-                                            <p className='TrackingRecordName'>{record.name}</p>
+                                            <p className='TrackingRecordName'>{record.name} id:{record.id} </p>
                                         </div>
                                         <div>
-                                            {/* {record.children ? 
-                                                record.children.map((child) => {
-                                                    return (
-                                                        <div className='TrackingRecordChild'>
-                                                            <p className='TrackingRecordName'>{child.name}</p>
-                                                        </div>
-                                                    )
-                                                })
-                                            : 
-                                                ""
-                                            } */}
                                         </div>
                                     </div>
                                 )
                             })}
                     </div>
                     <div className='row TrackingItemValueWrapper'>
-                        
-                    {this.state.trackingItemsData.map((targetTrackingItem) => (
-                        <div className='col-2 TrackingItemValueColumn'>
-                            {targetTrackingItem.value 
-                            ? 
-                                    <div className='TrackingItemValue'>
-                                        <p className='square'></p>
-                                        <p className={targetTrackingItem.value != '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
-                                            {targetTrackingItem.value != '' ? targetTrackingItem.value : '-'}
-                                        </p>
-                                    </div>
-                            : 
-                            <div className='TrackingItemValue'>
-                                <p className='square square-red'></p>
-                                <p className='TrackingItemValueText EmptyTrackingItemValueText'>
-                                -
-                                </p>
+                    {this.state.trackingRecordsData.map((record) => {
+                        const uniqueTrackingItems = [...new Set(this.state.trackingItemsData.filter((item) => item.value !== '').map((item) => item.trackingItemId ))];
+                        const uniqueTrackingItemsNoUndefined = uniqueTrackingItems.filter((item) => item != undefined)
+                        return (
+                            <div className='row'>
+                                {uniqueTrackingItemsNoUndefined.map((trackingItemId) => {
+                                    const matchingTrackingItem = this.state.trackingItemsData.find((item) => item.trackingItemId === trackingItemId);
+                                    if (matchingTrackingItem && matchingTrackingItem.trackingGroupRecordId === record.id) {
+                                        return (
+                                            <div className='col-2 TrackingItemValueColumn' key={trackingItemId}>
+                                                <div className='trackingRecordsContainer'>
+                                                    <div className='trackingItemsContainer'>
+                                                        <div className='TrackingItemValue'>
+                                                            <p className='square'></p>
+                                                            <p className={matchingTrackingItem.value !== '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
+                                                                {matchingTrackingItem.value !== '' ? matchingTrackingItem.value : '-'}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    } else {
+                                        return (
+                                            <div className='col-2 TrackingItemValueColumn' key={trackingItemId}>
+                                                <div className='trackingRecordsContainer'>
+                                                    <div className='trackingItemsContainer'>
+                                                        <div className='TrackingItemValue'>
+                                                            <p className='square square-red'></p>
+                                                            <p className='TrackingItemValueText EmptyTrackingItemValueText'>-</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                })}
                             </div>
-                            }
-                        </div>
-                        ))}
+                        );
+                    })}
+
                     </div>
-                </div>
-                <div className='SeperationLine bottomLine'>
-                </div>
-            </div>
-    )
-  }
-}
+
+
+</div>
+        <div className='SeperationLine bottomLine'>
+        </div>
+</div>
+    )}}
