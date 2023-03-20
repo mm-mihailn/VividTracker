@@ -115,7 +115,7 @@ export default class UseTracker extends Component {
     return (
             <div className='UseTrackerComponentWrapper'>
                 <div className='blueSeperationLine'></div>
-                {this.state.trackingItemsData.length > 5 ?
+                {this.state.trackingItemsData.length > 1 ?
                     <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
                     :
                     ""
