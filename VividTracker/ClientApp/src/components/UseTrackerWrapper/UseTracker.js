@@ -96,10 +96,15 @@ export default class UseTracker extends Component {
                     {
                         return curr.id != this.state.trackingRecordsData[idx-1].id
                     }
+                    else
+                    {
+                        return curr
+                    }
                    
                 })                
             this.setState({'trackingItemsData': uniqueTrackingItemsData})
             this.setState({'trackingRecordsData': uniqueTrackingRecordsData})
+            console.log(this.state.trackingRecordsData)
         })
         .catch((err) => {
             console.log(err)
