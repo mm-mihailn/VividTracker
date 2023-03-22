@@ -7,6 +7,7 @@ import authService from '../api-authorization/AuthorizeService';
 import { AddComment } from '../AddComment/AddComment';
 import NumbersSlider from '../TrackersSlider/NumbersSlider';
 import PercentagesSlider from '../TrackersSlider/PercentagesSlider';
+import { BoolsMenu } from '../TrackersSlider/BoolsMenu';
 
 export default class PanelComponent extends Component {
 
@@ -22,23 +23,23 @@ export default class PanelComponent extends Component {
         this.loadComments();
     }
 
-    getUserName = async (userId) => {
-        userId = "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3";
-        const token = await authService.getAccessToken();
-        let url = endpoints.getUserName(userId);
-        await fetch(url, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-        })
-            .then(async (res) => {
-                let userData = await res.json()
-                this.setState({ 'userData': userData })
-                this.setState({ 'userName': userData.userName })
-            }
-            )
-    }
+    //getUserName = async (userId) => {
+    //    userId = "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3";
+    //    const token = await authService.getAccessToken();
+    //    let url = endpoints.getUserName(userId);
+    //    await fetch(url, {
+    //        headers: {
+    //            'Content-Type': 'application/json',
+    //            'Authorization': `Bearer ${token}`
+    //        },
+    //    })
+    //        .then(async (res) => {
+    //            let userData = await res.json()
+    //            this.setState({ 'userData': userData })
+    //            this.setState({ 'userName': userData.userName })
+    //        }
+    //        )
+    //}
 
     async loadComments(trackingItemValueId) {
         const token = await authService.getAccessToken();
@@ -56,13 +57,14 @@ export default class PanelComponent extends Component {
         return (
             <div className='panelListWrapper d-flex justify-content-center align-items-center'>
                 <div className='panelContainer'>
-                    <PercentagesSlider />
-                    <NumbersSlider />
+                    <div className='panelListHeaderWrapper d-flex'>
+                        <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
+                        <h4 className='panel-item'>Code Reviews Process</h4>
+                    </div>
+                    <BoolsMenu />
+                    {/*<PercentagesSlider />*/}
+                    {/*<NumbersSlider />*/}
                     <div className='panelContent'>
-                        <div className='panelListHeaderWrapper d-flex'>
-                            <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
-                            <h4 className='panel-item'>Code Reviews Process</h4>
-                        </div>
                         <div className='createNewCommentButtonWrapper'>
                             <AddComment onCommentAdded={this.loadComments} />
                         </div>

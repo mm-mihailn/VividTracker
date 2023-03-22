@@ -27,6 +27,7 @@ export const endpoints = {
 
     createComment: (trackingItemId) => `${apiBaseUrl}/api/create/comments/${trackingItemId}`,
     loadComments: (trackingItemValueId) => `${apiBaseUrl}/api/comments/${trackingItemValueId}`,
-
     getUserName: (userId) => `${apiBaseUrl}/user/getName/${userId}`,
+
+    createItem: (trackingGroupId, trackingItemId, trackingGroupRecordId) => `${apiBaseUrl}/api/TrackingItemValues/update/${trackingGroupId}/${trackingItemId}/${trackingGroupRecordId}`,
 }

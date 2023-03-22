@@ -1,64 +1,67 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using VividTracker.Business.Services;
+using VividTracker.Business.Services.Interfaces;
+using VividTracker.Data.Models;
+using VividTracker.Models;
 
 namespace VividTracker.Controllers
 {
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using VividTracker.Business.Services;
-    using VividTracker.Business.Services.Interfaces;
-    using VividTracker.Models;
-
     [ApiController]
-    [Authorize]
-    public class TrackingItemValueActivityController : ControllerBase
+    //[Authorize]
+    public class TrackingItemValuesController : ControllerBase
     {
-        private readonly ITrackingItemValueActivityService _trackingItemValueActivityService;
-        private readonly IUsersService _usersService;
-        public TrackingItemValueActivityController(ITrackingItemValueActivityService trackingItemValueActivityService, IUsersService usersService)
+        private readonly ITrackingItemValuesService _trackingItemValuesService;
+        private readonly ITrackingItemsService _trackingItemsService;
+        private readonly ITrackingGroupRecordsService _trackingGroupRecordsService;
+        private readonly ITrackingGroupsService _trackingGroupsService;
+        public TrackingItemValuesController(ITrackingItemValuesService trackingItemValuesService, ITrackingItemsService trackingItemsService, ITrackingGroupRecordsService trackingGroupsService, ITrackingGroupsService trackingGroupService)
         {
-            _trackingItemValueActivityService = trackingItemValueActivityService;
-            _usersService = usersService;
-        }
-
-
-        [HttpGet]
-        [Route("api/comments/{trackingItemValueId}")]
-        public async Task<IActionResult> GetAllCommentsByTrackingItemValueId([FromRoute] int trackingItemValueId)
-        {
-            var comments = await _trackingItemValueActivityService.GetCommentsByTrackingItemId(trackingItemValueId);
-
-            if (comments == null)
-            {
-                return BadRequest("No comments!");
-            }
-            return Ok(comments);
-
+            _trackingItemValuesService = trackingItemValuesService;
+            _trackingItemsService = trackingItemsService;
+            _trackingGroupRecordsService = trackingGroupsService;
+            _trackingGroupsService = trackingGroupService;
         }
 
         [HttpPost]
-        [Route("api/create/comments/{trackingItemValueId}")]
-        public async Task<IActionResult> CreateComment([FromRoute] int trackingItemValueId, TrackingItemValueActivityModel trackingItemValueActivityModel)
+        [Route("api/TrackingItemValues/update/{trackingGroupId}/{trackingItemId}/{trackingGroupRecordId}")]
+        public async Task<IActionResult> AddItemValue([FromRoute] int trackingItemId, [FromRoute] int trackingGroupRecordId, [FromRoute] int trackingGroupId, [FromBody] TrackingItemValuesModel trackingItemValueModel)
         {
-            var comment = trackingItemValueActivityModel.ToCreateComment(trackingItemValueId);
-            var isExist = await _usersService.GetUserByIdAsync(comment.UserId);
+            var trackingItem = await _trackingItemsService.GetTrackingItemById(trackingItemId);
+            var trackingGroupRecords = await _trackingGroupRecordsService.GetTrackingGroupRecordById(trackingGroupRecordId);
+            var trackingGroup = await _trackingGroupsService.GetTrackerByIdAsync(trackingGroupId);
 
-            if (isExist != null)
+            if (trackingItem == null || trackingGroupRecords == null || trackingGroup == null)
             {
-                if (comment != null)
-                {
-                    await _trackingItemValueActivityService.AddComment(comment);
+                return BadRequest("Entity not found!");
+            }
 
-                    return Ok("Added Succesfully");
-                }
-                else
-                {
-                    return BadRequest("Failed");
-                }
-            }
-            else
+            var trackingItemValue = trackingItemValueModel.ToTrackingItemValue(trackingItemId, trackingGroupRecordId,
+                trackingItem, trackingGroupRecords);
+
+            if (trackingItemValue == null)
             {
-                return BadRequest("Invalid user Id");
+                return BadRequest("Null references type");
             }
+
+            var result = await _trackingItemValuesService.AddItemValueAsync(trackingItemValue);
+
+            return result == null ? BadRequest("Data is not valid!") : Ok(result);
+        }
+
+        [HttpGet]
+        [Route("api/trackingItemValue/trackingItem/{trackingGroupId}")]
+
+        public async Task<IActionResult> GetTrackingItemByTrackingGroupId([FromRoute] int trackingGroupId)
+        {
+            var result = await _trackingItemValuesService.GetAllValuesByTrackingGroupId(trackingGroupId);
+
+            if (result == null)
+            {
+                return BadRequest("Not found!");
+            }
+            return Ok(result);
         }
     }
 }

@@ -18,6 +18,7 @@
 .commentsIcon{
     color: #0084B4;
     height: 10px;
+    margin-left: 3px;
 }
 .managePanelIconWrapper{
     margin-top: -33px;
@@ -28,7 +29,8 @@
     margin-left: 20px;
 }
 .panelCommentWrapper {
-    margin-top: -5px;
+    margin-top: -17px;
+    margin-bottom: 2px;
 }
 .dateText {
     color: black;
@@ -37,5 +39,10 @@
 }
 .dateWrapper {
     margin-top: -15px;
+}
+.userNameText {
+    font-size: 12px;
+    color: black;
+    margin-top: -5px;
 }
 

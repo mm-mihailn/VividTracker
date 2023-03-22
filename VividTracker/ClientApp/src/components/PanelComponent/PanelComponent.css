@@ -1,4 +1,7 @@
-﻿.panel-header {
+﻿.commentsContainer{
+    margin-bottom: 10vh;
+}
+.panel-header {
     padding-top: 100px;
     background-color: #827D7D;
     width: 229px;
@@ -86,6 +89,7 @@
     color: black;
     text-align: left;
     margin-left: -1%;
+    margin-bottom: 3%;
 }
 
 .panel-item {
