@@ -61,9 +61,16 @@ export default class PanelComponent extends Component {
                         <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
                         <h4 className='panel-item'>Code Reviews Process</h4>
                     </div>
-                    <BoolsMenu />
-                    {/*<PercentagesSlider />*/}
-                    {/*<NumbersSlider />*/}
+                    <div className="boolsForm">
+                        <BoolsMenu />
+                    </div>
+                    <div className="percentagesSlider">
+                        <PercentagesSlider />
+                    </div>
+                    <div className="numbersSlider">
+                        <NumbersSlider />
+                    </div>
+
                     <div className='panelContent'>
                         <div className='createNewCommentButtonWrapper'>
                             <AddComment onCommentAdded={this.loadComments} />
