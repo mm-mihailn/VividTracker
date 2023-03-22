@@ -29,6 +29,7 @@ export default class TrackersComponent extends Component {
     render() {
         return (
             <div className='trackersListWrapper d-flex justify-content-center align-items-center' >
+                {console.log(this.state.trackers)}
                 <form className='trackersContainer'>
                     <div className='trackersListHeaderWrapper d-flex'>
                         <h4 className='trackersListHeader'>Trackers List</h4>
