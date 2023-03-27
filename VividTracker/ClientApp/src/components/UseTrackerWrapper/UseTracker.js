@@ -49,12 +49,11 @@ export default class UseTracker extends Component {
     }
     scrollElements = () => {
         let firstColumn = this.state.trackingItemsData[0]
-        this.setState({'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn)}, () => {
-            this.setState((prevState) => ({
-                trackingItemsData: [...prevState.trackingItemsData, firstColumn]
-            }))
-        })
-
+        this.setState({'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn)})
+        // TODO: put smooth transition animation
+        this.setState((prevState) => ({
+            trackingItemsData: [...prevState.trackingItemsData, firstColumn]
+        }))
     }
 
     getTrackingItemsData = async () => {
@@ -68,43 +67,137 @@ export default class UseTracker extends Component {
         })
         .then(async (res) => {
             let trackingItemsData = await res.json()
-            this.setState({'trackingItemsData': trackingItemsData}, () => {
-                trackingItemsData.some((dataObject) => {
-                    this.setState((prevState) => ({
-                        'trackingItemsData': [...prevState.trackingItemsData, dataObject.trackingItem]
-                        }))
-                    this.setState((prevState) => ({
-                        'trackingRecordsData': [...prevState.trackingRecordsData, dataObject.trackingGroupRecord]
-                    }))
-                })
+            let allRecordsNames = trackingItemsData.map((trackingItemObject) => {
+                return {name: trackingItemObject.trackingGroupRecord.name}
             })
-            let uniqueTrackingItemsData = this.state.trackingItemsData.filter((curr, idx) => 
-                {
-                    if(idx > 0)
-                    {
-                        return curr.id != this.state.trackingItemsData[idx-1].id
-                    }
-                    else
-                    {
-                        return curr
-                    }
-                })
+            let allRecordsIds = trackingItemsData.map((trackingItemObject) => {
+                return {id: trackingItemObject.trackingGroupRecord.id}
+            })
 
-                let uniqueTrackingRecordsData = this.state.trackingRecordsData.filter((curr, idx) => 
+            const uniqueArr = allRecordsNames.filter((item, index) => {
+                // Use reduce to check if this name already exists in the array
+                return index === allRecordsNames.findIndex(obj => {
+                  return obj.name === item.name;
+                });
+              });
+
+              this.setState({'trackingRecordsData': uniqueArr})
+              let allItemsNamesAndValues = []
+              let previousValue = -1
+              let allValuesAmountCummulative = 0
+              let allRecordsAmount = uniqueArr.length
+              trackingItemsData.some((trackingitemObject) => {
+                if(trackingitemObject.value)
                 {
-                    if(idx > 0)
+                    allValuesAmountCummulative ++;
+                }
+              })
+              trackingItemsData.map((trackingItemObject, idx) => {
+                let targetTrackingItemID = trackingItemObject.trackingGroupRecordId;
+                let filtered = []; 
+                allRecordsIds.map((record) => {
+                  if (uniqueArr.length <= 1) 
+                  {
+                    if (targetTrackingItemID == record.id) 
                     {
-                        return curr.id != this.state.trackingRecordsData[idx-1].id
-                    }
-                    else
+                      filtered.push({
+                        name: trackingItemObject.trackingItem.name,
+                        itemValues: [{ value: trackingItemObject.value }]
+                      });
+                    } 
+                    else 
                     {
-                        return curr
+                      let emptyObject = {value: ''}   
+                      let itemValues = Array.from({ length: uniqueArr.length - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
+                      filtered.push({
+                        name: trackingItemObject.trackingItem.name,
+                        itemValues: itemValues
+                      });
                     }
-                   
-                })                
-            this.setState({'trackingItemsData': uniqueTrackingItemsData})
-            this.setState({'trackingRecordsData': uniqueTrackingRecordsData})
-            console.log(this.state.trackingRecordsData)
+                  } 
+                  else 
+                  {
+                    if (targetTrackingItemID != record.id) 
+                    {
+                        filtered.push({
+                            name: trackingItemObject.trackingItem.name,
+                            itemValues: [{ value: trackingItemObject.value }, {value: ''}, {value: ''}]
+                          });
+                    } 
+                    else 
+                    {
+                      let emptyObject = {value: ''}
+
+                      // If another value exists then instead of putting an empty object, add that value as an object to the item values array
+                      let itemValues = ''
+
+                      if(previousValue != - 1)
+                      {
+                        let currentItemValues = []
+                        trackingItemsData.some((trackingItemObjectInner) => {
+                            if(trackingItemObjectInner.trackingItemId == trackingItemObject.trackingItemId)
+                            {
+                                currentItemValues.push(trackingItemObjectInner)
+                            }
+                        })
+                        //TODO: subtract only the amount of spaces left until the records amount is met!,
+                        // -- add N times the values that need to be added, make sure not to overwrite!
+                        // TODO: Check if the amount of values is equal to the records, if it is, do not add any empty fields!
+                        if(currentItemValues.length == uniqueArr.length)
+                        {
+                            itemValues = currentItemValues
+                            filtered.push({
+                                name: trackingItemObject.trackingItem.name,
+                                itemValues: itemValues
+                              });
+                              previousValue = trackingItemObject.value
+                        }
+                        else
+                        {
+                            itemValues = Array.from({ length: Math.abs(uniqueArr.length - currentItemValues.length )}, () => emptyObject).concat([{value: previousValue}, {value: trackingItemObject.value }]);
+                            filtered.push({
+                                name: trackingItemObject.trackingItem.name,
+                                itemValues: itemValues
+                              });
+                              previousValue = trackingItemObject.value
+                        }
+                      }
+                      else
+                      {
+                        itemValues = Array.from({ length: uniqueArr.length - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
+                        filtered.push({
+                            name: trackingItemObject.trackingItem.name,
+                            itemValues: itemValues
+                          });
+                          previousValue = trackingItemObject.value
+                      }
+
+
+                    }
+                  }
+                });
+                
+                allItemsNamesAndValues.push(filtered);
+              });
+
+            allItemsNamesAndValues = [].concat(...allItemsNamesAndValues)
+                .reduce((uniqueItems, currentItem) => {
+                    let itemIndex = uniqueItems.findIndex(item => item.name === currentItem.name && item.itemValues.value === currentItem.itemValues.value);
+                    if (itemIndex < 0) {
+                        uniqueItems.push(currentItem);
+                    } else {
+                        uniqueItems[itemIndex] = currentItem;
+                    }
+                    return uniqueItems;
+                }, []);
+  
+                
+            allItemsNamesAndValues = allItemsNamesAndValues.filter((item, index) => {
+                return index === allItemsNamesAndValues.findIndex(obj => {
+                  return obj.name === item.name;
+                });
+              });            
+            this.setState({'trackingItemsData': allItemsNamesAndValues})
         })
         .catch((err) => {
             console.log(err)
@@ -118,95 +211,93 @@ export default class UseTracker extends Component {
     }
   render() {
     return (
-            <div className='UseTrackerComponentWrapper'>
-                <div className='blueSeperationLine'></div>
-                {this.state.trackingItemsData.length > 1 ?
-                    <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
-                    :
-                    ""
-                }
-                <div className='row menuWrapper'>
-                    <div className='TrackingRecordsColumn'>
-                        <div className='TrackingRecordsColumnHeader'>
-                            <p className='TrackingRecordsHeader'>Projects</p>
-                        </div>
-                    </div>
-                    {this.state.trackingItemsData.map((trackingItem) => {
-                        
-                        return(
-                            trackingItem.name ? 
+        <div className='UseTrackerComponentWrapper'>
+        <div className='blueSeperationLine'></div>
+        {this.state.trackingItemsData.length > 4 ?
+            <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
+            :
+            ""
+        }
+        <div className='row menuWrapper'>
+            <div className='TrackingRecordsColumn'>
+                <div className='TrackingRecordsColumnHeader'>
+                    <p className='TrackingRecordsHeader'>Projects</p>
+                </div>
+            </div>
+                {this.state.trackingItemsData.map((item) => {
+                    //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
+                    return(
                             <div className='TrackingItemsColumn col-2'>
                                 <div className='TrackingItemsColumnHeader'>
-                                    <p className='TrackingItemsHeader'>{trackingItem.name}</p>
+                                    <p className='TrackingItemsHeader'>{item.name}</p>
                                 </div>
                             </div>
-                            : ""
                     )
-                    })}
-                </div>          
-                <div className='SeperationLine'>
-                </div>
-                <div className='TrackingRecordsWrapper'>
-                    <div className='TrackingRecords'>
-                            {this.state.trackingRecordsData.map((record) => {
-                                return (
-                                    <div>
-                                        <div className='TrackingRecord'>
-                                            <p className='TrackingRecordName'>{record.name} </p>
-                                        </div>
-                                        <div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                    </div>
-                    <div className='row TrackingItemValueWrapper'>
+
+                })}
+        </div>          
+        <div className='SeperationLine'>
+        </div>
+        <div className='TrackingRecordsWrapper'>
+            <div className='TrackingRecords'>
                     {this.state.trackingRecordsData.map((record) => {
-                        const uniqueTrackingItems = [...new Set(this.state.trackingItemsData.filter((item) => item.value !== '').map((item) => item.trackingItemId ))];
-                        const uniqueTrackingItemsNoUndefined = uniqueTrackingItems.filter((item) => item != undefined)
                         return (
-                            <div className='row'>
-                                {uniqueTrackingItemsNoUndefined.map((trackingItemId) => {
-                                    const matchingTrackingItem = this.state.trackingItemsData.find((item) => item.trackingItemId === trackingItemId);
-                                    if (matchingTrackingItem && matchingTrackingItem.trackingGroupRecordId === record.id) {
-                                        return (
-                                            <div className='col-2 TrackingItemValueColumn' key={trackingItemId}>
-                                                <div className='trackingRecordsContainer'>
-                                                    <div className='trackingItemsContainer'>
-                                                        <div className='TrackingItemValue'>
-                                                            <p className='square'></p>
-                                                            <p className={matchingTrackingItem.value !== '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
-                                                                {matchingTrackingItem.value !== '' ? matchingTrackingItem.value : '-'}
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                            <div>
+                                <div className='TrackingRecord'>
+                                    <p className='TrackingRecordName'>{record.name}</p>
+                                </div>
+                                <div>
+                                    {record.children ? 
+                                        record.children.map((child) => {
+                                            return (
+                                                <div className='TrackingRecordChild'>
+                                                    <p className='TrackingRecordName'>{child.name}</p>
                                                 </div>
-                                            </div>
-                                        );
-                                    } else {
-                                        return (
-                                            <div className='col-2 TrackingItemValueColumn' key={trackingItemId}>
-                                                <div className='trackingRecordsContainer'>
-                                                    <div className='trackingItemsContainer'>
-                                                        <div className='TrackingItemValue'>
-                                                            <p className='square square-red'></p>
-                                                            <p className='TrackingItemValueText EmptyTrackingItemValueText'>-</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        );
+                                            )
+                                        })
+                                    : 
+                                        ""
                                     }
-                                })}
+                                </div>
                             </div>
-                        );
+                        )
                     })}
+            </div>
+            <div className='row TrackingItemValueWrapper'>
 
+            {this.state.trackingItemsData.map((targetTrackingItem) => (
+                <div className='col-2 TrackingItemValueColumn'>
+                    {targetTrackingItem.itemValues.length > 1
+                    ? 
+                            targetTrackingItem.itemValues.map((valueObject) => {
+                                return(
+                                <div className='TrackingItemValue' style={valueObject.value == '' ? {backgroundColor: 'white'} : {backgroundColor: '#D9D9D9'}}>
+                                    {valueObject.value != '' ? 
+                                    <p className='square'></p>
+                                    :
+                                    ""}
+                                    <p className={valueObject.value != '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
+                                        {valueObject.value}
+                                    </p>
+                                </div>)
+
+                            })
+                        
+                    : 
+                    <div className='TrackingItemValue'>
+                        <p className='square square-red'></p>
+                        <p className='TrackingItemValueText EmptyTrackingItemValueText'>
+                        -
+                        </p>
                     </div>
+                    }
+                </div>
+                ))}
+            </div>
 
-
-</div>
+           
+        </div>
         <div className='SeperationLine bottomLine'>
         </div>
-</div>
+    </div>
     )}}
