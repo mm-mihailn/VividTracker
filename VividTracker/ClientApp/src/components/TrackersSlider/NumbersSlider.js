@@ -36,11 +36,12 @@ export default class NumbersSlider extends Component {
             })
         })
            .then((res) => {
-                      console.log(res)
-                    })
-                    .catch((err) => {
-                      console.log(err)
-                    })
+               console.log(res)
+               this.props.onNumberAdded(this.createItem)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
     render() {
         return (

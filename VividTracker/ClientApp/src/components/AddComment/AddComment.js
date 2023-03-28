@@ -27,9 +27,9 @@ export class AddComment extends Component {
         const token = await authService.getAccessToken();
         const errors = {
             minLength: "You cannot submit an empty field.",
-            maxLength: "Comment is too long",
-            success: "Successfuly added a new comment",
-            invalid: "Invalid input"
+            maxLength: "Comment is too long.",
+            success: "Successfuly added a new comment.",
+            invalid: "Invalid input."
         }
         const color = {
             error: "red",
@@ -67,6 +67,7 @@ export class AddComment extends Component {
                         this.setState({ textColor: color.success });
                         this.setState({ errorMessage: errors.success });
                         this.props.onCommentAdded(this.props.value);
+                        this.props.onClickAdd(this.createComment);
                     }
                 })
         }
@@ -86,9 +87,9 @@ export class AddComment extends Component {
                             onChange={(e) => this.setState({ 'comment': e.target.value })}
                             className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                         />
-                        <button type="submit" id="submitPanel"
-                            onClick={(trackingItemId) => this.createComment(trackingItemId)}>Add
-                        </button>
+                        {/*<button type="submit" id="submitPanel"*/}
+                        {/*    onClick={() => { this.createComment(); this.props.createItem(); }}>Add*/}
+                        {/*</button>*/}
                         <div id="errorComment">
                             <p>{this.state.errorMessage}</p>
                         </div>

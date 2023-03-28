@@ -36,6 +36,7 @@ export default class BoolsMenu extends Component {
         })
             .then((res) => {
                 console.log(res)
+                this.props.onBooleanAdded(this.createItem)
             })
             .catch((err) => {
                 console.log(err)
@@ -55,9 +56,9 @@ export default class BoolsMenu extends Component {
                             <option value={0}>False</option>
                             <option value={1}>True</option>
                         </select>
-                        <div className="boolBtn">
-                            <button className="saveBtn">Save</button>
-                        </div>
+                        {/*<div className="boolBtn">*/}
+                        {/*    <button className="saveBtn">Save</button>*/}
+                        {/*</div>*/}
                     </form>
                 </div>
             </div>

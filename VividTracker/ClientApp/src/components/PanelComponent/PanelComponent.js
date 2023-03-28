@@ -10,7 +10,6 @@ import PercentagesSlider from '../TrackersSlider/PercentagesSlider';
 import BoolsMenu from '../TrackersSlider/BoolsMenu';
 
 export default class PanelComponent extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -22,25 +21,6 @@ export default class PanelComponent extends Component {
     async componentDidMount() {
         this.loadComments();
     }
-
-    //getUserName = async (userId) => {
-    //    userId = "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3";
-    //    const token = await authService.getAccessToken();
-    //    let url = endpoints.getUserName(userId);
-    //    await fetch(url, {
-    //        headers: {
-    //            'Content-Type': 'application/json',
-    //            'Authorization': `Bearer ${token}`
-    //        },
-    //    })
-    //        .then(async (res) => {
-    //            let userData = await res.json()
-    //            this.setState({ 'userData': userData })
-    //            this.setState({ 'userName': userData.userName })
-    //        }
-    //        )
-    //}
-
     async loadComments(trackingItemValueId) {
         const token = await authService.getAccessToken();
         trackingItemValueId = 2;
@@ -53,6 +33,12 @@ export default class PanelComponent extends Component {
             .then((res) => res.json())
             .then((res) => this.setState({ comments: res }))
     }
+    addItems = () => {
+        //do something
+        this.createComment();
+        //do something
+        this.createItem();
+    }
     render() {
         return (
             <div className='panelListWrapper d-flex justify-content-center align-items-center'>
@@ -62,18 +48,22 @@ export default class PanelComponent extends Component {
                         <h4 className='panel-item'>Code Reviews Process</h4>
                     </div>
                     <div className="boolsForm">
-                        <BoolsMenu />
+                        <BoolsMenu onBooleanAdded={this.createItem} />
                     </div>
                     <div className="percentagesSlider">
-                        <PercentagesSlider />
+                        <PercentagesSlider onPercentageAdded={this.createItem} />
                     </div>
                     <div className="numbersSlider">
-                        <NumbersSlider />
+                        <NumbersSlider onNumberAdded={this.createItem} />
                     </div>
-
                     <div className='panelContent'>
                         <div className='createNewCommentButtonWrapper'>
                             <AddComment onCommentAdded={this.loadComments} />
+                        </div>
+                        <div className='saveItems'>
+                            <button type="submit" className="submitItems"
+                                onClick={this.addItems}>Add
+                            </button>
                         </div>
                         <div className='commentsContainer'>
                             {this.state.comments.map((trackingItemValueActivityData) => {

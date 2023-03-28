@@ -34,6 +34,7 @@ export default class PercentagesSlider extends Component {
         })
             .then((res) => {
                 console.log(res)
+                this.props.onPercentageAdded(this.createItem)
             })
             .catch((err) => {
                 console.log(err)
