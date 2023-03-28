@@ -7,7 +7,7 @@ import authService from '../api-authorization/AuthorizeService';
 import { AddComment } from '../AddComment/AddComment';
 import NumbersSlider from '../TrackersSlider/NumbersSlider';
 import PercentagesSlider from '../TrackersSlider/PercentagesSlider';
-import { BoolsMenu } from '../TrackersSlider/BoolsMenu';
+import BoolsMenu from '../TrackersSlider/BoolsMenu';
 
 export default class PanelComponent extends Component {
 

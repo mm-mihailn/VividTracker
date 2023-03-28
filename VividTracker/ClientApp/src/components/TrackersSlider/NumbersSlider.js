@@ -68,12 +68,12 @@ export default class NumbersSlider extends Component {
                                 onValueChanged={this.setSliderValue} />
                         </div>
                     </div>
-                    <div className="numberBtn">
-                        <button className="saveBtn"
-                            onClick={(trackingGroupId, trackingItemId, trackingGroupRecordId) =>
-                                this.createItem(trackingGroupId, trackingItemId, trackingGroupRecordId)}>
-                            Save</button>
-                    </div>
+                    {/*<div className="numberBtn">*/}
+                    {/*    <button className="saveBtn"*/}
+                    {/*        onClick={(trackingGroupId, trackingItemId, trackingGroupRecordId) =>*/}
+                    {/*            this.createItem(trackingGroupId, trackingItemId, trackingGroupRecordId)}>*/}
+                    {/*        Save</button>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         );
