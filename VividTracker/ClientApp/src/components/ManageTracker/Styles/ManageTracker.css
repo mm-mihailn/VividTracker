@@ -269,10 +269,16 @@
 .AddTrackingButton:hover{
     cursor: pointer;
 }
-.ItemSectionRecords{
+.ItemSectionRecords {
     margin-top: 0;
     width: 100%;
     padding-right: 2rem;
+    height: 40vh;
+    overflow-y: scroll;
+    border-right-style: solid;
+    border-color: #D9D9D9;
+    border-width: 8px;
+    padding-right: 2.5rem;
 }
 .AlreadyExistingRecords{
     height: 35vh;
