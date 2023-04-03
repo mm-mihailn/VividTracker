@@ -271,11 +271,11 @@ export default class UseTracker extends Component {
                     &&
                             targetTrackingItem.itemValues.map((valueObject) => {
                                 return(
-                                    <div className='TrackingItemValue' style={valueObject.value == '' ? {backgroundColor: 'white'} : {backgroundColor: '#D9D9D9'}}>
+                                    <div className='TrackingItemValue' >
                                         {valueObject.value != '' ? 
                                         <p className='square '></p>
                                         :
-                                        ""}
+                                        <p className='square square-red'></p>}
                                         <p className={valueObject.value != '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
                                             {valueObject.value}
                                         </p>
