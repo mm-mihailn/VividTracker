@@ -119,10 +119,20 @@ export default class UseTracker extends Component {
                   {
                     if (targetTrackingItemID != record.id) 
                     {
-                        filtered.push({
+                        let currentItemValues = []
+                        trackingItemsData.some((trackingItemObjectInner) => {
+                            if(trackingItemObjectInner.trackingItemId == trackingItemObject.trackingItemId)
+                            {
+                                currentItemValues.push(trackingItemObjectInner)
+                            }
+                        })
+
+                          filtered.push({
                             name: trackingItemObject.trackingItem.name,
-                            itemValues: [{ value: trackingItemObject.value }, {value: ''}, {value: ''}]
+                            itemValues: currentItemValues
                           });
+
+                          
                     } 
                     else 
                     {
