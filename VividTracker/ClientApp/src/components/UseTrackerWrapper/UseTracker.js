@@ -119,17 +119,22 @@ export default class UseTracker extends Component {
                   {
                     if (targetTrackingItemID != record.id) 
                     {
+                        let emptyObject = {value: ''}
+
                         let currentItemValues = []
                         trackingItemsData.some((trackingItemObjectInner) => {
                             if(trackingItemObjectInner.trackingItemId == trackingItemObject.trackingItemId)
                             {
                                 currentItemValues.push(trackingItemObjectInner)
                             }
+                            
                         })
+
+                        let itemValues = Array.from({ length: Math.abs(uniqueArr.length - currentItemValues.length - 1 )}, () => emptyObject).concat(currentItemValues);
 
                           filtered.push({
                             name: trackingItemObject.trackingItem.name,
-                            itemValues: currentItemValues
+                            itemValues: itemValues
                           });
 
                           
@@ -275,27 +280,39 @@ export default class UseTracker extends Component {
             </div>
             <div className='row TrackingItemValueWrapper'>
 
-            {this.state.trackingItemsData.map((targetTrackingItem) => (
+            {this.state.trackingItemsData.map((targetTrackingItem) => {
+                const list = targetTrackingItem.itemValues;
+                const emptyObjects = list.filter(obj => obj.value === "");
+                const uniqueValues = Array.from(new Set(list.filter(obj => obj.value !== "").map(obj => obj.value))).map(value => ({value}));
+                const result = uniqueValues.concat(emptyObjects).reverse();
+
+                return(
                 <div className='col-2 TrackingItemValueColumn'>
-                    {targetTrackingItem.itemValues.length >= 1
-                    &&
-                            targetTrackingItem.itemValues.map((valueObject) => {
-                                return(
-                                    <div className='TrackingItemValue' >
-                                        {valueObject.value != '' ? 
-                                        <p className='square '></p>
+                    {targetTrackingItem.itemValues.length >= 1 && result.map((valueObject) => {
+                        return(
+                                    <div className='TrackingItemValue' style={valueObject.value == '' ? {backgroundColor: 'white'} : {backgroundColor: '#D9D9D9'}} >
+                                        
+                                        {valueObject.value != '' 
+                                        ? 
+                                            <p className='square '></p>
                                         :
-                                        <p className='square square-red'></p>}
-                                        <p className={valueObject.value != '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
+                                            ""
+                                        }
+                                        <p className={
+                                        valueObject.value != '' 
+                                        ? 
+                                            'TrackingItemValueText' 
+                                        : 
+                                            'TrackingItemValueText EmptyTrackingItemValueText'}
+                                        >
                                             {valueObject.value}
                                         </p>
                                     </div>
                                 )
-
                             })
-                    }
-                </div>
-                ))}
+                        }
+                </div>)
+                })}
             </div>
 
            
