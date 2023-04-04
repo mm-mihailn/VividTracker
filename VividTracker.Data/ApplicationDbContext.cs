@@ -53,6 +53,7 @@ namespace VividTracker.Data
             builder.ApplyConfiguration(new UserGroupEntityConfiguration());
 
             SeedInitialData(builder);
+            AdditionalSeeder(builder);
         }
 
         private void SeedInitialData(ModelBuilder builder)
@@ -101,6 +102,100 @@ namespace VividTracker.Data
                 new Tenant{Id = 3, Name = "Dream Corp" },
                 new Tenant{Id = 4, Name = "PM Corse Racing Team" },
                 new Tenant{Id = 5, Name = "Low Peak High School" }
+                );
+        }
+        private void AdditionalSeeder(ModelBuilder builder)
+        {
+            builder.Entity<TrackingGroup>().HasData(
+                new TrackingGroup
+                {
+                    Id = 1,
+                    Name = "DB Department",
+                    TenantId = 2,
+                    Label = "Work"
+                }
+                , new TrackingGroup()
+                {
+                    Id = 2,
+                    Name = ".NET Backend",
+                    TenantId = 2,
+                    Label = "Backend"
+                });
+                    
+
+
+            builder.Entity<TrackingGroupRecord>().HasData(
+                new TrackingGroupRecord
+                {
+                    Id = 1,
+                    Name = "VividTracker", 
+                    ParentId = null,
+                    Disabled = false, 
+                    TrackingGroupId = 1
+                },
+                new TrackingGroupRecord
+                {   Id = 2, 
+                    Name = "Google",
+                    ParentId = null, 
+                    Disabled = false,
+                    TrackingGroupId = 2 }
+            );
+
+            builder.Entity<TrackingItem>().HasData(new TrackingItem()
+                {
+                    Id = 1,
+                    TenantId = 2,
+                    IrrelevantAllowed = true,
+                    MandatoryComment = false,
+                    DefaultValue = 10,
+                    MaxValueColor = "#FFFFF",
+                    MinValueColor = "#FFFFF",
+                    IrrelevantColor = "#FFFFF",
+                    Target = 20,
+                    Name = "Code coverage",
+                    MinValueType = 0,
+                    MaxValueType = 1
+                }
+                , new TrackingItem()
+                {
+                    Id = 2,
+                    TenantId = 2,
+                    IrrelevantAllowed = true,
+                    MandatoryComment = false,
+                    DefaultValue = 69,
+                    MaxValueColor = "#FFFFF",
+                    MinValueColor = "#FFFFF",
+                    IrrelevantColor = "#FFFFF",
+                    Target = 100,
+                    Name = "Branch Strategy",
+                    MinValueType = 0,
+                    MaxValueType = 1
+                });
+
+            builder.Entity<TrackingItemValue>().HasData(
+                new TrackingItemValue 
+                    {   Id = 1,
+                        Value = 15, 
+                        TrackingItemId = 1, 
+                        TrackingGroupRecordId = 1
+                    },
+                new TrackingItemValue 
+                    {   Id = 2, 
+                        Value = 69, 
+                        TrackingItemId = 2,
+                        TrackingGroupRecordId = 2
+                });
+
+
+            builder.Entity<TrackingGroup>()
+                .HasMany(t=>t.TrackingItems)
+                .WithMany(b => b.TrackingGroups)
+                .UsingEntity<Dictionary<string, object>>(
+                    "TrackingGroupTrackingItems",
+                    bt=>bt.HasData(
+                        new {TrackingItemId = 1 , TrackingGroupId = 1},
+                        new {TrackingItemId = 2, TrackingGroupId = 2}
+                        )
                 );
         }
     }
