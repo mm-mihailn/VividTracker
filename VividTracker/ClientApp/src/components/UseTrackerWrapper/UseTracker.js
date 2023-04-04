@@ -130,7 +130,7 @@ export default class UseTracker extends Component {
                             
                         })
 
-                        let itemValues = Array.from({ length: Math.abs(uniqueArr.length - currentItemValues.length - 1 )}, () => emptyObject).concat(currentItemValues);
+                        let itemValues = Array.from({ length: Math.abs(uniqueArr.length - currentItemValues.length - 2 )}, () => emptyObject).concat(currentItemValues);
 
                           filtered.push({
                             name: trackingItemObject.trackingItem.name,
@@ -285,7 +285,6 @@ export default class UseTracker extends Component {
                 const emptyObjects = list.filter(obj => obj.value === "");
                 const uniqueValues = Array.from(new Set(list.filter(obj => obj.value !== "").map(obj => obj.value))).map(value => ({value}));
                 const result = uniqueValues.concat(emptyObjects).reverse();
-
                 return(
                 <div className='col-2 TrackingItemValueColumn'>
                     {targetTrackingItem.itemValues.length >= 1 && result.map((valueObject) => {
