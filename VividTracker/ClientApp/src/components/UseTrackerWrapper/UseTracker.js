@@ -74,29 +74,30 @@ export default class UseTracker extends Component {
                 return {id: trackingItemObject.trackingGroupRecord.id}
             })
 
-            const uniqueArr = allRecordsNames.filter((item, index) => {
-                // Use reduce to check if this name already exists in the array
+            const uniqueRecordsList = allRecordsNames.filter((item, index) => {
                 return index === allRecordsNames.findIndex(obj => {
                   return obj.name === item.name;
                 });
               });
 
-              this.setState({'trackingRecordsData': uniqueArr})
+              // save all the unique records to the respective state variable
+              this.setState({'trackingRecordsData': uniqueRecordsList})
               let allItemsNamesAndValues = []
               let previousValue = -1
               let allValuesAmountCummulative = 0
-              let allRecordsAmount = uniqueArr.length
+              let allRecordsAmount = uniqueRecordsList.length
               trackingItemsData.some((trackingitemObject) => {
                 if(trackingitemObject.value)
                 {
                     allValuesAmountCummulative ++;
                 }
               })
+
               trackingItemsData.map((trackingItemObject, idx) => {
                 let targetTrackingItemID = trackingItemObject.trackingGroupRecordId;
                 let filtered = []; 
                 allRecordsIds.map((record) => {
-                  if (uniqueArr.length <= 1) 
+                  if (uniqueRecordsList.length <= 1) 
                   {
                     if (targetTrackingItemID == record.id) 
                     {
@@ -108,7 +109,7 @@ export default class UseTracker extends Component {
                     else 
                     {
                       let emptyObject = {value: ''}   
-                      let itemValues = Array.from({ length: uniqueArr.length - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
+                      let itemValues = Array.from({ length: allRecordsAmount - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
                       filtered.push({
                         name: trackingItemObject.trackingItem.name,
                         itemValues: itemValues
@@ -117,27 +118,26 @@ export default class UseTracker extends Component {
                   } 
                   else 
                   {
+                    // if the item id does NOT correspond to the record id we're working it, i.e. record 1, item 3
                     if (targetTrackingItemID != record.id) 
                     {
                         let emptyObject = {value: ''}
 
                         let currentItemValues = []
-                        trackingItemsData.some((trackingItemObjectInner) => {
+                        trackingItemsData.some((trackingItemObjectInner, index) => {
                             if(trackingItemObjectInner.trackingItemId == trackingItemObject.trackingItemId)
                             {
-                                currentItemValues.push(trackingItemObjectInner)
+                                currentItemValues.push(trackingItemObjectInner);
                             }
-                            
                         })
+                        let itemValuesList = Array.from({ length: Math.abs(allRecordsAmount - currentItemValues.length - 2) }, () => emptyObject).concat(currentItemValues);
+                        let existingIndex = filtered.findIndex(obj => obj.name === trackingItemObject.trackingItem.name);
+                        if (existingIndex >= 0) 
+                        {
+                            // If the object exists, update its itemValues property
+                            filtered[existingIndex].itemValues = itemValuesList;
+                        } 
 
-                        let itemValues = Array.from({ length: Math.abs(uniqueArr.length - currentItemValues.length - 2 )}, () => emptyObject).concat(currentItemValues);
-
-                          filtered.push({
-                            name: trackingItemObject.trackingItem.name,
-                            itemValues: itemValues
-                          });
-
-                          
                     } 
                     else 
                     {
@@ -158,18 +158,26 @@ export default class UseTracker extends Component {
                         //TODO: subtract only the amount of spaces left until the records amount is met!,
                         // -- add N times the values that need to be added, make sure not to overwrite!
                         // TODO: Check if the amount of values is equal to the records, if it is, do not add any empty fields!
-                        if(currentItemValues.length == uniqueArr.length)
+                        if((trackingItemsData.length - 2) == allRecordsAmount) // if the amount of items is equal to the records, i.e. 3 records, 3 items
                         {
-                            itemValues = currentItemValues
-                            filtered.push({
-                                name: trackingItemObject.trackingItem.name,
-                                itemValues: itemValues
-                              });
-                              previousValue = trackingItemObject.value
+                            let previousIndex = filtered.findIndex(item => item.name === trackingItemObject.trackingItem.name);
+                            if (previousIndex >= 0) 
+                            {
+                                filtered[previousIndex].itemValues = currentItemValues;
+                            } 
+                            else 
+                            {
+                                filtered.push({
+                                    name: trackingItemObject.trackingItem.name,
+                                    itemValues: currentItemValues
+                                });
+                            }
+                            previousValue = trackingItemObject.value
+
                         }
                         else
                         {
-                            itemValues = Array.from({ length: Math.abs(uniqueArr.length - currentItemValues.length )}, () => emptyObject).concat([{value: previousValue}, {value: trackingItemObject.value }]);
+                            itemValues = Array.from({ length: Math.abs(allRecordsAmount - currentItemValues.length )}, () => emptyObject).concat([{value: previousValue}, {value: trackingItemObject.value }]);
                             filtered.push({
                                 name: trackingItemObject.trackingItem.name,
                                 itemValues: itemValues
@@ -179,7 +187,7 @@ export default class UseTracker extends Component {
                       }
                       else
                       {
-                        itemValues = Array.from({ length: uniqueArr.length - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
+                        itemValues = Array.from({ length: allRecordsAmount - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
                         filtered.push({
                             name: trackingItemObject.trackingItem.name,
                             itemValues: itemValues
@@ -191,11 +199,10 @@ export default class UseTracker extends Component {
                     }
                   }
                 });
-                
+                //HERE ARE THE FILTERED PROBLEMS FIXED !
                 allItemsNamesAndValues.push(filtered);
               });
-
-            allItemsNamesAndValues = [].concat(...allItemsNamesAndValues)
+              allItemsNamesAndValues = [].concat(...allItemsNamesAndValues)
                 .reduce((uniqueItems, currentItem) => {
                     let itemIndex = uniqueItems.findIndex(item => item.name === currentItem.name && item.itemValues.value === currentItem.itemValues.value);
                     if (itemIndex < 0) {
@@ -204,14 +211,8 @@ export default class UseTracker extends Component {
                         uniqueItems[itemIndex] = currentItem;
                     }
                     return uniqueItems;
-                }, []);
-  
-                
-            allItemsNamesAndValues = allItemsNamesAndValues.filter((item, index) => {
-                return index === allItemsNamesAndValues.findIndex(obj => {
-                  return obj.name === item.name;
-                });
-              });            
+                }, []);    
+
             this.setState({'trackingItemsData': allItemsNamesAndValues})
         })
         .catch((err) => {
@@ -221,8 +222,6 @@ export default class UseTracker extends Component {
     componentDidMount()
     {
         this.getTrackingItemsData()
-       
-
     }
   render() {
     return (
@@ -284,7 +283,7 @@ export default class UseTracker extends Component {
                 const list = targetTrackingItem.itemValues;
                 const emptyObjects = list.filter(obj => obj.value === "");
                 const uniqueValues = Array.from(new Set(list.filter(obj => obj.value !== "").map(obj => obj.value))).map(value => ({value}));
-                const result = uniqueValues.concat(emptyObjects).reverse();
+                const result = list
                 return(
                 <div className='col-2 TrackingItemValueColumn'>
                     {targetTrackingItem.itemValues.length >= 1 && result.map((valueObject) => {
