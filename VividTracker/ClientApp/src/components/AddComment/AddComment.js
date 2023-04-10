@@ -7,6 +7,7 @@ export class AddComment extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            inputValue: '',
             comment: '',
             userId: '',
             timeStamp: '',
@@ -17,12 +18,14 @@ export class AddComment extends Component {
             textColor: '',
         }
         this.createComment = this.createComment.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
+
+    handleInputChange = (event) => {
+        this.setState({ inputValue: event.target.value });
+    };
     
     async createComment() {
-        console.log(this.state.comment);
-        var input = this.state.comment;
         var trackingItemId = 2;
         const token = await authService.getAccessToken();
         const errors = {
@@ -35,12 +38,12 @@ export class AddComment extends Component {
             error: "red",
             success: "green"
         }
-        if (input.length < 1) {
+        if (this.state.inputValue.length < 1) {
 
             this.setState({ errorMessage: errors.minLength });
             this.setState({ textColor: color.error });
         }
-        else if (input.length > 255) {
+        else if (this.state.inputValue.length > 255) {
             this.setState({ errorMessage: errors.maxLength });
             this.setState({ textColor: color.error });
         }
@@ -54,7 +57,7 @@ export class AddComment extends Component {
                 },
                 body: JSON.stringify({
 
-                    "Comment": input,
+                    "Comment": this.state.inputValue,
                     "UserId": "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3"
                 })
             })
@@ -67,13 +70,9 @@ export class AddComment extends Component {
                         this.setState({ textColor: color.success });
                         this.setState({ errorMessage: errors.success });
                         this.props.onCommentAdded(this.props.value);
-                        this.props.onClickAdd(this.createComment);
                     }
                 })
         }
-    }
-    handleChange(event) {
-        this.setState({ comment: event.target.value });
     }
     componentDidMount() {
         this.render();
@@ -84,7 +83,8 @@ export class AddComment extends Component {
                 <div className="container">
                     <div className='CreateNewTenantButtonWrapper'>
                         <input type="text" id="input-comment" className="form-control"
-                            onChange={(e) => this.setState({ 'comment': e.target.value })}
+                            value={this.state.inputValue}
+                            onChange={this.handleInputChange}
                             className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                         />
                         {/*<button type="submit" id="submitPanel"*/}

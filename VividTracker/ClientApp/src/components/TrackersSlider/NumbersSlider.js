@@ -10,17 +10,23 @@ export default class NumbersSlider extends Component {
         super(props);
         this.state = {
             sliderValue: 1,
+            //inputValue: "",
         };
+        this.createNumberItem = this.createNumberItem.bind(this);
         this.setSliderValue = this.setSliderValue.bind(this);
-        this.createItem = this.createItem.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    async createItem() {
+    handleInputChange = (event) => {
+        this.setState({ sliderValue: event.target.value });
+    };
+
+    createNumberItem = async () => {
         console.log(this.state.sliderValue);
         var trackingGroupId = 157;
         var trackingItemId = 1;
         var trackingGroupRecordId = 1;
-        const token = await authService.getAccessToken();
+        const token = authService.getAccessToken();
         var url = endpoints.createItem(trackingGroupId, trackingItemId, trackingGroupRecordId);
         await fetch(url, {
             method: 'POST',
@@ -37,12 +43,15 @@ export default class NumbersSlider extends Component {
         })
            .then((res) => {
                console.log(res)
-               this.props.onNumberAdded(this.createItem)
             })
             .catch((err) => {
                 console.log(err)
             })
     }
+    setSliderValue({ value }) {
+        this.setState({ sliderValue: value });
+    }
+
     render() {
         return (
             <div className="numbersForm">
@@ -57,7 +66,9 @@ export default class NumbersSlider extends Component {
                             <Slider min={1}
                                 max={5}
                                 value={this.state.sliderValue}
-                                onValueChanged={this.setSliderValue} />
+                                onChange={this.handleInputChange}
+                                onValueChanged={this.setSliderValue}
+                            />
                         </div>
                     </div>
                     <div className="dx-field">
@@ -65,8 +76,10 @@ export default class NumbersSlider extends Component {
                             <NumberBox min={1}
                                 max={5}
                                 value={this.state.sliderValue}
+                                onChange={this.handleInputChange}
                                 showSpinButtons={true}
-                                onValueChanged={this.setSliderValue} />
+                                onValueChanged={this.setSliderValue} 
+                            />
                         </div>
                     </div>
                     {/*<div className="numberBtn">*/}
@@ -79,12 +92,4 @@ export default class NumbersSlider extends Component {
             </div>
         );
     }
-
-    setSliderValue({ value }) {
-        this.setState({ sliderValue: value });
-    }
-}
-
-function format(value) {
-    return `${value}`;
 }

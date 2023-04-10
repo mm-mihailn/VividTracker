@@ -10,9 +10,10 @@ export default class PercentagesSlider extends Component {
         super(props);
         this.state = { sliderValue: 0 };
         this.setSliderValue = this.setSliderValue.bind(this);
+        this.createPercentageItem = this.createPercentageItem.bind(this);
     }
 
-    async createItem() {
+    createPercentageItem = async () => {
         console.log(this.state.sliderValue);
         var trackingGroupId = 157;
         var trackingItemId = 1;
@@ -34,7 +35,6 @@ export default class PercentagesSlider extends Component {
         })
             .then((res) => {
                 console.log(res)
-                this.props.onPercentageAdded(this.createItem)
             })
             .catch((err) => {
                 console.log(err)

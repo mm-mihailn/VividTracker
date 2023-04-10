@@ -10,10 +10,10 @@ export default class BoolsMenu extends Component {
             boolValue: 0,
         };
         this.handleChange = this.handleChange.bind(this);
-        this.createItem = this.createItem.bind(this);
+        this.createBooleanItem = this.createBooleanItem.bind(this);
     }
 
-    async createItem(event) {
+    createBooleanItem = async (event) => {
         event.preventDefault();
         console.log(this.state.boolValue);
         var trackingGroupId = 157;
@@ -36,7 +36,6 @@ export default class BoolsMenu extends Component {
         })
             .then((res) => {
                 console.log(res)
-                this.props.onBooleanAdded(this.createItem)
             })
             .catch((err) => {
                 console.log(err)
@@ -49,7 +48,7 @@ export default class BoolsMenu extends Component {
         return (
             <div>
                 <div className="boolsForm">
-                    <form onSubmit={this.createItem}>
+                    <form>
                         <select className='form-control'
                             onChange={(e) => this.setState({ 'boolValue': e.target.value })}
                             value={this.state.boolValue}>

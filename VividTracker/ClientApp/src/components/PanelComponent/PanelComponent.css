@@ -1,4 +1,13 @@
-﻿.submitItems {
+﻿.numbersSliderContainer{
+    margin-top: 30%;
+}
+.percentagesSliderContainer {
+    margin-top: 30%;
+}
+.boolsMenuContainer {
+    margin-top: 30%;
+}
+.submitItems {
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
