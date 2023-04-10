@@ -1,0 +1,15 @@
+.TrackingItemContainer{
+    background-color: #0084B4;
+    color: white;
+}
+.ValueContainer{
+    background-color: #D9D9D9;
+    color: black;
+    margin: 20px;
+    width: 104px;
+    height: 32px;
+}
+.TrackingItemValueContainer
+{
+    background-color: #D9D9D9;
+}
