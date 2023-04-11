@@ -1,10 +1,11 @@
-import React from 'react';
-import './UseTrackerWrapperStyles/TableStyles.css'
+import React, { Component } from 'react';
+import './UseTrackerWrapperStyles/TableStyles.css';
 
-const Table = ({ records, itemsList }) => {
-
-  return (
-    <div className='useTrackerContainer'>
+class Table extends Component {
+  render() {
+    const { records, itemsList } = this.props;
+    return (
+      <div className='useTrackerContainer'>
         <table className="table table-bordered">
           <thead>
             <tr>
@@ -49,8 +50,9 @@ const Table = ({ records, itemsList }) => {
             ))}
           </tbody>
         </table>
-    </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
 export default Table;
