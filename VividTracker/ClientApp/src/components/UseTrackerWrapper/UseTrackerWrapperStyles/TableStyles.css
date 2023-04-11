@@ -1,15 +1,20 @@
 .TrackingItemContainer{
-    background-color: #0084B4;
+    background-color: #0084B4 !important;
     color: white;
 }
 .ValueContainer{
-    background-color: #D9D9D9;
     color: black;
-    margin: 20px;
-    width: 104px;
-    height: 32px;
+    display: flex;
+}
+.TrackingItem{
+    background-color: #0084B4 !important;
+    color: white;
 }
 .TrackingItemValueContainer
 {
     background-color: #D9D9D9;
+}
+
+.ValueParagraph{
+    margin-left: auto;
 }
