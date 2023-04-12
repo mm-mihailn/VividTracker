@@ -36,8 +36,18 @@ class Table extends Component {
                   })
                   let finalValue = valueArray.length > 0 ? valueArray[0].value : '';
 
-                  return <td className={finalValue.length > 0 ? 'ValueContainer' : 'EmptyValueContainer'}>
-                    {finalValue ? finalValue : '-'}
+                  return <td >
+                        <div className='ValueContainer'>
+                          {finalValue > 0 
+                            ? 
+                            <p className='square'></p>
+
+                            : 
+                            <p className='square' style={{backgroundColor: 'red'}}></p>
+
+                          }
+                          <p className='ValueContainerText'>{finalValue ? finalValue : '-'}</p>
+                        </div>
                     </td>
                 })}
               </tr>

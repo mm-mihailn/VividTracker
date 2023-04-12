@@ -6,6 +6,10 @@
     color: black;
     display: flex;
 }
+.ValueContainerText{
+    margin-left: auto;
+    line-height: 30px;
+}
 .TrackingItem{
     background-color: #0084B4 !important;
     color: white;
@@ -13,6 +17,7 @@
 .TrackingItemValueContainer
 {
     background-color: #D9D9D9;
+    width: 300px;
 }
 
 .ValueParagraph{
