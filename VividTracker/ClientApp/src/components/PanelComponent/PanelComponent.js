@@ -65,6 +65,7 @@ export default class PanelComponent extends Component {
         if (this.state.numbersRender) {
             return (
                 <div className='panelListWrapper d-flex justify-content-center align-items-center'>
+                  
                     <div className='panelContainer'>
                         <div className='panelListHeaderWrapper d-flex'>
                             <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
@@ -72,6 +73,14 @@ export default class PanelComponent extends Component {
                         </div>
                         <div className='numbersSliderContainer'>
                             <NumbersSlider />
+                        </div>
+                        <div className='commentsContainer'>
+                            {this.state.comments.map((trackingItemValueActivityData) => {
+                                return (
+                                    <PanelContainer trackingItemValueActivityData={trackingItemValueActivityData}
+                                        key={trackingItemValueActivityData.id} />
+                                )
+                            })}
                         </div>
                     </div>
                 </div>
@@ -88,6 +97,14 @@ export default class PanelComponent extends Component {
                         <div className='percentagesSliderContainer'>
                             <PercentagesSlider />
                         </div>
+                        <div className='commentsContainer'>
+                            {this.state.comments.map((trackingItemValueActivityData) => {
+                                return (
+                                    <PanelContainer trackingItemValueActivityData={trackingItemValueActivityData}
+                                        key={trackingItemValueActivityData.id} />
+                                )
+                            })}
+                        </div>
                     </div>
                 </div>
             );
@@ -102,6 +119,14 @@ export default class PanelComponent extends Component {
                         </div>
                         <div className='boolsMenuContainer'>
                             <BoolsMenu />
+                        </div>
+                        <div className='commentsContainer'>
+                            {this.state.comments.map((trackingItemValueActivityData) => {
+                                return (
+                                    <PanelContainer trackingItemValueActivityData={trackingItemValueActivityData}
+                                        key={trackingItemValueActivityData.id} />
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

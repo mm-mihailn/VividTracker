@@ -4,6 +4,7 @@ import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { endpoints } from '../../endpoints';
 import authService from '../api-authorization/AuthorizeService';
+import PanelComponent from '../PanelComponent/PanelComponent';
 
 export default class UseTracker extends Component {
     constructor()
@@ -203,11 +204,18 @@ export default class UseTracker extends Component {
             console.log(err)
         })
     }
+    toggleVisibility() {
+        let element = document.getElementById("panelComponent");
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        }
+        else {
+            element.style.display = "none";
+        }
+    }
     componentDidMount()
     {
         this.getTrackingItemsData()
-       
-
     }
   render() {
     return (
@@ -264,7 +272,14 @@ export default class UseTracker extends Component {
                     })}
             </div>
             <div className='row TrackingItemValueWrapper'>
-
+                    <div className="col-2 panelContainer">
+                        <div className="hidePanelContainer">
+                            <button className="hidePanel" onClick={this.toggleVisibility}>Show/Hide</button>
+                        </div>
+                        <div id="panelComponent" >
+                            <PanelComponent />
+                        </div>
+                    </div>
             {this.state.trackingItemsData.map((targetTrackingItem) => (
                 <div className='col-2 TrackingItemValueColumn'>
                     {targetTrackingItem.itemValues.length > 1
@@ -294,9 +309,10 @@ export default class UseTracker extends Component {
                 </div>
                 ))}
             </div>
-
+               
            
-        </div>
+            </div>
+
         <div className='SeperationLine bottomLine'>
         </div>
     </div>

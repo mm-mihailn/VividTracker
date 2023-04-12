@@ -205,3 +205,20 @@
 .square-red{
     background-color: #F03C31;
 }
+.panelContainer{
+    margin-left: 80%;
+    margin-top: -140%;
+}
+.hidePanelContainer {
+    margin-top: -80%;
+    margin-left: 15px;
+}
+.hidePanel {
+    background-color: #0084B4;
+    color: white;
+    border: 2px solid white;
+    font-size: 18px;
+}
+#panelComponent{
+    display: block;
+}
