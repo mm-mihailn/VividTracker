@@ -21,13 +21,15 @@ export default class PanelComponent extends Component {
             boolsRender: false,
             numberValue: 1,
             percentageValue: 0,
-            boolsValue: false
+            boolsValue: false,
+            isDivVisible: true
         }
         this.loadComments = this.loadComments.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
     }
     async componentDidMount() {
         this.loadComments();
-        //this.checkValue();
+        window.addEventListener('keydown', this.handleKeyDown);
     }
 
     handleSaveInputValues = () => {
