@@ -49,6 +49,7 @@ export default class UseTracker extends Component {
         
     }
     scrollElements = () => {
+        // TODO: FIX SCROLL BEHAVIOR
         let firstColumn = this.state.trackingItemsData[0]
         this.setState({'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn)})
         // TODO: put smooth transition animation
@@ -132,7 +133,7 @@ export default class UseTracker extends Component {
   render() {
     return (
         <div className='UseTrackerComponentWrapper'>
-        <div className='blueSeperationLine'></div>
+        {/* <div className='blueSeperationLine'></div> */}
         {this.state.trackingItemsData.length >= 4 ?
             <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
             :
