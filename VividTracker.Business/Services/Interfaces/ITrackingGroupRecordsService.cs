@@ -10,7 +10,7 @@
     public interface ITrackingGroupRecordsService
     {
         Task<IEnumerable<TrackingGroupRecord>> GetAllRecords(int trackingGroupId);
-        Task<IEnumerable<string>> GetAllTrackingGroupsRecordsAsync(int tenantId);
+        Task<IEnumerable<string>> GetAllTrackingGroupsRecordsAsync(int tenantId, int trackingGroupId);
         Task<TrackingGroupRecord> CreateTrackingGroupRecord(TrackingGroupRecord trackingGroupRecord);
         Task<TrackingGroupRecord> GetTrackingGroupRecordById(int trackingGroupRecordId);
     }

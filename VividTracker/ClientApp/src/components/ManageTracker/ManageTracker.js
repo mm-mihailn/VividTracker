@@ -124,6 +124,8 @@ export default class ManageTracker extends Component {
             .then((
                 async (res) => {
                     let result = await res.json()
+                    console.log(`Result is:${result}`)
+                    /*console.log(`All is:${this.state.trackingGroupRecords}`)*/
                     this.setState({ 'allRecords': result })
                 }))
             .catch((err) => {
@@ -147,7 +149,6 @@ export default class ManageTracker extends Component {
                 async (res) => {
                     let result = await res.json()
                     let filteredTrackerItemList = []
-                    console.log(this.state.currentTrackerItems.map((targetItem) => {console.log(targetItem.name)}))
                     result.map((item) => {
                         if((filteredTrackerItemList.findIndex((targetItem) => targetItem.name == item.name)) == -1 &&
                         (this.state.currentTrackerItems.findIndex((targetItem) => targetItem.name == item.name)) == -1)
