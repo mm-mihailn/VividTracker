@@ -20,9 +20,16 @@
             return await Entities.Include(t=>t.TrackingGroup.Tenant).Where(t=>t.TrackingGroupId==trackingGroupId).ToListAsync();
         }
 
-        public async Task<IEnumerable<string>> GetAllTrackingGroupsRecords(int tenantId)
+        public async Task<IEnumerable<string>> GetAllTrackingGroupsRecords(int tenantId, int trackingGroupId)
         {
-            return await Entities.Where(t => t.TrackingGroup.TenantId == tenantId).Select(p => p.Name).Distinct().ToListAsync();
+            var allExistingRecords = await GetAllRecordsAsync(trackingGroupId);
+            var allRecords = await Entities.ToListAsync();
+
+            var names = allRecords.Where(r => !allExistingRecords.Any(e => e.Name == r.Name))
+                .Select(r => r.Name)
+                .ToList();
+
+            return names;
         }
     }
 }

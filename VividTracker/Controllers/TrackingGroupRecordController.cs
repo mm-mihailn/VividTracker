@@ -38,7 +38,7 @@
         {
             var trackingGroup = await _trackingGroupsService.GetTrackerByIdAsync(trackingGroupId);
 
-            return await _trackingGroupRecordsService.GetAllTrackingGroupsRecordsAsync(trackingGroup.TenantId);
+            return await _trackingGroupRecordsService.GetAllTrackingGroupsRecordsAsync(trackingGroup.TenantId,trackingGroupId);
         }
         [HttpPost]
         [Route("api/create/trackingGroupsRecords/{trackingGroupId}")]
