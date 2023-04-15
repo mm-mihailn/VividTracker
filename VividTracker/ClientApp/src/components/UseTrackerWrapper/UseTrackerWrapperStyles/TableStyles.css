@@ -1,26 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 .TrackingItemContainer{
     background-color: #0084B4 !important;
     color: white;
     border-style: solid;
-border-width: 10px;
-border-color: white;
+    border-width: 4px;
+    border-color: white;
 }
 .ValueContainer{
     color: black;
     display: flex;
     /* border-style: solid; */
     background-color: #d9d9d9;
-    margin: 0px;
+    margin: -4px;
+    margin-left: -5.5px;
+    width: 105%;
 }
 .ValueContainerText{
     margin-left: auto;
+    margin-right: 10px;
     line-height: 30px;
+    margin-bottom: 0;
 }
 .TrackingItem{
     background-color: #0084B4 !important;
     color: white;
     border-style: solid;
-    border-width: 10px;
+    border-width: 4px;
     border-color: white;
 }
 .hidden
@@ -43,5 +48,16 @@ border-color: white;
     margin-left: auto;
 }
 
-  
-  
+table > :not(caption) > * > * 
+{
+    border-bottom-width: 0px !important;
+}
+
+.RecordNameContainer{
+    background-color: #d9d9d9 !important;
+    margin: 5px;
+    height: 30px;
+    line-height: 19.07px;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}

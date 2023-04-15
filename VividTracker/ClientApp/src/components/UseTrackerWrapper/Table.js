@@ -7,7 +7,7 @@ class Table extends Component {
     const visibleItems = 5
     return (
       <div className='useTrackerContainer'>
-        <table className="table " >
+        <table className="table" >
           <thead>
             <tr className="border-bottom" style={{ borderBottom: '1px solid #ddd', margin: '20px 0' }}>
               <th className='TrackingItemContainer'>Projects</th>
@@ -31,7 +31,7 @@ class Table extends Component {
             <tbody>
             {records.map(record => (
               <tr key={record.id} className='TrackingItemValueContainer' >
-                <td>{record.name}</td>
+                <div className='RecordNameContainer'>{record.name}</div>
                 {itemsList.map((valuesObject, key) => {
                   let targetTrackingItemId = Number(Object.keys(valuesObject)[0])
                   let targetTrackingItemValuesArray = Object.values(valuesObject)[0]
