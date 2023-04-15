@@ -1,10 +1,16 @@
 .TrackingItemContainer{
     background-color: #0084B4 !important;
     color: white;
+    border-style: solid;
+border-width: 10px;
+border-color: white;
 }
 .ValueContainer{
     color: black;
     display: flex;
+    /* border-style: solid; */
+    background-color: #d9d9d9;
+    margin: 0px;
 }
 .ValueContainerText{
     margin-left: auto;
@@ -13,17 +19,29 @@
 .TrackingItem{
     background-color: #0084B4 !important;
     color: white;
+    border-style: solid;
+    border-width: 10px;
+    border-color: white;
 }
 .hidden
 {
     display: none;
 }
-.TrackingItemValueContainer
-{
-    background-color: #D9D9D9;
-    width: 300px;
+
+.SeperationLine{
+    border-bottom-style: solid;
+    border-color: #D9D9D9;
+    border-width: 4px;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+    margin-left: 1.813rem;
+    margin-right: 1.4rem;
+    width: 100%;
 }
 
 .ValueParagraph{
     margin-left: auto;
 }
+
+  
+  

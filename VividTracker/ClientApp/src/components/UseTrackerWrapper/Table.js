@@ -7,10 +7,10 @@ class Table extends Component {
     const visibleItems = 5
     return (
       <div className='useTrackerContainer'>
-        <table className="table table-bordered">
+        <table className="table " >
           <thead>
-            <tr>
-              <th className='TrackingItemContainer'>Record</th>
+            <tr className="border-bottom" style={{ borderBottom: '1px solid #ddd', margin: '20px 0' }}>
+              <th className='TrackingItemContainer'>Projects</th>
               {[...new Set(itemsList
               .flatMap(item => Object.values(item))
                 .flatMap(values => values.map(value => value.trackingItemName)))]
@@ -28,9 +28,9 @@ class Table extends Component {
               }
             </tr>
           </thead>
-          <tbody>
+            <tbody>
             {records.map(record => (
-              <tr key={record.id} className='TrackingItemValueContainer'>
+              <tr key={record.id} className='TrackingItemValueContainer' >
                 <td>{record.name}</td>
                 {itemsList.map((valuesObject, key) => {
                   let targetTrackingItemId = Number(Object.keys(valuesObject)[0])
@@ -42,7 +42,7 @@ class Table extends Component {
                   let finalValue = valueArray.length > 0 ? valueArray[0].value : '';
                   if(key < visibleItems)
                   {
-                    return <td >
+                    return <td>
                           <div className='ValueContainer'>
                             {finalValue > 0 
                               ? 
