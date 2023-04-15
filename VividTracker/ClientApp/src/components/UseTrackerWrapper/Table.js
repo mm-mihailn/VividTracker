@@ -4,8 +4,7 @@ import './UseTrackerWrapperStyles/TableStyles.css';
 class Table extends Component {
   render() {
     const { records, itemsList } = this.props;
-    console.log(itemsList)
-    console.log(records)
+    const visibleItems = 5
     return (
       <div className='useTrackerContainer'>
         <table className="table table-bordered">
@@ -15,12 +14,18 @@ class Table extends Component {
               {[...new Set(itemsList
               .flatMap(item => Object.values(item))
                 .flatMap(values => values.map(value => value.trackingItemName)))]
-                  .map(name => (
-                    <th key={name} className='TrackingItem'>{name}</th>
-                  )
+                  .map((name, index) => {
+                    if(index < visibleItems)
+                    {
+                      return <th key={name} className='TrackingItem'>{name}</th>
+                    }
+                    else
+                    {
+                      return <th key={name} className='TrackingItem hidden'>{name}</th>
+                    }
+                  }
                 )
               }
-
             </tr>
           </thead>
           <tbody>
@@ -35,20 +40,22 @@ class Table extends Component {
                     return targetTrackingItemValue.recordId == record.id
                   })
                   let finalValue = valueArray.length > 0 ? valueArray[0].value : '';
+                  if(key < visibleItems)
+                  {
+                    return <td >
+                          <div className='ValueContainer'>
+                            {finalValue > 0 
+                              ? 
+                              <p className='square'></p>
 
-                  return <td >
-                        <div className='ValueContainer'>
-                          {finalValue > 0 
-                            ? 
-                            <p className='square'></p>
+                              : 
+                              <p className='square' style={{backgroundColor: 'red'}}></p>
 
-                            : 
-                            <p className='square' style={{backgroundColor: 'red'}}></p>
-
-                          }
-                          <p className='ValueContainerText'>{finalValue ? finalValue : '-'}</p>
-                        </div>
-                    </td>
+                            }
+                            <p className='ValueContainerText'>{finalValue ? finalValue : '-'}</p>
+                          </div>
+                      </td>
+                  }
                 })}
               </tr>
             ))}
