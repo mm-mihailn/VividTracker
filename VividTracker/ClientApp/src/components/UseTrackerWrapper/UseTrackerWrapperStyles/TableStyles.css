@@ -5,6 +5,8 @@
     border-style: solid;
     border-width: 4px;
     border-color: white;
+    border-right-color: #D9D9D9;
+    border-right: 100px;
 }
 .ValueContainer{
     color: black;
@@ -27,6 +29,7 @@
     border-style: solid;
     border-width: 4px;
     border-color: white;
+    min-width: 126px;
 }
 .hidden
 {
