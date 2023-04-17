@@ -21,9 +21,6 @@ export default class UseTrackerWrapper extends Component {
             </div>
         </div>
             <UseTracker />
-            {/*<div className = "panelContainer">*/}
-            {/*    <PanelComponent />*/}
-            {/*</div>*/}
       </div>
     )
   }

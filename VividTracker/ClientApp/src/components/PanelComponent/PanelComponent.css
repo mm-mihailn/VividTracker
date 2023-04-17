@@ -107,13 +107,14 @@
     cursor: pointer;
 }
 
-.panelContainer {
+#panelContainer {
     position: absolute;
     top: 18.2rem;
     width: 229px;
     height: max-content;
     padding-bottom: 10vh;
     margin-bottom: 70px;
+    visibility: visible;
 }
 
 .panelListHeaderWrapper {

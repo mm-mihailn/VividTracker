@@ -31,7 +31,14 @@ export default class PanelComponent extends Component {
         this.loadComments();
         window.addEventListener('keydown', this.handleKeyDown);
     }
-
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyDown);
+    }
+    handleKeyDown(event) {
+        if (event.key === 'F') {
+            this.setState({ isDivVisible: false });
+        }
+    }
     handleSaveInputValues = () => {
         console.log(this.state.childInputValues);
     };
@@ -64,11 +71,11 @@ export default class PanelComponent extends Component {
             .then((res) => this.setState({ comments: res }))
     }
     render() {
+        const { isDivVisible } = this.state;
         if (this.state.numbersRender) {
             return (
                 <div className='panelListWrapper d-flex justify-content-center align-items-center'>
-                  
-                    <div className='panelContainer'>
+                    <div id='panelContainer' className={isDivVisible ? 'visible' : 'hidden'}>
                         <div className='panelListHeaderWrapper d-flex'>
                             <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
                             <h4 className='panel-item'>Code Reviews Process</h4>
