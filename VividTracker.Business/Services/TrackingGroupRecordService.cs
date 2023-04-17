@@ -32,9 +32,9 @@
             return await _trackingGroupRecordsRepository.GetAllRecordsAsync(trackingGroupId);
         }
 
-        public async Task<IEnumerable<string>> GetAllTrackingGroupsRecordsAsync(int tenantId)
+        public async Task<IEnumerable<string>> GetAllTrackingGroupsRecordsAsync(int tenantId,int trackingGroupId)
         {
-            return await _trackingGroupRecordsRepository.GetAllTrackingGroupsRecords(tenantId);
+            return await _trackingGroupRecordsRepository.GetAllTrackingGroupsRecords(tenantId, trackingGroupId);
         }
     }
 }
