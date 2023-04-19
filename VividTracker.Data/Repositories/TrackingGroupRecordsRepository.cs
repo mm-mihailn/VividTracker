@@ -26,6 +26,7 @@
             var allRecords = await Entities.ToListAsync();
 
             var names = allRecords.Where(r => !allExistingRecords.Any(e => e.Name == r.Name))
+                .DistinctBy(t=>t.Name)
                 .Select(r => r.Name)
                 .ToList();
 
