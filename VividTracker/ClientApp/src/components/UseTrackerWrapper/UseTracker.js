@@ -4,6 +4,7 @@ import { faAngleLeft, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { endpoints } from '../../endpoints';
 import authService from '../api-authorization/AuthorizeService';
+import Table from './Table';
 
 export default class UseTracker extends Component {
     constructor()
@@ -48,6 +49,7 @@ export default class UseTracker extends Component {
         
     }
     scrollElements = () => {
+        // TODO: FIX SCROLL BEHAVIOR
         let firstColumn = this.state.trackingItemsData[0]
         this.setState({'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn)})
         // TODO: put smooth transition animation
@@ -73,132 +75,53 @@ export default class UseTracker extends Component {
             let allRecordsIds = trackingItemsData.map((trackingItemObject) => {
                 return {id: trackingItemObject.trackingGroupRecord.id}
             })
-
-            const uniqueArr = allRecordsNames.filter((item, index) => {
-                // Use reduce to check if this name already exists in the array
-                return index === allRecordsNames.findIndex(obj => {
+            let allRecords = trackingItemsData.map((trackingItemObject) => {
+                return {name: trackingItemObject.trackingGroupRecord.name, id: trackingItemObject.trackingGroupRecord.id}
+            })
+            const uniqueRecordsList = allRecords.filter((item, index) => {
+                return index === allRecords.findIndex(obj => {
                   return obj.name === item.name;
                 });
               });
 
-              this.setState({'trackingRecordsData': uniqueArr})
+              // save all the unique records to the respective state variable
+              this.setState({'trackingRecordsData': uniqueRecordsList})
               let allItemsNamesAndValues = []
               let previousValue = -1
               let allValuesAmountCummulative = 0
-              let allRecordsAmount = uniqueArr.length
+              let allRecordsAmount = uniqueRecordsList.length
               trackingItemsData.some((trackingitemObject) => {
                 if(trackingitemObject.value)
                 {
                     allValuesAmountCummulative ++;
                 }
               })
-              trackingItemsData.map((trackingItemObject, idx) => {
-                let targetTrackingItemID = trackingItemObject.trackingGroupRecordId;
-                let filtered = []; 
-                allRecordsIds.map((record) => {
-                  if (uniqueArr.length <= 1) 
-                  {
-                    if (targetTrackingItemID == record.id) 
-                    {
-                      filtered.push({
-                        name: trackingItemObject.trackingItem.name,
-                        itemValues: [{ value: trackingItemObject.value }]
-                      });
-                    } 
-                    else 
-                    {
-                      let emptyObject = {value: ''}   
-                      let itemValues = Array.from({ length: uniqueArr.length - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
-                      filtered.push({
-                        name: trackingItemObject.trackingItem.name,
-                        itemValues: itemValues
-                      });
-                    }
-                  } 
-                  else 
-                  {
-                    if (targetTrackingItemID != record.id) 
-                    {
-                        filtered.push({
-                            name: trackingItemObject.trackingItem.name,
-                            itemValues: [{ value: trackingItemObject.value }, {value: ''}, {value: ''}]
-                          });
-                    } 
-                    else 
-                    {
-                      let emptyObject = {value: ''}
 
-                      // If another value exists then instead of putting an empty object, add that value as an object to the item values array
-                      let itemValues = ''
+            trackingItemsData.map((trackingItem) => {
+                let currentItemObject = 
+                {
+                    [trackingItem.trackingItemId]: [{'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id}]
+                }
+                let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]); 
+                if(targetElement)
+                {
+                    
+                    console.log(`${trackingItem.trackingItemId} is included`)
+                    // get previous instance of existing objects from the list of objects
+                    let previousItemObjectCopy = targetElement
+                    // update it and replace the old object with the new one
+                    previousItemObjectCopy[trackingItem.trackingItemId].push({'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id})
+                }
+                else
+                {
+                    allItemsNamesAndValues.push(currentItemObject)
+                }
 
-                      if(previousValue != - 1)
-                      {
-                        let currentItemValues = []
-                        trackingItemsData.some((trackingItemObjectInner) => {
-                            if(trackingItemObjectInner.trackingItemId == trackingItemObject.trackingItemId)
-                            {
-                                currentItemValues.push(trackingItemObjectInner)
-                            }
-                        })
-                        //TODO: subtract only the amount of spaces left until the records amount is met!,
-                        // -- add N times the values that need to be added, make sure not to overwrite!
-                        // TODO: Check if the amount of values is equal to the records, if it is, do not add any empty fields!
-                        if(currentItemValues.length == uniqueArr.length)
-                        {
-                            itemValues = currentItemValues
-                            filtered.push({
-                                name: trackingItemObject.trackingItem.name,
-                                itemValues: itemValues
-                              });
-                              previousValue = trackingItemObject.value
-                        }
-                        else
-                        {
-                            itemValues = Array.from({ length: Math.abs(uniqueArr.length - currentItemValues.length )}, () => emptyObject).concat([{value: previousValue}, {value: trackingItemObject.value }]);
-                            filtered.push({
-                                name: trackingItemObject.trackingItem.name,
-                                itemValues: itemValues
-                              });
-                              previousValue = trackingItemObject.value
-                        }
-                      }
-                      else
-                      {
-                        itemValues = Array.from({ length: uniqueArr.length - 1 }, () => emptyObject).concat({ value: trackingItemObject.value });
-                        filtered.push({
-                            name: trackingItemObject.trackingItem.name,
-                            itemValues: itemValues
-                          });
-                          previousValue = trackingItemObject.value
-                      }
+            })
 
-
-                    }
-                  }
-                });
-                
-                allItemsNamesAndValues.push(filtered);
-              });
-
-            allItemsNamesAndValues = [].concat(...allItemsNamesAndValues)
-                .reduce((uniqueItems, currentItem) => {
-                    let itemIndex = uniqueItems.findIndex(item => item.name === currentItem.name && item.itemValues.value === currentItem.itemValues.value);
-                    if (itemIndex < 0) {
-                        uniqueItems.push(currentItem);
-                    } else {
-                        uniqueItems[itemIndex] = currentItem;
-                    }
-                    return uniqueItems;
-                }, []);
-  
-                
-            allItemsNamesAndValues = allItemsNamesAndValues.filter((item, index) => {
-                return index === allItemsNamesAndValues.findIndex(obj => {
-                  return obj.name === item.name;
-                });
-              });            
+            console.log(allItemsNamesAndValues)
             this.setState({'trackingItemsData': allItemsNamesAndValues})
-        })
+            })
         .catch((err) => {
             console.log(err)
         })
@@ -206,98 +129,16 @@ export default class UseTracker extends Component {
     componentDidMount()
     {
         this.getTrackingItemsData()
-       
-
     }
   render() {
     return (
         <div className='UseTrackerComponentWrapper'>
-        <div className='blueSeperationLine'></div>
-        {this.state.trackingItemsData.length > 4 ?
+        {/* <div className='blueSeperationLine'></div> */}
+        {this.state.trackingItemsData.length > 5 ?
             <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon = {faAngleLeft}/>
             :
             ""
         }
-        <div className='row menuWrapper'>
-            <div className='TrackingRecordsColumn'>
-                <div className='TrackingRecordsColumnHeader'>
-                    <p className='TrackingRecordsHeader'>Projects</p>
-                </div>
-            </div>
-                {this.state.trackingItemsData.map((item) => {
-                    //TODO: Figure out what exactly is supposed to happen with the width, is it dynamic or is it fixed ? The story seems kind of torn on that.
-                    return(
-                            <div className='TrackingItemsColumn col-2'>
-                                <div className='TrackingItemsColumnHeader'>
-                                    <p className='TrackingItemsHeader'>{item.name}</p>
-                                </div>
-                            </div>
-                    )
-
-                })}
-        </div>          
-        <div className='SeperationLine'>
-        </div>
-        <div className='TrackingRecordsWrapper'>
-            <div className='TrackingRecords'>
-                    {this.state.trackingRecordsData.map((record) => {
-                        return (
-                            <div>
-                                <div className='TrackingRecord'>
-                                    <p className='TrackingRecordName'>{record.name}</p>
-                                </div>
-                                <div>
-                                    {record.children ? 
-                                        record.children.map((child) => {
-                                            return (
-                                                <div className='TrackingRecordChild'>
-                                                    <p className='TrackingRecordName'>{child.name}</p>
-                                                </div>
-                                            )
-                                        })
-                                    : 
-                                        ""
-                                    }
-                                </div>
-                            </div>
-                        )
-                    })}
-            </div>
-            <div className='row TrackingItemValueWrapper'>
-
-            {this.state.trackingItemsData.map((targetTrackingItem) => (
-                <div className='col-2 TrackingItemValueColumn'>
-                    {targetTrackingItem.itemValues.length > 1
-                    ? 
-                            targetTrackingItem.itemValues.map((valueObject) => {
-                                return(
-                                <div className='TrackingItemValue' style={valueObject.value == '' ? {backgroundColor: 'white'} : {backgroundColor: '#D9D9D9'}}>
-                                    {valueObject.value != '' ? 
-                                    <p className='square'></p>
-                                    :
-                                    ""}
-                                    <p className={valueObject.value != '' ? 'TrackingItemValueText' : 'TrackingItemValueText EmptyTrackingItemValueText'}>
-                                        {valueObject.value}
-                                    </p>
-                                </div>)
-
-                            })
-                        
-                    : 
-                    <div className='TrackingItemValue'>
-                        <p className='square square-red'></p>
-                        <p className='TrackingItemValueText EmptyTrackingItemValueText'>
-                        -
-                        </p>
-                    </div>
-                    }
-                </div>
-                ))}
-            </div>
-
-           
-        </div>
-        <div className='SeperationLine bottomLine'>
-        </div>
+        <Table records={this.state.trackingRecordsData} itemsList={this.state.trackingItemsData}/>
     </div>
     )}}
