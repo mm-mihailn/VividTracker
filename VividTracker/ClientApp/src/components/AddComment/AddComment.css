@@ -1,4 +1,10 @@
-﻿#submitPanel {
+﻿#numbersForm {
+    visibility: visible;
+}
+#numbersForm {
+    display: block;
+}
+#submitPanel {
     border-radius: 50px;
     font-style: normal;
     font-weight: 700;
@@ -56,3 +62,4 @@
 .form-control:focus {
     border-bottom: 2px solid #F28627 !important;
 }
+

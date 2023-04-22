@@ -6,6 +6,8 @@ import { faComments } from "@fortawesome/free-regular-svg-icons";
 export default class PanelContainer extends Component {
 
     render() {
+        const date = new Date(this.props.trackingItemValueActivityData.timeStamp);
+        const formattedDate = date.toLocaleDateString("en-GB");
         return (
             <div className='panelContainerIndividual d-flex' key={this.props.trackingItemValueActivityData.id}>
                 <div className='panelContentContainer'>
@@ -23,7 +25,7 @@ export default class PanelContainer extends Component {
                     </div>
                     <div className='dateWrapper ml-auto'>
                         <span className='dateText pageText'>
-                            {this.props.trackingItemValueActivityData.timeStamp}
+                            {formattedDate}
                         </span>
                     </div>
                 </div>

@@ -24,8 +24,8 @@ export default class NumbersSlider extends Component {
     createNumberItem = async () => {
         console.log(this.state.sliderValue);
         var trackingGroupId = 157;
-        var trackingItemId = 1;
-        var trackingGroupRecordId = 1;
+        var trackingItemId = 2;
+        var trackingGroupRecordId = 6;
         const token = authService.getAccessToken();
         var url = endpoints.createItem(trackingGroupId, trackingItemId, trackingGroupRecordId);
         await fetch(url, {
@@ -82,12 +82,12 @@ export default class NumbersSlider extends Component {
                             />
                         </div>
                     </div>
-                    {/*<div className="numberBtn">*/}
-                    {/*    <button className="saveBtn"*/}
-                    {/*        onClick={(trackingGroupId, trackingItemId, trackingGroupRecordId) =>*/}
-                    {/*            this.createItem(trackingGroupId, trackingItemId, trackingGroupRecordId)}>*/}
-                    {/*        Save</button>*/}
-                    {/*</div>*/}
+                    <div className="numberBtn">
+                        <button className="saveBtn"
+                            onClick={(trackingGroupId, trackingItemId, trackingGroupRecordId) =>
+                                this.createNumberItem(trackingGroupId, trackingItemId, trackingGroupRecordId)}>
+                            Save</button>
+                    </div>
                 </div>
             </div>
         );

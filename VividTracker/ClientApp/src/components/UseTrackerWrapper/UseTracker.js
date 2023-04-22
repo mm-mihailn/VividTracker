@@ -270,16 +270,17 @@ export default class UseTracker extends Component {
                             </div>
                         )
                     })}
-            </div>
-            <div className='row TrackingItemValueWrapper'>
-                    <div className="col-2 panelContainer">
-                        <div className="hidePanelContainer">
-                            <button className="hidePanel" onClick={this.toggleVisibility}>Show/Hide</button>
-                        </div>
-                        <div id="panelComponent" >
-                            <PanelComponent />
-                        </div>
+                </div>
+                <div className="col-2 panelContainer">
+                    <div className="hidePanelContainer">
+                        <button className="hidePanel" onClick={this.toggleVisibility}>Show/Hide</button>
                     </div>
+                    <div id="panelComponent" >
+                        <PanelComponent />
+                    </div>
+                </div>
+            <div className='row TrackingItemValueWrapper'>
+             
             {this.state.trackingItemsData.map((targetTrackingItem) => (
                 <div className='col-2 TrackingItemValueColumn'>
                     {targetTrackingItem.itemValues.length > 1

@@ -29,16 +29,16 @@
     margin-left: 20px;
 }
 .panelCommentWrapper {
-    margin-top: -17px;
+    margin-top: -3px;
     margin-bottom: 2px;
 }
 .dateText {
     color: black;
-    font-size: 10px;
-    margin-top: -15px;
+    font-size: 7px;
+    margin-top: 15px;
 }
 .dateWrapper {
-    margin-top: -15px;
+    margin-top: 5px;
 }
 .userNameText {
     font-size: 12px;
