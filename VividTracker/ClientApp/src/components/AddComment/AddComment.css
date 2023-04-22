@@ -57,7 +57,7 @@
     margin-top: 5px;
     margin-right: -120px;
     margin-left: -48px;
-    color: white;
+    color: black;
 }
 .form-control:focus {
     border-bottom: 2px solid #F28627 !important;

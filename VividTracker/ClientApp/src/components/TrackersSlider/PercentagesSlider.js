@@ -67,12 +67,6 @@ export default class PercentagesSlider extends Component {
                                 onValueChanged={this.setSliderValue} />
                         </div>
                     </div>
-                    {/*<div className="percentageBtn">*/}
-                    {/*    <button className="saveBtn"*/}
-                    {/*        onClick={(trackingGroupId, trackingItemId, trackingGroupRecordId) =>*/}
-                    {/*            this.createItem(trackingGroupId, trackingItemId, trackingGroupRecordId)}>*/}
-                    {/*        Save</button>*/}
-                    {/*</div>*/}
                 </div>
             </div>
         );

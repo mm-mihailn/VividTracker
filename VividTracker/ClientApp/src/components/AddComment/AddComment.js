@@ -20,6 +20,10 @@ export class AddComment extends Component {
             errorMessage: '',
             textColor: '',
             sliderValue: 1,
+            numbersRender: false,
+            percentagesRender: false,
+            boolsRender: true,
+            isDivVisible: true
         }
         this.createComment = this.createComment.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -122,54 +126,135 @@ export class AddComment extends Component {
         this.render();
     }
     render() {
-        return (
-            <div className="container">
-                <div className="numbersForm">
-                    <div className="dx-fieldset">
-                        <div className="numberTxt">
-                            <span id="numberTxt-min">1</span>
-                            <span id="numberTxt-max">5</span>
-                        </div>
-                        <div className="dx-field">
-
-                            <div className="dx-field-value">
-                                <Slider min={1}
-                                    max={5}
-                                    value={this.state.sliderValue}
-                                    onChange={this.handleInputChange}
-                                    onValueChanged={this.setSliderValue}
-                                />
-                            </div>
-                        </div>
-                        <div className="dx-field">
-                            <div className="dx-field-value">
-                                <NumberBox min={1}
-                                    max={5}
-                                    value={this.state.sliderValue}
-                                    onChange={this.handleInputChange}
-                                    showSpinButtons={true}
-                                    onValueChanged={this.setSliderValue}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        if (this.state.numbersRender) {
+            return (
                 <div className="container">
-                    <div className='CreateNewTenantButtonWrapper'>
-                        <input type="text" id="input-comment" className="form-control"
-                            value={this.state.inputValue}
-                            onChange={(e) => this.setState({ 'inputValue': e.target.value })}
-                            className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
-                        />
-                        <button type="submit" id="submitPanel"
-                            onClick={this.handleAddButtonClick}>Add
-                        </button>
-                        <div id="errorComment">
-                            <p>{this.state.errorMessage}</p>
+                    <div id="numbersForm">
+                        <div className="dx-fieldset">
+                            <div className="numberTxt">
+                                <span id="numberTxt-min">1</span>
+                                <span id="numberTxt-max">5</span>
+                            </div>
+                            <div className="dx-field">
+                                <div className="dx-field-value">
+                                    <Slider min={1}
+                                        max={5}
+                                        value={this.state.sliderValue}
+                                        onChange={this.handleInputChange}
+                                        onValueChanged={this.setSliderValue}
+                                    />
+                                </div>
+                            </div>
+                            <div className="dx-field">
+                                <div className="dx-field-value">
+                                    <NumberBox min={1}
+                                        max={5}
+                                        value={this.state.sliderValue}
+                                        onChange={this.handleInputChange}
+                                        showSpinButtons={true}
+                                        onValueChanged={this.setSliderValue}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="container">
+                        <div className='CreateNewTenantButtonWrapper'>
+                            <input type="text" id="input-comment" className="form-control"
+                                value={this.state.inputValue}
+                                onChange={(e) => this.setState({ 'inputValue': e.target.value })}
+                                className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
+                            />
+                            <button type="submit" id="submitPanel"
+                                onClick={this.handleAddButtonClick}>Add
+                            </button>
+                            <div id="errorComment">
+                                <p>{this.state.errorMessage}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else if (this.state.percentagesRender) {
+            return (
+                <div className="container">
+                    <div className="percentagesForm">
+                        <div className="dx-fieldset">
+                            <div className="percentageTxt">
+                                <span id="percentageTxt-min">0%</span>
+                                <span id="percentageTxt-max">100%</span>
+                            </div>
+                            <div className="dx-field">
+
+                                <div className="dx-field-value">
+                                    <Slider min={0}
+                                        max={100}
+                                        value={this.state.sliderValue}
+                                        onChange={this.handleInputChange}
+                                        onValueChanged={this.setSliderValue} />
+                                </div>
+                            </div>
+                            <div className="dx-field">
+                                <div className="dx-field-value">
+                                    <NumberBox min={0}
+                                        max={100}
+                                        value={this.state.sliderValue}
+                                        onChange={this.handleInputChange}
+                                        showSpinButtons={true}
+                                        onValueChanged={this.setSliderValue} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="container">
+                        <div className='CreateNewTenantButtonWrapper'>
+                            <input type="text" id="input-comment" className="form-control"
+                                value={this.state.inputValue}
+                                onChange={(e) => this.setState({ 'inputValue': e.target.value })}
+                                className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
+                            />
+                            <button type="submit" id="submitPanel"
+                                onClick={this.handleAddButtonClick}>Add
+                            </button>
+                            <div id="errorComment">
+                                <p>{this.state.errorMessage}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        else if (this.state.boolsRender) {
+            return (
+                <div className="container">
+                    <div className="boolsForm">
+                        <form onSubmit={this.createNumberItem}>
+                            <select className='form-control'
+                                onChange={(e) => this.setState({ 'sliderValue': e.target.value })}
+                                value={this.state.sliderValue}>
+                                <option value={0}>False</option>
+                                <option value={1}>True</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div className="container">
+                        <div className='CreateNewTenantButtonWrapper'>
+                            <input type="text" id="input-comment" className="form-control"
+                                value={this.state.inputValue}
+                                onChange={(e) => this.setState({ 'inputValue': e.target.value })}
+                                className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
+                            />
+                            <button type="submit" id="submitPanel"
+                                onClick={this.handleAddButtonClick}>Add
+                            </button>
+                            <div id="errorComment">
+                                <p>{this.state.errorMessage}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
     }
 }

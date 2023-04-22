@@ -55,9 +55,6 @@ export default class BoolsMenu extends Component {
                             <option value={0}>False</option>
                             <option value={1}>True</option>
                         </select>
-                        {/*<div className="boolBtn">*/}
-                        {/*    <button className="saveBtn">Save</button>*/}
-                        {/*</div>*/}
                     </form>
                 </div>
             </div>
