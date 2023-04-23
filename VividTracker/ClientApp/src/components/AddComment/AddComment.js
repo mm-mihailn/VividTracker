@@ -4,7 +4,9 @@ import authService from '../api-authorization/AuthorizeService';
 import { endpoints } from '../../endpoints';
 import { Slider } from 'devextreme-react/slider';
 import { NumberBox } from 'devextreme-react/number-box';
-import './Styles/NumbersSlider.css'
+import './Styles/NumbersSlider.css';
+import './Styles/PercentagesSlider.css';
+import './Styles/BoolsMenu.css';
 
 export class AddComment extends Component {
     constructor(props) {

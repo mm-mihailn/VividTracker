@@ -1,1 +1,38 @@
-﻿
+﻿.percentagesForm {
+    margin-bottom: 15%;
+    margin-top: -20%;
+}
+.percentageTxt {
+    margin-top: -15%;
+}
+#percentageTxt-min {
+    color: white;
+    margin-left: 40%;
+}
+#percentageTxt-max {
+    color: white;
+    margin-left: 45%;
+}
+.dx-slider-handle {
+    background-color: #F28627;
+}
+.dx-slider {
+    width: 220px;
+    color: #F28627;
+}
+.dx-texteditor-input {
+    width: max-content;
+}
+.dx-numberbox-spin-up-icon {
+    background-color: #F28627;
+}
+.dx-numberbox-spin-down-icon {
+    background-color: #F28627;
+}
+.dx-fieldset {
+    margin-left: -65%;
+    margin-top: -15%;
+}
+.percentageBtn {
+    margin-left: 55%;
+}

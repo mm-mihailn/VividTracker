@@ -1,44 +1,35 @@
 ﻿.numberTxt {
     margin-top: 3%;
 }
-
 #numberTxt-min {
     color: white;
     margin-left: 40%;
 }
-
 #numberTxt-max {
     color: white;
     margin-left: 55%;
 }
-
 .dx-slider-handle {
     background-color: #F28627;
 }
-
 .dx-slider {
     width: 220px;
     color: #F28627;
 }
-
 .dx-field input, .dx-field textarea {
     font-family: "Helvetica Neue","Segoe UI",helvetica,verdana,sans-serif;
     line-height: 1.35715;
     width: 100px;
 }
-
 .dx-numberbox-spin-up-icon {
     background-color: #F28627;
 }
-
 .dx-numberbox-spin-down-icon {
     background-color: #F28627;
 }
-
 .dx-fieldset {
     margin-left: -65%;
 }
-
 .numberBtn {
     margin-left: 55%;
 }

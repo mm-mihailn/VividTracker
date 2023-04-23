@@ -114,7 +114,7 @@
     height: max-content;
     padding-bottom: 10vh;
     margin-bottom: 70px;
-    visibility: visible;
+    /*visibility: visible;*/
 }
 
 .panelListHeaderWrapper {
