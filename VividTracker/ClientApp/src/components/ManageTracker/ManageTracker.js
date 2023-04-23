@@ -382,9 +382,9 @@ export default class ManageTracker extends Component {
                                 'createdItemMaxColorCode': '',
                                 'createdItemIrrelevantColorCode': '',
                                 'createdItemDefaultValue': '',
-                                'createdItemPropertyType': '',
-                                'createdItemIrrelevantAllowed': '',
-                                'createdItemMandatoryCommentAvailable': '',
+                                'createdItemPropertyType': '1',
+                                'createdItemIrrelevantAllowed': 'false',
+                                'createdItemMandatoryCommentAvailable': 'false',
                                 'createdItemTarget': '',
                                 'maximalValue': '',
                                 'minimalValue': ''})
