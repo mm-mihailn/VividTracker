@@ -19,6 +19,13 @@
 
         public async Task<TrackingGroupRecord> CreateTrackingGroupRecord(TrackingGroupRecord trackingGroupRecord)
         {
+            var allRecords = await _trackingGroupRecordsRepository.GetAllRecordsAsync(trackingGroupRecord.TrackingGroupId);
+            var recordsName = allRecords.Select(t => t.Name).ToList();
+
+            if (recordsName.Any(t=>t.ToUpper().Trim() == trackingGroupRecord.Name.ToUpper().Trim()))
+            {
+                return null;
+            }
             return await _trackingGroupRecordsRepository.AddAsync(trackingGroupRecord);
         }
 
