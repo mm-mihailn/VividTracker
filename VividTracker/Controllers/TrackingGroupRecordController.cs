@@ -48,7 +48,10 @@
             var trackingGroupRecord = trackingGroupRecordsRequestModel.TrackingGroupRecords(trackingGroup);
 
             var result = await _trackingGroupRecordsService.CreateTrackingGroupRecord(trackingGroupRecord);
-
+            if (result == null)
+            {
+                return BadRequest("Already exist!");
+            }
             return Ok(result);
         }
     }
