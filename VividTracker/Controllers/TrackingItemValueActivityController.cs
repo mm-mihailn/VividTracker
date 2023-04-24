@@ -9,11 +9,12 @@ namespace VividTracker.Controllers
     using VividTracker.Models;
 
     [ApiController]
+    [Authorize]
     public class TrackingItemValueActivityController : ControllerBase
     {
         private readonly ITrackingItemValueActivityService _trackingItemValueActivityService;
         private readonly IUsersService _usersService;
-        public TrackingItemValueActivityController(ITrackingItemValueActivityService trackingItemValueActivityService,IUsersService usersService)
+        public TrackingItemValueActivityController(ITrackingItemValueActivityService trackingItemValueActivityService, IUsersService usersService)
         {
             _trackingItemValueActivityService = trackingItemValueActivityService;
             _usersService = usersService;
@@ -26,19 +27,19 @@ namespace VividTracker.Controllers
         {
             var comments = await _trackingItemValueActivityService.GetCommentsByTrackingItemId(trackingItemValueId);
 
-            if(comments == null)
+            if (comments == null)
             {
                 return BadRequest("No comments!");
             }
             return Ok(comments);
-           
+
         }
 
         [HttpPost]
-        [Route("api/create/comments/{trackingItemValueId}")]
-        public async Task<IActionResult> CreateComment([FromRoute] int trackingItemValueId, TrackingItemValueActivityModel trackingItemValueActivityModel)
+        [Route("api/create/comments/{trackingItemId}")]
+        public async Task<IActionResult> CreateComment([FromRoute] int trackingItemId, TrackingItemValueActivityModel trackingItemValueActivityModel)
         {
-            var comment = trackingItemValueActivityModel.ToCreateComment(trackingItemValueId);
+            var comment = trackingItemValueActivityModel.ToCreateComment(trackingItemId);
             var isExist = await _usersService.GetUserByIdAsync(comment.UserId);
 
             if (isExist != null)
@@ -47,7 +48,7 @@ namespace VividTracker.Controllers
                 {
                     await _trackingItemValueActivityService.AddComment(comment);
 
-                    return Ok("Added Succesfully");
+                    return Ok("Added Successfully");
                 }
                 else
                 {

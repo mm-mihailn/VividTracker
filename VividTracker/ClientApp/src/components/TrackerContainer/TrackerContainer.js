@@ -22,9 +22,8 @@ export default class TrackerContainerComponent extends Component {
                         </a>
                     </button>
                 </div>
-
             </div>
-    </div>
+        </div>
     )
   }
 }

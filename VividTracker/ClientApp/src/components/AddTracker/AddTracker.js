@@ -26,8 +26,6 @@ export class AddTracker extends Component {
         var record = this.state.trackerRecord;
         let tenantId = this.props.location.pathname.split('/')[2]
         
-        // console.log(name,record,tenantId)
-
         const color = {
             error: "red",
             success: "green"

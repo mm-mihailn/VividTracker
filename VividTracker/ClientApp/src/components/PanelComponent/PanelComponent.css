@@ -1,0 +1,150 @@
+﻿.numbersSliderContainer{
+    margin-top: 30%;
+}
+.percentagesSliderContainer {
+    margin-top: 30%;
+}
+.boolsMenuContainer {
+    margin-top: 30%;
+}
+.submitItems {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #0084B4;
+    color: white;
+    height: 36px;
+    margin-left: 103%;
+    margin-top: -22.7%;
+    border-radius: 0;
+    margin-bottom: 10px;
+    border: 2px solid white;
+}
+.boolsForm{
+    margin-top: -20%;
+}
+.percentagesSlider{
+    margin-top: 40%;
+}
+.commentsContainer {
+    margin-bottom: 10vh;
+}
+.panel-header {
+    padding-top: 100px;
+    background-color: #827D7D;
+    width: 229px;
+    border-radius: 0px;
+    text-align: left;
+    margin-left: -3%;
+}
+
+.project-name {
+    font-size: 14px !important;
+    font-weight: 700;
+    color: black;
+    margin-top: -12%;
+}
+
+.item-name {
+    font-size: 14px !important;
+    font-weight: 700;
+    color: black;
+    margin-top: -6%;
+}
+
+.panel-body {
+    margin-top: 3%;
+    background-color: #D9D9D9;
+    width: 229px;
+    height: 45px;
+}
+
+.comment-name {
+    font-size: 12px !important;
+    color: black;
+    font-weight: 700;
+}
+
+.date {
+    margin-left: 180px !important;
+    font-size: 12px !important;
+    color: black;
+    margin-top: -11%;
+}
+
+.slideContainer {
+    margin-top: 10%;
+    width: 17%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: orange;
+    cursor: pointer;
+}
+
+#panelContainer {
+    position: absolute;
+    top: 18.2rem;
+    width: 229px;
+    height: max-content;
+    padding-bottom: 10vh;
+    margin-bottom: 70px;
+    /*visibility: visible;*/
+}
+
+.panelListHeaderWrapper {
+    background-color: #827D7D;
+    color: black;
+    text-align: left;
+    margin-left: -9%;
+    margin-bottom: 33%;
+    margin-top: -50%;
+}
+
+.panel-item {
+    margin-left: -10.5rem;
+    padding-top: 1.95rem;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.panelListHeader {
+    margin-left: 0.3rem;
+    padding-top: 0.55rem;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.pageText {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+}
+

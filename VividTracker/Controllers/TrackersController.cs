@@ -31,7 +31,6 @@ namespace VividTracker.Controllers
         }
 
         [HttpGet]
-        
         [Route("api/trackersList")]
         public async Task<IActionResult> GetTrackingGroupsByTenantId()
         {

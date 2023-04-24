@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './Styles/ManageTracker.css'
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { endpoints } from '../../endpoints';
 import authService from '../api-authorization/AuthorizeService';
 export default class ManageTracker extends Component {
