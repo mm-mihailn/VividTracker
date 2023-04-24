@@ -5,6 +5,17 @@ import { faTable, faCirclePlay, faFilter } from '@fortawesome/free-solid-svg-ico
 import UseTracker from './UseTracker';
 import PanelComponent from '../PanelComponent/PanelComponent';
 export default class UseTrackerWrapper extends Component {
+  constructor(props)
+  {
+    super(props)
+    this.state = {
+      isPanelVisible: false
+    }
+  }
+
+  handlePanelVisibility = (TrackingItemId, TrackingItemValueId) => {
+    console.log(`showing tracking item with id ${TrackingItemValueId} of tracking item with id: ${TrackingItemId}`)
+  }
   render() {
     return (
       <div className='useTrackerWrapper'>
@@ -20,7 +31,12 @@ export default class UseTrackerWrapper extends Component {
                 <FontAwesomeIcon className='usedTrackerFilterIcon usedTrackerMenuIcon' icon={faFilter}/>
             </div>
         </div>
-            <UseTracker />
+        <div className='UseTrackerMainPoint'>
+          <UseTracker panelHandler = {this.handlePanelVisibility}/>
+          {this.state.isPanelVisible &&
+          <PanelComponent/>
+          }
+        </div>
       </div>
     )
   }

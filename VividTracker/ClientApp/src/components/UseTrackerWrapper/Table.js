@@ -40,10 +40,11 @@ class Table extends Component {
                     return targetTrackingItemValue.recordId == record.id
                   })
                   let finalValue = valueArray.length > 0 ? valueArray[0].value : '';
+                  let finalValueId = valueArray.length > 0 ? valueArray[0].id : null
                   if(key < visibleItems)
                   {
                     return <td>
-                          <div className='ValueContainer'>
+                          <div className='ValueContainer' onClick={finalValueId != null ? () => this.props.panelHandler(targetTrackingItemId, finalValueId) : null}>
                             {finalValue > 0 
                               ? 
                               <p className='square'></p>
