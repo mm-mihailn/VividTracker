@@ -9,12 +9,19 @@ export default class UseTrackerWrapper extends Component {
   {
     super(props)
     this.state = {
-      isPanelVisible: false
+      isPanelVisible: true,
+      panelTrackingItemId: -1,
+      panelTrackingItemValueId: -1,
+      panelTrackingRecordId: -1
     }
   }
 
-  handlePanelVisibility = (TrackingItemId, TrackingItemValueId) => {
+  handlePanelVisibility = (TrackingItemId, TrackingItemValueId, TrackingRecordId) => {
     console.log(`showing tracking item with id ${TrackingItemValueId} of tracking item with id: ${TrackingItemId}`)
+    this.setState({'panelTrackingItemId': TrackingItemId})
+    this.setState({'panelTrackingItemValueId': TrackingItemValueId})
+    this.setState({'panelTrackingRecordId': TrackingRecordId})
+
   }
   render() {
     return (
@@ -34,7 +41,7 @@ export default class UseTrackerWrapper extends Component {
         <div className='UseTrackerMainPoint'>
           <UseTracker panelHandler = {this.handlePanelVisibility}/>
           {this.state.isPanelVisible &&
-          <PanelComponent/>
+            <PanelComponent panelTrackingItemId = {this.state.panelTrackingItemId} panelTrackingItemValueId = {this.state.panelTrackingItemValueId} panelTrackingRecordId = {this.state.panelTrackingRecordId}/>
           }
         </div>
       </div>

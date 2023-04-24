@@ -18,7 +18,10 @@ export default class PanelComponent extends Component {
             numberValue: 1,
             percentageValue: 0,
             boolsValue: false,
-            isDivHidden: false
+            isDivHidden: false,
+            TrackingItemId: -1,
+            TrackingItemValueId: -1,
+            TrackingRecordId: -1
         }
         this.loadComments = this.loadComments.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -26,6 +29,17 @@ export default class PanelComponent extends Component {
     async componentDidMount() {
         this.loadComments();
         document.addEventListener("keydown", this.handleKeyDown);
+        this.setState({'TrackingItemId': this.props.panelTrackingItemId}, () => {
+            this.setState({'TrackingItemValueId': this.props.panelTrackingItemValueId}, () => {
+                this.setState({'TrackingRecordId': this.props.panelTrackingRecordId}, () => {
+                    console.log(this.state)
+
+                })
+
+            })
+
+        })
+
     }
     handleKeyDown = (event) => {
         if (event.keyCode === 27) {
