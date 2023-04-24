@@ -162,7 +162,7 @@ export class AddComment extends Component {
                     </div>
                     <div className="container">
                         <div className='CreateNewTenantButtonWrapper'>
-                            <input type="text" id="input-comment" className="form-control"
+                            <input type="text" id="input-comment"
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
@@ -211,7 +211,7 @@ export class AddComment extends Component {
                     </div>
                     <div className="container">
                         <div className='CreateNewTenantButtonWrapper'>
-                            <input type="text" id="input-comment" className="form-control"
+                            <input type="text" id="input-comment"
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
@@ -242,7 +242,7 @@ export class AddComment extends Component {
                     </div>
                     <div className="container">
                         <div className='CreateNewTenantButtonWrapper'>
-                            <input type="text" id="input-comment" className="form-control"
+                            <input type="text" id="input-comment"
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
