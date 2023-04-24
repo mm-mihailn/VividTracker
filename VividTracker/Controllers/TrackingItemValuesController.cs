@@ -9,7 +9,7 @@ using VividTracker.Models;
 namespace VividTracker.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class TrackingItemValuesController : ControllerBase
     {
         private readonly ITrackingItemValuesService _trackingItemValuesService;
