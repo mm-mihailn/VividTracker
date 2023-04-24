@@ -32,13 +32,12 @@ export default class PanelComponent extends Component {
         this.setState({'TrackingItemId': this.props.panelTrackingItemId}, () => {
             this.setState({'TrackingItemValueId': this.props.panelTrackingItemValueId}, () => {
                 this.setState({'TrackingRecordId': this.props.panelTrackingRecordId}, () => {
-                    console.log(this.state)
-
+                    
                 })
-
             })
-
         })
+
+        this.getTargetData()
 
     }
     handleKeyDown = (event) => {
@@ -61,6 +60,35 @@ export default class PanelComponent extends Component {
             .then((res) => res.json())
             .then((res) => this.setState({ comments: res }))
     }
+
+    getTargetData = async () => {
+             // get record name
+             // get tracking item name
+             let trackingRecordItems = await this.getTrackingItemData(2)
+             console.log(trackingRecordItems)
+             // get tracking item value
+    }
+
+    getTrackingItemData = async (trackingRecordId) => {
+        const token = await authService.getAccessToken();
+        let url = endpoints.getTrackingGroupTrackingItems(trackingRecordId);
+        return fetch(url, {
+            method: 'GET',
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err)
+        });
+    }
+
+    getTrackingRecordData = async ( trackingRecordId) => {
+
+    }
+
+    
     render() {
         return (
             <div className='panelListWrapper d-flex justify-content-center align-items-center'>
@@ -70,7 +98,7 @@ export default class PanelComponent extends Component {
                             <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
                             <h4 className='panel-item'>Code Reviews Process</h4>
                         </div>
-                        <AddComment onCommentAdded={this.loadComments()} />
+                        <AddComment onCommentAdded={this.loadComments} />
                         <div className='commentsContainer'>
                             {this.state.comments.map((trackingItemValueActivityData) => {
                                 return (
