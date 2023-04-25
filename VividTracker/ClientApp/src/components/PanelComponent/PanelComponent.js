@@ -31,6 +31,7 @@ export default class PanelComponent extends Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
     }
     async componentDidMount() {
+        
         this.loadComments();
         document.addEventListener("keydown", this.handleKeyDown);
         this.setState({'TrackingItemId': this.props.panelTrackingItemId}, () => {
@@ -44,6 +45,7 @@ export default class PanelComponent extends Component {
     handleKeyDown = (event) => {
         if (event.keyCode === 27) {
             this.setState({ isDivHidden: true });
+            this.props.panelHandler()
         }
     };
     handleSaveInputValues = () => {
@@ -102,10 +104,6 @@ export default class PanelComponent extends Component {
 
         return result
     }
-    // TODO: ASK FOR THE FOLLOWING
-    // -- GET RECORD DATA BY ID
-    // -- GET TRACKING ITEM BY ID SHOULD INCLUDE VALUE
-    // -------- GET TRACKING ITEM VALUE BY ID --------
     getTrackingRecordData = async (trackingRecordId) => {
         const token = await authService.getAccessToken();
         let url = endpoints.getTrackingRecordById(trackingRecordId);
@@ -123,27 +121,47 @@ export default class PanelComponent extends Component {
         return result
     }
 
+    componentDidUpdate(prevProps) {
+        // Compare the new props with the previous props
+        if (this.props.panelTrackingItemId != prevProps.panelTrackingItemId ||
+            this.props.panelTrackingItemValueId != prevProps.panelTrackingItemValueId ||
+            this.props.panelTrackingRecordId != prevProps.panelTrackingRecordId) {
+            // If the new prop is different, update the state accordingly
+            this.setState({'TrackingItemId': this.props.panelTrackingItemId}, () => {
+                this.setState({'TrackingItemValueId': this.props.panelTrackingItemValueId}, () => {
+                    this.setState({'TrackingRecordId': this.props.panelTrackingRecordId}, () => {
+                        this.getTargetData()
+                    })
+                })
+            })
+        }
+    }
     
     render() {
         return (
             <div className='panelListWrapper d-flex justify-content-center align-items-center'>
-                {this.state.isDivHidden == false && this.state.isPanelLoading == false && (
+                {this.state.isDivHidden == false && this.state.isPanelLoading == false 
+                && (
                     <div id='panelContainer'>
                         <div className='panelListHeaderWrapper d-flex'>
                             <h4 className='panelListHeader'>{this.state.TagetRecordData.name}</h4>
                             <h4 className='panel-item'>{this.state.TagetTrackingItemData.name}</h4>
                         </div>
-                        <AddComment onCommentAdded={this.loadComments} />
+                        <AddComment onCommentAdded={this.loadComments}  updatePanel = {this.updatePanel}/>
                         <div className='commentsContainer'>
                             {this.state.comments.map((trackingItemValueActivityData) => {
                                 return (
                                     <PanelContainer trackingItemValueActivityData={trackingItemValueActivityData}
-                                        key={trackingItemValueActivityData.id} />
+                                        key={trackingItemValueActivityData.id}/>   
                                 )
-                            })}
+                                
+                            })
+                            }
                         </div>
                     </div>
-                )}
+                    
+                    )
+                }
             </div>
         );
     }

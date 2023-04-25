@@ -12,7 +12,8 @@ export default class UseTrackerWrapper extends Component {
       isPanelVisible: false,
       panelTrackingItemId: null,
       panelTrackingItemValueId: null,
-      panelTrackingRecordId: null
+      panelTrackingRecordId: null, 
+      
     }
   }
 
@@ -20,15 +21,13 @@ export default class UseTrackerWrapper extends Component {
     console.log(`showing tracking item with id ${TrackingItemValueId} of tracking item with id: ${TrackingItemId}`)
     if(this.state.isPanelVisible == false && TrackingItemId && TrackingItemValueId && TrackingRecordId)
     {
-      this.setState({'isPanelVisible': true})
+      await this.setState({'isPanelVisible': true})
+     
     }
-    this.setState({'panelTrackingItemId': TrackingItemId}, () => {
-      this.setState({'panelTrackingItemValueId': TrackingItemValueId} , () => {
-        this.setState({'panelTrackingRecordId': TrackingRecordId})
-      })
 
-    })
-
+    this.setState({'panelTrackingItemId': TrackingItemId})
+    this.setState({'panelTrackingItemValueId': TrackingItemValueId})
+    this.setState({'panelTrackingRecordId': TrackingRecordId})
   }
   render() {
     return (
@@ -47,9 +46,9 @@ export default class UseTrackerWrapper extends Component {
         </div>
         <div className='UseTrackerMainPoint'>
           <UseTracker panelHandler = {this.handlePanelVisibility}/>
-          {this.state.isPanelVisible == true 
+          {this.state.isPanelVisible == true && this.state.panelTrackingItemId && this.state.panelTrackingItemValueId && this.state.panelTrackingRecordId
             ?
-              <PanelComponent panelTrackingItemId = {this.state.panelTrackingItemId} panelTrackingItemValueId = {this.state.panelTrackingItemValueId} panelTrackingRecordId = {this.state.panelTrackingRecordId}/>
+              <PanelComponent panelHandler = {this.handlePanelVisibility} panelTrackingItemId = {this.state.panelTrackingItemId} panelTrackingItemValueId = {this.state.panelTrackingItemValueId} panelTrackingRecordId = {this.state.panelTrackingRecordId}/>
             :
               ""
           }
