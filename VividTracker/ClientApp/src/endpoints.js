@@ -23,6 +23,7 @@ export const endpoints = {
     resetName: (trackingGroupId) => `${apiBaseUrl}/api/reset/tracker/${trackingGroupId}`,
     editTracker: (trackerId) => `${apiBaseUrl}/api/editTracker/${trackerId}`,
     getAllRecords: (trackingGroupId) => `${apiBaseUrl}/api/trackingGroupsRecordsUnique/${trackingGroupId}`,
+    getTrackingRecordById: (trackingRecordId) => `${apiBaseUrl}/api/GetTrackingGroupRecordsById/${trackingRecordId}`,
     getAllTrackingItems: (trackingGroupId) => `${apiBaseUrl}/api/trackingItems/${trackingGroupId}`,
     createComment: (trackingItemId) => `${apiBaseUrl}/api/create/comments/${trackingItemId}`,
     loadComments: (trackingItemValueId) => `${apiBaseUrl}/api/comments/${trackingItemValueId}`,

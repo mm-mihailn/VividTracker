@@ -21,7 +21,11 @@ export default class PanelComponent extends Component {
             isDivHidden: false,
             TrackingItemId: -1,
             TrackingItemValueId: -1,
-            TrackingRecordId: -1
+            TrackingRecordId: -1,
+            TagetRecordData: null,
+            TagetTrackingItemData: null,
+            TargetTrackingItemValue: -1,
+            isPanelLoading: true
         }
         this.loadComments = this.loadComments.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -43,7 +47,7 @@ export default class PanelComponent extends Component {
         }
     };
     handleSaveInputValues = () => {
-        console.log(this.state.childInputValues);
+        // console.log(this.state.childInputValues);
     };
     async loadComments(trackingItemValueId) {
         const token = await authService.getAccessToken();
@@ -61,17 +65,25 @@ export default class PanelComponent extends Component {
     getTargetData = async () => {
              // get record name
              // -- getAllRecords endpoint and filter by record id
-             let allRecords = await this.getTrackingRecordData(3)
-            //  let targetRecord = allRecords.filter((iteratedRecord) => iteratedRecord.id == this.state.TrackingRecordId)
-             console.log(allRecords)
+             let targetRecord = await this.getTrackingRecordData(this.state.TrackingRecordId)
+             let targetRecordName = targetRecord.name
 
              // get tracking item name
              let trackingItem = await this.getTrackingItemData(this.state.TrackingItemId)
              let targetTrackingItemName = trackingItem.name
 
-
              // get tracking item value
-             // - getTrackingItemsDataByTrackingGroupId
+             let trackingItemInTargetRecordValue = trackingItem.trackingItemsValues.filter((trackingItemValue) => 
+                trackingItemValue.trackingGroupRecordId == this.state.TrackingRecordId
+             )
+             this.setState({'TagetRecordData': targetRecord }, () => {
+                 this.setState({'TagetTrackingItemData': trackingItem }, () => {
+                     this.setState({'TargetTrackingItemValue': trackingItemInTargetRecordValue }, () => {
+                         this.setState({'isPanelLoading': false})
+                     })
+                 })
+             })
+
     }
 
     getTrackingItemData = async (trackingItemId) => {
@@ -96,7 +108,7 @@ export default class PanelComponent extends Component {
     // -------- GET TRACKING ITEM VALUE BY ID --------
     getTrackingRecordData = async (trackingRecordId) => {
         const token = await authService.getAccessToken();
-        let url = endpoints.getAllRecords(trackingRecordId);
+        let url = endpoints.getTrackingRecordById(trackingRecordId);
         let result = await fetch(url, {
             method: 'GET',
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
@@ -115,11 +127,11 @@ export default class PanelComponent extends Component {
     render() {
         return (
             <div className='panelListWrapper d-flex justify-content-center align-items-center'>
-                {this.state.isDivHidden ? null : (
+                {this.state.isDivHidden == false && this.state.isPanelLoading == false && (
                     <div id='panelContainer'>
                         <div className='panelListHeaderWrapper d-flex'>
-                            <h4 className='panelListHeader'>Augeo Affinity Marketing</h4>
-                            <h4 className='panel-item'>Code Reviews Process</h4>
+                            <h4 className='panelListHeader'>{this.state.TagetRecordData.name}</h4>
+                            <h4 className='panel-item'>{this.state.TagetTrackingItemData.name}</h4>
                         </div>
                         <AddComment onCommentAdded={this.loadComments} />
                         <div className='commentsContainer'>
