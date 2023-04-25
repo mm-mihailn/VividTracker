@@ -1,4 +1,6 @@
-﻿namespace VividTracker.Data.Repositories
+﻿using AutoMapper.QueryableExtensions;
+
+namespace VividTracker.Data.Repositories
 {
     using Microsoft.EntityFrameworkCore;
     using System;
@@ -32,5 +34,18 @@
 
             return names;
         }
+        public async Task<TrackingGroupRecord> GetTrackingGroupRecordById(int trackingGroupRecordId)
+        {
+            var result = await Entities.Include(t => t.TrackingGroup.Tenant).FirstOrDefaultAsync(t=>t.Id==trackingGroupRecordId);
+
+            if (result == null)
+            {
+                return null;
+            }
+
+            return result;
+
+        }
+
     }
 }
