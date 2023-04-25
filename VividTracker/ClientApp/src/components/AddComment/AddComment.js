@@ -22,9 +22,9 @@ export class AddComment extends Component {
             errorMessage: '',
             textColor: '',
             sliderValue: 1,
-            numbersRender: false,
+            numbersRender: true,
             percentagesRender: false,
-            boolsRender: true,
+            boolsRender: false,
             isDivVisible: true
         }
         this.createComment = this.createComment.bind(this);
