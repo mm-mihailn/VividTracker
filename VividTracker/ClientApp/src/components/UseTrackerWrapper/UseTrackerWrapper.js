@@ -9,18 +9,25 @@ export default class UseTrackerWrapper extends Component {
   {
     super(props)
     this.state = {
-      isPanelVisible: true,
-      panelTrackingItemId: -1,
-      panelTrackingItemValueId: -1,
-      panelTrackingRecordId: -1
+      isPanelVisible: false,
+      panelTrackingItemId: null,
+      panelTrackingItemValueId: null,
+      panelTrackingRecordId: null
     }
   }
 
-  handlePanelVisibility = (TrackingItemId, TrackingItemValueId, TrackingRecordId) => {
+  handlePanelVisibility = async (TrackingItemId, TrackingItemValueId, TrackingRecordId) => {
     console.log(`showing tracking item with id ${TrackingItemValueId} of tracking item with id: ${TrackingItemId}`)
-    this.setState({'panelTrackingItemId': TrackingItemId})
-    this.setState({'panelTrackingItemValueId': TrackingItemValueId})
-    this.setState({'panelTrackingRecordId': TrackingRecordId})
+    if(this.state.isPanelVisible == false && TrackingItemId && TrackingItemValueId && TrackingRecordId)
+    {
+      this.setState({'isPanelVisible': true})
+    }
+    this.setState({'panelTrackingItemId': TrackingItemId}, () => {
+      this.setState({'panelTrackingItemValueId': TrackingItemValueId} , () => {
+        this.setState({'panelTrackingRecordId': TrackingRecordId})
+      })
+
+    })
 
   }
   render() {
@@ -40,8 +47,11 @@ export default class UseTrackerWrapper extends Component {
         </div>
         <div className='UseTrackerMainPoint'>
           <UseTracker panelHandler = {this.handlePanelVisibility}/>
-          {this.state.isPanelVisible &&
-            <PanelComponent panelTrackingItemId = {this.state.panelTrackingItemId} panelTrackingItemValueId = {this.state.panelTrackingItemValueId} panelTrackingRecordId = {this.state.panelTrackingRecordId}/>
+          {this.state.isPanelVisible == true 
+            ?
+              <PanelComponent panelTrackingItemId = {this.state.panelTrackingItemId} panelTrackingItemValueId = {this.state.panelTrackingItemValueId} panelTrackingRecordId = {this.state.panelTrackingRecordId}/>
+            :
+              ""
           }
         </div>
       </div>

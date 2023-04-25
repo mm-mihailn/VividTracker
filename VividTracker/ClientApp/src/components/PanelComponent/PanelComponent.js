@@ -32,13 +32,10 @@ export default class PanelComponent extends Component {
         this.setState({'TrackingItemId': this.props.panelTrackingItemId}, () => {
             this.setState({'TrackingItemValueId': this.props.panelTrackingItemValueId}, () => {
                 this.setState({'TrackingRecordId': this.props.panelTrackingRecordId}, () => {
-                    
+                    this.getTargetData()
                 })
             })
         })
-
-        this.getTargetData()
-
     }
     handleKeyDown = (event) => {
         if (event.keyCode === 27) {
@@ -63,16 +60,24 @@ export default class PanelComponent extends Component {
 
     getTargetData = async () => {
              // get record name
+             // -- getAllRecords endpoint and filter by record id
+             let allRecords = await this.getTrackingRecordData(3)
+            //  let targetRecord = allRecords.filter((iteratedRecord) => iteratedRecord.id == this.state.TrackingRecordId)
+             console.log(allRecords)
+
              // get tracking item name
-             let trackingRecordItems = await this.getTrackingItemData(2)
-             console.log(trackingRecordItems)
+             let trackingItem = await this.getTrackingItemData(this.state.TrackingItemId)
+             let targetTrackingItemName = trackingItem.name
+
+
              // get tracking item value
+             // - getTrackingItemsDataByTrackingGroupId
     }
 
-    getTrackingItemData = async (trackingRecordId) => {
+    getTrackingItemData = async (trackingItemId) => {
         const token = await authService.getAccessToken();
-        let url = endpoints.getTrackingGroupTrackingItems(trackingRecordId);
-        return fetch(url, {
+        let url = endpoints.getTrackingItemById(trackingItemId);
+        let result = await fetch(url, {
             method: 'GET',
             headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
         })
@@ -82,10 +87,28 @@ export default class PanelComponent extends Component {
         .catch((err) => {
             console.log(err)
         });
+
+        return result
     }
+    // TODO: ASK FOR THE FOLLOWING
+    // -- GET RECORD DATA BY ID
+    // -- GET TRACKING ITEM BY ID SHOULD INCLUDE VALUE
+    // -------- GET TRACKING ITEM VALUE BY ID --------
+    getTrackingRecordData = async (trackingRecordId) => {
+        const token = await authService.getAccessToken();
+        let url = endpoints.getAllRecords(trackingRecordId);
+        let result = await fetch(url, {
+            method: 'GET',
+            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err)
+        });
 
-    getTrackingRecordData = async ( trackingRecordId) => {
-
+        return result
     }
 
     
