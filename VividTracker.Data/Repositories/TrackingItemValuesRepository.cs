@@ -35,5 +35,10 @@ namespace VividTracker.Data.Repositories
                 i.TrackingGroupRecord.TrackingGroupId == trackingGroupId &&
                 i.TrackingItem.TrackingGroups.Any(tg => tg.Id == trackingGroupId)).ToListAsync();
         }
+        public async Task<TrackingItemValue> GetTrackingItemValueById(int trackingItemValueId)
+        {
+            return await Entities.Include(t => t.TrackingItem.Tenant).Include(t => t.TrackingGroupRecord.TrackingGroup)
+                .FirstOrDefaultAsync(t => t.Id == trackingItemValueId);
+        }
     }
 }

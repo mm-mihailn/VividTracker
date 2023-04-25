@@ -54,5 +54,17 @@
             }
             return Ok(result);
         }
+        [HttpGet]
+        [Route("api/GetTrackingGroupRecordsById/{trackingGroupRecordId}")]
+        public async Task<IActionResult> GetTrackingGroupRecordById([FromRoute] int trackingGroupRecordId)
+        {
+            var records = await _trackingGroupRecordsService.GetTrackingGroupRecordByRecordId(trackingGroupRecordId);
+
+            if (records == null)
+            {
+                return BadRequest("No exist");
+            }
+            return Ok(records);
+        }
     }
 }
