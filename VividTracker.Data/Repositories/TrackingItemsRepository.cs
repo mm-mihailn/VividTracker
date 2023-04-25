@@ -23,7 +23,10 @@
         }
         public async Task<TrackingItem> GetTrackingItemById(int id)
         {
-            return await Entities.Include(t => t.Tenant).FirstOrDefaultAsync(t => t.Id == id);
+            return await Entities.Include(t => t.Tenant)
+                .Include(t=>t.TrackingItemsValues)
+                .ThenInclude(t=>t.TrackingGroupRecord.TrackingGroup)
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<IEnumerable<TrackingItem>> GetTrackingItemsByTrackingGroupId(int trackingGroupId)

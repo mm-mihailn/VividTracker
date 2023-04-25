@@ -51,6 +51,20 @@ namespace VividTracker.Controllers
         }
 
         [HttpGet]
+        [Route("api/trackingItemValueById/{trackingItemValueId}")]
+
+        public async Task<IActionResult> GetTrackingItemValueById([FromRoute] int trackingItemValueId)
+        {
+            var result =  await _trackingItemValuesService.GetTrackingItemValueById(trackingItemValueId);
+
+            if (result == null)
+            {
+                return BadRequest("Not found!");
+            }
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("api/trackingItemValue/trackingItem/{trackingGroupId}")]
 
         public async Task<IActionResult> GetTrackingItemByTrackingGroupId([FromRoute] int trackingGroupId)

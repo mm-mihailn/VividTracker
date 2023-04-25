@@ -31,5 +31,17 @@ namespace VividTracker.Business.Services
         {
             return await _trackingItemValuesRepository.GetAllValuesByTrackingGroupId(trackingGroupId);
         }
+
+        public async Task<TrackingItemValue> GetTrackingItemValueById(int trackingItemValueId)
+        {
+           var result  =  await _trackingItemValuesRepository.GetTrackingItemValueById(trackingItemValueId);
+
+           if (result == null)
+           {
+               return null;
+           }
+
+           return result;
+        }
     }
 }

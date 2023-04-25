@@ -19,12 +19,24 @@
 
         public async Task<TrackingGroupRecord> CreateTrackingGroupRecord(TrackingGroupRecord trackingGroupRecord)
         {
+            var allRecords = await _trackingGroupRecordsRepository.GetAllRecordsAsync(trackingGroupRecord.TrackingGroupId);
+            var recordsName = allRecords.Select(t => t.Name).ToList();
+
+            if (recordsName.Any(t=>t.ToUpper().Trim() == trackingGroupRecord.Name.ToUpper().Trim()))
+            {
+                return null;
+            }
             return await _trackingGroupRecordsRepository.AddAsync(trackingGroupRecord);
         }
 
         public async Task<TrackingGroupRecord> GetTrackingGroupRecordById(int trackingGroupRecordId)
         {
-            return await _trackingGroupRecordsRepository.FindAsync((trackingGroupRecordId));
+            return await _trackingGroupRecordsRepository.FindAsync(trackingGroupRecordId);
+        }
+
+        public async Task<TrackingGroupRecord> GetTrackingGroupRecordByRecordId(int trackingGroupRecordId)
+        {
+            return await _trackingGroupRecordsRepository.GetTrackingGroupRecordById(trackingGroupRecordId);
         }
 
         public async Task<IEnumerable<TrackingGroupRecord>> GetAllRecords(int trackingGroupId)

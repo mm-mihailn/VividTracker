@@ -48,8 +48,23 @@
             var trackingGroupRecord = trackingGroupRecordsRequestModel.TrackingGroupRecords(trackingGroup);
 
             var result = await _trackingGroupRecordsService.CreateTrackingGroupRecord(trackingGroupRecord);
-
+            if (result == null)
+            {
+                return BadRequest("Already exist!");
+            }
             return Ok(result);
+        }
+        [HttpGet]
+        [Route("api/GetTrackingGroupRecordsById/{trackingGroupRecordId}")]
+        public async Task<IActionResult> GetTrackingGroupRecordById([FromRoute] int trackingGroupRecordId)
+        {
+            var records = await _trackingGroupRecordsService.GetTrackingGroupRecordByRecordId(trackingGroupRecordId);
+
+            if (records == null)
+            {
+                return BadRequest("No exist");
+            }
+            return Ok(records);
         }
     }
 }

@@ -13,5 +13,6 @@
         Task<IEnumerable<string>> GetAllTrackingGroupsRecordsAsync(int tenantId, int trackingGroupId);
         Task<TrackingGroupRecord> CreateTrackingGroupRecord(TrackingGroupRecord trackingGroupRecord);
         Task<TrackingGroupRecord> GetTrackingGroupRecordById(int trackingGroupRecordId);
+        Task<TrackingGroupRecord> GetTrackingGroupRecordByRecordId(int trackingGroupRecordId);
     }
 }
