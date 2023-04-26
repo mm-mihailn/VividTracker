@@ -133,9 +133,13 @@ export class AddComment extends Component {
     }
     componentDidUpdate(prevProps)
     {
-        if(this.props.TargetTrackingItemValue.length > 0 && prevProps.TargetTrackingItemValue[0].value != this.props.TargetTrackingItemValue[0].value)
+        console.log(this.props.TargetTrackingItemValue.length)
+        if(this.props.TargetTrackingItemValue.length > 0 && prevProps.TargetTrackingItemValue.length > 0)
         {
-            this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
+            if(prevProps.TargetTrackingItemValue[0].value != this.props.TargetTrackingItemValue[0].value)
+            {
+                this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
+            }
         }
 
     }
