@@ -22,7 +22,7 @@ export class AddComment extends Component {
             errorMessage: '',
             textColor: '',
             sliderValue: 1,
-            numbersRender: false,
+            numbersRender: true,
             percentagesRender: false,
             boolsRender: true,
             isDivVisible: true
