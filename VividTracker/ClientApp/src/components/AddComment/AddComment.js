@@ -128,6 +128,14 @@ export class AddComment extends Component {
         this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
         this.render();
     }
+    componentDidUpdate(prevProps)
+    {
+        if(prevProps.TargetTrackingItemValue[0].value != this.props.TargetTrackingItemValue[0].value)
+        {
+            this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
+        }
+
+    }
     render() {
         if (this.state.numbersRender) {
             return (
