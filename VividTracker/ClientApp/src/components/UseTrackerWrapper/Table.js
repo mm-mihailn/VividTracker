@@ -45,7 +45,7 @@ class Table extends Component {
                   if(key < visibleItems)
                   {
                     return <td>
-                          <div className='ValueContainer' onClick={finalValueId != null ? () => this.props.panelHandler(targetTrackingItemId, finalValueId, record.id) : null}>
+                          <div className='ValueContainer' onClick={() => this.props.panelHandler(targetTrackingItemId, finalValueId, record.id)}>
                             {finalValue > 0 
                               ? 
                               <p className='square'></p>

@@ -18,11 +18,14 @@ export default class UseTrackerWrapper extends Component {
   }
 
   handlePanelVisibility = async (TrackingItemId, TrackingItemValueId, TrackingRecordId) => {
-    console.log(`showing tracking item with id ${TrackingItemValueId} of tracking item with id: ${TrackingItemId}`)
     if(this.state.isPanelVisible == false && TrackingItemId && TrackingItemValueId && TrackingRecordId)
     {
+      console.log(`showing tracking item with id ${TrackingItemValueId} of tracking item with id: ${TrackingItemId}`)
       await this.setState({'isPanelVisible': true})
-     
+    }
+    else
+    {
+      console.log(`creating tracking item value`)
     }
 
     this.setState({'panelTrackingItemId': TrackingItemId})
@@ -46,7 +49,7 @@ export default class UseTrackerWrapper extends Component {
         </div>
         <div className='UseTrackerMainPoint'>
           <UseTracker panelHandler = {this.handlePanelVisibility}/>
-          {this.state.isPanelVisible == true && this.state.panelTrackingItemId && this.state.panelTrackingItemValueId && this.state.panelTrackingRecordId
+          {this.state.isPanelVisible == true
             ?
               <PanelComponent panelHandler = {this.handlePanelVisibility} panelTrackingItemId = {this.state.panelTrackingItemId} panelTrackingItemValueId = {this.state.panelTrackingItemValueId} panelTrackingRecordId = {this.state.panelTrackingRecordId}/>
             :
