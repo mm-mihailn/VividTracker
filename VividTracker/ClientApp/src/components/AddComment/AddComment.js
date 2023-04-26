@@ -125,6 +125,7 @@ export class AddComment extends Component {
         this.createNumberItem();
     }
     componentDidMount() {
+        this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
         this.render();
     }
     render() {
@@ -139,8 +140,8 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <Slider min={1}
-                                        max={5}
+                                    <Slider min={0}
+                                        max={this.props.TagetTrackingItemData.target}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         onValueChanged={this.setSliderValue}
@@ -149,8 +150,8 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <NumberBox min={1}
-                                        max={5}
+                                    <NumberBox min={0}
+                                        max={this.props.TagetTrackingItemData.target}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         showSpinButtons={true}

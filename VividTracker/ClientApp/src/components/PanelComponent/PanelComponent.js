@@ -147,12 +147,17 @@ export default class PanelComponent extends Component {
                             <h4 className='panelListHeader'>{this.state.TagetRecordData.name}</h4>
                             <h4 className='panel-item'>{this.state.TagetTrackingItemData.name}</h4>
                         </div>
-                        <AddComment onCommentAdded={this.loadComments}  updatePanel = {this.updatePanel}/>
+                        <AddComment 
+                        onCommentAdded={this.loadComments}  
+                        updatePanel = {this.updatePanel} 
+                        TagetTrackingItemData = {this.state.TagetTrackingItemData}
+                        TargetTrackingItemValue = {this.state.TargetTrackingItemValue}/>
                         <div className='commentsContainer'>
                             {this.state.comments.map((trackingItemValueActivityData) => {
                                 return (
-                                    <PanelContainer trackingItemValueActivityData={trackingItemValueActivityData}
-                                        key={trackingItemValueActivityData.id}/>   
+                                    <PanelContainer 
+                                    trackingItemValueActivityData={trackingItemValueActivityData}
+                                    key={trackingItemValueActivityData.id}/>   
                                 )
                                 
                             })
