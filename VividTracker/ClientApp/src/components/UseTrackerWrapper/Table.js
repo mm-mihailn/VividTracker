@@ -41,7 +41,6 @@ class Table extends Component {
                   })
                   let finalValue = valueArray.length > 0 ? valueArray[0].value : '';
                   let finalValueId = valueArray.length > 0 ? valueArray[0].id : null
-                  
                   if(key < visibleItems)
                   {
                     return <td>

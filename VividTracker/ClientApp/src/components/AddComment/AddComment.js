@@ -24,7 +24,7 @@ export class AddComment extends Component {
             sliderValue: 1,
             numbersRender: true,
             percentagesRender: false,
-            boolsRender: true,
+            boolsRender: false,
             isDivVisible: true
         }
         this.createComment = this.createComment.bind(this);
@@ -133,7 +133,6 @@ export class AddComment extends Component {
     }
     componentDidUpdate(prevProps)
     {
-        console.log(this.props.TargetTrackingItemValue.length)
         if(this.props.TargetTrackingItemValue.length > 0 && prevProps.TargetTrackingItemValue.length > 0)
         {
             if(prevProps.TargetTrackingItemValue[0].value != this.props.TargetTrackingItemValue[0].value)

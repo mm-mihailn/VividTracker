@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTable, faCirclePlay, faFilter } from '@fortawesome/free-solid-svg-icons';
 import UseTracker from './UseTracker';
 import PanelComponent from '../PanelComponent/PanelComponent';
+import { endpoints } from '../../endpoints';
+import authService from '../api-authorization/AuthorizeService';
 export default class UseTrackerWrapper extends Component {
   constructor(props)
   {
@@ -13,6 +15,7 @@ export default class UseTrackerWrapper extends Component {
       panelTrackingItemId: null,
       panelTrackingItemValueId: null,
       panelTrackingRecordId: null, 
+      panelTrackingGroupId: null
       
     }
   }
@@ -27,12 +30,41 @@ export default class UseTrackerWrapper extends Component {
     else
     {
       console.log(`creating tracking item value`)
+      this.createNewTrackingItemValue(TrackingItemId, TrackingRecordId)
+      
     }
 
     
     this.setState({'panelTrackingItemId': TrackingItemId})
     this.setState({'panelTrackingItemValueId': TrackingItemValueId})
     this.setState({'panelTrackingRecordId': TrackingRecordId})
+
+  }
+
+  createNewTrackingItemValue = async(TrackingItemId, TrackingRecordId) => {
+    let url = endpoints.createItemValue(this.state.panelTrackingGroupId, TrackingItemId, TrackingRecordId)
+    const token = await authService.getAccessToken();
+    let result = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        "value": 1
+      })
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  componentDidMount = () => {
+    let trackingGroupId = window.location.href.split('/')[4]
+    this.setState({'panelTrackingGroupId':trackingGroupId})
 
   }
   render() {
