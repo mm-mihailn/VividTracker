@@ -77,5 +77,25 @@ namespace VividTracker.Controllers
             }
             return Ok(result);
         }
+        [HttpPatch]
+        [Route("api/itemValue/update/{trackingItemValueId}")]
+        public async Task<IActionResult> UpdateTrackingItemValue([FromRoute] int trackingItemValueId, [FromBody] TrackingItemValuesModel trackingItemValueModel)
+        {
+            var itemValueResult = await _trackingItemValuesService.GetTrackingItemValueById(trackingItemValueId);
+            if (itemValueResult == null)
+            {
+                return BadRequest("Not valid Id");
+            }
+            var trackingItem = itemValueResult.TrackingItem;
+            var trackingGroupRecords = itemValueResult.TrackingGroupRecord;
+
+            itemValueResult.Value = trackingItemValueModel.Value;
+            var result = await _trackingItemValuesService.UpdateTrackingItemValueAsync(itemValueResult);
+
+
+            return Ok(itemValueResult);
+
+        }
+
     }
 }
