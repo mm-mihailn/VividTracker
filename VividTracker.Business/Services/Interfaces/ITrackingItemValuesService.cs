@@ -9,7 +9,7 @@ namespace VividTracker.Business.Services.Interfaces
 {
     public interface ITrackingItemValuesService
     {
-        Task<TrackingItemValue> AddTrackingItemValueAsync(TrackingItemValue itemValue);
+        Task<TrackingItemValue> UpdateTrackingItemValueAsync(TrackingItemValue itemValue);
         Task<TrackingItemValue> GetValueByCoordinatesAsync(int trackingGroupRecordId, int trackingItemId);
         Task<IEnumerable<TrackingItemValue>> GetItemValuesAsync(int trackingItemId);
         Task<TrackingItemValue> AddItemValueAsync(TrackingItemValue itemValue);
