@@ -15,8 +15,8 @@ export default class UseTrackerWrapper extends Component {
       panelTrackingItemId: null,
       panelTrackingItemValueId: null,
       panelTrackingRecordId: null, 
-      panelTrackingGroupId: null
-      
+      panelTrackingGroupId: null,
+      wasTableUpdated: false
     }
   }
 
@@ -55,7 +55,7 @@ export default class UseTrackerWrapper extends Component {
       })
     })
     .then((res) => {
-      console.log(res)
+      this.setState({'wasTableUpdated': true})
     })
     .catch((err) => {
       console.log(err)

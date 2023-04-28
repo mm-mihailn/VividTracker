@@ -25,7 +25,8 @@ export default class PanelComponent extends Component {
             TagetRecordData: null,
             TagetTrackingItemData: null,
             TargetTrackingItemValue: -1,
-            isPanelLoading: true
+            isPanelLoading: true,
+            TrackingItemValueFromAddCommentComponent: null
         }
         this.loadComments = this.loadComments.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -121,6 +122,15 @@ export default class PanelComponent extends Component {
         return result
     }
 
+    updateTrackingItemValue = () => {
+        let updatedTrackingItemValue = this.state.TrackingItemValueFromAddCommentComponent
+        // TODO: Fetch the update tracking item value using the update tracking item value endpoint
+    }
+
+    getTrackingItemValueFromAddCommentComponent = (trackingitemValue) => {
+        this.setState({'TrackingItemValueFromAddCommentComponent': trackingitemValue})
+    }
+
     componentDidUpdate(prevProps) {
         // Compare the new props with the previous props
         if (this.props.panelTrackingItemId != prevProps.panelTrackingItemId ||
@@ -148,10 +158,12 @@ export default class PanelComponent extends Component {
                             <h4 className='panel-item'>{this.state.TagetTrackingItemData.name}</h4>
                         </div>
                         <AddComment 
-                        onCommentAdded={this.loadComments}  
-                        updatePanel = {this.updatePanel} 
-                        TagetTrackingItemData = {this.state.TagetTrackingItemData}
-                        TargetTrackingItemValue = {this.state.TargetTrackingItemValue}/>
+                            onCommentAdded={this.loadComments}  
+                            updatePanel = {this.updatePanel} 
+                            TagetTrackingItemData = {this.state.TagetTrackingItemData}
+                            TargetTrackingItemValue = {this.state.TargetTrackingItemValue}
+                            getTrackingItemValueFromAddCommentComponent = {this.getTrackingItemValueFromAddCommentComponent}
+                        />
                         <div className='commentsContainer'>
                             {this.state.comments.map((trackingItemValueActivityData) => {
                                 return (
@@ -163,6 +175,7 @@ export default class PanelComponent extends Component {
                             })
                             }
                         </div>
+                        <button className='btn btn-primary' onClick={() => this.updateTrackingItemValue()}>Update value</button>
                     </div>
                     
                     )

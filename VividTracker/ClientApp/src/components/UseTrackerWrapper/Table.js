@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './UseTrackerWrapperStyles/TableStyles.css';
 
 class Table extends Component {
+  
+  
   render() {
     const { records, itemsList } = this.props;
     const visibleItems = 5

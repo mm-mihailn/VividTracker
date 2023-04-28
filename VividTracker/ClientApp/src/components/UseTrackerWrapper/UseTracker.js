@@ -143,7 +143,11 @@ export default class UseTracker extends Component {
                     :
                     ""
                 }
-                <Table records={this.state.trackingRecordsData} itemsList={this.state.trackingItemsData} panelHandler = {this.props.panelHandler}/>
+                <Table 
+                    records={this.state.trackingRecordsData} 
+                    itemsList={this.state.trackingItemsData} 
+                    panelHandler = {this.props.panelHandler}
+                />
             </div>
         )
     }

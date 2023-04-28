@@ -36,6 +36,7 @@ export class AddComment extends Component {
     }
     handleInputChange = (event) => {
         this.setState({ inputValue: event.target.value });
+        
     };
     handleSliderChange = (event) => {
         this.setState({ sliderValue: event.target.value });
@@ -119,12 +120,14 @@ export class AddComment extends Component {
     }
     setSliderValue({ value }) {
         this.setState({ sliderValue: value });
+        this.props.getTrackingItemValueFromAddCommentComponent(this.state.sliderValue)
     }
     handleAddButtonClick() {
         this.createComment();
-        this.createNumberItem();
+        // this.createNumberItem();
     }
     componentDidMount() {
+
         if(this.props.TargetTrackingItemValue.length > 0)
         {
             this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
