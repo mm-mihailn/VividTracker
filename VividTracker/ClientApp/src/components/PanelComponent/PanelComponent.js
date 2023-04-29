@@ -122,8 +122,31 @@ export default class PanelComponent extends Component {
         return result
     }
 
-    updateTrackingItemValue = () => {
+    updateTrackingItemValue = async () => {
+        const token = await authService.getAccessToken();
         let updatedTrackingItemValue = this.state.TrackingItemValueFromAddCommentComponent
+        let url = endpoints.updateTrackingItemValue(this.state.TrackingItemValueId)
+        
+        let result = await fetch(url, {
+            method: 'PATCH',
+            headers: 
+                !token ? 
+                {} 
+                : 
+                { 
+                    'Authorization': `Bearer ${token}`, 
+                    'Content-Type': 'application/json' 
+                },
+            body: JSON.stringify({
+                'Value': updatedTrackingItemValue
+            })
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .catch((err) => {
+            console.log(err)
+        });
         // TODO: Fetch the update tracking item value using the update tracking item value endpoint
     }
 
