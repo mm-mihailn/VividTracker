@@ -171,6 +171,7 @@ export default class PanelComponent extends Component {
                 this.setState({'TrackingItemValueId': this.props.panelTrackingItemValueId}, () => {
                     this.setState({'TrackingRecordId': this.props.panelTrackingRecordId}, () => {
                         this.getTargetData()
+                        this.loadComments();
                     })
                 })
             })
