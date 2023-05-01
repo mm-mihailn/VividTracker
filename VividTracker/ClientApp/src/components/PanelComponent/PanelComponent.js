@@ -52,17 +52,24 @@ export default class PanelComponent extends Component {
     handleSaveInputValues = () => {
         // console.log(this.state.childInputValues);
     };
-    async loadComments(trackingItemValueId) {
+    async loadComments() {
         const token = await authService.getAccessToken();
-        trackingItemValueId = 2;
+        let trackingItemValueId = this.state.TrackingItemValueId;
         await fetch(endpoints.loadComments(trackingItemValueId), {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
         })
-            .then((res) => res.json())
-            .then((res) => this.setState({ comments: res }))
+        .then( async (res) => {
+           
+            let comments = await res.json()
+            this.setState({'comments': comments})
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        
     }
 
     getTargetData = async () => {
@@ -188,7 +195,8 @@ export default class PanelComponent extends Component {
                             getTrackingItemValueFromAddCommentComponent = {this.getTrackingItemValueFromAddCommentComponent}
                         />
                         <div className='commentsContainer'>
-                            {this.state.comments.map((trackingItemValueActivityData) => {
+                            {this.state.comments.length > 0 ? 
+                                this.state.comments.map((trackingItemValueActivityData) => {
                                 return (
                                     <PanelContainer 
                                     trackingItemValueActivityData={trackingItemValueActivityData}
@@ -196,6 +204,8 @@ export default class PanelComponent extends Component {
                                 )
                                 
                             })
+                            :
+                            "This cell has no comments yet"
                             }
                         </div>
                         <button className='btn btn-primary' onClick={() => this.updateTrackingItemValue()}>Update value</button>
