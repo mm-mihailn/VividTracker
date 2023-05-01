@@ -31,7 +31,12 @@
 
         public async Task<TrackingGroupRecord> GetTrackingGroupRecordById(int trackingGroupRecordId)
         {
-            return await _trackingGroupRecordsRepository.FindAsync((trackingGroupRecordId));
+            return await _trackingGroupRecordsRepository.FindAsync(trackingGroupRecordId);
+        }
+
+        public async Task<TrackingGroupRecord> GetTrackingGroupRecordByRecordId(int trackingGroupRecordId)
+        {
+            return await _trackingGroupRecordsRepository.GetTrackingGroupRecordById(trackingGroupRecordId);
         }
 
         public async Task<IEnumerable<TrackingGroupRecord>> GetAllRecords(int trackingGroupId)

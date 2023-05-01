@@ -51,6 +51,20 @@ namespace VividTracker.Controllers
         }
 
         [HttpGet]
+        [Route("api/trackingItemValueById/{trackingItemValueId}")]
+
+        public async Task<IActionResult> GetTrackingItemValueById([FromRoute] int trackingItemValueId)
+        {
+            var result =  await _trackingItemValuesService.GetTrackingItemValueById(trackingItemValueId);
+
+            if (result == null)
+            {
+                return BadRequest("Not found!");
+            }
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("api/trackingItemValue/trackingItem/{trackingGroupId}")]
 
         public async Task<IActionResult> GetTrackingItemByTrackingGroupId([FromRoute] int trackingGroupId)
@@ -63,5 +77,25 @@ namespace VividTracker.Controllers
             }
             return Ok(result);
         }
+        [HttpPatch]
+        [Route("api/itemValue/update/{trackingItemValueId}")]
+        public async Task<IActionResult> UpdateTrackingItemValue([FromRoute] int trackingItemValueId, [FromBody] TrackingItemValuesModel trackingItemValueModel)
+        {
+            var itemValueResult = await _trackingItemValuesService.GetTrackingItemValueById(trackingItemValueId);
+            if (itemValueResult == null)
+            {
+                return BadRequest("Not valid Id");
+            }
+            var trackingItem = itemValueResult.TrackingItem;
+            var trackingGroupRecords = itemValueResult.TrackingGroupRecord;
+
+            itemValueResult.Value = trackingItemValueModel.Value;
+            var result = await _trackingItemValuesService.UpdateTrackingItemValueAsync(itemValueResult);
+
+
+            return Ok(itemValueResult);
+
+        }
+
     }
 }
