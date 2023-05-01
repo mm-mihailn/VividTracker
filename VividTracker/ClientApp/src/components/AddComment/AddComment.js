@@ -71,7 +71,6 @@ export class AddComment extends Component {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-
                     "Comment": this.state.inputValue,
                     "UserId": "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3"
                 })
