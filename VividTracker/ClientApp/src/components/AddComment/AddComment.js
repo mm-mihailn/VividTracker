@@ -42,8 +42,10 @@ export class AddComment extends Component {
         this.setState({ sliderValue: event.target.value });
     };
     async createComment() {
-        var trackingItemId = 2;
+        var trackingItemId = this.state.trackingItemId;   
         const token = await authService.getAccessToken();
+        let userData = await authService.getUser()
+        let userID = userData.sub
         const errors = {
             minLength: "You cannot submit an empty field.",
             maxLength: "Comment is too long.",
@@ -74,7 +76,7 @@ export class AddComment extends Component {
                 body: JSON.stringify({
 
                     "Comment": this.state.inputValue,
-                    "UserId": "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3"
+                    "UserId": userID 
                 })
             })
                 .then((response) => {
@@ -131,6 +133,7 @@ export class AddComment extends Component {
         if(this.props.TargetTrackingItemValue.length > 0)
         {
             this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
+            this.setState({'trackingItemId': this.props.TargetTrackingItemValue[0].id})
         }
         this.render();
     }
