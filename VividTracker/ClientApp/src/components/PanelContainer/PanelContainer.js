@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-regular-svg-icons";
 
 export default class PanelContainer extends Component {
-
     render() {
         const date = new Date(this.props.trackingItemValueActivityData.timeStamp);
         const formattedDate = date.toLocaleDateString("en-GB");

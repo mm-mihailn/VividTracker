@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { endpoints } from '../../endpoints';
 import authService from '../api-authorization/AuthorizeService';
 import Table from './Table';
+import PanelComponent from '../PanelComponent/PanelComponent';
 
 export default class UseTracker extends Component {
     constructor() {
@@ -142,7 +143,11 @@ export default class UseTracker extends Component {
                     :
                     ""
                 }
-                <Table records={this.state.trackingRecordsData} itemsList={this.state.trackingItemsData} />
+                <Table 
+                    records={this.state.trackingRecordsData} 
+                    itemsList={this.state.trackingItemsData} 
+                    panelHandler = {this.props.panelHandler}
+                />
             </div>
         )
     }
