@@ -108,7 +108,7 @@
 }
 
 #panelContainer {
-    position: absolute;
+    /* position: absolute; */
     top: 18.2rem;
     width: 229px;
     height: max-content;
@@ -121,13 +121,12 @@
     background-color: #827D7D;
     color: black;
     text-align: left;
-    margin-left: -9%;
     margin-bottom: 33%;
     margin-top: -50%;
 }
 
 .panel-item {
-    margin-left: -10.5rem;
+    margin-left: -7.5rem;
     padding-top: 1.95rem;
     font-weight: 700;
     font-size: 14px;

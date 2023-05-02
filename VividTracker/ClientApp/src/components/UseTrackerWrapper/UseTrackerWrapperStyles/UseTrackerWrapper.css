@@ -10,6 +10,10 @@
     padding-bottom: 10vh;
     margin-bottom: 4.375rem;
 }
+.UseTrackerMainPoint
+{
+    display: flex;
+}
 .usedTrackerHeaderWrapper{
     color: #0084B4;
     background-color: #D9D9D9;

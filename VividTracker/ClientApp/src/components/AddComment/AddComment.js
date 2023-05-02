@@ -22,9 +22,9 @@ export class AddComment extends Component {
             errorMessage: '',
             textColor: '',
             sliderValue: 1,
-            numbersRender: false,
+            numbersRender: true,
             percentagesRender: false,
-            boolsRender: true,
+            boolsRender: false,
             isDivVisible: true
         }
         this.createComment = this.createComment.bind(this);
@@ -36,13 +36,16 @@ export class AddComment extends Component {
     }
     handleInputChange = (event) => {
         this.setState({ inputValue: event.target.value });
+        
     };
     handleSliderChange = (event) => {
         this.setState({ sliderValue: event.target.value });
     };
     async createComment() {
-        var trackingItemId = 2;
+        var trackingItemId = this.state.trackingItemId;   
         const token = await authService.getAccessToken();
+        let userData = await authService.getUser()
+        let userID = userData.sub
         const errors = {
             minLength: "You cannot submit an empty field.",
             maxLength: "Comment is too long.",
@@ -73,7 +76,7 @@ export class AddComment extends Component {
                 body: JSON.stringify({
 
                     "Comment": this.state.inputValue,
-                    "UserId": "5e5c3b5b-e47b-4017-8d60-bed6f5fcffb3"
+                    "UserId": userID 
                 })
             })
                 .then((response) => {
@@ -119,13 +122,31 @@ export class AddComment extends Component {
     }
     setSliderValue({ value }) {
         this.setState({ sliderValue: value });
+        this.props.getTrackingItemValueFromAddCommentComponent(this.state.sliderValue)
     }
     handleAddButtonClick() {
         this.createComment();
-        this.createNumberItem();
+        // this.createNumberItem();
     }
     componentDidMount() {
+
+        if(this.props.TargetTrackingItemValue.length > 0)
+        {
+            this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
+            this.setState({'trackingItemId': this.props.TargetTrackingItemValue[0].id})
+        }
         this.render();
+    }
+    componentDidUpdate(prevProps)
+    {
+        if(this.props.TargetTrackingItemValue.length > 0 && prevProps.TargetTrackingItemValue.length > 0)
+        {
+            if(prevProps.TargetTrackingItemValue[0].value != this.props.TargetTrackingItemValue[0].value)
+            {
+                this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
+            }
+        }
+
     }
     render() {
         if (this.state.numbersRender) {
@@ -139,8 +160,8 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <Slider min={1}
-                                        max={5}
+                                    <Slider min={0}
+                                        max={this.props.TagetTrackingItemData.target}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         onValueChanged={this.setSliderValue}
@@ -149,8 +170,8 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <NumberBox min={1}
-                                        max={5}
+                                    <NumberBox min={0}
+                                        max={this.props.TagetTrackingItemData.target}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         showSpinButtons={true}
@@ -162,7 +183,7 @@ export class AddComment extends Component {
                     </div>
                     <div className="container">
                         <div className='CreateNewTenantButtonWrapper'>
-                            <input type="text" id="input-comment" className="form-control"
+                            <input type="text" id="input-comment"
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
@@ -211,7 +232,7 @@ export class AddComment extends Component {
                     </div>
                     <div className="container">
                         <div className='CreateNewTenantButtonWrapper'>
-                            <input type="text" id="input-comment" className="form-control"
+                            <input type="text" id="input-comment"
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
@@ -242,7 +263,7 @@ export class AddComment extends Component {
                     </div>
                     <div className="container">
                         <div className='CreateNewTenantButtonWrapper'>
-                            <input type="text" id="input-comment" className="form-control"
+                            <input type="text" id="input-comment"
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}

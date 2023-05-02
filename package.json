@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "devextreme": "22.2.4",
-    "devextreme-react": "22.2.4",
+    "devextreme": "22.2.5",
+    "devextreme-react": "22.2.5",
     "rc-slider": "^10.1.1"
   }
 }
