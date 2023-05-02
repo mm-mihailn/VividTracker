@@ -335,3 +335,38 @@
 .AlreadyExistingItemsButtonWrapper{
     margin-left: auto;
 }
+.labelMax{
+    margin-top: -16px;
+    /*width:200px;*/
+    white-space: nowrap;
+}
+.labelMin {
+    margin-top: -16px;
+    margin-left: 110px;
+    white-space: nowrap;
+}
+.labelIrrelevant {
+    margin-top: -16px;
+    margin-left: 110px;
+    white-space: nowrap;
+}
+#maxColor {
+    width: 180px;
+    height: 40px;
+    margin-top: 6px;
+    margin-left: -460px;
+    margin-right: 15px;
+}
+#minColor {
+    width: 180px;
+    height: 40px;
+    margin-top: 6px;
+    margin-left: -10px;
+    margin-right: 15px;
+}
+#irrelevantColor {
+    width: 180px;
+    height: 40px;
+    margin-top: 6px;
+    margin-left: -10px;
+}

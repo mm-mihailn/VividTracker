@@ -65,9 +65,9 @@ export default class ManageTracker extends Component {
                 'ValueRange': 3
             },
             createdItemName: null,
-            createdItemMaxColorCode: null,
-            createdItemMinColorCode: null,
-            createdItemIrrelevantColorCode: null,
+            createdItemMaxColorCode: '#000000',
+            createdItemMinColorCode: '#000000',
+            createdItemIrrelevantColorCode: '#000000',
             createdItemIrrelevantAllowed: 'false',
             createdItemMandatoryCommentAvailable: 'false',
             createdItemTarget: null,
@@ -796,30 +796,35 @@ export default class ManageTracker extends Component {
                                         </div>
                                         <div className='form-group row '>
                                             <div className="col-sm-6 d-flex inputWrapperItemCreation">
+                                                <div className="labelMax">
+                                                    <p>Max color </p>
+                                                </div>
+                                                <div className="labelMin">
+                                                    <p>Min color </p>
+                                                </div>
+                                                <div className="labelIrrelevant">
+                                                    <p>Irrelevant color </p>
+                                                </div>
                                                 <input
                                                     className='form-control'
-                                                    type='text'
-                                                    placeholder='Max color'
-                                                    value = {this.state.createdItemMaxColorCode}
+                                                    id="maxColor"
+                                                    type='color'
+                                                    value={this.state.createdItemMaxColorCode}
                                                     onChange={(e) => this.setState({ 'createdItemMaxColorCode': e.target.value })}
                                                 />
-
                                                 <input
                                                     className='form-control'
-                                                    type='text'
-                                                    placeholder='Min color'
-                                                    value = {this.state.createdItemMinColorCode}
+                                                    id="minColor"
+                                                    type='color'
+                                                    value={this.state.createdItemMinColorCode}
                                                     onChange={(e) => this.setState({ 'createdItemMinColorCode': e.target.value })}
-
                                                 />
-
                                                 <input
                                                     className='form-control'
-                                                    type='text'
-                                                    placeholder='Irrelevant color'
-                                                    value = {this.state.createdItemIrrelevantColorCode}
+                                                    id="irrelevantColor"
+                                                    type='color'
+                                                    value={this.state.createdItemIrrelevantColorCode}
                                                     onChange={(e) => this.setState({ 'createdItemIrrelevantColorCode': e.target.value })}
-
                                                 />
                                             </div>
                                         </div>
