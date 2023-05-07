@@ -18,7 +18,7 @@ export default class PanelComponent extends Component {
             numberValue: 1,
             percentageValue: 0,
             boolsValue: false,
-            isPanelVisible: false,
+            isPanelVisible: true,
             TrackingItemId: -1,
             TrackingItemValueId: -1,
             TrackingRecordId: -1,
@@ -45,8 +45,7 @@ export default class PanelComponent extends Component {
     }
     handleKeyDown = (event) => {
         if (event.keyCode === 27) {
-            this.setState({ isPanelVisible: false });
-            this.props.panelHandler()
+            this.props.showHidePanel(this.state.isPanelVisible)
         }
     };
     handleSaveInputValues = () => {
@@ -183,7 +182,7 @@ export default class PanelComponent extends Component {
     render() {
         return (
             <div className='panelListWrapper d-flex justify-content-center align-items-center'>
-                {this.state.isPanelVisible == false && this.state.isPanelLoading == false 
+                {this.props.isPanelVisible == true && this.state.isPanelLoading == false 
                 && (
                     <div id='panelContainer'>
                         <div className='panelListHeaderWrapper d-flex'>
