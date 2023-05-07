@@ -161,7 +161,8 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <Slider min={0}
+                                    <Slider 
+                                        min={this.props.TagetTrackingItemData.minValueType}
                                         max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
@@ -171,7 +172,8 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <NumberBox min={0}
+                                    <NumberBox 
+                                        min={this.props.TagetTrackingItemData.minValueType}
                                         max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
