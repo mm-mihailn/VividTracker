@@ -105,7 +105,14 @@ export default class UseTrackerWrapper extends Component {
             trackingItemsData.map((trackingItem) => {
                 let currentItemObject =
                 {
-                    [trackingItem.trackingItemId]: [{ 'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id }]
+                    [trackingItem.trackingItemId]: [{ 
+                    'value': trackingItem.value, 
+                    'recordId': trackingItem.trackingGroupRecordId, 
+                    'trackingItemName': trackingItem.trackingItem.name, 
+                    'id': trackingItem.id,
+                    'irrelevantColor': trackingItem.trackingItem.irrelevantColor,
+                    'maxValueColor': trackingItem.trackingItem.maxValueColor,
+                    'minValueColor': trackingItem.trackingItem.minValueColor }]
                 }
                 let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
                 if (targetElement) {

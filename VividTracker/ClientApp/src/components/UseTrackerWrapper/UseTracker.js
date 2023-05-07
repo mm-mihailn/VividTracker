@@ -50,9 +50,9 @@ export default class UseTracker extends Component {
                 { 'name': '10X Level' },
 
             ],
-
             trackingItemsData: [],
-            trackingRecordsData: []
+            trackingRecordsData: [],
+            isLoading: true,
         }
 
     }
@@ -64,6 +64,7 @@ export default class UseTracker extends Component {
         this.setState((prevState) => ({
             trackingItemsData: [...prevState.trackingItemsData, firstColumn]
         }))
+        console.log(this.state.trackingItemsData)
     }
 
     getTrackingItemsData = async () => {
@@ -125,34 +126,43 @@ export default class UseTracker extends Component {
                 })
 
                 console.log(allItemsNamesAndValues)
-                this.setState({ 'trackingItemsData': allItemsNamesAndValues })
+                this.setState({ 'trackingItemsData': allItemsNamesAndValues }, () => {
+                    this.setState({'isLoading': false})
+                })
+                
             })
             .catch((err) => {
                 console.log(err)
             })
     }
     componentDidMount() {
-        console.log(this.props)
-        this.setState({'trackingItemsData': this.props.itemsList}, () => {
-            this.setState({'trackingRecordsData': this.props.records})
-
-        })
-        // this.getTrackingItemsData()
+        this.getTrackingItemsData()
     }
+      
     render() {
         return (
             <div className='UseTrackerComponentWrapper'>
                 {/* <div className='blueSeperationLine'></div> */}
-                {this.state.trackingItemsData.length > 5 ?
-                    <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon={faAngleLeft} />
+                <div>
+                    {this.state.isLoading == false
+                    ?
+                    <div>
+
+                    {this.state.trackingItemsData.length > 5 ?
+                        <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon={faAngleLeft} />
+                        :
+                        ""
+                    }
+                    <Table 
+                        records={this.state.trackingRecordsData} 
+                        itemsList={this.state.trackingItemsData} 
+                        panelHandler = {this.props.panelHandler}
+                    />
+                    </div>
                     :
-                    ""
-                }
-                <Table 
-                    records={this.props.records} 
-                    itemsList={this.props.itemsList} 
-                    panelHandler = {this.props.panelHandler}
-                />
+                    "Loading"
+                    }
+                </div>
             </div>
         )
     }
