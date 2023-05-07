@@ -203,12 +203,13 @@ export default class PanelComponent extends Component {
                                 return (
                                     <PanelContainer 
                                     trackingItemValueActivityData={trackingItemValueActivityData}
-                                    key={trackingItemValueActivityData.id}/>   
+                                    key={trackingItemValueActivityData.id}
+                                    />   
                                 )
                                 
                             })
                             :
-                            "This cell has no comments yet"
+                            ""
                             }
                         </div>
                     </div>

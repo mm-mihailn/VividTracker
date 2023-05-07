@@ -188,12 +188,12 @@ export class AddComment extends Component {
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                             />
-                            <button type="submit" id="submitPanel"
-                                onClick={this.handleAddButtonClick}>Save changes
-                            </button>
                             <div id="errorComment">
                                 <p>{this.state.errorMessage}</p>
                             </div>
+                            <button className='btn btn-primary saveChangesButton' type="submit" 
+                                onClick={this.handleAddButtonClick}>Save changes
+                            </button>
                         </div>
                     </div>
                 </div>

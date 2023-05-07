@@ -21,6 +21,20 @@
     border-radius: 0;
     border: 2px solid white;
 }
+.saveChangesButton{
+    border-radius: 50px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    background-color: #0084B4;
+    color: white;
+    border-radius: 0;
+    border: 2px solid white;
+    transition: 0.6s linear;
+}
 #input-comment {
     width: 229px !important;
     height: 35px;
