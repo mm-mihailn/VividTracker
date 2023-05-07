@@ -187,6 +187,7 @@ export class AddComment extends Component {
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
+                                placeholder='Write a comment'
                             />
                             <div id="errorComment">
                                 <p>{this.state.errorMessage}</p>
