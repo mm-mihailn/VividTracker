@@ -31,7 +31,15 @@
     margin-top: 40%;
 }
 .commentsContainer {
+    height: 10rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
     margin-bottom: 10vh;
+}
+.commentsContainer::-webkit-scrollbar{
+    display: none;
 }
 .panel-header {
     padding-top: 100px;
