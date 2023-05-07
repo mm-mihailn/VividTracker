@@ -136,6 +136,7 @@ export class AddComment extends Component {
             this.setState({'trackingItemId': this.props.TargetTrackingItemValue[0].id})
         }
         this.render();
+        console.log(this.props.TagetTrackingItemData)
     }
     componentDidUpdate(prevProps)
     {
@@ -161,7 +162,7 @@ export class AddComment extends Component {
                             <div className="dx-field">
                                 <div className="dx-field-value">
                                     <Slider min={0}
-                                        max={this.props.TagetTrackingItemData.target}
+                                        max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         onValueChanged={this.setSliderValue}
@@ -171,7 +172,7 @@ export class AddComment extends Component {
                             <div className="dx-field">
                                 <div className="dx-field-value">
                                     <NumberBox min={0}
-                                        max={this.props.TagetTrackingItemData.target}
+                                        max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         showSpinButtons={true}

@@ -103,6 +103,7 @@ export default class UseTrackerWrapper extends Component {
             })
 
             trackingItemsData.map((trackingItem) => {
+                console.log(trackingItem)
                 let currentItemObject =
                 {
                     [trackingItem.trackingItemId]: [{ 
@@ -112,7 +113,11 @@ export default class UseTrackerWrapper extends Component {
                     'id': trackingItem.id,
                     'irrelevantColor': trackingItem.trackingItem.irrelevantColor,
                     'maxValueColor': trackingItem.trackingItem.maxValueColor,
-                    'minValueColor': trackingItem.trackingItem.minValueColor }]
+                    'minValueColor': trackingItem.trackingItem.minValueColor,
+                    'maxValue': trackingItem.trackingItem.maxValueType,
+                    'minValue': trackingItem.trackingItem.minValueType,
+                    'targetValue': trackingItem.trackingItem.target,
+                    'isIrrelevantAllowed': trackingItem.trackingItem.irrelevantAllowed }]
                 }
                 let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
                 if (targetElement) {
@@ -136,7 +141,7 @@ export default class UseTrackerWrapper extends Component {
             console.log(err)
         })
   }
-  
+
   scrollElements = () => {
     // TODO: FIX SCROLL BEHAVIOR
     let firstColumn = this.state.trackingItemsData[0]
