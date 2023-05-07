@@ -211,7 +211,6 @@ export default class PanelComponent extends Component {
                             "This cell has no comments yet"
                             }
                         </div>
-                        <button className='btn btn-primary' onClick={() => this.updateTrackingItemValue()}>Update value</button>
                     </div>
                     
                     )
