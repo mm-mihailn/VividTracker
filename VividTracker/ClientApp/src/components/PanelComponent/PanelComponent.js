@@ -149,12 +149,14 @@ export default class PanelComponent extends Component {
             })
         })
         .then((res) => {
+            this.props.updateTrackingItemsData()
             return res.json();
         })
         .catch((err) => {
             console.log(err)
         });
         // TODO: Fetch the update tracking item value using the update tracking item value endpoint
+
     }
 
     getTrackingItemValueFromAddCommentComponent = (trackingitemValue) => {

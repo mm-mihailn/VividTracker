@@ -132,7 +132,12 @@ export default class UseTracker extends Component {
             })
     }
     componentDidMount() {
-        this.getTrackingItemsData()
+        console.log(this.props)
+        this.setState({'trackingItemsData': this.props.itemsList}, () => {
+            this.setState({'trackingRecordsData': this.props.records})
+
+        })
+        // this.getTrackingItemsData()
     }
     render() {
         return (
@@ -144,8 +149,8 @@ export default class UseTracker extends Component {
                     ""
                 }
                 <Table 
-                    records={this.state.trackingRecordsData} 
-                    itemsList={this.state.trackingItemsData} 
+                    records={this.props.records} 
+                    itemsList={this.props.itemsList} 
                     panelHandler = {this.props.panelHandler}
                 />
             </div>
