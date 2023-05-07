@@ -192,6 +192,7 @@ export default class UseTrackerWrapper extends Component {
                 records={this.state.trackingRecordsData} 
                 itemsList={this.state.trackingItemsData} 
                 scrollElements = {this.scrollElements}
+                isPanelVisible = {this.state.isPanelVisible}
               />
 
               <PanelComponent 

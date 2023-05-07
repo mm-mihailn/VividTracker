@@ -181,7 +181,7 @@ export default class PanelComponent extends Component {
     
     render() {
         return (
-            <div className='panelListWrapper d-flex justify-content-center align-items-center'>
+            <div className='panelListWrapper'>
                 {this.props.isPanelVisible == true && this.state.isPanelLoading == false 
                 && (
                     <div id='panelContainer'>

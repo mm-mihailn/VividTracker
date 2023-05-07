@@ -60,7 +60,7 @@ export default class UseTracker extends Component {
         return (
             <div className='UseTrackerComponentWrapper'>
                 {/* <div className='blueSeperationLine'></div> */}
-                    <div>
+                    <div className={this.props.isPanelVisible ? 'UseTrackerComponentContainerPanelVisible' : 'UseTrackerComponentContainerPanelNotVisible'}>
 
                     {this.props.itemsList.length > 5 ?
                         <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.props.scrollElements()} icon={faAngleLeft} />
