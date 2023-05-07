@@ -125,6 +125,7 @@ export class AddComment extends Component {
     }
     handleAddButtonClick() {
         this.createComment();
+        this.props.updateTable()
         // this.createNumberItem();
     }
     componentDidMount() {

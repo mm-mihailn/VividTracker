@@ -192,10 +192,10 @@ export default class PanelComponent extends Component {
                         </div>
                         <AddComment 
                             onCommentAdded={this.loadComments}  
-                            updatePanel = {this.updatePanel} 
                             TagetTrackingItemData = {this.state.TagetTrackingItemData}
                             TargetTrackingItemValue = {this.state.TargetTrackingItemValue}
                             getTrackingItemValueFromAddCommentComponent = {this.getTrackingItemValueFromAddCommentComponent}
+                            updateTable = {this.updateTrackingItemValue}
                         />
                         <div className='commentsContainer'>
                             {this.state.comments.length > 0 ? 
