@@ -135,7 +135,18 @@ export default class UseTrackerWrapper extends Component {
         .catch((err) => {
             console.log(err)
         })
-}
+  }
+  
+  scrollElements = () => {
+    // TODO: FIX SCROLL BEHAVIOR
+    let firstColumn = this.state.trackingItemsData[0]
+    this.setState({ 'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn) })
+    // TODO: put smooth transition animation
+    this.setState((prevState) => ({
+        trackingItemsData: [...prevState.trackingItemsData, firstColumn]
+    }))
+    console.log(this.state.trackingItemsData)
+  }
 
   componentDidMount = () => {
     this.getTrackingItemsData()
@@ -163,6 +174,7 @@ export default class UseTrackerWrapper extends Component {
                 panelHandler = {this.handlePanelVisibility} 
                 records={this.state.trackingRecordsData} 
                 itemsList={this.state.trackingItemsData} 
+                scrollElements = {this.scrollElements}
               />
 
               <PanelComponent 
