@@ -201,8 +201,8 @@ export default class PanelComponent extends Component {
                                 this.state.comments.map((trackingItemValueActivityData) => {
                                 return (
                                     <PanelContainer 
-                                    trackingItemValueActivityData={trackingItemValueActivityData}
-                                    key={trackingItemValueActivityData.id}
+                                        trackingItemValueActivityData={trackingItemValueActivityData}
+                                        key={trackingItemValueActivityData.id}
                                     />   
                                 )
                                 

@@ -56,16 +56,9 @@ export class AddComment extends Component {
             error: "red",
             success: "green"
         }
-        if (this.state.inputValue.length < 1) {
-
-            this.setState({ errorMessage: errors.minLength });
-            this.setState({ textColor: color.error });
-        }
-        else if (this.state.inputValue.length > 255) {
-            this.setState({ errorMessage: errors.maxLength });
-            this.setState({ textColor: color.error });
-        }
-        else {
+        
+        if (this.state.inputValue.length >= 1 && this.state.inputValue.length <= 255)
+        {
             var url = endpoints.createComment(trackingItemId);
             await fetch(url, {
                 method: 'POST',
@@ -78,7 +71,7 @@ export class AddComment extends Component {
                     "UserId": userID 
                 })
             })
-                .then((response) => {
+            .then((response) => {
                     if (response.status != 200) {
                         this.setState({ textColor: color.error });
                         this.setState({ errorMessage: errors.invalid });
@@ -89,7 +82,12 @@ export class AddComment extends Component {
                         this.props.onCommentAdded(this.props.value);
                         this.state.inputValue = '';
                     }
-                })
+            })
+        }
+        else if(this.state.inputValue.length > 255)
+        {
+            this.setState({ errorMessage: errors.maxLength });
+            this.setState({ textColor: color.error });
         }
     }
     createNumberItem = async () => {
