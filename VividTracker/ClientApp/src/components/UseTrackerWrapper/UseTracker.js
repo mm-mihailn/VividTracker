@@ -50,104 +50,30 @@ export default class UseTracker extends Component {
                 { 'name': '10X Level' },
 
             ],
-
             trackingItemsData: [],
-            trackingRecordsData: []
-        }
+            trackingRecordsData: [],        }
 
     }
-    scrollElements = () => {
-        // TODO: FIX SCROLL BEHAVIOR
-        let firstColumn = this.state.trackingItemsData[0]
-        this.setState({ 'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn) })
-        // TODO: put smooth transition animation
-        this.setState((prevState) => ({
-            trackingItemsData: [...prevState.trackingItemsData, firstColumn]
-        }))
-    }
 
-    getTrackingItemsData = async () => {
-        const token = await authService.getAccessToken();
-        let LocationSplitted = window.location.href.split('/')
-        let TrackingGroupID = LocationSplitted[LocationSplitted.length - 1]
-        let url = endpoints.getTrackingItemsDataByTrackingGroupId(TrackingGroupID)
-        await fetch(url, {
-            method: 'GET',
-            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
-        })
-            .then(async (res) => {
-                let trackingItemsData = await res.json()
-                let allRecordsNames = trackingItemsData.map((trackingItemObject) => {
-                    return { name: trackingItemObject.trackingGroupRecord.name }
-                })
-                let allRecordsIds = trackingItemsData.map((trackingItemObject) => {
-                    return { id: trackingItemObject.trackingGroupRecord.id }
-                })
-                let allRecords = trackingItemsData.map((trackingItemObject) => {
-                    return { name: trackingItemObject.trackingGroupRecord.name, id: trackingItemObject.trackingGroupRecord.id }
-                })
-                const uniqueRecordsList = allRecords.filter((item, index) => {
-                    return index === allRecords.findIndex(obj => {
-                        return obj.name === item.name;
-                    });
-                });
 
-                // save all the unique records to the respective state variable
-                this.setState({ 'trackingRecordsData': uniqueRecordsList })
-                let allItemsNamesAndValues = []
-                let previousValue = -1
-                let allValuesAmountCummulative = 0
-                let allRecordsAmount = uniqueRecordsList.length
-                trackingItemsData.some((trackingitemObject) => {
-                    if (trackingitemObject.value) {
-                        allValuesAmountCummulative++;
-                    }
-                })
-
-                trackingItemsData.map((trackingItem) => {
-                    let currentItemObject =
-                    {
-                        [trackingItem.trackingItemId]: [{ 'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id }]
-                    }
-                    let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
-                    if (targetElement) {
-
-                        console.log(`${trackingItem.trackingItemId} is included`)
-                        // get previous instance of existing objects from the list of objects
-                        let previousItemObjectCopy = targetElement
-                        // update it and replace the old object with the new one
-                        previousItemObjectCopy[trackingItem.trackingItemId].push({ 'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id })
-                    }
-                    else {
-                        allItemsNamesAndValues.push(currentItemObject)
-                    }
-
-                })
-
-                console.log(allItemsNamesAndValues)
-                this.setState({ 'trackingItemsData': allItemsNamesAndValues })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-    componentDidMount() {
-        this.getTrackingItemsData()
-    }
     render() {
         return (
             <div className='UseTrackerComponentWrapper'>
                 {/* <div className='blueSeperationLine'></div> */}
-                {this.state.trackingItemsData.length > 5 ?
-                    <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.scrollElements()} icon={faAngleLeft} />
-                    :
-                    ""
-                }
-                <Table 
-                    records={this.state.trackingRecordsData} 
-                    itemsList={this.state.trackingItemsData} 
-                    panelHandler = {this.props.panelHandler}
-                />
+                    <div className={this.props.isPanelVisible ? 'UseTrackerComponentContainerPanelVisible' : 'UseTrackerComponentContainerPanelNotVisible'}>
+
+                    {this.props.itemsList.length > 5 ?
+                        <FontAwesomeIcon className='scrollElementsButton' onClick={() => this.props.scrollElements()} icon={faAngleLeft} />
+                        :
+                        ""
+                    }
+                    <Table 
+                        records={this.props.records} 
+                        itemsList={this.props.itemsList} 
+                        panelHandler = {this.props.panelHandler}
+                    />
+                    </div>
+                   
             </div>
         )
     }

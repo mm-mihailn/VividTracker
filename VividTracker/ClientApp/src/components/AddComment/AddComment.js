@@ -36,13 +36,13 @@ export class AddComment extends Component {
     }
     handleInputChange = (event) => {
         this.setState({ inputValue: event.target.value });
-        
+
     };
     handleSliderChange = (event) => {
         this.setState({ sliderValue: event.target.value });
     };
     async createComment() {
-        var trackingItemId = this.state.trackingItemId;   
+        var trackingItemId = this.state.trackingItemId;
         const token = await authService.getAccessToken();
         let userData = await authService.getUser()
         let userID = userData.sub
@@ -75,7 +75,7 @@ export class AddComment extends Component {
                 },
                 body: JSON.stringify({
                     "Comment": this.state.inputValue,
-                    "UserId": userID 
+                    "UserId": userID
                 })
             })
                 .then((response) => {
@@ -125,24 +125,22 @@ export class AddComment extends Component {
     }
     handleAddButtonClick() {
         this.createComment();
+        this.props.updateTable()
         // this.createNumberItem();
     }
     componentDidMount() {
 
-        if(this.props.TargetTrackingItemValue.length > 0)
-        {
-            this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
-            this.setState({'trackingItemId': this.props.TargetTrackingItemValue[0].id})
+        if (this.props.TargetTrackingItemValue.length > 0) {
+            this.setState({ 'sliderValue': this.props.TargetTrackingItemValue[0].value })
+            this.setState({ 'trackingItemId': this.props.TargetTrackingItemValue[0].id })
         }
         this.render();
+        console.log(this.props.TagetTrackingItemData)
     }
-    componentDidUpdate(prevProps)
-    {
-        if(this.props.TargetTrackingItemValue.length > 0 && prevProps.TargetTrackingItemValue.length > 0)
-        {
-            if(prevProps.TargetTrackingItemValue[0].value != this.props.TargetTrackingItemValue[0].value)
-            {
-                this.setState({'sliderValue':this.props.TargetTrackingItemValue[0].value})
+    componentDidUpdate(prevProps) {
+        if (this.props.TargetTrackingItemValue.length > 0 && prevProps.TargetTrackingItemValue.length > 0) {
+            if (prevProps.TargetTrackingItemValue[0].value != this.props.TargetTrackingItemValue[0].value) {
+                this.setState({ 'sliderValue': this.props.TargetTrackingItemValue[0].value })
             }
         }
 
@@ -159,8 +157,9 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <Slider min={0}
-                                        max={this.props.TagetTrackingItemData.target}
+                                    <Slider
+                                        min={this.props.TagetTrackingItemData.minValueType}
+                                        max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         onValueChanged={this.setSliderValue}
@@ -169,8 +168,9 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <NumberBox min={0}
-                                        max={this.props.TagetTrackingItemData.target}
+                                    <NumberBox
+                                        min={this.props.TagetTrackingItemData.minValueType}
+                                        max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         showSpinButtons={true}
@@ -186,13 +186,14 @@ export class AddComment extends Component {
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
+                                placeholder='Write a comment'
                             />
-                            <button type="submit" id="submitPanel"
-                                onClick={this.handleAddButtonClick}>Save
-                            </button>
                             <div id="errorComment">
                                 <p>{this.state.errorMessage}</p>
                             </div>
+                            <button className='btn btn-primary saveChangesButton' type="submit"
+                                onClick={this.handleAddButtonClick}>Save changes
+                            </button>
                         </div>
                     </div>
                 </div>

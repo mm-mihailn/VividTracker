@@ -1,12 +1,15 @@
-﻿.numbersSliderContainer{
+﻿.numbersSliderContainer {
     margin-top: 30%;
 }
+
 .percentagesSliderContainer {
     margin-top: 30%;
 }
+
 .boolsMenuContainer {
     margin-top: 30%;
 }
+
 .submitItems {
     font-style: normal;
     font-weight: 700;
@@ -24,15 +27,28 @@
     margin-bottom: 10px;
     border: 2px solid white;
 }
-.boolsForm{
+
+.boolsForm {
     margin-top: -20%;
 }
-.percentagesSlider{
+
+.percentagesSlider {
     margin-top: 40%;
 }
+
 .commentsContainer {
+    height: 10rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     margin-bottom: 10vh;
 }
+
+    .commentsContainer::-webkit-scrollbar {
+        display: none;
+    }
+
 .panel-header {
     padding-top: 100px;
     background-color: #827D7D;
@@ -71,9 +87,9 @@
 
 .date {
     margin-left: 180px !important;
-    font-size: 8px !important;
+    font-size: 12px !important;
     color: black;
-    /*margin-top: -11%;*/
+    margin-top: -11%;
 }
 
 .slideContainer {
@@ -93,52 +109,53 @@
     transition: opacity .2s;
 }
 
-.slider:hover {
-    opacity: 1;
-}
+    .slider:hover {
+        opacity: 1;
+    }
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: orange;
-    cursor: pointer;
-}
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: orange;
+        cursor: pointer;
+    }
 
 #panelContainer {
     /* position: absolute; */
-    /*margin-top: -4.2rem;*/
+    top: 18.2rem;
     width: 229px;
     height: max-content;
     padding-bottom: 10vh;
     margin-bottom: 70px;
     /*visibility: visible;*/
 }
-.panelContent{
-    margin-top: -6rem;
+
+.panelListWrapper {
+    position: absolute;
+    left: 78.5%;
+    top: 38.7%;
 }
+
 .panelListHeaderWrapper {
-    width: 290px;
     background-color: #827D7D;
     color: black;
     text-align: left;
-    margin-bottom: 5%;
-    /*margin-top: -50%;*/
-    padding-left: 6px;
-    float: left;
+    margin-bottom: 33%;
+    margin-top: -50%;
 }
 
 .panel-item {
-    margin-left: -4rem;
+    margin-left: -2rem;
     padding-top: 1.95rem;
     font-weight: 700;
     font-size: 14px;
 }
 
 .panelListHeader {
-    /*margin-left: 0.3rem;*/
+    margin-left: 0.3rem;
     padding-top: 0.55rem;
     font-weight: 700;
     font-size: 14px;
@@ -151,4 +168,3 @@
     font-size: 20px;
     line-height: 27px;
 }
-
