@@ -84,7 +84,11 @@ export class AddComment extends Component {
                     }
             })
         }
-
+        else if(this.state.inputValue.length > 255)
+        {
+            this.setState({ errorMessage: errors.maxLength });
+            this.setState({ textColor: color.error });
+        }
     }
     createNumberItem = async () => {
         console.log(this.state.sliderValue);
