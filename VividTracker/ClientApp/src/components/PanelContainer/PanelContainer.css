@@ -23,7 +23,11 @@
 
 .panelComment {
     color: black;
-    font-size: 18px;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-weight: 400 !important;
+    line-height: 13.62px;
+    
 }
 .panelCommentWrapper {
     margin-top: -3px;

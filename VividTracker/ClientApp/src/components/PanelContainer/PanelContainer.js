@@ -22,7 +22,7 @@ export default class PanelContainer extends Component {
                     </div>
                     <div className='panelCommentWrapper'>
                         <FontAwesomeIcon className='commentsIcon' icon={faComments} />
-                        <span className='panelComment pageText'> {this.props.trackingItemValueActivityData.comment}
+                        <span className='panelComment '> {this.props.trackingItemValueActivityData.comment}
                         </span>
                     </div>
                 </div>
