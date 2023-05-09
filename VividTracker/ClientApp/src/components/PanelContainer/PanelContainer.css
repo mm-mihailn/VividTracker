@@ -20,13 +20,10 @@
     height: 15px;
     margin-left: 3px;
 }
-.managePanelIconWrapper{
-    margin-top: -33px;
-}
+
 .panelComment {
     color: black;
     font-size: 18px;
-    margin-left: 25px;
 }
 .panelCommentWrapper {
     margin-top: -3px;
@@ -40,11 +37,17 @@
 .dateWrapper {
     margin-top: 5px;
 }
-.userNameText {
-    font-size: 18px;
-    color: black;
-    margin-top: -5px;
-    margin-left: 3px;
-    font-weight: 400 !important;
+.commentDate{
+    font-family: Open Sans ;
+    font-size: 14px ;
+    font-weight: 400 ;
+    line-height: 11px ;
+    margin-left: 10%;
 }
 
+.userNameText {
+    font-size: 16px;
+    color: black;
+    font-weight: 700 !important;
+    display: inline;
+}
