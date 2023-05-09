@@ -21,8 +21,9 @@
         {
             var allRecords = await _trackingGroupRecordsRepository.GetAllRecordsAsync(trackingGroupRecord.TrackingGroupId);
             var recordsName = allRecords.Select(t => t.Name).ToList();
-
-            if (recordsName.Any(t=>t.ToUpper().Trim() == trackingGroupRecord.Name.ToUpper().Trim()))
+            var name = trackingGroupRecord.Name.Trim();
+           
+            if (recordsName.Any(t=>t.ToUpper() == name.ToUpper()) || string.IsNullOrWhiteSpace(name))
             {
                 return null;
             }
