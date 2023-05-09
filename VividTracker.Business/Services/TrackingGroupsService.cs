@@ -47,8 +47,11 @@ namespace VividTracker.Business.Services
 
         public async Task<TrackingGroup> CreateTrackingGroup(TrackingGroup trackingGroup)
         {
-            var isExist = await _trackingGroupsRepository.GetTrackerByName(trackingGroup.Name);
-            if (isExist != null)
+            var name = trackingGroup.Name.Trim();
+            var allTrackingGroups = await GetTrackersAsync();
+            var isExist = allTrackingGroups.Any(x => x.Name.ToUpper() == name.ToUpper());
+
+            if (isExist || string.IsNullOrWhiteSpace(name))
             {
                 return null;
             }
