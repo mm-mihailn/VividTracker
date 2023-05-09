@@ -19,8 +19,22 @@ public class TenantsService : ITenantsService
 
     public async Task UpdateTenantAsync(Tenant tenant) => await _tenantsRepository.UpdateAsync(tenant);
 
-    public async Task AddTenantAsync(Tenant tenant) => await _tenantsRepository.AddAsync(tenant);
+    public async Task<Tenant?> AddTenantAsync(Tenant tenant)
+    {
+        var allTenants = await GetTenantsAsync();
+        var name = tenant.Name.Trim();
 
+        var isExist = allTenants.Any(t => t.Name.ToUpper() == name.ToUpper());
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            if (!isExist)
+            {
+                await _tenantsRepository.AddAsync(tenant);
+            }
+        }
+
+        return null;
+    }
     public async Task<Tenant?> GetTenantByNameAsync(string name)
     {
         return await _tenantsRepository.GetTenantByName(name);
