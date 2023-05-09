@@ -28,9 +28,11 @@
         {
 
             var trackers = await GetTrackingItemsByTrackingGroupId(trackingGroupId);
-            var isExist = trackers.FirstOrDefault(t => t.Name.ToUpper() == trackingItem.Name.ToUpper());
+            var name = trackingItem.Name.Trim();
 
-            if (isExist!=null)
+            var isExist = trackers.FirstOrDefault(t => t.Name.ToUpper() == name.ToUpper());
+
+            if (isExist!=null || string.IsNullOrWhiteSpace(name))
             {
                 return null;
             }
