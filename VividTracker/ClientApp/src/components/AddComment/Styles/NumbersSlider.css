@@ -11,9 +11,10 @@
 }
 .dx-slider-handle {
     background-color: #F28627;
+    width: 14px !important;
 }
 .dx-slider {
-    width: 220px;
+    width: 300px !important;
     color: #F28627;
 }
 .dx-field input, .dx-field textarea {
@@ -23,12 +24,17 @@
 }
 .dx-numberbox-spin-up-icon {
     background-color: #F28627;
+    /*margin-left: -270px;*/
 }
 .dx-numberbox-spin-down-icon {
     background-color: #F28627;
 }
 .dx-fieldset {
     margin-left: -65%;
+    width: 290px;
+}
+.dx-widget {
+    width: 290px;
 }
 .numberBtn {
     margin-left: 55%;

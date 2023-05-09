@@ -188,28 +188,30 @@ export default class PanelComponent extends Component {
                             <h4 className='panelListHeader'>{this.state.TagetRecordData.name}</h4>
                             <h4 className='panel-item'>{this.state.TagetTrackingItemData.name}</h4>
                         </div>
-                        <AddComment 
-                            onCommentAdded={this.loadComments}  
-                            updatePanel = {this.updatePanel} 
-                            TagetTrackingItemData = {this.state.TagetTrackingItemData}
-                            TargetTrackingItemValue = {this.state.TargetTrackingItemValue}
-                            getTrackingItemValueFromAddCommentComponent = {this.getTrackingItemValueFromAddCommentComponent}
-                        />
-                        <div className='commentsContainer'>
-                            {this.state.comments.length > 0 ? 
-                                this.state.comments.map((trackingItemValueActivityData) => {
-                                return (
-                                    <PanelContainer 
-                                    trackingItemValueActivityData={trackingItemValueActivityData}
-                                    key={trackingItemValueActivityData.id}/>   
-                                )
+                        <div className="panelContent">
+                            <AddComment 
+                                onCommentAdded={this.loadComments}  
+                                updatePanel = {this.updatePanel} 
+                                TagetTrackingItemData = {this.state.TagetTrackingItemData}
+                                TargetTrackingItemValue = {this.state.TargetTrackingItemValue}
+                                getTrackingItemValueFromAddCommentComponent = {this.getTrackingItemValueFromAddCommentComponent}
+                            />
+                            <div className='commentsContainer'>
+                                {this.state.comments.length > 0 ? 
+                                    this.state.comments.map((trackingItemValueActivityData) => {
+                                    return (
+                                        <PanelContainer 
+                                        trackingItemValueActivityData={trackingItemValueActivityData}
+                                        key={trackingItemValueActivityData.id}/>   
+                                    )
                                 
-                            })
-                            :
-                            "This cell has no comments yet"
-                            }
+                                })
+                                :
+                                "This cell has no comments yet"
+                                }
+                            </div>
+                            <button className='btn btn-primary' onClick={() => this.updateTrackingItemValue()}>Save</button>
                         </div>
-                        <button className='btn btn-primary' onClick={() => this.updateTrackingItemValue()}>Update value</button>
                     </div>
                     
                     )

@@ -188,7 +188,7 @@ export class AddComment extends Component {
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
                             />
                             <button type="submit" id="submitPanel"
-                                onClick={this.handleAddButtonClick}>Add
+                                onClick={this.handleAddButtonClick}>Save
                             </button>
                             <div id="errorComment">
                                 <p>{this.state.errorMessage}</p>
