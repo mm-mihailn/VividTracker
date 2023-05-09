@@ -18,7 +18,7 @@ export default class PanelComponent extends Component {
             numberValue: 1,
             percentageValue: 0,
             boolsValue: false,
-            isPanelVisible: false,
+            isPanelVisible: true,
             TrackingItemId: -1,
             TrackingItemValueId: -1,
             TrackingRecordId: -1,
@@ -45,8 +45,7 @@ export default class PanelComponent extends Component {
     }
     handleKeyDown = (event) => {
         if (event.keyCode === 27) {
-            this.setState({ isPanelVisible: false });
-            this.props.panelHandler()
+            this.props.showHidePanel(this.state.isPanelVisible)
         }
     };
     handleSaveInputValues = () => {
@@ -149,12 +148,14 @@ export default class PanelComponent extends Component {
             })
         })
         .then((res) => {
+            this.props.updateTrackingItemsData()
             return res.json();
         })
         .catch((err) => {
             console.log(err)
         });
         // TODO: Fetch the update tracking item value using the update tracking item value endpoint
+
     }
 
     getTrackingItemValueFromAddCommentComponent = (trackingitemValue) => {
@@ -180,8 +181,8 @@ export default class PanelComponent extends Component {
     
     render() {
         return (
-            <div className='panelListWrapper d-flex justify-content-center align-items-center'>
-                {this.state.isPanelVisible == false && this.state.isPanelLoading == false 
+            <div className='panelListWrapper'>
+                {this.props.isPanelVisible == true && this.state.isPanelLoading == false 
                 && (
                     <div id='panelContainer'>
                         <div className='panelListHeaderWrapper d-flex'>
@@ -190,10 +191,10 @@ export default class PanelComponent extends Component {
                         </div>
                         <AddComment 
                             onCommentAdded={this.loadComments}  
-                            updatePanel = {this.updatePanel} 
                             TagetTrackingItemData = {this.state.TagetTrackingItemData}
                             TargetTrackingItemValue = {this.state.TargetTrackingItemValue}
                             getTrackingItemValueFromAddCommentComponent = {this.getTrackingItemValueFromAddCommentComponent}
+                            updateTable = {this.updateTrackingItemValue}
                         />
                         <div className='commentsContainer'>
                             {this.state.comments.length > 0 ? 
@@ -201,15 +202,15 @@ export default class PanelComponent extends Component {
                                 return (
                                     <PanelContainer 
                                     trackingItemValueActivityData={trackingItemValueActivityData}
-                                    key={trackingItemValueActivityData.id}/>   
+                                    key={trackingItemValueActivityData.id}
+                                    />   
                                 )
                                 
                             })
                             :
-                            "This cell has no comments yet"
+                            ""
                             }
                         </div>
-                        <button className='btn btn-primary' onClick={() => this.updateTrackingItemValue()}>Update value</button>
                     </div>
                     
                     )

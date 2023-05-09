@@ -31,7 +31,15 @@
     margin-top: 40%;
 }
 .commentsContainer {
+    height: 10rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
     margin-bottom: 10vh;
+}
+.commentsContainer::-webkit-scrollbar{
+    display: none;
 }
 .panel-header {
     padding-top: 100px;
@@ -116,7 +124,12 @@
     margin-bottom: 70px;
     /*visibility: visible;*/
 }
-
+.panelListWrapper
+{
+    position: absolute;
+    left: 78.5%;
+    top: 38.7%;
+}
 .panelListHeaderWrapper {
     background-color: #827D7D;
     color: black;
@@ -126,7 +139,7 @@
 }
 
 .panel-item {
-    margin-left: -7.5rem;
+    margin-left: -2rem;
     padding-top: 1.95rem;
     font-weight: 700;
     font-size: 14px;

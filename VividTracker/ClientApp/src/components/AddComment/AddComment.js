@@ -125,6 +125,7 @@ export class AddComment extends Component {
     }
     handleAddButtonClick() {
         this.createComment();
+        this.props.updateTable()
         // this.createNumberItem();
     }
     componentDidMount() {
@@ -135,6 +136,7 @@ export class AddComment extends Component {
             this.setState({'trackingItemId': this.props.TargetTrackingItemValue[0].id})
         }
         this.render();
+        console.log(this.props.TagetTrackingItemData)
     }
     componentDidUpdate(prevProps)
     {
@@ -159,8 +161,9 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <Slider min={0}
-                                        max={this.props.TagetTrackingItemData.target}
+                                    <Slider 
+                                        min={this.props.TagetTrackingItemData.minValueType}
+                                        max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         onValueChanged={this.setSliderValue}
@@ -169,8 +172,9 @@ export class AddComment extends Component {
                             </div>
                             <div className="dx-field">
                                 <div className="dx-field-value">
-                                    <NumberBox min={0}
-                                        max={this.props.TagetTrackingItemData.target}
+                                    <NumberBox 
+                                        min={this.props.TagetTrackingItemData.minValueType}
+                                        max={this.props.TagetTrackingItemData.maxValueType}
                                         value={this.state.sliderValue}
                                         onChange={this.handleInputChange}
                                         showSpinButtons={true}
@@ -186,13 +190,14 @@ export class AddComment extends Component {
                                 value={this.state.inputValue}
                                 onChange={(e) => this.setState({ 'inputValue': e.target.value })}
                                 className={this.state.valid == false ? "form-control name name-error" : "form-control name"}
+                                placeholder='Write a comment'
                             />
-                            <button type="submit" id="submitPanel"
-                                onClick={this.handleAddButtonClick}>Add
-                            </button>
                             <div id="errorComment">
                                 <p>{this.state.errorMessage}</p>
                             </div>
+                            <button className='btn btn-primary saveChangesButton' type="submit" 
+                                onClick={this.handleAddButtonClick}>Save changes
+                            </button>
                         </div>
                     </div>
                 </div>
