@@ -378,9 +378,9 @@ export default class ManageTracker extends Component {
                             
                             this.setState({
                                 'createdItemName': '', 
-                                'createdItemMinColorCode': '',
-                                'createdItemMaxColorCode': '',
-                                'createdItemIrrelevantColorCode': '',
+                                'createdItemMinColorCode': '#000000',
+                                'createdItemMaxColorCode': '#000000',
+                                'createdItemIrrelevantColorCode': '#000000',
                                 'createdItemDefaultValue': '',
                                 'createdItemPropertyType': '1',
                                 'createdItemIrrelevantAllowed': 'false',
