@@ -134,9 +134,10 @@ class Table extends Component {
                     <tr className='TrackingItemValueContainer' >
                       <div className='RecordNameContainer'>{record.name}</div>
                       {/* create an array of length of all possible values!  */}
-                      {defaultValuesList.map((wannabeValuesObject, key) => {
+                      {allItemsRegardlessValuePresence.map((wannabeValuesObject, key) => {
                         let targetObjectKey = Object.keys(wannabeValuesObject)
                         let targetObject = wannabeValuesObject[targetObjectKey][0]
+                        
                         if(key < visibleItems)
                         {
                           return <td>
