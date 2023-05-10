@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using VividTracker.Business.Services.Interfaces;
     using VividTracker.Data.Models;
@@ -22,7 +23,8 @@
             var allRecords = await _trackingGroupRecordsRepository.GetAllRecordsAsync(trackingGroupRecord.TrackingGroupId);
             var recordsName = allRecords.Select(t => t.Name).ToList();
             var name = trackingGroupRecord.Name.Trim();
-           
+            name = Regex.Replace(name, @"\s", "");
+
             if (recordsName.Any(t=>t.ToUpper() == name.ToUpper()) || string.IsNullOrWhiteSpace(name))
             {
                 return null;
