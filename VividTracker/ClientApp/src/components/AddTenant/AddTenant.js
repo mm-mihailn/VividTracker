@@ -48,7 +48,7 @@ export class AddTenant extends Component {
                 body: JSON.stringify({ "name": input })
             })
                 .then((response) => {
-                    if (response.status == 400) {
+                    if (response.status != 200) {
                         this.setState({ errorMessage: errors.existingTenant });
                         this.setState({ textColor: color.error });
                     }

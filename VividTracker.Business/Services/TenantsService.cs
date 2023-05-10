@@ -31,7 +31,7 @@ public class TenantsService : ITenantsService
         {
             if (!isExist)
             {
-                await _tenantsRepository.AddAsync(tenant);
+                return await _tenantsRepository.AddAsync(tenant);
             }
         }
 
