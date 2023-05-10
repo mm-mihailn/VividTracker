@@ -30,7 +30,7 @@ class Table extends Component {
               }
             </tr>
           </thead>
-            <tbody>
+          <tbody>
             {records.map(record => (
               <tr key={record.id} className='TrackingItemValueContainer' >
                 <div className='RecordNameContainer'>{record.name}</div>

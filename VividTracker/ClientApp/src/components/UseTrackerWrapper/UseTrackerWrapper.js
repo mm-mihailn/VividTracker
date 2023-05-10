@@ -87,67 +87,134 @@ export default class UseTrackerWrapper extends Component {
     })
         .then(async (res) => {
             let trackingItemsData = await res.json()
-            let allRecordsNames = trackingItemsData.map((trackingItemObject) => {
-                return { name: trackingItemObject.trackingGroupRecord.name }
-            })
-            let allRecordsIds = trackingItemsData.map((trackingItemObject) => {
-                return { id: trackingItemObject.trackingGroupRecord.id }
-            })
-            let allRecords = trackingItemsData.map((trackingItemObject) => {
-                return { name: trackingItemObject.trackingGroupRecord.name, id: trackingItemObject.trackingGroupRecord.id }
-            })
-            const uniqueRecordsList = allRecords.filter((item, index) => {
-                return index === allRecords.findIndex(obj => {
-                    return obj.name === item.name;
+            if(trackingItemsData.length > 0)
+            {
+                let allRecordsNames = trackingItemsData.map((trackingItemObject) => {
+                    return { name: trackingItemObject.trackingGroupRecord.name }
+                })
+                let allRecordsIds = trackingItemsData.map((trackingItemObject) => {
+                    return { id: trackingItemObject.trackingGroupRecord.id }
+                })
+                let allRecords = trackingItemsData.map((trackingItemObject) => {
+                    return { name: trackingItemObject.trackingGroupRecord.name, id: trackingItemObject.trackingGroupRecord.id }
+                })
+                const uniqueRecordsList = allRecords.filter((item, index) => {
+                    return index === allRecords.findIndex(obj => {
+                        return obj.name === item.name;
+                    });
                 });
-            });
+                // save all the unique records to the respective state variable
+                this.setState({ 'trackingRecordsData': uniqueRecordsList })
 
-            // save all the unique records to the respective state variable
-            this.setState({ 'trackingRecordsData': uniqueRecordsList })
-            let allItemsNamesAndValues = []
-            let previousValue = -1
-            let allValuesAmountCummulative = 0
-            let allRecordsAmount = uniqueRecordsList.length
-            trackingItemsData.some((trackingitemObject) => {
-                if (trackingitemObject.value) {
-                    allValuesAmountCummulative++;
-                }
-            })
+                let allItemsNamesAndValues = []
+                let previousValue = -1
+                let allValuesAmountCummulative = 0
+                let allRecordsAmount = uniqueRecordsList.length
+                trackingItemsData.some((trackingitemObject) => {
+                    if (trackingitemObject.value) {
+                        allValuesAmountCummulative++;
+                    }
+                })
+                trackingItemsData.map((trackingItem) => {
+                    console.log(trackingItem)
+                    let currentItemObject =
+                    {
+                        [trackingItem.trackingItemId]: [{ 
+                        'value': trackingItem.value, 
+                        'recordId': trackingItem.trackingGroupRecordId, 
+                        'trackingItemName': trackingItem.trackingItem.name, 
+                        'id': trackingItem.id,
+                        'irrelevantColor': trackingItem.trackingItem.irrelevantColor,
+                        'maxValueColor': trackingItem.trackingItem.maxValueColor,
+                        'minValueColor': trackingItem.trackingItem.minValueColor,
+                        'maxValue': trackingItem.trackingItem.maxValueType,
+                        'minValue': trackingItem.trackingItem.minValueType,
+                        'targetValue': trackingItem.trackingItem.target,
+                        'isIrrelevantAllowed': trackingItem.trackingItem.irrelevantAllowed }]
+                    }
+                    let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
+                    if (targetElement) {
 
-            trackingItemsData.map((trackingItem) => {
-                console.log(trackingItem)
-                let currentItemObject =
-                {
-                    [trackingItem.trackingItemId]: [{ 
-                    'value': trackingItem.value, 
-                    'recordId': trackingItem.trackingGroupRecordId, 
-                    'trackingItemName': trackingItem.trackingItem.name, 
-                    'id': trackingItem.id,
-                    'irrelevantColor': trackingItem.trackingItem.irrelevantColor,
-                    'maxValueColor': trackingItem.trackingItem.maxValueColor,
-                    'minValueColor': trackingItem.trackingItem.minValueColor,
-                    'maxValue': trackingItem.trackingItem.maxValueType,
-                    'minValue': trackingItem.trackingItem.minValueType,
-                    'targetValue': trackingItem.trackingItem.target,
-                    'isIrrelevantAllowed': trackingItem.trackingItem.irrelevantAllowed }]
-                }
-                let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
-                if (targetElement) {
+                        console.log(`${trackingItem.trackingItemId} is included`)
+                        // get previous instance of existing objects from the list of objects
+                        let previousItemObjectCopy = targetElement
+                        // update it and replace the old object with the new one
+                        previousItemObjectCopy[trackingItem.trackingItemId].push({ 'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id })
+                    }
+                    else {
+                        allItemsNamesAndValues.push(currentItemObject)
+                    }
 
-                    console.log(`${trackingItem.trackingItemId} is included`)
-                    // get previous instance of existing objects from the list of objects
-                    let previousItemObjectCopy = targetElement
-                    // update it and replace the old object with the new one
-                    previousItemObjectCopy[trackingItem.trackingItemId].push({ 'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id })
-                }
-                else {
+                })
+                this.setState({ 'trackingItemsData': allItemsNamesAndValues })
+            }
+            else
+            {
+              console.log('getting items and records')
+
+              let getTrackingGroupRecordsURL = endpoints.getTrackingGroupRecords(TrackingGroupID)
+              let getTrackingGroupItemsURL = endpoints.getTrackingGroupTrackingItems(TrackingGroupID)
+
+
+              await fetch(getTrackingGroupRecordsURL, {
+                method: 'GET',
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+              })
+              .then(async (res) => {
+                let records = await res.json()
+                let allRecords = records.map((targetRecord) => {
+                  return { name: targetRecord.name, id: targetRecord.id }
+                })
+                this.setState({ 'trackingRecordsData': allRecords })
+
+              })
+
+
+              
+              await fetch(getTrackingGroupItemsURL, {
+                method: 'GET',
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+              })
+              .then(async (res) => {
+                let items = await res.json()
+                let allItemsNamesAndValues = []
+                items.map((trackingItem) => {
+                  let currentItemObject =
+                  {
+                      [trackingItem.id]: [{ 
+                      'value': trackingItem.value ? trackingItem.value : 0 , 
+                      'recordId': trackingItem.trackingGroupRecordId, // todo: figure out what to do with that empty id 
+                      'trackingItemName': trackingItem.name, 
+                      'id': trackingItem.id,
+                      'irrelevantColor': trackingItem.irrelevantColor,
+                      'maxValueColor': trackingItem.maxValueColor,
+                      'minValueColor': trackingItem.minValueColor,
+                      'maxValue': trackingItem.maxValueType ? trackingItem.maxValueType : 0, 
+                      'minValue': trackingItem.minValueType ? trackingItem.minValueType : 0,
+                      'targetValue': trackingItem.target,
+                      'isIrrelevantAllowed': trackingItem.irrelevantAllowed }]
+                  }
+                  let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
+                  if (targetElement) {
+
+                      console.log(`${trackingItem.trackingItemId} is included`)
+                      // get previous instance of existing objects from the list of objects
+                      let previousItemObjectCopy = targetElement
+                      // update it and replace the old object with the new one
+                      previousItemObjectCopy[trackingItem.trackingItemId].push({ 'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id })
+                  }
+                  else {
                     allItemsNamesAndValues.push(currentItemObject)
-                }
+                  }
 
-            })
+                  this.setState({ 'trackingItemsData': allItemsNamesAndValues })
 
-            console.log(allItemsNamesAndValues)
-            this.setState({ 'trackingItemsData': allItemsNamesAndValues })
+                  
+                })
+              })
+
+
+            }
         })
         .catch((err) => {
             console.log(err)
