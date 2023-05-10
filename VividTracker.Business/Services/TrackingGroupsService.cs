@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VividTracker.Business.Services.Interfaces;
 using VividTracker.Data.Models;
@@ -48,9 +49,10 @@ namespace VividTracker.Business.Services
         public async Task<TrackingGroup> CreateTrackingGroup(TrackingGroup trackingGroup)
         {
             var name = trackingGroup.Name.Trim();
+            name = Regex.Replace(name, @"\s", "");
+
             var allTrackingGroups = await GetTrackersAsync();
             var isExist = allTrackingGroups.Any(x => x.Name.ToUpper() == name.ToUpper());
-
             if (isExist || string.IsNullOrWhiteSpace(name))
             {
                 return null;
