@@ -1,4 +1,6 @@
-﻿using VividTracker.Business.Services.Interfaces;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Text.RegularExpressions;
+using VividTracker.Business.Services.Interfaces;
 using VividTracker.Data.Models;
 using VividTracker.Data.Repositories.Interfaces;
 
@@ -23,13 +25,13 @@ public class TenantsService : ITenantsService
     {
         var allTenants = await GetTenantsAsync();
         var name = tenant.Name.Trim();
-
+        name = Regex.Replace(name, @"\s", "");
         var isExist = allTenants.Any(t => t.Name.ToUpper() == name.ToUpper());
         if (!string.IsNullOrWhiteSpace(name))
         {
             if (!isExist)
             {
-                await _tenantsRepository.AddAsync(tenant);
+                return await _tenantsRepository.AddAsync(tenant);
             }
         }
 
