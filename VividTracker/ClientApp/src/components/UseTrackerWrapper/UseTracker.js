@@ -68,6 +68,8 @@ export default class UseTracker extends Component {
                         ""
                     }
                     <Table 
+                        allRecordsRegardlessValuePresence = {this.props.allRecordsRegardlessValuePresence}
+                        allItemsRegardlessValuePresence = {this.props.allItemsRegardlessValuePresence}
                         records={this.props.records} 
                         itemsList={this.props.itemsList} 
                         panelHandler = {this.props.panelHandler}

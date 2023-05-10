@@ -5,7 +5,9 @@ class Table extends Component {
   
   
   render() {
-    const { records, itemsList } = this.props;
+    const {allRecordsRegardlessValuePresence, allItemsRegardlessValuePresence, records, itemsList } = this.props;
+
+    console.log(allRecordsRegardlessValuePresence, allItemsRegardlessValuePresence, records, itemsList)
     const visibleItems = 5
     return (
       <div className='useTrackerContainer'>
@@ -13,90 +15,116 @@ class Table extends Component {
           <thead>
             <tr className="border-bottom" style={{ borderBottom: '1px solid #ddd', margin: '20px 0' }}>
               <th className='TrackingItemContainer'>Projects</th>
-              {[...new Set(itemsList
-              .flatMap(item => Object.values(item))
-                .flatMap(values => values.map(value => value.trackingItemName)))]
-                  .map((name, index) => {
-                    if(index < visibleItems)
-                    {
-                      return <th key={name} className='TrackingItem'>{name}</th>
+              {itemsList.length > 0 
+              ? 
+                [...new Set(itemsList
+                .flatMap(item => Object.values(item))
+                  .flatMap(values => values.map(value => value.trackingItemName)))]
+                    .map((name, index) => {
+                      if(index < visibleItems)
+                      {
+                        return <th key={name} className='TrackingItem'>{name}</th>
+                      }
+                      else
+                      {
+                        return <th key={name} className='TrackingItem hidden'>{name}</th>
+                      }
                     }
-                    else
-                    {
-                      return <th key={name} className='TrackingItem hidden'>{name}</th>
-                    }
-                  }
-                )
+                  )
+                  :
+                  [...new Set(allItemsRegardlessValuePresence
+                    .flatMap(item => Object.values(item))
+                      .flatMap(values => values.map(value => value.trackingItemName)))]
+                        .map((name, index) => {
+                          if(index < visibleItems)
+                          {
+                            return <th key={name} className='TrackingItem'>{name}</th>
+                          }
+                          else
+                          {
+                            return <th key={name} className='TrackingItem hidden'>{name}</th>
+                          }
+                        }
+                      )
               }
             </tr>
           </thead>
           <tbody>
-            {records.map(record => (
-              <tr key={record.id} className='TrackingItemValueContainer' >
-                <div className='RecordNameContainer'>{record.name}</div>
-                {itemsList.map((valuesObject, key) => {
-                  let targetTrackingItemId = Number(Object.keys(valuesObject)[0])
-                  let targetTrackingItemValuesArray = Object.values(valuesObject)[0]
+            {records.length > 0 && itemsList.length > 0 ? 
+              records.map(record => (
+                <tr key={record.id} className='TrackingItemValueContainer' >
+                  <div className='RecordNameContainer'>{record.name}</div>
+                  {itemsList.map((valuesObject, key) => {
+                    let targetTrackingItemId = Number(Object.keys(valuesObject)[0])
+                    let targetTrackingItemValuesArray = Object.values(valuesObject)[0]
 
-                  let valueArray = targetTrackingItemValuesArray.filter((targetTrackingItemValue) => {
-                    return targetTrackingItemValue.recordId == record.id
-                  })
-
-                  let colorPercentageMaxValue = '0'
-                  if(valueArray[0])
-                  {
-                    colorPercentageMaxValue = (valueArray[0].value / valueArray[0].maxValue).toString().split('.')[1]
-                    if(colorPercentageMaxValue)
+                    let valueArray = targetTrackingItemValuesArray.filter((targetTrackingItemValue) => {
+                      return targetTrackingItemValue.recordId == record.id
+                    })
+                    
+                    let colorPercentageMaxValue = '0'
+                    if(valueArray[0])
                     {
-                      if(valueArray[0].value / valueArray[0].maxValue < 0.1)
+                      colorPercentageMaxValue = (valueArray[0].value / valueArray[0].maxValue).toString().split('.')[1]
+                      if(colorPercentageMaxValue)
                       {
-                        colorPercentageMaxValue = '0' + colorPercentageMaxValue.substring(0,2)
-                      }
-                      else
-                      {
-                        colorPercentageMaxValue = colorPercentageMaxValue.substring(0,2)
+                        if(valueArray[0].value / valueArray[0].maxValue < 0.1)
+                        {
+                          colorPercentageMaxValue = '0' + colorPercentageMaxValue.substring(0,2)
+                        }
+                        else
+                        {
+                          colorPercentageMaxValue = colorPercentageMaxValue.substring(0,2)
+                        }
                       }
                     }
-                  }
-                  let finalValue = valueArray.length > 0 ? valueArray[0].value : '';
-                  let finalValueId = valueArray.length > 0 ? valueArray[0].id : null
-                  if(key < visibleItems)
-                  {
-                    return <td>
-                          <div className='ValueContainer' onClick={() => this.props.panelHandler(targetTrackingItemId, finalValueId, record.id)}>
-                            {finalValue >= 1 
-                              ? 
-                                valueArray[0] 
-                                ?
-                                  valueArray[0].isIrrelevantAllowed 
+                    let finalValue = valueArray.length > 0 ? valueArray[0].value : '';
+                    let finalValueId = valueArray.length > 0 ? valueArray[0].id : null
+                    if(key < visibleItems)
+                    {
+                      return <td>
+                            <div className='ValueContainer' onClick={() => this.props.panelHandler(targetTrackingItemId, finalValueId, record.id)}>
+                              {finalValue >= 1 
+                                ? 
+                                  valueArray[0] 
                                   ?
-                                    <p className='square' style={{backgroundColor: `${valueArray[0].irrelevantColor}`}}/>
-                                  :
-                                  valueArray[0].value == valueArray[0].maxValue 
-                                  ?
-                                    <p className='square' 
-                                    style={{backgroundColor: `${valueArray[0].maxValueColor}`}}/>
-                                  :
-                                    valueArray[0].value == valueArray[0].minValue
+                                    valueArray[0].isIrrelevantAllowed 
+                                    ?
+                                      <p className='square' style={{backgroundColor: `${valueArray[0].irrelevantColor}`}}/>
+                                    :
+                                    valueArray[0].value == valueArray[0].maxValue 
                                     ?
                                       <p className='square' 
-                                      style={{backgroundColor: `${valueArray[0].minValueColor}`}}/>
+                                      style={{backgroundColor: `${valueArray[0].maxValueColor}`}}/>
                                     :
-                                    <p className='square' 
-                                    style={{backgroundColor: `${valueArray[0].maxValueColor + colorPercentageMaxValue}`}}/>
-                                :
-                                  <p className='square'/>
-                              : 
-                              <p className='square' style={{backgroundColor: 'red'}}></p>
+                                      valueArray[0].value == valueArray[0].minValue
+                                      ?
+                                        <p className='square' 
+                                        style={{backgroundColor: `${valueArray[0].minValueColor}`}}/>
+                                      :
+                                      <p className='square' 
+                                      style={{backgroundColor: `${valueArray[0].maxValueColor + colorPercentageMaxValue}`}}/>
+                                  :
+                                    <p className='square'/>
+                                : 
+                                <p className='square' style={{backgroundColor: 'red'}}></p>
 
-                            }
-                            <p className='ValueContainerText'>{finalValue ? finalValue : '-'}</p>
-                          </div>
-                      </td>
-                  }
-                })}
-              </tr>
-            ))}
+                              }
+                              <p className='ValueContainerText'>{finalValue ? finalValue : '-'}</p>
+                            </div>
+                        </td>
+                    }
+                  })}
+                </tr>
+              ))
+              :
+              allRecordsRegardlessValuePresence.map((record) => {
+                return(
+                <tr className='TrackingItemValueContainer' >
+                  <div className='RecordNameContainer'>{record.name}</div>
+                </tr>)
+              })
+          }
           </tbody>
         </table>
       </div>

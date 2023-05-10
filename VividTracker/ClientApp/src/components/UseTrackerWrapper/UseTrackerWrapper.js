@@ -18,7 +18,9 @@ export default class UseTrackerWrapper extends Component {
       panelTrackingGroupId: null,
       wasTableUpdated: false,
       trackingItemsData: [],
-      trackingRecordsData: []
+      trackingRecordsData: [],
+      trackingRecordsOverallData: [],
+      trackingItemsOverallData: []
     }
   }
 
@@ -85,10 +87,9 @@ export default class UseTrackerWrapper extends Component {
         method: 'GET',
         headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
     })
-        .then(async (res) => {
+    .then(async (res) => {
             let trackingItemsData = await res.json()
-            if(trackingItemsData.length > 0)
-            {
+
                 let allRecordsNames = trackingItemsData.map((trackingItemObject) => {
                     return { name: trackingItemObject.trackingGroupRecord.name }
                 })
@@ -147,11 +148,7 @@ export default class UseTrackerWrapper extends Component {
 
                 })
                 this.setState({ 'trackingItemsData': allItemsNamesAndValues })
-            }
-            else
-            {
-              console.log('getting items and records')
-
+            
               let getTrackingGroupRecordsURL = endpoints.getTrackingGroupRecords(TrackingGroupID)
               let getTrackingGroupItemsURL = endpoints.getTrackingGroupTrackingItems(TrackingGroupID)
 
@@ -165,19 +162,16 @@ export default class UseTrackerWrapper extends Component {
                 let allRecords = records.map((targetRecord) => {
                   return { name: targetRecord.name, id: targetRecord.id }
                 })
-                this.setState({ 'trackingRecordsData': allRecords })
-
+                this.setState({ 'trackingRecordsOverallData': allRecords })
               })
-
-
-              
+              //trackingItemsOverallData
               await fetch(getTrackingGroupItemsURL, {
                 method: 'GET',
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
               })
               .then(async (res) => {
                 let items = await res.json()
-                let allItemsNamesAndValues = []
+                let allItemsNames = []
                 items.map((trackingItem) => {
                   let currentItemObject =
                   {
@@ -194,7 +188,7 @@ export default class UseTrackerWrapper extends Component {
                       'targetValue': trackingItem.target,
                       'isIrrelevantAllowed': trackingItem.irrelevantAllowed }]
                   }
-                  let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
+                  let targetElement = allItemsNames.find(obj => obj[trackingItem.trackingItemId]);
                   if (targetElement) {
 
                       console.log(`${trackingItem.trackingItemId} is included`)
@@ -204,21 +198,16 @@ export default class UseTrackerWrapper extends Component {
                       previousItemObjectCopy[trackingItem.trackingItemId].push({ 'value': trackingItem.value, 'recordId': trackingItem.trackingGroupRecordId, 'trackingItemName': trackingItem.trackingItem.name, 'id': trackingItem.id })
                   }
                   else {
-                    allItemsNamesAndValues.push(currentItemObject)
+                    allItemsNames.push(currentItemObject)
                   }
-
-                  this.setState({ 'trackingItemsData': allItemsNamesAndValues })
-
-                  
-                })
+                this.setState({ 'trackingItemsOverallData': allItemsNames })
               })
-
-
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+             
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+          })
   }
 
   scrollElements = () => {
@@ -254,9 +243,12 @@ export default class UseTrackerWrapper extends Component {
             </div>
         </div>
         <div className='UseTrackerMainPoint'>
+          {/* //  console.log(this.state.trackingRecordsOverallData, this.state.trackingItemsOverallData) */}
              <UseTracker 
                 panelHandler = {this.handlePanelVisibility} 
                 records={this.state.trackingRecordsData} 
+                allRecordsRegardlessValuePresence = {this.state.trackingRecordsOverallData}
+                allItemsRegardlessValuePresence = {this.state.trackingItemsOverallData}
                 itemsList={this.state.trackingItemsData} 
                 scrollElements = {this.scrollElements}
                 isPanelVisible = {this.state.isPanelVisible}
