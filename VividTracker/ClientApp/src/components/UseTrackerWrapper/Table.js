@@ -3,7 +3,6 @@ import './UseTrackerWrapperStyles/TableStyles.css';
 
 class Table extends Component {
   
-  
   render() {
     const {allRecordsRegardlessValuePresence, allItemsRegardlessValuePresence, records, itemsList } = this.props;
     const allPossibleValuesAmount = allRecordsRegardlessValuePresence.length * allItemsRegardlessValuePresence.length
@@ -14,8 +13,6 @@ class Table extends Component {
       defaultValuesList[currentIndexValueNormalized] = allItemsRegardlessValuePresence[i];
       defaultValuesList[currentIndexValueNormalized + 1] = allItemsRegardlessValuePresence[i];
     }
-
-    console.log(defaultValuesList)
     const visibleItems = 5
     return (
       <div className='useTrackerContainer'>
@@ -59,13 +56,16 @@ class Table extends Component {
           </thead>
           <tbody>
             {
-              records.length > 0 && 
-              itemsList.length > 0 
-              ? 
-                records.map(record => (
+              // records.length > 0 && 
+              // itemsList.length > 0 
+              // ? 
+                allRecordsRegardlessValuePresence.map(record => (
                   <tr key={record.id} className='TrackingItemValueContainer' >
                     <div className='RecordNameContainer'>{record.name}</div>
-                    {itemsList.map((valuesObject, key) => {
+                    {/* show RDS by ITS values, wherever value exists show it, otherwise red square */}
+                    {/* check if value exists by record and tracking item id */}
+                    {allItemsRegardlessValuePresence.map((valuesObject, key) => {
+                      
                       let targetTrackingItemId = Number(Object.keys(valuesObject)[0])
                       let targetTrackingItemValuesArray = Object.values(valuesObject)[0]
 
@@ -128,29 +128,29 @@ class Table extends Component {
                     })}
                   </tr>
                 ))
-              :
-                allRecordsRegardlessValuePresence.map((record) => {
-                  return(
-                    <tr className='TrackingItemValueContainer' >
-                      <div className='RecordNameContainer'>{record.name}</div>
-                      {/* create an array of length of all possible values!  */}
-                      {allItemsRegardlessValuePresence.map((wannabeValuesObject, key) => {
-                        let targetObjectKey = Object.keys(wannabeValuesObject)
-                        let targetObject = wannabeValuesObject[targetObjectKey][0]
+              // :
+              //   allRecordsRegardlessValuePresence.map((record) => {
+              //     return(
+              //       <tr className='TrackingItemValueContainer' >
+              //         <div className='RecordNameContainer'>{record.name}</div>
+              //         {/* create an array of length of all possible values!  */}
+              //         {allItemsRegardlessValuePresence.map((wannabeValuesObject, key) => {
+              //           let targetObjectKey = Object.keys(wannabeValuesObject)
+              //           let targetObject = wannabeValuesObject[targetObjectKey][0]
                         
-                        if(key < visibleItems)
-                        {
-                          return <td>
-                                <div className='ValueContainer' onClick={() => this.props.panelHandler(targetObject.id, null, record.id)}>
-                                  <p className='square' style={{backgroundColor: 'red'}}></p>
-                                  <p className='ValueContainerText'>-</p>
-                                </div>
-                            </td>
-                        }
-                      })}
-                    </tr>
-                  )
-                })
+              //           if(key < visibleItems)
+              //           {
+              //             return <td>
+              //                   <div className='ValueContainer' onClick={() => this.props.panelHandler(targetObject.id, null, record.id)}>
+              //                     <p className='square' style={{backgroundColor: 'red'}}></p>
+              //                     <p className='ValueContainerText'>-</p>
+              //                   </div>
+              //               </td>
+              //           }
+              //         })}
+              //       </tr>
+              //     )
+              //   })
           }
           </tbody>
         </table>
