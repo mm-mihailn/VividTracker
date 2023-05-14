@@ -20,7 +20,8 @@ export default class UseTrackerWrapper extends Component {
       trackingItemsData: [],
       trackingRecordsData: [],
       trackingRecordsOverallData: [],
-      trackingItemsOverallData: []
+      trackingItemsOverallData: [],
+      trackerData: []
     }
   }
 
@@ -235,11 +236,26 @@ export default class UseTrackerWrapper extends Component {
     
     }
   }
-
-  componentDidMount = () => {
+  getTrackingGroupData = async (trackingGroupId) => {
+    const token = await authService.getAccessToken();
+    let url = endpoints.getTrackingGroup(trackingGroupId)
+    let result = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(async (res) => {
+      let data = await res.json()
+      this.setState({'trackerData': data})
+    })
+  }
+  componentDidMount = async() => {
     this.getTrackingItemsData()
     let trackingGroupId = window.location.href.split('/')[4]
     this.setState({'panelTrackingGroupId':trackingGroupId})
+    await this.getTrackingGroupData(trackingGroupId)
 
   }
   render() {
@@ -247,7 +263,7 @@ export default class UseTrackerWrapper extends Component {
       <div className='useTrackerWrapper'>
         <div className='usedTrackerHeaderWrapper'>
             <p className='usedTrackerHeader'>
-                <strong>Tracker name</strong>
+                <strong>{this.state.trackerData.name}</strong>
             </p>
             <FontAwesomeIcon className='usedTrackerTableIcon' icon={faTable}/>
         </div>
