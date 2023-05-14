@@ -89,7 +89,6 @@ export default class UseTrackerWrapper extends Component {
     })
     .then(async (res) => {
             let trackingItemsData = await res.json()
-
                 let allRecordsNames = trackingItemsData.map((trackingItemObject) => {
                     return { name: trackingItemObject.trackingGroupRecord.name }
                 })
@@ -109,15 +108,9 @@ export default class UseTrackerWrapper extends Component {
 
                 let allItemsNamesAndValues = []
                 let previousValue = -1
-                let allValuesAmountCummulative = 0
                 let allRecordsAmount = uniqueRecordsList.length
-                trackingItemsData.some((trackingitemObject) => {
-                    if (trackingitemObject.value) {
-                        allValuesAmountCummulative++;
-                    }
-                })
                 trackingItemsData.map((trackingItem) => {
-                    console.log(trackingItem)
+                  console.log(trackingItem)
                     let currentItemObject =
                     {
                         [trackingItem.trackingItemId]: [{ 
@@ -136,7 +129,6 @@ export default class UseTrackerWrapper extends Component {
                     let targetElement = allItemsNamesAndValues.find(obj => obj[trackingItem.trackingItemId]);
                     if (targetElement) {
 
-                        console.log(`${trackingItem.trackingItemId} is included`)
                         // get previous instance of existing objects from the list of objects
                         let previousItemObjectCopy = targetElement
                         // update it and replace the old object with the new one
@@ -164,6 +156,8 @@ export default class UseTrackerWrapper extends Component {
                 })
                 this.setState({ 'trackingRecordsOverallData': allRecords })
               })
+
+              
               //trackingItemsOverallData
               await fetch(getTrackingGroupItemsURL, {
                 method: 'GET',
