@@ -206,13 +206,34 @@ export default class UseTrackerWrapper extends Component {
 
   scrollElements = () => {
     // TODO: FIX SCROLL BEHAVIOR
-    let firstColumn = this.state.trackingItemsData[0]
-    this.setState({ 'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn) })
-    // TODO: put smooth transition animation
-    this.setState((prevState) => ({
-        trackingItemsData: [...prevState.trackingItemsData, firstColumn]
-    }))
-    console.log(this.state.trackingItemsData)
+    if(this.state.trackingItemsData.length == this.state.trackingItemsOverallData.length)
+    {
+      let firstColumn = this.state.trackingItemsData[0]
+      let firstItem = this.state.trackingItemsOverallData[0]
+      this.setState({ 'trackingItemsData': this.state.trackingItemsData.filter((item) => item != firstColumn) })
+      this.setState({ 'trackingItemsOverallData': this.state.trackingItemsOverallData.filter((item) => item != firstItem) })
+      // TODO: put smooth transition animation
+      this.setState((prevState) => ({
+           trackingItemsData: [...prevState.trackingItemsData, firstColumn],
+          trackingItemsOverallData: [...prevState.trackingItemsOverallData, firstItem]
+      }))
+    }
+    else
+    {
+      let concatenatedList = this.state.trackingItemsData.concat(
+        this.state.trackingItemsOverallData.filter(item => 
+          !this.state.trackingItemsData.some(obj => Object.keys(obj)[0] === Object.keys(item)[0]))
+      )
+      let firstColumn = concatenatedList[0]
+      this.setState({ 'trackingItemsData': concatenatedList.filter((item) => item != firstColumn) })
+      this.setState({ 'trackingItemsOverallData': concatenatedList.filter((item) => item != firstColumn) })
+      // TODO: put smooth transition animation
+      this.setState((prevState) => ({
+           trackingItemsData: [...prevState.trackingItemsData, firstColumn],
+          trackingItemsOverallData: [...prevState.trackingItemsOverallData, firstColumn]
+      }))
+    
+    }
   }
 
   componentDidMount = () => {
