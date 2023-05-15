@@ -152,11 +152,7 @@ export class AddComment extends Component {
             return (
                 <div className="container">
                     <div id="numbersForm">
-                        <div className="dx-fieldset">
-                            <div className="numberTxt">
-                                <span id="numberTxt-min">1</span>
-                                <span id="numberTxt-max">5</span>
-                            </div>
+                        <div className="dx-fieldset ">
                             <div className="dx-field">
                                 <div className="dx-field-value">
                                     <Slider 

@@ -3,6 +3,7 @@
 }
 #numbersForm {
     display: block;
+    margin-top: -33%;
 }
 #submitPanel {
     border-radius: 50px;
@@ -32,13 +33,15 @@
     border-radius: 0;
     border: 2px solid white;
     transition: 0.6s linear;
+    width: 100%;
 }
 #input-comment {
-    width: 229px !important;
+    width: 220px !important;
+    /*margin-left: 15% !important;*/
     height: 35px;
     background: #F3F3F3;
     border-radius: 0;
-    margin-left: -25% !important;
+    margin-left: -20% !important;
     margin-top: 3%;
     border-bottom: 2px solid gray;
 }
@@ -74,4 +77,8 @@
 .form-control:focus {
     border-bottom: 2px solid #F28627 !important;
 }
+/*.dx-field-value {
+    margin-top: 5% !important;
+    margin-left: 5% !important;
+}*/
 

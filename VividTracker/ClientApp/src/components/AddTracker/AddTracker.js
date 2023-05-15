@@ -113,7 +113,7 @@ export class AddTracker extends Component {
                                 </div>
                                 <button className='saveButton' type="submit" method="post" onClick={(tenantId) => this.createTracker(tenantId)}>Save</button>
                                 <button className='cancelButton'>
-                                    <Link id="cancelText" onClick={() => this.clear()}>Cancel</Link>
+                                    <Link id="cancelText" onClick={() => this.clear()}>Back</Link>
                                 </button>
                             </div>
                         </div>

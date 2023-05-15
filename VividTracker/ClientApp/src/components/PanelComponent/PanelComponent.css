@@ -119,7 +119,7 @@
     /* position: absolute; */
     top: 18.2rem;
     width: 229px;
-    height: max-content;
+    height: 60px;
     padding-bottom: 10vh;
     margin-bottom: 70px;
     /*visibility: visible;*/
@@ -136,18 +136,20 @@
     text-align: left;
     margin-bottom: 33%;
     margin-top: -50%;
+    margin-left: 5px;
+    height: 42px;
 }
 
 .panel-item {
-    margin-left: -2rem;
-    padding-top: 1.95rem;
+    margin-left: 0.3rem;
+    padding-top: 1rem;
     font-weight: 700;
     font-size: 14px;
+    position: absolute;
 }
 
 .panelListHeader {
     margin-left: 0.3rem;
-    padding-top: 0.55rem;
     font-weight: 700;
     font-size: 14px;
 }
