@@ -30,5 +30,6 @@ export const endpoints = {
     getUserName: (userId) => `${apiBaseUrl}/user/getName/${userId}`,
     updateTrackingItemValue: (trackingItemValueId) => `${apiBaseUrl}/api/itemValue/update/${trackingItemValueId}`,
     createItemValue: (trackingGroupId, trackingItemId, trackingGroupRecordId) => `${apiBaseUrl}/api/TrackingItemValues/update/${trackingGroupId}/${trackingItemId}/${trackingGroupRecordId}`,
-    getTrackingItemsDataByTrackingGroupId: (trackingGroupId)  => `${apiBaseUrl}/api/trackingItemValue/trackingItem/${trackingGroupId}`
+    getTrackingItemsDataByTrackingGroupId: (trackingGroupId)  => `${apiBaseUrl}/api/trackingItemValue/trackingItem/${trackingGroupId}`,
+    getTrackingItemValueByRecordAndItemID: (trackingGroupRecordId, trackingItemId) => `${apiBaseUrl}/api/trackingItemValueById/${trackingGroupRecordId}/${trackingItemId}`
 }
