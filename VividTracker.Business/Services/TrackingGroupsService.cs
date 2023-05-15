@@ -52,7 +52,7 @@ namespace VividTracker.Business.Services
             name = Regex.Replace(name, @"\s", "");
 
             var allTrackingGroups = await GetTrackersAsync();
-            var isExist = allTrackingGroups.Any(x => x.Name.ToUpper() == name.ToUpper());
+            var isExist = allTrackingGroups.Any(t => Regex.Replace(t.Name.ToUpper(), @"\s", "") == name.ToUpper());
             if (isExist || string.IsNullOrWhiteSpace(name))
             {
                 return null;

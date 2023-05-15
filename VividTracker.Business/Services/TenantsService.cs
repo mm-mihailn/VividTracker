@@ -26,7 +26,7 @@ public class TenantsService : ITenantsService
         var allTenants = await GetTenantsAsync();
         var name = tenant.Name.Trim();
         name = Regex.Replace(name, @"\s", "");
-        var isExist = allTenants.Any(t => t.Name.ToUpper() == name.ToUpper());
+        var isExist = allTenants.Any(t => Regex.Replace(t.Name.ToUpper(), @"\s", "") == name.ToUpper());
         if (!string.IsNullOrWhiteSpace(name))
         {
             if (!isExist)

@@ -24,8 +24,9 @@
             var recordsName = allRecords.Select(t => t.Name).ToList();
             var name = trackingGroupRecord.Name.Trim();
             name = Regex.Replace(name, @"\s", "");
+            var isExist = recordsName.Any(t => Regex.Replace(t.ToUpper(), @"\s", "") == name.ToUpper());
 
-            if (recordsName.Any(t=>t.ToUpper() == name.ToUpper()) || string.IsNullOrWhiteSpace(name))
+            if (isExist || string.IsNullOrWhiteSpace(name))
             {
                 return null;
             }

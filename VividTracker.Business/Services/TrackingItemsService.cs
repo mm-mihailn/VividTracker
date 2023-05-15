@@ -31,8 +31,7 @@
             var trackers = await GetTrackingItemsByTrackingGroupId(trackingGroupId);
             var name = trackingItem.Name.Trim();
             name = Regex.Replace(name, @"\s", "");
-
-            var isExist = trackers.FirstOrDefault(t => t.Name.ToUpper() == name.ToUpper());
+            var isExist = trackers.Any(t => Regex.Replace(t.Name.ToUpper(), @"\s", "") == name.ToUpper());
 
             if (isExist!=null || string.IsNullOrWhiteSpace(name))
             {
